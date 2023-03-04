@@ -1,4 +1,4 @@
-import { AppStyled } from "./styles/AppStyled";
+import { AppStyled, DivOpacity } from "./styles/AppStyled";
 
 import galaxy from "./assets/background_images/galaxy.jpg";
 
@@ -8,7 +8,9 @@ const App = () => {
   return (
     <>
       <AppStyled bg={galaxy}>
-        <Start/>
+        <DivOpacity>
+          <Start />
+        </DivOpacity>
       </AppStyled>
     </>
   );

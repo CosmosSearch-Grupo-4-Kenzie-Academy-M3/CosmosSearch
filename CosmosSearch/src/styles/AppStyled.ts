@@ -23,11 +23,11 @@ export const AppStyled = styled.div<iAppStyled>`
       display: none;
     }
   }
-
-  @media (min-width: 1000px) {
-    .container__page--start {
-      min-width: 82.5%;
-      flex-direction: row;
-    }
-  }
 `;
+
+export const DivOpacity = styled.div`
+  height: 100%;
+  width: 100%;
+
+  background-color: rgba(0,0,0, .4);
+`

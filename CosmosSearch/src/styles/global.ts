@@ -119,4 +119,12 @@ export const GlobalStyle = createGlobalStyle`
         border-top: 2px solid var(--primary-blue);
         margin-top: var(--links-distance-line-to-text);
     }
+
+    /* MediaQuery */
+    @media (min-width: 1000px) {
+    .container__page--start {
+      min-width: 82.5%;
+      flex-direction: row;
+    }
+  }
 `;
