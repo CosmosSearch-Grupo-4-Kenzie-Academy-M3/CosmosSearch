@@ -53,7 +53,8 @@ export const GlobalStyle = createGlobalStyle`
     /* Utility-Classes */
     /* Container */
     .container__page--start {
-        width: max-content;
+        max-width: max-content;
+        width: 92%;
         height: 100%;
 
         margin: auto;
@@ -63,6 +64,10 @@ export const GlobalStyle = createGlobalStyle`
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
+    }
+
+    .title__box {
+        display: none;
     }
 
     /* Texts */
@@ -116,5 +121,16 @@ export const GlobalStyle = createGlobalStyle`
 
         border-top: 2px solid var(--primary-blue);
         margin-top: var(--links-distance-line-to-text);
+    }
+
+    /* Media Query */
+    @media (min-width: 441px) {
+        .title__box {
+            display: block;
+        }
+
+        .small__logo {
+            display: none;
+        }
     }
 `;

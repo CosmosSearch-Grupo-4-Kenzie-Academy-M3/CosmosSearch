@@ -22,3 +22,8 @@ export const TitleBordersStyled = styled.div<iTitle>`
     margin-top: ${props => props.marginTop ? props.marginTop : null};
     margin-bottom: ${props => props.marginBottom};
 `
+
+export const SmallLogoStyled = styled.img<iTitle>`
+    margin-top: ${props => props.marginTop ? props.marginTop : null};
+    margin-bottom: ${props => props.marginBottom};
+`

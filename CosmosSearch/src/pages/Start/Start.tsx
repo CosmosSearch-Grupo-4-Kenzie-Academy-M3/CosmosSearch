@@ -5,7 +5,6 @@ import { StartStyled } from "./StartStyled";
 import burgerMenu from "../../assets/svgs/burger_menu.svg";
 
 import { useState } from "react";
-import { set } from "react-hook-form";
 
 export const Start = () => {
   const [burgerOpen, setBurgerOpen] = useState(false);
@@ -13,8 +12,8 @@ export const Start = () => {
   return (
     <StartStyled>
       <div className="container__page--start">
-        <div>
-          <Title />
+        <div className="top__start">
+          <Title/>
           <LinkButton text="Home" line={true} />
         </div>
         <div className="burger__div">
