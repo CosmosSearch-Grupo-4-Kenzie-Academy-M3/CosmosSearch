@@ -66,9 +66,6 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: space-between;
     }
 
-    .title__box {
-        display: none;
-    }
 
     /* Texts */
     .title__primary {
@@ -121,23 +118,5 @@ export const GlobalStyle = createGlobalStyle`
 
         border-top: 2px solid var(--primary-blue);
         margin-top: var(--links-distance-line-to-text);
-    }
-
-    /* Media Query */
-    @media (min-width: 441px) {
-        .title__box {
-            display: block;
-        }
-
-        .small__logo {
-            display: none;
-        }
-    }
-
-    @media (min-width: 1000px) {
-        .container__page--start {
-            min-width: 82.5%;
-            flex-direction: row;
-        }
     }
 `;
