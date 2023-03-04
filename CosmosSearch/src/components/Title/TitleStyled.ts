@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-interface iTitle {
+export interface iTitle {
     marginTop?: string,
-    marginBottom: string
+    marginBottom?: string
 }
 
 export const TitleBordersStyled = styled.div<iTitle>`
@@ -20,7 +20,7 @@ export const TitleBordersStyled = styled.div<iTitle>`
     text-align: center;
 
     margin-top: ${props => props.marginTop ? props.marginTop : null};
-    margin-bottom: ${props => props.marginBottom};
+    margin-bottom: ${props => props.marginBottom ? props.marginBottom : null};
 `
 
 export const SmallLogoStyled = styled.img<iTitle>`

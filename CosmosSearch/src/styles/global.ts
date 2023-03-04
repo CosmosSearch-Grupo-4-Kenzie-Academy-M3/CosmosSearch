@@ -133,4 +133,11 @@ export const GlobalStyle = createGlobalStyle`
             display: none;
         }
     }
+
+    @media (min-width: 1000px) {
+        .container__page--start {
+            min-width: 82.5%;
+            flex-direction: row;
+        }
+    }
 `;
