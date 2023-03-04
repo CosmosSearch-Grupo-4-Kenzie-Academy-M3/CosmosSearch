@@ -22,6 +22,10 @@ export const GlobalStyle = createGlobalStyle`
         --grey-1: #555556;
         --error-form: #FC035D;
 
+        /* Font-Family */
+        --ff-Oswald: 'Oswald', sans-serif;
+        --ff-Inter: 'Inter', sans-serif;
+
         /* Font-Size */
         --fs-50: 3.125rem;
         --fs-30: 1.875rem;
