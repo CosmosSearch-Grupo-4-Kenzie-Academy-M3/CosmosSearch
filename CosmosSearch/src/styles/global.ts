@@ -66,6 +66,11 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: space-between;
     }
 
+    .burger__menu {
+        width: max-content;
+
+        cursor: pointer;
+     }
 
     /* Texts */
     .title__primary {
