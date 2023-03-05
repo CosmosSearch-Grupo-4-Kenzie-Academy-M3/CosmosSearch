@@ -72,6 +72,12 @@ export const GlobalStyle = createGlobalStyle`
         cursor: pointer;
      }
 
+     .close__menu {
+        width: max-content;
+
+        cursor: pointer;
+     }
+
     /* Texts */
     .title__primary {
         font-family: var(--ff-Oswald);
