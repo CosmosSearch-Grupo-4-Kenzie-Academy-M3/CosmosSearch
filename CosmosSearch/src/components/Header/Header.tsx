@@ -2,11 +2,8 @@ import { useState } from "react";
 
 import { HeaderStyled } from "./HeaderStyled";
 
-import burgerMenu from "../../assets/svgs/burger_menu.svg";
-import closeMenu from "../../assets/svgs/close_menu.svg";
-
 import { LinksHeader } from "./LinksHeader/LinksHeader";
-import { SmallLogo } from "../Svgs/Svg";
+import { BurgerMenu, CloseMenu, SmallLogo } from "../Svgs/Svg";
 
 interface iLinksHeader {
   path: "userLogged" | "userDeslogged" | "userLoggedInPerfil";
@@ -24,19 +21,13 @@ export const Header = ({ path }: iLinksHeader) => {
         <p className="title__box--header title__primary">CosmosSearch</p>
         <div className="icons">
           {burgerOpen ? (
-            <img
-              src={closeMenu}
-              alt="Close Menu Button"
-              className="close__menu"
-              onClick={() => setBurgerOpen(false)}
-            />
+            <div className="close__menu" onClick={() => setBurgerOpen(false)}>
+              <CloseMenu/>
+            </div>
           ) : (
-            <img
-              src={burgerMenu}
-              alt="Burger Menu Button"
-              className="burger__menu"
-              onClick={() => setBurgerOpen(true)}
-            />
+            <div className="burger__menu" onClick={() => setBurgerOpen(true)}>
+              <BurgerMenu />
+            </div>
           )}
           {burgerOpen ? (
             <div className="links__start--header">
