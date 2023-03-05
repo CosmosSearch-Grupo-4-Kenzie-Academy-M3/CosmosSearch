@@ -4,9 +4,10 @@ import { SmallLogoStyled, TitleBordersStyled } from "../Title/TitleStyled";
 import { HeaderStyled } from "./HeaderStyled";
 
 import burgerMenu from "../../assets/svgs/burger_menu.svg";
-import closeMenu from "../../assets/svgs/close_menu.svg"
+import closeMenu from "../../assets/svgs/close_menu.svg";
 import SmallLogo from "../../assets/svgs/SmallMobileLogo.svg";
 import { LinkButton } from "../LinkButton/LinkButton";
+import { LinksHeader } from "./LinksHeader/LinksHeader";
 
 export const Header = () => {
   const [burgerOpen, setBurgerOpen] = useState(false);
@@ -19,31 +20,32 @@ export const Header = () => {
           alt="CosmosSeach Small Logo"
           className="small__logo--header"
         />
-        {burgerOpen ? (
-          <img
-            src={closeMenu}
-            alt="Close Menu Button"
-            className="close__menu"
-            onClick={() => setBurgerOpen(false)}
-          />
-        ) : (
-          <img
-            src={burgerMenu}
-            alt="Burger Menu Button"
-            className="burger__menu"
-            onClick={() => setBurgerOpen(true)}
-          />
-        )}
-        {burgerOpen ? (
-          <div className="links__start--header">
-            <LinkButton text="Perfil" />
-            <div className="colum"></div>
-            <LinkButton text="Singup" />
-          </div>
-        ) : null}
-        <TitleBordersStyled className="title__box--header">
-          <p className="title__primary">CosmosSearch</p>
-        </TitleBordersStyled>
+        <p className="title__box--header title__primary">CosmosSearch</p>
+        <div className="icons">
+          {burgerOpen ? (
+            <img
+              src={closeMenu}
+              alt="Close Menu Button"
+              className="close__menu"
+              onClick={() => setBurgerOpen(false)}
+            />
+          ) : (
+            <img
+              src={burgerMenu}
+              alt="Burger Menu Button"
+              className="burger__menu"
+              onClick={() => setBurgerOpen(true)}
+            />
+          )}
+          {burgerOpen ? (
+            <div className="links__start--header">
+                <LinksHeader path="userDeslogged"/> 
+            </div>
+          ) : null}
+        </div>
+        <div className="links__start--headerDesktop">
+            <LinksHeader path="userDeslogged"/> 
+        </div>
       </div>
     </HeaderStyled>
   );

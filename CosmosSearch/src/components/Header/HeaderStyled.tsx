@@ -23,32 +23,42 @@ export const HeaderStyled = styled.header`
     padding-inline: 20px;
 
     .title__box--header {
-        display: none;
-    }
-
-    @media (min-width: 540px) {
-    .title__box--header {
-      display: block ;
-    }
-
-    .small__logo--header {
       display: none;
     }
+
+    /* MediaQuerys */
+    @media (min-width: 540px) {
+      .title__box--header {
+        display: block;
+      }
+
+      .small__logo--header {
+        display: none;
+      }
+    }
+
+    .links__start--header {
+      display: flex;
+      gap: 1rem;
+
+      position: absolute;
+
+      top: 9rem;
+      left: 20px;
+    }
   }
 
-  .links__start--header {
-    display: flex;
-    gap: 1rem;
-    
-    position: absolute;
-
-    top: 10rem;
+  .links__start--headerDesktop {
+    display: none;
   }
 
-  .colum {
-    border-left: 2px solid var(--primary-blue);
+  /* MediaQuerys */
+  @media (min-width: 920px) {
+    .icons {
+      display: none;
+    }
+    .links__start--headerDesktop {
+      display: block;
+    }
   }
-}
-
-
 `;
