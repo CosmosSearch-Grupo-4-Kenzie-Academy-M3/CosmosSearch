@@ -1,29 +1,26 @@
 import { useState } from "react";
 
-import { SmallLogoStyled, TitleBordersStyled } from "../Title/TitleStyled";
 import { HeaderStyled } from "./HeaderStyled";
 
 import burgerMenu from "../../assets/svgs/burger_menu.svg";
 import closeMenu from "../../assets/svgs/close_menu.svg";
-import SmallLogo from "../../assets/svgs/SmallMobileLogo.svg";
 
 import { LinksHeader } from "./LinksHeader/LinksHeader";
+import { SmallLogo } from "../Svgs/Svg";
 
 interface iLinksHeader {
   path: "userLogged" | "userDeslogged" | "userLoggedInPerfil";
 }
 
-export const Header = ({path}: iLinksHeader) => {
+export const Header = ({ path }: iLinksHeader) => {
   const [burgerOpen, setBurgerOpen] = useState(false);
 
   return (
     <HeaderStyled>
       <div className="container__header--mobileSmall">
-        <SmallLogoStyled
-          src={SmallLogo}
-          alt="CosmosSeach Small Logo"
-          className="small__logo--header"
-        />
+        <div className="small__logo--header">
+          <SmallLogo />
+        </div>
         <p className="title__box--header title__primary">CosmosSearch</p>
         <div className="icons">
           {burgerOpen ? (
@@ -43,12 +40,12 @@ export const Header = ({path}: iLinksHeader) => {
           )}
           {burgerOpen ? (
             <div className="links__start--header">
-                <LinksHeader path={path}/> 
+              <LinksHeader path={path} />
             </div>
           ) : null}
         </div>
         <div className="links__start--headerDesktop">
-            <LinksHeader path={path}/> 
+          <LinksHeader path={path} />
         </div>
       </div>
     </HeaderStyled>
