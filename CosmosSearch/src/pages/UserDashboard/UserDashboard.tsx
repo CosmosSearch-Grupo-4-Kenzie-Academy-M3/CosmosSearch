@@ -4,7 +4,7 @@ import { UserDashboardStyled } from "./UserDashboardStyled";
 export const UserDashboard = () => {
   return (
     <UserDashboardStyled>
-      <Header />
+      <Header path="userDeslogged" />
     </UserDashboardStyled>
   );
 };

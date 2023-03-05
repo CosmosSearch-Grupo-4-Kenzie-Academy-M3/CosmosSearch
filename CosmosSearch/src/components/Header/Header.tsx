@@ -6,10 +6,14 @@ import { HeaderStyled } from "./HeaderStyled";
 import burgerMenu from "../../assets/svgs/burger_menu.svg";
 import closeMenu from "../../assets/svgs/close_menu.svg";
 import SmallLogo from "../../assets/svgs/SmallMobileLogo.svg";
-import { LinkButton } from "../LinkButton/LinkButton";
+
 import { LinksHeader } from "./LinksHeader/LinksHeader";
 
-export const Header = () => {
+interface iLinksHeader {
+  path: "userLogged" | "userDeslogged" | "userLoggedInPerfil";
+}
+
+export const Header = ({path}: iLinksHeader) => {
   const [burgerOpen, setBurgerOpen] = useState(false);
 
   return (
@@ -39,12 +43,12 @@ export const Header = () => {
           )}
           {burgerOpen ? (
             <div className="links__start--header">
-                <LinksHeader path="userDeslogged"/> 
+                <LinksHeader path={path}/> 
             </div>
           ) : null}
         </div>
         <div className="links__start--headerDesktop">
-            <LinksHeader path="userDeslogged"/> 
+            <LinksHeader path={path}/> 
         </div>
       </div>
     </HeaderStyled>
