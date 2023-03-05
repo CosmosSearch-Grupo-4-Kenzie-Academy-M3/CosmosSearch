@@ -4,18 +4,19 @@ import galaxy from "./assets/background_images/galaxy.jpg";
 
 import { Start } from "./pages/Start/Start";
 import { UserDashboard } from "./pages/UserDashboard/UserDashboard";
+import { Providers } from "./contexts/Providers";
 
 export const App = () => {
   return (
     <>
       <AppStyled bg={galaxy}>
         <DivOpacity>
-          {/* <Start /> */}
-          <UserDashboard/>
+          <Providers>
+            {/* <Start /> */}
+            <UserDashboard />
+          </Providers>
         </DivOpacity>
       </AppStyled>
     </>
   );
 };
-
-

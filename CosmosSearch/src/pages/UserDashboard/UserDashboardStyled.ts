@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 export const UserDashboardStyled = styled.div`
-    height: 100%;
+    min-height: 100vh;
+    max-height: max-content;
     width: 100%;
+
+
 `
 

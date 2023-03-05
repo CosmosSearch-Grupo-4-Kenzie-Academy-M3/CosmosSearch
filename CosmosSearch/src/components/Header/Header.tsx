@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { useContext } from "react";
 
 import { HeaderStyled } from "./HeaderStyled";
 
 import { LinksHeader } from "./LinksHeader/LinksHeader";
 import { BurgerMenu, CloseMenu, SmallLogo } from "../Svgs/Svg";
+import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 
 interface iLinksHeader {
   path: "userLogged" | "userDeslogged" | "userLoggedInPerfil";
 }
 
 export const Header = ({ path }: iLinksHeader) => {
-  const [burgerOpen, setBurgerOpen] = useState(false);
+  const {burgerOpen, setBurgerOpen} = useContext(LinksContext);
 
   return (
     <HeaderStyled>
