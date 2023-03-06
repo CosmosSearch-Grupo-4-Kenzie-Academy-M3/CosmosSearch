@@ -1,14 +1,15 @@
+import { useContext } from "react";
+
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { Title } from "../../components/Title/Title";
 import { StartStyled } from "./StartStyled";
 
-import burgerMenu from "../../assets/svgs/burger_menu.svg";
-
-import { useState } from "react";
 import { TitleBordersStyled } from "../../components/Title/TitleStyled";
+import { LinksContext } from "../../contexts/LinksContext/LinksContext";
+import { BurgerMenu } from "../../components/Svgs/Svg";
 
 export const Start = () => {
-  const [burgerOpen, setBurgerOpen] = useState(false);
+  const {burgerOpen, setBurgerOpen} = useContext(LinksContext)
 
   return (
     <StartStyled>
@@ -25,12 +26,9 @@ export const Start = () => {
               <LinkButton text="Singup" />
             </div>
           ) : (
-            <img
-              src={burgerMenu}
-              alt="Burger Menu Button"
-              className="burger__menu"
-              onClick={() => setBurgerOpen(true)}
-            />
+            <div className="burger__menu" onClick={() => setBurgerOpen(true)}>
+              <BurgerMenu/>
+            </div>
           )}
         </div>
         {/* Desktop */}

@@ -1,6 +1,7 @@
 import burger from "../../assets/svgs/burger_menu.svg"
 import close from "../../assets/svgs/close_menu.svg"
 import planet from "../../assets/svgs/planet.svg"
+import planetGrey from "../../assets/svgs/planet_grey.svg"
 import plus from "../../assets/svgs/plus+.svg"
 import smallLogo from "../../assets/svgs/SmallMobileLogo.svg"
 import astronaut from "../../assets/svgs/astronaut.svg"
@@ -17,6 +18,10 @@ export const CloseMenu = () => {
 
 export const Planet = () => {
   return <SvgStyled src={planet} alt="Planet Icon"/>;
+};
+
+export const PlanetGrey = () => {
+  return <SvgStyled src={planetGrey} alt="Planet Icon"/>;
 };
 
 export const Plus = () => {
