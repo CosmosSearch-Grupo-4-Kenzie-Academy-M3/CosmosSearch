@@ -1,5 +1,5 @@
 import { ButtonStyled } from "../../Button/ButtonStyled";
-import { Planet } from "../../Svgs/Svg";
+import { PlanetGrey } from "../../Svgs/Svg";
 import { PostStyled } from "../PostListStyled";
 
 export const Post = () => {
@@ -13,7 +13,7 @@ export const Post = () => {
                     <p className="post__text__preview">topic: phisycs</p>
                 </div>
                 <div className="button">
-                    <Planet/>
+                    <PlanetGrey/>
                     <ButtonStyled textColor="var(--primary-blue)" borderColor="var(--primary-blue)">open</ButtonStyled>
                 </div>
             </div>
