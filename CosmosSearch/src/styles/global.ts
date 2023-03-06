@@ -18,8 +18,10 @@ export const Reset = createGlobalStyle`
 export const GlobalStyle = createGlobalStyle`
     :root {
         /* Colors */
+        --white: #fff;
         --primary-blue: #BADBD7;
         --grey-1: #555556;
+        --grey-2: #353636;
         --error-form: #FC035D;
 
         /* Font-Family */
