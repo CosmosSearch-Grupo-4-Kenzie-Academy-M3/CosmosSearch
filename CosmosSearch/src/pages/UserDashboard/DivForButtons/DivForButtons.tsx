@@ -10,7 +10,7 @@ import {
 import { LinkButtonWithSvg } from "./LinkButtonWithSvg/LinkButtonWithSvg";
 
 export const DivForButtons = () => {
-  const { burgerOpen } = useContext(LinksContext);
+  const { burgerOpen, setMainComponent } = useContext(LinksContext);
 
   return (
     <>
@@ -18,7 +18,9 @@ export const DivForButtons = () => {
       <DivForButtonsStyledMobile className="container__pages">
         {burgerOpen ? (
           <div className="divForButtonsStyledMobile__burgerOpen">
-            <Astronaut />
+            <div onClick={() => setMainComponent("updatePerfil")}>
+              <Astronaut />
+            </div>
             <Planet />
             <Plus />
           </div>

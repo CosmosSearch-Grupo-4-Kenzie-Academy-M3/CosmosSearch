@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const RegisterUserFormStyled = styled.form`
     display: flex;
     flex-direction: column;
-    gap: 0.625rem;
     align-items: center;
+    gap: 2rem;
 
     box-sizing: border-box;
 

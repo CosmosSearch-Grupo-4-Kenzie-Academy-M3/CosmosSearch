@@ -5,12 +5,25 @@ export const UserDashboardStyled = styled.div`
   max-height: max-content;
   width: 100%;
 
+  .container__form {
+    padding-inline: 20px;
+  }
+
   .main__burgerOpen {
     margin-top: 7rem;
   }
 
   .userdash__desktop {
     display: none;
+  }
+
+  /* MediaQuery */
+  @media (min-width: 450px) {
+    .container__form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   @media (min-width: 560px) {

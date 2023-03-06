@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
-export const ImputStyled = styled.fieldset`
+export const ImputStyled = styled.div`
   border: none;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 20px;
   width: 100%;
 
   .containerInputSpan {
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
     width: 100%;
+    max-width: 300px;
     gap: 5px;
   }
 
@@ -23,12 +24,15 @@ export const ImputStyled = styled.fieldset`
     color: var(--primary-blue);
     font-size: 16px;
     padding: 10px;
-    width: 90%;
   }
 
   .spanError {
     color: var(--error-form);
     font-size: 14px;
     font-family: var(--ff-Inter);
+  }
+
+  @media (min-width: 376px) {
+    width: 300px;
   }
 `;
