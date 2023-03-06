@@ -45,6 +45,7 @@ export const PostStyled = styled.li`
     .button {
       display: flex;
       gap: 1rem;
+      align-self: flex-end;
     }
 
     /* MediaQuery */
