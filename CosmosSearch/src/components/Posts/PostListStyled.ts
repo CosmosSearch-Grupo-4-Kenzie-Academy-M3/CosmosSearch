@@ -14,9 +14,9 @@ export const PostListStyled = styled.ul`
 
 export const PostStyled = styled.li`
     width: 100%;
-    height: 200px;
+    height: 400px;
 
     padding: 1.25rem;
 
-    background-color: var(--grey-2);
+    background-color: var(--grey-2-opct);
 `
