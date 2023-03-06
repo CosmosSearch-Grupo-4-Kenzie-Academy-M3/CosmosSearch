@@ -18,8 +18,10 @@ export const Reset = createGlobalStyle`
 export const GlobalStyle = createGlobalStyle`
     :root {
         /* Colors */
+        --white: #fff;
         --primary-blue: #BADBD7;
         --grey-1: #555556;
+        --grey-2-opct: rgba(53,54,54,.2);
         --error-form: #FC035D;
 
         /* Font-Family */
@@ -40,7 +42,7 @@ export const GlobalStyle = createGlobalStyle`
         --fw-400: 400;
 
         /* Border-Radius */
-        --br-8: 8px
+        --br-8: 8px;
 
         /* Heights */
         --inpt-height: 3.125rem;
@@ -66,6 +68,21 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: space-between;
     }
 
+    .container__pages {
+        padding-inline: 20px;
+    }
+
+    .burger__menu {
+        width: max-content;
+
+        cursor: pointer;
+     }
+
+     .close__menu {
+        width: max-content;
+
+        cursor: pointer;
+     }
 
     /* Texts */
     .title__primary {

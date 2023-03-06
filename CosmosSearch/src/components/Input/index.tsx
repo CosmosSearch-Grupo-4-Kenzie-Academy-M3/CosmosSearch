@@ -7,11 +7,11 @@ interface IInput {
     register: UseFormRegisterReturn<string>;
     labelName: string;
     type:string;
-    
+    placeholder:string;
     
 };
 
-export const Input = ({error,  register , type, labelName} : IInput) => {
+export const Input = ({error, placeholder, register , type, labelName} : IInput) => {
 
     console.log(error)
 
@@ -19,8 +19,8 @@ export const Input = ({error,  register , type, labelName} : IInput) => {
         
         <ImputStyle >
             <label className="input__label" htmlFor={register.name}>{labelName}</label>
-            <div  className="containerInputSpan">
-                <input className="input__placeholder" id={register.name} type={type} {...register}/>
+            <div className="containerInputSpan">
+                <input placeholder={placeholder} className="input__placeholder" id={register.name} type={type} {...register}/>
                 {error ? <span className="spanError">{error}</span> : null}
             </div>
         </ImputStyle>

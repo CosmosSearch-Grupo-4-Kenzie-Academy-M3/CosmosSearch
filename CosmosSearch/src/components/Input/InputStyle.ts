@@ -21,6 +21,7 @@ width: 100%;
 
 
 input{
+    border-radius: 4px;
   
     background: none;
     border: solid 1px var(--primary-blue);

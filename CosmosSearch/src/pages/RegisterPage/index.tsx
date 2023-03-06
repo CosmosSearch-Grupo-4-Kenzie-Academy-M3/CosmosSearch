@@ -5,6 +5,7 @@ import {RegisterPageStyle} from "./RegisterPage"
 import * as yup from "yup"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
+import { ButtonStyled } from "../../components/Button/ButtonStyled"
 
 
 
@@ -55,28 +56,34 @@ export const RegisterPage = () => {
 
         <RegisterPageStyle >
 
-            
-
             <div>
                 <Title />;
-                <div>
+                <div className="linksDesktop">
+                    <LinkButton text="Login" line={true}/>
+                    <LinkButton text="Singup" />
+                </div>
+
+                <div className="linksMobile">
                     <LinkButton text="Login" />
                     <div className="colum"></div>
                     <LinkButton text="Singup" />
                 </div>
+
+
             </div>
 
             <form onSubmit={handleSubmit(userSubmit)}>
 
-                <Input   error={errors.name?.message} register={register("name")} type="text" labelName="Name" />
-                <Input   error={errors.email?.message} register={register("email")} type="email"  labelName="Email"  />
-                <Input   error={errors.password?.message} register={register("password")} type="password"  labelName="Password" />
-                <Input   error={errors.confirmPassword?.message} register={register("confirmPassword")} type="password"  labelName="Confirm password"/>
-                <button type="submit">Register</button>
+                <Input   placeholder="Type your name" error={errors.name?.message} register={register("name")} type="text" labelName="Name" />
+                <Input   placeholder="Type your email"  error={errors.email?.message} register={register("email")} type="email"  labelName="Email"  />
+                <Input   placeholder="Type your password" error={errors.password?.message} register={register("password")} type="password"  labelName="Password" />
+                <Input   placeholder="Confirm your password" error={errors.confirmPassword?.message} register={register("confirmPassword")} type="password"  labelName="Confirm password"/>
+                <ButtonStyled type="submit"  borderColor={"var(--primary-blue)"} textColor="var(--primary-blue)" >
+                    Register
+                </ButtonStyled>
             </form>
 
         </RegisterPageStyle>
-
 
     );
 

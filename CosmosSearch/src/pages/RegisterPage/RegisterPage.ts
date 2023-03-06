@@ -19,7 +19,7 @@ export const RegisterPageStyle = styled.main`
         gap: 10px;
         align-items: center;
 
-        padding: 10px;
+        
         box-sizing: border-box;
 
         border-top: 1px solid white ;
@@ -27,8 +27,7 @@ export const RegisterPageStyle = styled.main`
 
         width: 95%;
         max-width: 395px;
-        margin-bottom: 20px;
-        margin-top: 20px;
+        padding-block: 30px;
     }
 
     .colum{
@@ -36,7 +35,35 @@ export const RegisterPageStyle = styled.main`
 
     }
 
+    .linksDesktop{
+
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+    }
+
+    .linksMobile{
+
+        display: none;
+
+    }
+
+
+
+
     @media (max-width: 920px) {
+
+        .linksMobile{
+
+            display: flex;
+
+            }
+
+        .linksDesktop{
+            display: none;
+        }
+
 
         .colum{
            background-color: red;
