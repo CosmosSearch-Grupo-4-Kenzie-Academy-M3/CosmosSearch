@@ -10,3 +10,9 @@ export interface IFormUserUpdate {
   email: string;
   password: string;
 }
+
+export interface IFormPostRegister {
+  title: string;
+  content: string;
+  topic: string;
+}

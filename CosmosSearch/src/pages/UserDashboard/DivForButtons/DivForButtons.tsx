@@ -21,14 +21,24 @@ export const DivForButtons = () => {
             <div onClick={() => setMainComponent("updatePerfil")}>
               <Astronaut />
             </div>
-            <Planet />
-            <Plus />
+            <div onClick={() => setMainComponent("posts")}>
+              <Planet />
+            </div>
+            <div onClick={() => setMainComponent("registerPost")}>
+              <Plus />
+            </div>
           </div>
         ) : (
           <div className="divForButtonsStyledMobile__burgerClosed">
-            <Astronaut />
-            <Planet />
-            <Plus />
+            <div onClick={() => setMainComponent("updatePerfil")}>
+              <Astronaut />
+            </div>
+            <div onClick={() => setMainComponent("posts")}>
+              <Planet />
+            </div>
+            <div onClick={() => setMainComponent("registerPost")}>
+              <Plus />
+            </div>
           </div>
         )}
       </DivForButtonsStyledMobile>

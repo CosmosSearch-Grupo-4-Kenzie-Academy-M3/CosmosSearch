@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { RegisterPostForm } from "../../components/Forms/RegisterPostForm/RegisterPostForm";
 import { UpdateUserForm } from "../../components/Forms/UpdateUserForm/UpdateUserForm";
 import { Header } from "../../components/Header/Header";
 import { Posts } from "../../components/Posts/PostList";
@@ -21,6 +22,10 @@ export const UserDashboard = () => {
           <div className="container__form">
             <UpdateUserForm />
           </div>
+        ) : mainComponent === "registerPost" ? (
+          <div className="container__form">
+            <RegisterPostForm />
+          </div>
         ) : null}
       </div>
       {/* Desktop */}
@@ -33,6 +38,8 @@ export const UserDashboard = () => {
               <Posts />
             ) : mainComponent === "updatePerfil" ? (
               <UpdateUserForm />
+            ) : mainComponent === "registerPost" ? (
+              <RegisterPostForm />
             ) : null}
           </main>
         ) : (
@@ -42,6 +49,8 @@ export const UserDashboard = () => {
               <Posts />
             ) : mainComponent === "updatePerfil" ? (
               <UpdateUserForm />
+            ) : mainComponent === "registerPost" ? (
+              <RegisterPostForm />
             ) : null}
           </main>
         )}

@@ -12,8 +12,8 @@ export const App = () => {
         <DivOpacity>
           <Providers>
             {/* <Start /> */}
-            {/* <UserDashboard /> */}
-            <RegisterPage />
+            <UserDashboard />
+            {/* <RegisterPage /> */}
           </Providers>
         </DivOpacity>
       </AppStyled>
