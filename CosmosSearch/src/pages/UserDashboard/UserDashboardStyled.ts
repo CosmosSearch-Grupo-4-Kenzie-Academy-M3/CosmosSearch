@@ -7,7 +7,6 @@ export const UserDashboardStyled = styled.div`
 
   .main__burgerOpen {
     margin-top: 7rem;
-    border: 2px solid rebeccapurple;
   }
 
   .userdash__desktop {
