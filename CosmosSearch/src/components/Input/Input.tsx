@@ -1,5 +1,5 @@
 import { UseFormRegisterReturn } from "react-hook-form";
-import { ImputStyle } from "./InputStyle";
+import { ImputStyled } from "./InputStyled";
 
 interface IInput {
   error?: string;
@@ -19,7 +19,7 @@ export const Input = ({
   console.log(error);
 
   return (
-    <ImputStyle>
+    <ImputStyled>
       <label className="input__label" htmlFor={register.name}>
         {labelName}
       </label>
@@ -33,6 +33,6 @@ export const Input = ({
         />
         {error ? <span className="spanError">{error}</span> : null}
       </div>
-    </ImputStyle>
+    </ImputStyled>
   );
 };

@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { ButtonStyled } from "../../Button/ButtonStyled";
-import { Input } from "../../Input";
+import { Input } from "../../Input/Input";
 import { RegisterUserFormStyled } from "./RegisterUserFormStyled";
 
 import { fromSchema } from "../../../contexts/UserContext/validation";

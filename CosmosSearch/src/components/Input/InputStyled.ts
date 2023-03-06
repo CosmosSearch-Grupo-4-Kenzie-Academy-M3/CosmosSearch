@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ImputStyle = styled.fieldset`
+export const ImputStyled = styled.fieldset`
   border: none;
   display: flex;
   flex-direction: column;
