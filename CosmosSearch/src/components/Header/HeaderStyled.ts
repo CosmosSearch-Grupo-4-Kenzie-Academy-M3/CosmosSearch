@@ -27,7 +27,7 @@ export const HeaderStyled = styled.header`
     }
 
     /* MediaQuerys */
-    @media (min-width: 540px) {
+    @media (min-width: 560px) {
       .title__box--header {
         display: block;
       }

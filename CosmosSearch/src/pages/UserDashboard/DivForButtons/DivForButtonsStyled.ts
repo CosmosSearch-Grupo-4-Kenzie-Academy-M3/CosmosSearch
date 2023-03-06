@@ -22,7 +22,7 @@ export const DivForButtonsStyled = styled.div`
   }
 
   /* MediaQuery */
-  @media (min-width: 550px) {
+  @media (min-width: 560px) {
     display: block;
   }
 
@@ -57,7 +57,7 @@ export const DivForButtonsStyledMobile = styled.div`
   }
 
   /* MediaQuery */
-  @media (min-width: 550px) {
+  @media (min-width: 560px) {
     display: none;
   }
 `;

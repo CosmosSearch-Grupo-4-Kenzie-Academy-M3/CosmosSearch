@@ -14,7 +14,7 @@ export const UserDashboardStyled = styled.div`
     display: none;
   }
 
-  @media (min-width: 550px) {
+  @media (min-width: 560px) {
     .userdash__desktop {
       display: block;
 
