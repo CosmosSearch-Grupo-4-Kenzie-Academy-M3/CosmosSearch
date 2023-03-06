@@ -2,7 +2,10 @@ import styled from "styled-components";
 
 export const PostListStyled = styled.ul`
     width: 100%;
+    max-width: 800px;
     height: max-content;
+
+    margin-top: 1rem;
 
     display: flex;
     flex-direction: column;
@@ -13,5 +16,8 @@ export const PostStyled = styled.li`
     width: 100%;
     height: 200px;
 
-    background-color: red;
+    padding: 1.25rem;
+
+    background-color: var(--grey-2);
+    opacity: .5;
 `

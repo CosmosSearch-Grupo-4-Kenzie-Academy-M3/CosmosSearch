@@ -1,7 +1,12 @@
 import React from 'react'
+import { PostListStyled, PostStyled } from './PostsStyled'
 
 export const Posts = () => {
   return (
-    <div>Posts</div>
+    <PostListStyled className='container__pages'>
+      <PostStyled/>
+      <PostStyled/>
+      <PostStyled/>
+    </PostListStyled>
   )
 }

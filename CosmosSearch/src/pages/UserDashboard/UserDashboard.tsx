@@ -1,12 +1,37 @@
+import { useContext } from "react";
 import { Header } from "../../components/Header/Header";
+import { Posts } from "../../components/Posts/Posts";
+import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { DivForButtons } from "./DivForButtons/DivForButtons";
 import { UserDashboardStyled } from "./UserDashboardStyled";
 
 export const UserDashboard = () => {
+  const { burgerOpen } = useContext(LinksContext);
+
   return (
     <UserDashboardStyled>
-      <Header path="userDeslogged" />
-      <DivForButtons/>
+      {/* Mobile */}
+      <div className="userdash__mobile">
+        <Header path="userDeslogged" />
+        <DivForButtons />
+        <Posts />
+      </div>
+      {/* Desktop */}
+
+      <div className="userdash__desktop">
+        <Header path="userDeslogged" />
+        {burgerOpen ? (
+          <main className="main__burgerOpen">
+            <DivForButtons />
+            <Posts />
+          </main>
+        ) : (
+          <main className="main__bugerClosed">
+            <DivForButtons/>
+            <Posts />
+          </main>
+        )}
+      </div>
     </UserDashboardStyled>
   );
 };

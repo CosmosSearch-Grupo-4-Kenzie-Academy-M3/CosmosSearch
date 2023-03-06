@@ -1,7 +1,8 @@
 import { useContext } from "react";
-import { Astronaut, Planet, Plus } from "../../../components/Svgs/Svg";
+
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 
+import { Astronaut, Planet, Plus } from "../../../components/Svgs/Svg";
 import {
   DivForButtonsStyled,
   DivForButtonsStyledMobile,
@@ -9,7 +10,7 @@ import {
 import { LinkButtonWithSvg } from "./LinkButtonWithSvg/LinkButtonWithSvg";
 
 export const DivForButtons = () => {
-  const { burgerOpen, setBurgerOpen } = useContext(LinksContext);
+  const { burgerOpen } = useContext(LinksContext);
 
   return (
     <>
@@ -31,19 +32,11 @@ export const DivForButtons = () => {
       </DivForButtonsStyledMobile>
       {/* Desktop */}
       <DivForButtonsStyled className="container__pages">
-        {burgerOpen ? (
-          <div className=" divForButtonStyled__burgerOpen">
-            <LinkButtonWithSvg icon="astronaut" />
-            <LinkButtonWithSvg icon="planet" />
-            <LinkButtonWithSvg icon="plus" />
-          </div>
-        ) : (
-          <div className=" divForButtonStyled__burgerClosed">
-            <LinkButtonWithSvg icon="astronaut" />
-            <LinkButtonWithSvg icon="planet" />
-            <LinkButtonWithSvg icon="plus" />
-          </div>
-        )}
+        <div className=" divForButtonStyled__burgerClosed">
+          <LinkButtonWithSvg icon="astronaut" />
+          <LinkButtonWithSvg icon="planet" />
+          <LinkButtonWithSvg icon="plus" />
+        </div>
       </DivForButtonsStyled>
     </>
   );
