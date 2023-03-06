@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { LinkButton } from "../../../../components/LinkButton/LinkButton";
 import { Astronaut, Planet, Plus } from "../../../../components/Svgs/Svg";
+import { LinksContext } from "../../../../contexts/LinksContext/LinksContext";
 import { LinkButtonWithSvgStyled } from "./LinkButtonWithSvgStyled";
 
 interface iLinkButtonWithSvg {
@@ -7,12 +9,14 @@ interface iLinkButtonWithSvg {
 }
 
 export const LinkButtonWithSvg = ({ icon }: iLinkButtonWithSvg) => {
+  const { setMainComponent } = useContext(LinksContext);
+
   switch (icon) {
     case "astronaut":
       return (
-        <LinkButtonWithSvgStyled>
+        <LinkButtonWithSvgStyled onClick={() => setMainComponent("updatePerfil")}>
           <Astronaut />
-          <LinkButton text="Perfil" line={true} />
+          <LinkButton text="Perfil" line={true}/>
         </LinkButtonWithSvgStyled>
       );
     case "planet":

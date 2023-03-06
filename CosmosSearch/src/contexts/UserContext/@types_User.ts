@@ -5,3 +5,8 @@ export interface IformUserRegister {
   confirmPassword: string;
 }
 
+export interface IFormUserUpdate {
+  name: string;
+  email: string;
+  password: string;
+}
