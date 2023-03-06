@@ -21,14 +21,14 @@ export const LinkButtonWithSvg = ({ icon }: iLinkButtonWithSvg) => {
       );
     case "planet":
       return (
-        <LinkButtonWithSvgStyled>
+        <LinkButtonWithSvgStyled onClick={() => setMainComponent("posts")}>
           <Planet />
           <LinkButton text="My Posts" line={true} />
         </LinkButtonWithSvgStyled>
       );
     case "plus":
       return (
-        <LinkButtonWithSvgStyled>
+        <LinkButtonWithSvgStyled onClick={() => setMainComponent("registerPost")}>
           <Plus />
           <LinkButton text="New Post" line={true} />
         </LinkButtonWithSvgStyled>
