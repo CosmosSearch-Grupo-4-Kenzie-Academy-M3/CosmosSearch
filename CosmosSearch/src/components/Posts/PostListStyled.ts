@@ -19,5 +19,4 @@ export const PostStyled = styled.li`
     padding: 1.25rem;
 
     background-color: var(--grey-2);
-    opacity: .5;
 `

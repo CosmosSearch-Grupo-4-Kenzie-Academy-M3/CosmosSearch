@@ -20,6 +20,7 @@ export const UserDashboardStyled = styled.div`
 
       main {
         width: 100%;
+
         display: flex;
         justify-content: space-between;
       }

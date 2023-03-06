@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Header } from "../../components/Header/Header";
-import { Posts } from "../../components/Posts/Posts";
+import { Posts } from "../../components/Posts/PostList";
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { DivForButtons } from "./DivForButtons/DivForButtons";
 import { UserDashboardStyled } from "./UserDashboardStyled";
@@ -17,7 +17,6 @@ export const UserDashboard = () => {
         <Posts />
       </div>
       {/* Desktop */}
-
       <div className="userdash__desktop">
         <Header path="userDeslogged" />
         {burgerOpen ? (
