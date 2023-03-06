@@ -42,7 +42,7 @@ export const GlobalStyle = createGlobalStyle`
         --fw-400: 400;
 
         /* Border-Radius */
-        --br-8: 8px
+        --br-8: 8px;
 
         /* Heights */
         --inpt-height: 3.125rem;
