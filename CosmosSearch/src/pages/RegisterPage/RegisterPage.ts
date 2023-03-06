@@ -17,29 +17,30 @@ export const RegisterPageStyle = styled.main`
         display: flex;
         flex-direction: column;
         gap: 10px;
+        align-items: center;
 
-        padding: 26px;
+        padding: 10px;
         box-sizing: border-box;
 
         border-top: 1px solid white ;
         border-bottom: 1px solid white ;
 
-        width: 90%;
+        width: 95%;
         max-width: 395px;
-
-        
-
-        span{
-            color: red;
-            max-width: 700px;
-        }
-        
+        margin-bottom: 20px;
+        margin-top: 20px;
     }
 
     .colum{
         border-left: 2px solid var(--primary-blue);
+
     }
+
     @media (max-width: 920px) {
+
+        .colum{
+           background-color: red;
+        }
 
         flex-direction: column;
         justify-content: start;

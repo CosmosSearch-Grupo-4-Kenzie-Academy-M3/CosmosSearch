@@ -1,21 +1,30 @@
+import { FieldErrors, FieldValues, UseFormRegisterReturn } from "react-hook-form";
 import {ImputStyle} from "./InputStyle"
 
 interface IInput {
-    name: string;
-}
+    
+    error?: string;
+    register: UseFormRegisterReturn<string>;
+    labelName: string;
+    type:string;
+    
+    
+};
 
-export const Input = ({name} : IInput) => {
+export const Input = ({error,  register , type, labelName} : IInput) => {
+
+    console.log(error)
 
     return(
         
         <ImputStyle >
-            <label htmlFor={name}>{name[0].toUpperCase() + name.slice(1)}</label>
-            <div>
-                <input id={name} type="text" />
-                <span>erro</span>
+            <label className="input__label" htmlFor={register.name}>{labelName}</label>
+            <div  className="containerInputSpan">
+                <input className="input__placeholder" id={register.name} type={type} {...register}/>
+                {error ? <span className="spanError">{error}</span> : null}
             </div>
         </ImputStyle>
 
-    )
+    );
 
-} 
+} ;
