@@ -28,5 +28,11 @@ export const UserDashboardStyled = styled.div`
     .userdash__mobile {
       display: none;
     }
+
+    @media (min-width: 920px) {
+      .main__burgerOpen {
+        margin-top: 1rem;
+      }
+    }
   }
 `;
