@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
 export const RegisterPageStyled = styled.main`
-  width: 100%;
   min-height: 100vh;
   max-height: max-content;
   color: white;
   align-items: center;
   display: flex;
-  justify-content: center;
-  gap: 100px;
+  justify-content: space-between;
+  /* gap: 100px; */
 
   .colum {
     border-left: 2px solid var(--primary-blue);
@@ -24,7 +23,7 @@ export const RegisterPageStyled = styled.main`
     display: none;
   }
 
-  @media (max-width: 920px) {
+  @media (max-width: 950px) {
     .linksMobile {
       display: flex;
     }
@@ -38,7 +37,6 @@ export const RegisterPageStyled = styled.main`
     }
 
     flex-direction: column;
-    justify-content: start;
 
     > div {
       display: flex;

@@ -5,21 +5,23 @@ import { RegisterPageStyled } from "./RegisterPageStyled";
 
 export const RegisterPage = () => {
   return (
-    <RegisterPageStyled>
-      <div>
-        <Title />;
-        <div className="linksDesktop">
-          <LinkButton text="Login" line={true} />
-          <LinkButton text="Singup" />
+    <div className="container__pages--forms">
+      <RegisterPageStyled>
+        <div>
+          <Title />;
+          <div className="linksDesktop">
+            <LinkButton text="Login" line={true} />
+            <LinkButton text="Singup" />
+          </div>
+          <div className="linksMobile">
+            <LinkButton text="Login" />
+            <div className="colum"></div>
+            <LinkButton text="Singup" />
+          </div>
         </div>
-        <div className="linksMobile">
-          <LinkButton text="Login" />
-          <div className="colum"></div>
-          <LinkButton text="Singup" />
-        </div>
-      </div>
 
-      <RegisterUserForm />
-    </RegisterPageStyled>
+        <RegisterUserForm />
+      </RegisterPageStyled>
+    </div>
   );
 };

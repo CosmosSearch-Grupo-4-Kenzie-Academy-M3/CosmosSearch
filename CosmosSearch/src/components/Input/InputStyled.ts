@@ -32,7 +32,7 @@ export const ImputStyled = styled.div`
     font-family: var(--ff-Inter);
   }
 
-  @media (min-width: 376px) {
+  @media (min-width: 380px) {
     width: 300px;
   }
 `;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StartStyled = styled.div`
-  height: 100%;
+  min-height: 100vh;
   width: 100%;
 
   .burger__div {
@@ -9,6 +9,7 @@ export const StartStyled = styled.div`
     width: 100%;
 
     margin-bottom: 68px;
+    margin-top: 200px;
 
     display: flex;
     justify-content: center;
@@ -51,6 +52,9 @@ export const StartStyled = styled.div`
     }
     .top__start--desktop {
       display: block;
+    }
+    .container__page--start {
+      height: 100vh;
     }
     .links__start--desktop {
       height: 100%;

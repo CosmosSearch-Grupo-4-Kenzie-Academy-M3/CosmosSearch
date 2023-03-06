@@ -18,7 +18,7 @@ export const UserDashboardStyled = styled.div`
   }
 
   /* MediaQuery */
-  @media (min-width: 450px) {
+  @media (min-width: 380px) {
     .container__form {
       display: flex;
       justify-content: center;

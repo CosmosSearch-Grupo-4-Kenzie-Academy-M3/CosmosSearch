@@ -9,7 +9,7 @@ import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { BurgerMenu } from "../../components/Svgs/Svg";
 
 export const Start = () => {
-  const {burgerOpen, setBurgerOpen} = useContext(LinksContext)
+  const { burgerOpen, setBurgerOpen } = useContext(LinksContext);
 
   return (
     <StartStyled>
@@ -27,7 +27,7 @@ export const Start = () => {
             </div>
           ) : (
             <div className="burger__menu" onClick={() => setBurgerOpen(true)}>
-              <BurgerMenu/>
+              <BurgerMenu />
             </div>
           )}
         </div>

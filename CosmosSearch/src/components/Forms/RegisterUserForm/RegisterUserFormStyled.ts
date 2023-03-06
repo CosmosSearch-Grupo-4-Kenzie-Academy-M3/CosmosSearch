@@ -10,9 +10,17 @@ export const RegisterUserFormStyled = styled.form`
 
     border-top: 1px solid white;
     border-bottom: 1px solid white;
+    
+    width: 220px;
 
-    width: 95%;
-    max-width: 395px;
+    padding-inline: 20px;
     padding-block: 30px;
+
+    margin-block: 2rem;
+
+    /* MediaQuery */
+    @media (min-width: 380px) {
+        width: max-content;
+    }
 
 `

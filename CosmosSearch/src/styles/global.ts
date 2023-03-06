@@ -67,6 +67,9 @@ export const GlobalStyle = createGlobalStyle`
         align-items: flex-start;
         justify-content: space-between;
     }
+    .container__pages--forms {
+        padding-inline: 7rem;
+    }
 
     .container__pages {
         padding-inline: 20px;

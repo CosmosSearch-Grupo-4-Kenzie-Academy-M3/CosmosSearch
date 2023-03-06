@@ -19,7 +19,7 @@ export const UpdateUserFormStyled = styled.form`
     border-bottom: 1px solid white;
 
     /* MediaQuery */
-    @media (min-width: 450px) {
+    @media (min-width: 380px) {
         width: max-content;
     }
 
