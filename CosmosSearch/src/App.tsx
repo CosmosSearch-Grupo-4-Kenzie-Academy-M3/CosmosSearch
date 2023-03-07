@@ -4,6 +4,7 @@ import { Start } from "./pages/Start/Start";
 import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
 import { UserDashboard } from "./pages/UserDashboard/UserDashboard";
 import { Providers } from "./contexts/Providers";
+import { PostsDashboard } from "./pages/Dashboard/PostsDashboard";
 
 export const App = () => {
   return (
@@ -13,6 +14,7 @@ export const App = () => {
           <Providers>
             {/* <Start /> */}
             <UserDashboard />
+            <PostsDashboard />
             {/* <RegisterPage /> */}
           </Providers>
         </DivOpacity>
