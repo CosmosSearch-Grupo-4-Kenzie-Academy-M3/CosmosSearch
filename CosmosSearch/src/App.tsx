@@ -12,10 +12,10 @@ export const App = () => {
       <AppStyled bg={galaxy}>
         <DivOpacity>
           <Providers>
-            <LoginPage/>
+            {/* <LoginPage/> */}
             {/* <RegisterPage /> */}
             {/* <Start /> */}
-            {/* <UserDashboard /> */}
+            <UserDashboard />
           </Providers>
         </DivOpacity>
       </AppStyled>

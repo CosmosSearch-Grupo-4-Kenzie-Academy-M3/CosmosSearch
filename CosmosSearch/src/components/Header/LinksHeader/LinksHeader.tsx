@@ -29,7 +29,7 @@ export const LinksHeader = ({path}: iLinksHeader) => {
                 <LinksHeaderStyled>
                   <LinkButton text="Home" />
                   <div className="colum"></div>
-                  <LinkButton text="Singup" />
+                  <LinkButton text="Sign Up" />
                 </LinksHeaderStyled>
               );      
     }

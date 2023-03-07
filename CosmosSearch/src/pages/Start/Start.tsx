@@ -41,7 +41,7 @@ export const Start = () => {
           <LinkButton text="Home" line={true} />
           <div className="links__start">
             <LinkButton text="Login" line={true} />
-            <LinkButton text="Singup" />
+            <LinkButton text="Sign Up" />
           </div>
         </div>
       </div>
