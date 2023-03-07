@@ -23,7 +23,10 @@ export const RegisterPageStyled = styled.main`
     display: none;
   }
 
-  @media (max-width: 950px) {
+  @media (max-width: 1018px) {
+    justify-content: unset;
+    gap: 4.25rem;
+
     .linksMobile {
       display: flex;
     }

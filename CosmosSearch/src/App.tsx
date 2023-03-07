@@ -4,6 +4,7 @@ import { Start } from "./pages/Start/Start";
 import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
 import { UserDashboard } from "./pages/UserDashboard/UserDashboard";
 import { Providers } from "./contexts/Providers";
+import { LoginPage } from "./pages/LoginPage/LoginPage";
 
 export const App = () => {
   return (
@@ -11,10 +12,10 @@ export const App = () => {
       <AppStyled bg={galaxy}>
         <DivOpacity>
           <Providers>
-
-            {/* <Start /> */}
-            <UserDashboard />
+            <LoginPage/>
             {/* <RegisterPage /> */}
+            {/* <Start /> */}
+            {/* <UserDashboard /> */}
           </Providers>
         </DivOpacity>
       </AppStyled>
