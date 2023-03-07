@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
-export const RegisterPageStyled = styled.main`
+export const LoginPageStyled = styled.div`
   min-height: 100vh;
   max-height: max-content;
   color: white;
   align-items: center;
   display: flex;
   justify-content: space-between;
-  /* gap: 100px; */
 
   .colum {
     border-left: 2px solid var(--primary-blue);

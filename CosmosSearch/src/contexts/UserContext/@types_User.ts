@@ -16,3 +16,8 @@ export interface IFormPostRegister {
   content: string;
   topic: string;
 }
+
+export interface IFormUserLogin {
+  email: string;
+  password: string;
+}
