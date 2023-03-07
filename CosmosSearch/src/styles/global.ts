@@ -69,7 +69,6 @@ export const GlobalStyle = createGlobalStyle`
     }
     .container__pages--forms {
         padding-inline: 7rem;
-        border: 2px solid tan;
     }
 
     .container__pages {
