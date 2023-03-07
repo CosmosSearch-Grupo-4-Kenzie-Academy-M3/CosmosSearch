@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const UpdateUserFormStyled = styled.form`
-    border: 2px solid rebeccapurple;
-
     width: 100%;
     
     padding: 1rem;
