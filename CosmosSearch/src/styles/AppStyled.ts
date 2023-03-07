@@ -6,10 +6,13 @@ export const AppStyled = styled.div<iAppStyled>`
 
   min-height: 100vh;
   max-height: max-content;
+
   background-image: url(${(props) => props.bg});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+
+  padding-bottom: 4rem;
 
   .title__box {
     display: none;

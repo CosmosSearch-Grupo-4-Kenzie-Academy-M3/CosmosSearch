@@ -11,6 +11,7 @@ export const App = () => {
       <AppStyled bg={galaxy}>
         <DivOpacity>
           <Providers>
+
             {/* <Start /> */}
             <UserDashboard />
             {/* <RegisterPage /> */}

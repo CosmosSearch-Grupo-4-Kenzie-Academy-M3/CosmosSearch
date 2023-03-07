@@ -7,6 +7,7 @@ import { IFormPostRegister } from "../../../contexts/UserContext/@types_User";
 import { Input } from "../../Input/Input";
 import { ButtonStyled } from "../../Button/ButtonStyled";
 import { UpdateUserFormStyled } from "../UpdateUserForm/UpdateUserFormStyled";
+import { Textarea } from "../../Input/Textarea/Textarea";
 
 export const RegisterPostForm = () => {
   const {
@@ -29,18 +30,15 @@ export const RegisterPostForm = () => {
         labelName="Title"
       />
       <Input
-        placeholder="Post Content"
-        error={errors.content?.message}
-        register={register("content")}
-        type="textarea"
-        labelName="Content"
-      />
-      <Input
         placeholder="Post Topic"
         error={errors.topic?.message}
         register={register("topic")}
         type="text"
         labelName="Topic"
+      />
+      <Textarea
+        error={errors.content?.message}
+        register={register("content")}
       />
       <ButtonStyled
         type="submit"

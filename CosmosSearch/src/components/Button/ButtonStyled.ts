@@ -23,4 +23,8 @@ export const ButtonStyled = styled.button<iButtonStyled>`
     align-items: center;
 
     cursor: pointer;
+
+    :hover {
+        background-color: rgba(186,219,215, .3);
+    }
 `
