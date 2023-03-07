@@ -12,8 +12,6 @@ export const AppStyled = styled.div<iAppStyled>`
   background-size: cover;
   background-position: center;
 
-  padding-bottom: 4rem;
-
   .title__box {
     display: none;
   }
