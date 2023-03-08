@@ -20,4 +20,5 @@ export interface IFormPostRegister {
 export interface IFormUserLogin {
   email: string;
   password: string;
+  error?: string;
 }
