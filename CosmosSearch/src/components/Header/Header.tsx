@@ -11,8 +11,7 @@ interface iLinksHeader {
 }
 
 export const Header = ({ path }: iLinksHeader) => {
-  const {burgerOpen, setBurgerOpen} = useContext(LinksContext);
-  console.log(burgerOpen)
+  const {burgerOpen, setBurgerOpen} = useContext(LinksContext);  
 
   return (
     <HeaderStyled>
