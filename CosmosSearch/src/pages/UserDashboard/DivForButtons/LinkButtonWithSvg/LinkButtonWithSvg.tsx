@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { LinkButton } from "../../../../components/LinkButton/LinkButton";
 import { Astronaut, Planet, Plus } from "../../../../components/Svgs/Svg";
 import { LinksContext } from "../../../../contexts/LinksContext/LinksContext";
+import { UserContext } from "../../../../contexts/UserContext/UserContext";
 import { LinkButtonWithSvgStyled } from "./LinkButtonWithSvgStyled";
 
 interface iLinkButtonWithSvg {
@@ -10,27 +11,35 @@ interface iLinkButtonWithSvg {
 
 export const LinkButtonWithSvg = ({ icon }: iLinkButtonWithSvg) => {
   const { setMainComponent } = useContext(LinksContext);
+  const { setUserState } = useContext(UserContext);
 
   switch (icon) {
     case "astronaut":
       return (
-        <LinkButtonWithSvgStyled onClick={() => setMainComponent("updatePerfil")}>
+        <LinkButtonWithSvgStyled
+          onClick={() => {
+            setMainComponent("updatePerfil");
+            setUserState("userLoggedInPerfil")
+          }}
+        >
           <Astronaut />
-          <LinkButton text="Perfil" line={true}/>
+          <LinkButton path="/userdashboard" text="Perfil" line={true} />
         </LinkButtonWithSvgStyled>
       );
     case "planet":
       return (
         <LinkButtonWithSvgStyled onClick={() => setMainComponent("posts")}>
           <Planet />
-          <LinkButton text="My Posts" line={true} />
+          <LinkButton path="/userdashboard" text="My Posts" line={true} />
         </LinkButtonWithSvgStyled>
       );
     case "plus":
       return (
-        <LinkButtonWithSvgStyled onClick={() => setMainComponent("registerPost")}>
+        <LinkButtonWithSvgStyled
+          onClick={() => setMainComponent("registerPost")}
+        >
           <Plus />
-          <LinkButton text="New Post" line={true} />
+          <LinkButton path="/userdashboard" text="New Post" line={true} />
         </LinkButtonWithSvgStyled>
       );
   }

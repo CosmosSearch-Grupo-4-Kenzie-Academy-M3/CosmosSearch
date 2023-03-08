@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { Title } from "../../components/Title/Title";
@@ -17,7 +17,16 @@ export const Start = () => {
         {/* Mobile */}
         <div className="top__start">
           <Title />
-          <LinkButton path="/dashboard" text="Home" line={true} />
+          <div
+            onClick={() =>
+              localStorage.setItem(
+                "@CosmosSearch:USERSTATE",
+                "userDeslogged"
+              )
+            }
+          >
+            <LinkButton path="/dashboard" text="Home" line={true} />
+          </div>
         </div>
         <div className="burger__div">
           {burgerOpen ? (
@@ -38,7 +47,16 @@ export const Start = () => {
           </TitleBordersStyled>
         </div>
         <div className="links__start--desktop">
-          <LinkButton path="/dashboard" text="Home" line={true} />
+          <div
+            onClick={() =>
+              localStorage.setItem(
+                "@CosmosSearch:USERSTATE",
+                "userDeslogged"
+              )
+            }
+          >
+            <LinkButton path="/dashboard" text="Home" line={true} />
+          </div>
           <div className="links__start">
             <LinkButton path="/login" text="Login" line={true} />
             <LinkButton path="/register" text="Sign Up" />

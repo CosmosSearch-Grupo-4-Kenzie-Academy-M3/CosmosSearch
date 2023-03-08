@@ -1,37 +1,58 @@
-import React from "react";
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/UserContext/UserContext";
 import { LinkButton } from "../../LinkButton/LinkButton";
 import { LinksHeaderStyled } from "./LinksHeaderStyled";
 
 interface iLinksHeader {
-  path: "userLogged" | "userDeslogged" | "userLoggedInPerfil";
+  path: "userLoggedInPerfil" | "userLogged" | "userDeslogged";
 }
 
 export const LinksHeader = ({ path }: iLinksHeader) => {
-  const teste = () => {
-    console.log("deslogou");
-  };
+  const { logout } = useContext(UserContext);
 
   switch (path) {
     case "userLoggedInPerfil":
       return (
         <LinksHeaderStyled>
-          <LinkButton path="/" text="Home" />
+          <div
+            onClick={() =>
+              localStorage.setItem(
+                "@CosmosSearch:USERSTATE",
+                "userLogged"
+              )
+            }
+          >
+            <LinkButton path="/dashboard" text="Home" />
+          </div>
           <div className="colum"></div>
-          <LinkButton path="/" text="Logout" />
+          <div onClick={() => logout()}>
+            <LinkButton path="/" text="Logout" />
+          </div>
         </LinksHeaderStyled>
       );
     case "userLogged":
       return (
         <LinksHeaderStyled>
-          <LinkButton path="/userdashboard" text="Perfil" />
+          <div
+            onClick={() =>
+              localStorage.setItem(
+                "@CosmosSearch:USERSTATE",
+                "userLoggedInPerfil"
+              )
+            }
+          >
+            <LinkButton path="/userdashboard" text="Perfil" />
+          </div>
           <div className="colum"></div>
-          <LinkButton path="/" text="Logout" />
+          <div onClick={() => logout()}>
+            <LinkButton path="/" text="Logout" />
+          </div>
         </LinksHeaderStyled>
       );
     case "userDeslogged":
       return (
         <LinksHeaderStyled>
-          <LinkButton path="/" text="Home" />
+          <LinkButton path="/" text="Start" />
           <div className="colum"></div>
           <LinkButton path="/register" text="Sign Up" />
         </LinksHeaderStyled>

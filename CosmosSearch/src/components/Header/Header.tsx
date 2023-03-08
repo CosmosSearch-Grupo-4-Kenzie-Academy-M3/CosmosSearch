@@ -7,7 +7,7 @@ import { BurgerMenu, CloseMenu, SmallLogo } from "../Svgs/Svg";
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 
 interface iLinksHeader {
-  path: "userLogged" | "userDeslogged" | "userLoggedInPerfil";
+  path: "userLoggedInPerfil" | "userLogged" | "userDeslogged"
 }
 
 export const Header = ({ path }: iLinksHeader) => {

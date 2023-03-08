@@ -1,20 +1,30 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RegisterPostForm } from "../../components/Forms/RegisterPostForm/RegisterPostForm";
 import { UpdateUserForm } from "../../components/Forms/UpdateUserForm/UpdateUserForm";
 import { Header } from "../../components/Header/Header";
 import { Posts } from "../../components/Posts/PostList";
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
+import { UserContext } from "../../contexts/UserContext/UserContext";
 import { DivForButtons } from "./DivForButtons/DivForButtons";
 import { UserDashboardStyled } from "./UserDashboardStyled";
 
 export const UserDashboard = () => {
   const { burgerOpen, mainComponent } = useContext(LinksContext);
+  const { userState, setUserState } = useContext(UserContext);
+
+  useEffect(() => {
+    const actualUserState = localStorage.getItem("@CosmosSearch:USERSTATE") as
+      | "userLoggedInPerfil"
+      | "userLogged"
+      | "userDeslogged";
+    setUserState(actualUserState);
+  }, []);
 
   return (
     <UserDashboardStyled>
       {/* Mobile */}
       <div className="userdash__mobile">
-        <Header path="userDeslogged" />
+        <Header path={userState} />
         <DivForButtons />
         {mainComponent === "posts" ? (
           <Posts />
@@ -30,7 +40,7 @@ export const UserDashboard = () => {
       </div>
       {/* Desktop */}
       <div className="userdash__desktop">
-        <Header path="userDeslogged" />
+        <Header path={userState} />
         {burgerOpen ? (
           <main className="main__burgerOpen">
             <DivForButtons />

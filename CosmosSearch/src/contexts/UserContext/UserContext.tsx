@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,7 +12,11 @@ import { IFormUserLogin, IFormUserRegister, IUserContext } from "./@types_User";
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: iChildren) => {
-  const {setMainComponent} = useContext(LinksContext);
+  const { setMainComponent } = useContext(LinksContext);
+
+  const [userState, setUserState] = useState<
+    "userLoggedInPerfil" | "userLogged" | "userDeslogged"
+  >("userDeslogged");
 
   const navigate = useNavigate();
 
@@ -27,7 +31,8 @@ export const UserProvider = ({ children }: iChildren) => {
     try {
       const response = await api.post("/users", data);
       console.log(response);
-      localStorage.setItem("@CosmosSearchTOKEN", response.data.accessToken);
+      localStorage.setItem("@CosmosSearch:TOKEN", response.data.accessToken);
+      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       navigate("/DashBoard");
     } catch (error) {
       console.log(error);
@@ -38,16 +43,19 @@ export const UserProvider = ({ children }: iChildren) => {
   const userLogin = async (data: IFormUserLogin) => {
     try {
       const response = await api.post("/login", data);
-      localStorage.setItem("@CosmosSearchTOKEN", response.data.accessToken);
-      navigate("/UserDashboard");
+      localStorage.setItem("@CosmosSearch:TOKEN", response.data.accessToken);
+      navigate("/dashboard");
+      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
     } catch (error) {
       toast.error("Usuário ou Senha inválidos.");
       reset();
     }
   };
-
+  
   const logout = () => {
-    localStorage.removeItem("@CosmosSearchTOKEN");
+    localStorage.removeItem("@CosmosSearch:TOKEN");
+    localStorage.removeItem("@CosmosSearch:USERSTATE")
+    setUserState("userDeslogged");
     navigate("/");
   };
 
@@ -66,7 +74,9 @@ export const UserProvider = ({ children }: iChildren) => {
         errors,
         reset,
         logout,
-        redirectToNewPost
+        redirectToNewPost,
+        userState,
+        setUserState,
       }}
     >
       {children}

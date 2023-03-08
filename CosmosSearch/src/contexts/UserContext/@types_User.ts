@@ -34,4 +34,6 @@ export interface IUserContext {
   reset: UseFormReset<IFormUserLogin>;
   logout: () => void;
   redirectToNewPost: () => void;
+  userState: "userLoggedInPerfil" | "userLogged" | "userDeslogged";
+  setUserState: React.Dispatch<React.SetStateAction< "userLoggedInPerfil" | "userLogged" | "userDeslogged">>;
 }
