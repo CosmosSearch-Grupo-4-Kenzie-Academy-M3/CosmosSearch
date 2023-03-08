@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -6,11 +6,14 @@ import { toast } from "react-toastify";
 import { api } from "../../services/api";
 
 import { iChildren } from "../@childrenType";
+import { LinksContext } from "../LinksContext/LinksContext";
 import { IFormUserLogin, IFormUserRegister, IUserContext } from "./@types_User";
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: iChildren) => {
+  const {setMainComponent} = useContext(LinksContext);
+
   const navigate = useNavigate();
 
   const {
@@ -48,7 +51,11 @@ export const UserProvider = ({ children }: iChildren) => {
     navigate("/");
   };
 
-  
+  const redirectToNewPost = () => {
+    setMainComponent("registerPost");
+    navigate("/userdashboard");
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -59,6 +66,7 @@ export const UserProvider = ({ children }: iChildren) => {
         errors,
         reset,
         logout,
+        redirectToNewPost
       }}
     >
       {children}

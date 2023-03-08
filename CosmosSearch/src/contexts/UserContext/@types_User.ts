@@ -32,5 +32,6 @@ export interface IUserContext {
   handleSubmit: UseFormHandleSubmit<IFormUserLogin>;
   errors: FieldErrors<IFormUserLogin>;
   reset: UseFormReset<IFormUserLogin>;
-  logout: () => void
+  logout: () => void;
+  redirectToNewPost: () => void;
 }
