@@ -6,6 +6,7 @@ import { UserDashboard } from "./pages/UserDashboard/UserDashboard";
 import { Providers } from "./contexts/Providers";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { Dashboard } from "./pages/Dashboard/Dashboard";
+import { AppRoutes } from "./routes/Router";
 
 export const App = () => {
   return (
@@ -13,11 +14,7 @@ export const App = () => {
       <AppStyled bg={galaxy}>
         <DivOpacity>
           <Providers>
-            {/* <LoginPage/> */}
-            {/* <RegisterPage /> */}
-            {/* <Start /> */}
-            {/* <UserDashboard /> */}
-            <Dashboard/>
+            <AppRoutes/>
           </Providers>
         </DivOpacity>
       </AppStyled>
