@@ -8,8 +8,11 @@ import { RegisterUserFormStyled } from "./RegisterUserFormStyled";
 
 import { fromSchema } from "../../../contexts/UserContext/validation";
 import { IformUserRegister } from "../../../contexts/UserContext/@types_User";
+import { api } from "../../../services/api";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterUserForm = () => {
+
   const {
     register,
     handleSubmit,
@@ -18,9 +21,35 @@ export const RegisterUserForm = () => {
     resolver: yupResolver(fromSchema),
   });
 
+
+  const navigate = useNavigate()
+
+  const userRegister = async (data: IformUserRegister) => {
+
+    
+
+    try {
+  
+      const request = await api.post("/users" , data)
+  
+      console.log(request)
+      navigate("/DashBoard")
+      
+
+
+    } catch (error) {
+    
+      console.log(error) 
+    }
+
+    
+  
+  }
+
   const userRegisterSubmit: SubmitHandler<IformUserRegister> = (data) => {
-    console.log(data);
+    userRegister(data);
   };
+
 
   return (
     <RegisterUserFormStyled onSubmit={handleSubmit(userRegisterSubmit)}>

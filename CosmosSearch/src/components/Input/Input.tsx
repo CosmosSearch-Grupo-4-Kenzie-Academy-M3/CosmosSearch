@@ -16,7 +16,6 @@ export const Input = ({
   type,
   labelName,
 }: IInput) => {
-  console.log(error);
 
   return (
     <ImputStyled>
