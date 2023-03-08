@@ -17,13 +17,13 @@ export const Start = () => {
         {/* Mobile */}
         <div className="top__start">
           <Title />
-          <LinkButton text="Home" line={true} />
+          <LinkButton path="/dashboard" text="Home" line={true} />
         </div>
         <div className="burger__div">
           {burgerOpen ? (
             <div className="links__start">
-              <LinkButton text="Login" line={true} />
-              <LinkButton text="Singup" />
+              <LinkButton path="/login" text="Login" line={true} />
+              <LinkButton path="/register" text="Singup" />
             </div>
           ) : (
             <div className="burger__menu" onClick={() => setBurgerOpen(true)}>
@@ -38,10 +38,10 @@ export const Start = () => {
           </TitleBordersStyled>
         </div>
         <div className="links__start--desktop">
-          <LinkButton text="Home" line={true} />
+          <LinkButton path="/dashboard" text="Home" line={true} />
           <div className="links__start">
-            <LinkButton text="Login" line={true} />
-            <LinkButton text="Sign Up" />
+            <LinkButton path="/login" text="Login" line={true} />
+            <LinkButton path="/register" text="Sign Up" />
           </div>
         </div>
       </div>

@@ -10,13 +10,13 @@ export const RegisterPage = () => {
         <div>
           <Title />;
           <div className="linksDesktop">
-            <LinkButton text="Login" line={true} />
-            <LinkButton text="Singup" />
+            <LinkButton path="/" text="Start" line={true} />
+            <LinkButton path="/login" text="Login" />
           </div>
           <div className="linksMobile">
-            <LinkButton text="Login" />
+            <LinkButton path="/" text="Start" />
             <div className="colum"></div>
-            <LinkButton text="Singup" />
+            <LinkButton path="/login" text="Login" />
           </div>
         </div>
 

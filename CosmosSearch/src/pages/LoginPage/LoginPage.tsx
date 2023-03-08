@@ -10,13 +10,13 @@ export const LoginPage = () => {
         <div>
           <Title />;
           <div className="linksDesktop">
-            <LinkButton text="Start" line={true} />
-            <LinkButton text="Singup" />
+            <LinkButton path="/" text="Start" line={true} />
+            <LinkButton path="/register" text="Sign Up" />
           </div>
           <div className="linksMobile">
-            <LinkButton text="Start" />
+            <LinkButton path="/" text="Start" />
             <div className="colum"></div>
-            <LinkButton text="Singup" />
+            <LinkButton path="/register" text="Sign Up" />
           </div>
         </div>
 
