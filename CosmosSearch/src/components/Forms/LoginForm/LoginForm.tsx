@@ -1,37 +1,25 @@
-import axios from "axios";
+import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+
 import { IFormUserLogin } from "../../../contexts/UserContext/@types_User";
-import { api } from "../../../services/api";
+import { UserContext } from "../../../contexts/UserContext/UserContext";
+
 import { ButtonStyled } from "../../Button/ButtonStyled";
 import { Input } from "../../Input/Input";
-import { UpdateUserFormStyled } from "../UpdateUserForm/UpdateUserFormStyled";
 import { LoginFormStyled } from "./LoginFormStyled";
 
 export const LoginForm = () => {
-  const navigate = useNavigate();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  //   reset,
+  // } = useForm<IFormUserLogin>();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<IFormUserLogin>();
+  const { userLogin, register, errors, handleSubmit} = useContext(UserContext);
 
   const userLoginSubmit: SubmitHandler<IFormUserLogin> = async (data) => {
     userLogin(data);
-  };
-
-  const userLogin = async (data: IFormUserLogin) => {
-    try {
-      const response = await api.post("/login", data);
-      localStorage.setItem("@CosmosSearchTOKEN", response.data.accessToken);
-      navigate("/UserDashboard");
-    } catch (error) {
-      toast.error(`Usuário ou Senha inválidos`);
-      reset();
-    }
   };
 
   return (
