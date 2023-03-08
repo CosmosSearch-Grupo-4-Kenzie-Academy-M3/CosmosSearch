@@ -10,8 +10,10 @@ export const LinksProvider = ({ children }: iChildren) => {
   const [mainComponent, setMainComponent] = useState("posts")
 
   return (
+
     <LinksContext.Provider value={{ burgerOpen, setBurgerOpen, mainComponent, setMainComponent }}>
       {children}
     </LinksContext.Provider>
+    
   );
 };
