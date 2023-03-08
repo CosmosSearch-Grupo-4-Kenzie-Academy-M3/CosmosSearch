@@ -5,6 +5,7 @@ import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
 import { UserDashboard } from "./pages/UserDashboard/UserDashboard";
 import { Providers } from "./contexts/Providers";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
+import { Dashboard } from "./pages/Dashboard/Dashboard";
 
 export const App = () => {
   return (
@@ -15,7 +16,8 @@ export const App = () => {
             {/* <LoginPage/> */}
             {/* <RegisterPage /> */}
             {/* <Start /> */}
-            <UserDashboard />
+            {/* <UserDashboard /> */}
+            <Dashboard/>
           </Providers>
         </DivOpacity>
       </AppStyled>
