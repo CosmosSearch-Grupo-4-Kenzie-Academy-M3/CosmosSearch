@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { Header } from "../../components/Header/Header";
 
 import { Posts } from "../../components/Posts/PostList";
+import { PostModal } from "../../components/Posts/PostModal/PostModal";
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import { DashboardStyled } from "./DashboardStyled";
@@ -11,7 +12,7 @@ export const Dashboard = () => {
   const { burgerOpen } = useContext(LinksContext);
   const { userState, setUserState } = useContext(UserContext);
 
-  console.log(userState)
+  console.log(userState);
 
   useEffect(() => {
     const actualUserState = localStorage.getItem("@CosmosSearch:USERSTATE") as
@@ -23,6 +24,7 @@ export const Dashboard = () => {
 
   return (
     <DashboardStyled>
+      <PostModal />
       <Header path={userState} />
       {/* Mobile */}
       {burgerOpen ? (

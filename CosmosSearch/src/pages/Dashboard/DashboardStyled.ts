@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const DashboardStyled = styled.div`
+  position: relative;
+
   min-height: 100vh;
   max-height: max-content;
   width: 100%;

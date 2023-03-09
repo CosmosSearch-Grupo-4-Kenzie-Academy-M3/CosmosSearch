@@ -5,8 +5,9 @@ import planetGrey from "../../assets/svgs/planet_grey.svg"
 import plus from "../../assets/svgs/plus+.svg"
 import smallLogo from "../../assets/svgs/SmallMobileLogo.svg"
 import astronaut from "../../assets/svgs/astronaut.svg"
+import closeModal from "../../assets/svgs/close__modal--teste.svg"
 
-import { SvgStyled } from "./SvgStyled"
+import { SvgCloseModal, SvgStyled } from "./SvgStyled"
 
 export const BurgerMenu = () => {
   return <SvgStyled src={burger} alt="Burger Menu Button"/>;
@@ -35,3 +36,7 @@ export const SmallLogo = () => {
 export const Astronaut = () => {
   return <SvgStyled src={astronaut} alt="Astronaut icon"/>;
 };
+
+export const CloseModal = () => {
+  return <SvgCloseModal src={closeModal} alt="Close icon"/>;
+}

@@ -5,3 +5,8 @@ export const SvgStyled = styled.img`
 
     cursor: pointer;
 `
+export const SvgCloseModal = styled.img`
+    width: 100%;
+    height: 100%;
+
+`
