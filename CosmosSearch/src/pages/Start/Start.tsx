@@ -19,40 +19,34 @@ export const Start = () => {
           <Title />
           <div
             onClick={() =>
-              localStorage.setItem(
-                "@CosmosSearch:USERSTATE",
-                "userDeslogged"
-              )
+              localStorage.setItem("@CosmosSearch:USERSTATE", "userDeslogged")
             }
           >
             <LinkButton path="/dashboard" text="Home" line={true} />
           </div>
-        </div>
-        <div className="burger__div">
-          {burgerOpen ? (
-            <div className="links__start">
-              <LinkButton path="/login" text="Login" line={true} />
-              <LinkButton path="/register" text="Singup" />
-            </div>
-          ) : (
-            <div className="burger__menu" onClick={() => setBurgerOpen(true)}>
-              <BurgerMenu />
-            </div>
-          )}
+          <div className="burger__div">
+            {burgerOpen ? (
+              <div className="links__start">
+                <LinkButton path="/login" text="Login" line={true} />
+                <LinkButton path="/register" text="Singup" />
+              </div>
+            ) : (
+              <div className="burger__menu" onClick={() => setBurgerOpen(true)}>
+                <BurgerMenu />
+              </div>
+            )}
+          </div>
         </div>
         {/* Desktop */}
         <div className="top__start--desktop">
-          <TitleBordersStyled marginTop="210px" className="title__box">
+          <TitleBordersStyled marginTop="10.1875rem" className="title__box">
             <p className="title__primary">CosmosSearch</p>
           </TitleBordersStyled>
         </div>
         <div className="links__start--desktop">
           <div
             onClick={() =>
-              localStorage.setItem(
-                "@CosmosSearch:USERSTATE",
-                "userDeslogged"
-              )
+              localStorage.setItem("@CosmosSearch:USERSTATE", "userDeslogged")
             }
           >
             <LinkButton path="/dashboard" text="Home" line={true} />

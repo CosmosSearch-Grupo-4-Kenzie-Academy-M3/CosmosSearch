@@ -53,9 +53,6 @@ export const StartStyled = styled.div`
     .top__start--desktop {
       display: block;
     }
-    .container__page--start {
-      height: 100vh;
-    }
     .links__start--desktop {
       height: 100%;
 

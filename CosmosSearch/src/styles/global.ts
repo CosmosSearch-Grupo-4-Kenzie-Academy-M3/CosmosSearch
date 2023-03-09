@@ -160,7 +160,9 @@ export const GlobalStyle = createGlobalStyle`
     /* MediaQuery */
     @media (min-width: 1000px) {
     .container__page--start {
-      min-width: 82.5%;
+      min-width: 100%;
+      height: 100vh;
+      padding-inline: 7rem  ;
       flex-direction: row;
     }
   }
