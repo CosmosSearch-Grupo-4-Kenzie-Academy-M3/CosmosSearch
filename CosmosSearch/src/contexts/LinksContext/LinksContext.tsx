@@ -7,13 +7,21 @@ export const LinksContext = createContext({} as iLinks);
 
 export const LinksProvider = ({ children }: iChildren) => {
   const [burgerOpen, setBurgerOpen] = useState(false);
-  const [mainComponent, setMainComponent] = useState("posts")
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [mainComponent, setMainComponent] = useState("posts");
 
   return (
-
-    <LinksContext.Provider value={{ burgerOpen, setBurgerOpen, mainComponent, setMainComponent }}>
+    <LinksContext.Provider
+      value={{
+        burgerOpen,
+        setBurgerOpen,
+        mainComponent,
+        setMainComponent,
+        modalIsOpen,
+        setModalIsOpen,
+      }}
+    >
       {children}
     </LinksContext.Provider>
-    
   );
 };

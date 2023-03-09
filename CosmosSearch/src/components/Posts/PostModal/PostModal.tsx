@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 import { CloseModal } from "../../Svgs/Svg";
 import {
   CommentDiv,
@@ -11,10 +13,12 @@ import {
 } from "./PostModalStyled";
 
 export const PostModal = () => {
+  const { setModalIsOpen } = useContext(LinksContext);
+
   return (
     <PostModalDivStyled>
       <PostModalStyled>
-        <CloseButton>
+        <CloseButton onClick={() => setModalIsOpen(false)}>
           <CloseModal />
         </CloseButton>
         <HeaderModal>

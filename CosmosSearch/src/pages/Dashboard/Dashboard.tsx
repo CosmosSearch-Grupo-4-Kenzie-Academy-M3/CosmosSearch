@@ -9,7 +9,7 @@ import { DashboardStyled } from "./DashboardStyled";
 import { NewPost } from "./NewPost/NewPost";
 
 export const Dashboard = () => {
-  const { burgerOpen } = useContext(LinksContext);
+  const { burgerOpen, modalIsOpen } = useContext(LinksContext);
   const { userState, setUserState } = useContext(UserContext);
 
   console.log(userState);
@@ -24,7 +24,7 @@ export const Dashboard = () => {
 
   return (
     <DashboardStyled>
-      <PostModal />
+      {modalIsOpen ? <PostModal /> : (<></>)}
       <Header path={userState} />
       {/* Mobile */}
       {burgerOpen ? (
