@@ -8,5 +8,4 @@ export const SvgStyled = styled.img`
 export const SvgCloseModal = styled.img`
     width: 100%;
     height: 100%;
-
 `

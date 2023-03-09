@@ -63,7 +63,7 @@ export const HeaderModal = styled.header`
 `;
 export const ContentDiv = styled.div`
   width: 100%;
-  height: 250px;
+  height: 210px;
 
   padding: 1rem;
 
@@ -72,7 +72,7 @@ export const ContentDiv = styled.div`
   border: 2px solid var(--primary-blue);
 `;
 
-export const CommentsList = styled.div`
+export const CommentsList = styled.ul`
   width: 100%;
   height: 220px;
 
@@ -85,12 +85,26 @@ export const CommentsList = styled.div`
   overflow-y: auto;
 
   border: 2px solid var(--primary-blue);
+
+  .comments__header {
+    width: 100%;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  } 
+
+  .plus__comment {
+    width: max-content;
+    height: 100%;
+  }
 `;
 
-export const CommentDiv = styled.div`
+export const CommentDiv = styled.li`
   width: 100%;
   min-height: 50px;
-  height: 170px;
+  height: 210px;
 
   overflow-y: auto;
 
@@ -103,4 +117,38 @@ export const InfosDiv = styled.div`
 
     display: flex;
     justify-content: space-between;
+`;
+
+export const DivInput = styled.div`
+  position: relative;
+`
+
+export const NewCommentInput = styled.input`
+  width:100%;
+  min-height: 50px;
+
+  padding-left: 1rem;
+
+  margin-inline: auto;
+
+  background-color: transparent;
+
+  border: 2px solid var(--primary-blue);
+`;
+
+export const NewCommentInputButton = styled.button`
+  height: 100%;
+  width: max-content;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  right: 1rem;
+
+  background-color: transparent;
+
+  cursor: pointer;
 `

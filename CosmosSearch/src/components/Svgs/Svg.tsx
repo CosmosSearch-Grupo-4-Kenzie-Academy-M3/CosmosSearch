@@ -7,6 +7,7 @@ import smallLogo from "../../assets/svgs/SmallMobileLogo.svg"
 import astronaut from "../../assets/svgs/astronaut.svg"
 import closeModal from "../../assets/svgs/close__modal--teste.svg"
 import spaceInvaders from "../../assets/svgs/space_invaders.svg"
+import plusComment from "../../assets/svgs/plus__comment.svg"
 
 import { SvgCloseModal, SvgStyled } from "./SvgStyled"
 
@@ -44,4 +45,8 @@ export const SpaceInvaders = () => {
 
 export const CloseModal = () => {
   return <SvgCloseModal src={closeModal} alt="Close icon"/>;
+}
+
+export const PlusComment = () => {
+  return <SvgStyled src={plusComment} alt="Close icon"/>;  
 }

@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
-import { CloseModal } from "../../Svgs/Svg";
+import { CloseModal, PlusComment } from "../../Svgs/Svg";
 import {
   CommentDiv,
   CommentsList,
@@ -10,10 +10,15 @@ import {
   CloseButton,
   PostModalDivStyled,
   PostModalStyled,
+  NewCommentInput,
+  NewCommentInputButton,
+  DivInput,
 } from "./PostModalStyled";
 
 export const PostModal = () => {
   const { setModalIsOpen } = useContext(LinksContext);
+
+  const [openCommentInput, setOpenCommentInput] = useState(false);
 
   return (
     <PostModalDivStyled>
@@ -34,7 +39,38 @@ export const PostModal = () => {
           </p>
         </ContentDiv>
         <CommentsList>
-          <p className="title__comments">Comments</p>
+          <div className="comments__header">
+            <p className="title__comments">Comments</p>
+            <div
+              className="plus__comment"
+              onClick={() => setOpenCommentInput(!openCommentInput)}
+            >
+              <PlusComment />
+            </div>
+          </div>
+          {openCommentInput ? (
+            <DivInput>
+              <NewCommentInput
+                className="post__text__preview--mobile"
+                type="text"
+              />
+              <NewCommentInputButton className="title__comments">ENVIAR</NewCommentInputButton>
+            </DivInput>
+          ) : (
+            <>            
+            </>
+          )}
+          
+
+
+          {/* comments.map ((comment) => {
+            <CommentDiv>
+            <p> </p>
+            <span>
+            comment.user
+            </span>
+            </CommentDiv>
+          }) */}
           <CommentDiv>
             <p className="post__text__preview--mobile">
               <span className="title__comments">User: </span>

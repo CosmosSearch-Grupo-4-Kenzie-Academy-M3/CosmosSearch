@@ -25,6 +25,12 @@ export interface IFormUserLogin {
   error?: string;
 }
 
+export interface IUser {
+  email: string;
+  name: string;
+  id: number;
+}
+
 export interface IUserContext {
   userRegister: (data: IFormUserRegister) => Promise<void>
   userLogin: (data: IFormUserLogin) => Promise<void>
@@ -36,4 +42,8 @@ export interface IUserContext {
   redirectToNewPost: () => void;
   userState: "userLoggedInPerfil" | "userLogged" | "userDeslogged";
   setUserState: React.Dispatch<React.SetStateAction< "userLoggedInPerfil" | "userLogged" | "userDeslogged">>;
+  user: IUser | string | null;
+  setUser: React.Dispatch<React.SetStateAction<IUser | string |null>>
 }
+
+

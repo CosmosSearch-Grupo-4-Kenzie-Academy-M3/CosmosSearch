@@ -147,7 +147,7 @@ export const GlobalStyle = createGlobalStyle`
         font-size: var(--fs-10);
         font-weight: var(--fw-400);
         color: var(--primary-blue);
-    }
+    } 
 
     /* LinksLine */
     .links__line {
