@@ -9,7 +9,7 @@ import closeModal from "../../assets/svgs/close__modal--teste.svg"
 import spaceInvaders from "../../assets/svgs/space_invaders.svg"
 import plusComment from "../../assets/svgs/plus__comment.svg"
 
-import { SvgCloseModal, SvgStyled } from "./SvgStyled"
+import { SvgCloseModal, SvgPlusComment, SvgStyled } from "./SvgStyled"
 
 export const BurgerMenu = () => {
   return <SvgStyled src={burger} alt="Burger Menu Button"/>;
@@ -48,5 +48,5 @@ export const CloseModal = () => {
 }
 
 export const PlusComment = () => {
-  return <SvgStyled src={plusComment} alt="Close icon"/>;  
+  return <SvgPlusComment src={plusComment} alt="Close icon"/>;  
 }

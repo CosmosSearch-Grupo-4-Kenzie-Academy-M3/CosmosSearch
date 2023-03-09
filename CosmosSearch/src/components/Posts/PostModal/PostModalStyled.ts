@@ -6,7 +6,8 @@ export const PostModalDivStyled = styled.div`
   display: flex;
   justify-content: center;
 
-  height: 100%;
+  min-height: 100%;
+  max-height: max-content;
   width: 100%;
 
   padding-inline: 1rem;
@@ -27,7 +28,9 @@ export const PostModalStyled = styled.div`
 
   padding: 2.25rem 2.75rem;
 
-  margin-top: 10rem;
+  z-index: 100;
+
+  margin-top: 1rem;
 
   border: 2px solid var(--primary-blue);
   border-radius: 8px;
