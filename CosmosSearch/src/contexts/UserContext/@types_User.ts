@@ -15,8 +15,10 @@ export interface IFormUserUpdate {
 
 export interface IFormPostRegister {
   title: string;
-  content: string;
+  body: string;
   topic: string;
+  userId: number;
+  name: string;
 }
 
 export interface IFormUserLogin {

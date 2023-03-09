@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 interface iButtonStyled {
-    borderColor: string
-    textColor: string 
+    borderColor: string;
+    textColor: string;
+    id?: number;
 }
 
 export const ButtonStyled = styled.button<iButtonStyled>`
