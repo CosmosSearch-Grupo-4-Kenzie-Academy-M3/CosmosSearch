@@ -94,6 +94,11 @@ export const CommentsList = styled.div`
     align-items: center;
     justify-content: space-between;
   } 
+
+  .plus__comment {
+    width: max-content;
+    height: 100%;
+  }
 `;
 
 export const CommentDiv = styled.div`
@@ -112,4 +117,38 @@ export const InfosDiv = styled.div`
 
     display: flex;
     justify-content: space-between;
+`;
+
+export const DivInput = styled.div`
+  position: relative;
+`
+
+export const NewCommentInput = styled.input`
+  width:100%;
+  min-height: 50px;
+
+  padding-left: 1rem;
+
+  margin-inline: auto;
+
+  background-color: transparent;
+
+  border: 2px solid var(--primary-blue);
+`;
+
+export const NewCommentInputButton = styled.button`
+  height: 100%;
+  width: max-content;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  right: 1rem;
+
+  background-color: transparent;
+
+  cursor: pointer;
 `
