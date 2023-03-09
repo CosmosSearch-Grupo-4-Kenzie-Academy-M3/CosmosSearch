@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { CommentsContext } from "../../../contexts/CommentsContext/CommentsContext";
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 import { ButtonStyled } from "../../Button/ButtonStyled";
 import { PlanetGrey, SpaceInvaders } from "../../Svgs/Svg";
@@ -6,6 +7,7 @@ import { PostStyled } from "../PostListStyled";
 
 export const Post = () => {
   const { setModalIsOpen } = useContext(LinksContext);
+  const {readAllComments} = useContext(CommentsContext);
 
   return (
     <PostStyled>
