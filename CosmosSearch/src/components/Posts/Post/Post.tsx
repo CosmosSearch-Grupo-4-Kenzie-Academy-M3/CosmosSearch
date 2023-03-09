@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 import { ButtonStyled } from "../../Button/ButtonStyled";
-import { PlanetGrey } from "../../Svgs/Svg";
+import { PlanetGrey, SpaceInvaders } from "../../Svgs/Svg";
 import { PostStyled } from "../PostListStyled";
 
 export const Post = () => {
@@ -24,7 +24,7 @@ export const Post = () => {
             <p className="post__text__preview">topic: phisycs</p>
           </div>
           <div className="button" onClick={() => setModalIsOpen(true)}>
-            <PlanetGrey />
+            <SpaceInvaders />
             <ButtonStyled
               textColor="var(--primary-blue)"
               borderColor="var(--primary-blue)"

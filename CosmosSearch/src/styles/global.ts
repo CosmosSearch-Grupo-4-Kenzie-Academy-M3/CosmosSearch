@@ -20,6 +20,7 @@ export const GlobalStyle = createGlobalStyle`
         /* Colors */
         --white: #fff;
         --primary-blue: #BADBD7;
+        --primary-blue-opct: rgba(186,219,215, .3);
         --grey-1: #555556;
         --grey-2-opct: rgba(53,54,54,.2);
         --error-form: #FC035D;

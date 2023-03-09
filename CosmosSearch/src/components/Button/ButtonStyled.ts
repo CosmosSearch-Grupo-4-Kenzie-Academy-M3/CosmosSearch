@@ -25,6 +25,6 @@ export const ButtonStyled = styled.button<iButtonStyled>`
     cursor: pointer;
 
     :hover {
-        background-color: rgba(186,219,215, .3);
+        background-color: var(--primary-blue-opct);
     }
 `
