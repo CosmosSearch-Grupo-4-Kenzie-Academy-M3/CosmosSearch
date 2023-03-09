@@ -18,16 +18,21 @@ export const PostListStyled = styled.ul`
 `;
 
 export const PostStyled = styled.li`
-    display: flex;
-    gap: 2rem;
+  display: flex;
+  gap: 2rem;
 
-   .icon {
+  .post__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .icon {
     display: none;
-   } 
+  }
 
   .post {
     width: 100%;
-    height: 370px;
+    height: 440px;
 
     padding: 1.25rem;
 
@@ -50,12 +55,16 @@ export const PostStyled = styled.li`
 
       cursor: pointer;
 
-      :hover button{
+      :hover button {
         background-color: var(--primary-blue-opct);
       }
     }
 
     /* MediaQuery */
+    @media (min-width: 330px) {
+      height: 370px;
+    }
+
     @media (min-width: 440px) {
       height: 250px;
 
@@ -80,9 +89,22 @@ export const PostStyled = styled.li`
   /* MediaQuery */
   @media (min-width: 1130px) {
     .icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
+`;
+
+export const CloseButtonStyled = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  background-color: transparent;
+
+  cursor: pointer;
 `;

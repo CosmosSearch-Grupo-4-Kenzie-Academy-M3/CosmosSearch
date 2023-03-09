@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 import { ButtonStyled } from "../../Button/ButtonStyled";
 import { PlanetGrey, SpaceInvaders } from "../../Svgs/Svg";
-import { PostStyled } from "../PostListStyled";
+import { CloseModal } from "../../Svgs/Svg";
+import { CloseButtonStyled, PostStyled } from "../PostListStyled";
 
 export const Post = () => {
   const { setModalIsOpen } = useContext(LinksContext);
@@ -13,7 +14,14 @@ export const Post = () => {
         <PlanetGrey />
       </div>
       <div className="post">
-        <p className="title__posts title__posts--desktop">Post Title - User</p>
+        <div className="post__header">
+          <p className="title__posts title__posts--desktop">
+            Post Title - User
+          </p>
+          <CloseButtonStyled>
+            <CloseModal />
+          </CloseButtonStyled>
+        </div>
         <p className="post__text__preview">
           post content preview, if wanna see more click on the button to open
           modal

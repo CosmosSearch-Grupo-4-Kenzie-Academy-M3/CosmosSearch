@@ -63,7 +63,7 @@ export const HeaderModal = styled.header`
 `;
 export const ContentDiv = styled.div`
   width: 100%;
-  height: 250px;
+  height: 210px;
 
   padding: 1rem;
 
@@ -90,7 +90,7 @@ export const CommentsList = styled.div`
 export const CommentDiv = styled.div`
   width: 100%;
   min-height: 50px;
-  height: 170px;
+  height: 210px;
 
   overflow-y: auto;
 
