@@ -11,15 +11,11 @@ import { UserDashboardStyled } from "./UserDashboardStyled";
 
 export const UserDashboard = () => {
   const { burgerOpen, mainComponent, modalIsOpen } = useContext(LinksContext);
-  const { userState, setUserState, user } = useContext(UserContext);
+  const { userState, setUserState} = useContext(UserContext);
   
 
   useEffect(() => {
-    const actualUserState = localStorage.getItem("@CosmosSearch:USERSTATE") as
-      | "userLoggedInPerfil"
-      | "userLogged"
-      | "userDeslogged";
-    setUserState(actualUserState);
+    setUserState("userLoggedInPerfil");
   }, []);
 
   return (
