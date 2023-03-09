@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const SvgStyled = styled.img`
     max-width: max-content;
-    height: 100%;
 
     cursor: pointer;
 `
