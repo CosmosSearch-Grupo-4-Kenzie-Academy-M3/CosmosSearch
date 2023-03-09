@@ -8,8 +8,12 @@ import { Input } from "../../Input/Input";
 import { ButtonStyled } from "../../Button/ButtonStyled";
 import { UpdateUserFormStyled } from "../UpdateUserForm/UpdateUserFormStyled";
 import { Textarea } from "../../Input/Textarea/Textarea";
+import { useContext } from "react";
+import { PostContext } from "../../../contexts/PostContext/PostContext";
 
 export const RegisterPostForm = () => {
+  const {createPost} = useContext(PostContext)
+
   const {
     register,
     handleSubmit,
@@ -17,7 +21,7 @@ export const RegisterPostForm = () => {
   } = useForm<IFormPostRegister>();
 
   const userPostSubmit: SubmitHandler<IFormPostRegister> = (data) => {
-    console.log(data);
+    createPost(data)
   };
 
   return (
@@ -37,8 +41,8 @@ export const RegisterPostForm = () => {
         labelName="Topic"
       />
       <Textarea
-        error={errors.content?.message}
-        register={register("content")}
+        error={errors.body?.message}
+        register={register("body")}
       />
       <ButtonStyled
         type="submit"
