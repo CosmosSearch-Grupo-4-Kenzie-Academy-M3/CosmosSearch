@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { api } from "../../services/api";
 import { iChildren } from "../@childrenType";
+import { IFormPostRegister } from "../UserContext/@types_User";
 import { IPost, IPostContext } from "./@typesPost";
 
 export const PostContext = createContext({} as IPostContext)
@@ -19,7 +20,7 @@ export const PostProvider = ({children}: iChildren) => {
     }
 
     const getAllUserPosts = async (userId: number) => {
-        const token: string | null = localStorage.getItem("@CosmosSearch:TOKEN")
+        const token = localStorage.getItem("@CosmosSearch:TOKEN")
         if (token){
             try {
                 const response = await api.get(`/users/${userId}/posts`, {
@@ -34,18 +35,24 @@ export const PostProvider = ({children}: iChildren) => {
         }
     }
 
-    const createPost = async (data: IPost) => {
-        const token: string | null = localStorage.getItem("@CosmosSearch:TOKEN")
+    const createPost = async (data: IFormPostRegister) => {
+        const userId = Number(localStorage.getItem("@CosmosSearch:USERID"))
+        const name = localStorage.getItem("@CosmosSearch: USERNAME") as string
+        const newData = {...data, userId, name}
+        const token = localStorage.getItem("@CosmosSearch:TOKEN")
         if(token){
             try {
-                const response = await api.post(`posts`, data, {
+                const response = await api.post(`/posts`, newData, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 })
-                setPosts([...posts, response.data]) 
+               setPosts([...posts, response.data]) 
             } catch (error) {
-                console.log("Erro, token expirado")
+                console.log(error)
+            }
+            finally{
+                console.log(data)
             }
         }
     }
