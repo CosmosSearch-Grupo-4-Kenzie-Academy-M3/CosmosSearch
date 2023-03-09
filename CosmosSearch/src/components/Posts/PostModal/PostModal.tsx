@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
-import { CloseModal } from "../../Svgs/Svg";
+import { CloseModal, PlusComment } from "../../Svgs/Svg";
 import {
   CommentDiv,
   CommentsList,
@@ -34,7 +34,10 @@ export const PostModal = () => {
           </p>
         </ContentDiv>
         <CommentsList>
-          <p className="title__comments">Comments</p>
+          <div className="comments__header">
+            <p className="title__comments">Comments</p>
+            <PlusComment />
+          </div>
           <CommentDiv>
             <p className="post__text__preview--mobile">
               <span className="title__comments">User: </span>

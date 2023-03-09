@@ -85,6 +85,15 @@ export const CommentsList = styled.div`
   overflow-y: auto;
 
   border: 2px solid var(--primary-blue);
+
+  .comments__header {
+    width: 100%;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  } 
 `;
 
 export const CommentDiv = styled.div`
