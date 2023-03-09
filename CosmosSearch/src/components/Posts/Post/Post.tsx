@@ -17,7 +17,8 @@ interface IPostProps {
 
 export const Post = ({title, name, body, topic, postId}: IPostProps) => {
   const { setModalIsOpen } = useContext(LinksContext);
-  const { deletePost } = useContext(PostContext)
+  const { deletePost } = useContext(PostContext);
+  const {readAllComments} = useContext(CommentsContext)
 
   const deletePosts = () => {
     deletePost(postId)
@@ -47,7 +48,9 @@ export const Post = ({title, name, body, topic, postId}: IPostProps) => {
           </div>
           <div className="button" onClick={() => setModalIsOpen(true)}>
             <SpaceInvaders />
-            <div id={postId.toString()}>    
+            <div id={postId.toString()} onClick={(()=>{
+              readAllComments(postId);
+            })} >
               <ButtonStyled      
                 textColor="var(--primary-blue)"
                 borderColor="var(--primary-blue)"

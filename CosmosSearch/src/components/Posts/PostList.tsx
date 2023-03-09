@@ -7,9 +7,9 @@ import { PostListStyled} from './PostListStyled'
 export const Posts = () => {
   const {posts, getAllPosts} = useContext(PostContext)
 
-  useEffect(() => {
-    getAllPosts()
-  }, [])
+  // useEffect(() => {
+  //   getAllPosts()
+  // }, [])
   useEffect(() => {
     getAllPosts()
   }, [posts])

@@ -1,9 +1,9 @@
 export interface IAllComments {
     id: number,
     name: string,
-    postId: number,
-    text: string,
-    userId: number
+    postId: number,    
+    userId: number,
+    body: string,    
 };
 
 export interface IComments {

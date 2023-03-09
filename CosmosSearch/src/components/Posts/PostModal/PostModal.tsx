@@ -1,6 +1,9 @@
 import { useContext, useState } from "react";
+import { CommentsContext } from "../../../contexts/CommentsContext/CommentsContext";
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 import { CloseModal, PlusComment } from "../../Svgs/Svg";
+import { CommentLi } from "./CommentLi/CommentLi";
+import { CommentUl } from "./CommentUl/CommentUl";
 import {
   CommentDiv,
   CommentsList,
@@ -17,9 +20,8 @@ import {
 
 export const PostModal = () => {
   const { setModalIsOpen } = useContext(LinksContext);
-
+  const { allComments, readAllComments } = useContext(CommentsContext);
   const [openCommentInput, setOpenCommentInput] = useState(false);
-
   return (
     <PostModalDivStyled>
       <PostModalStyled>
@@ -38,30 +40,36 @@ export const PostModal = () => {
             ideia!O que voces acham?
           </p>
         </ContentDiv>
+        {/* <CommentUl /> */}
         <CommentsList>
-          <div className="comments__header">
-            <p className="title__comments">Comments</p>
-            <div
-              className="plus__comment"
-              onClick={() => setOpenCommentInput(!openCommentInput)}
-            >
-              <PlusComment />
-            </div>
-          </div>
-          {openCommentInput ? (
-            <DivInput>
-              <NewCommentInput
-                className="post__text__preview--mobile"
-                type="text"
-              />
-              <NewCommentInputButton className="title__comments">ENVIAR</NewCommentInputButton>
-            </DivInput>
-          ) : (
-            <>            
-            </>
-          )}
-          
-
+      <div className="comments__header">
+        <p className="title__comments">Comments</p>
+        <div
+          className="plus__comment"
+          onClick={() => setOpenCommentInput(!openCommentInput)}
+        >
+          <PlusComment />
+        </div>
+      </div>
+      {openCommentInput ? (
+        <DivInput>
+          <NewCommentInput
+            className="post__text__preview--mobile"
+            type="text"
+          />
+          <NewCommentInputButton className="title__comments">
+            ENVIAR
+          </NewCommentInputButton>
+        </DivInput>
+      ) : (
+        <></>
+      )}
+      <ul>
+        {allComments.map(comment => <CommentLi key={comment.id} id={comment.id} name={comment.name} postId={comment.postId} userId={comment.id} body={comment.body} />)}
+      </ul>
+      
+    </CommentsList>
+  
 
           {/* comments.map ((comment) => {
             <CommentDiv>
@@ -71,7 +79,7 @@ export const PostModal = () => {
             </span>
             </CommentDiv>
           }) */}
-          <CommentDiv>
+          {/* <CommentDiv>
             <p className="post__text__preview--mobile">
               <span className="title__comments">User: </span>
               Opa parece estar ficando bem legal nossa aplicação!
@@ -101,8 +109,8 @@ export const PostModal = () => {
               Agora aquele comentário para ativar o scroll da lista de
               comentários!
             </p>
-          </CommentDiv>
-        </CommentsList>
+          </CommentDiv> */}
+        
         <InfosDiv>
           <p className="post__text__preview--mobile">data: xx/xx/xx</p>
           <p className="post__text__preview--mobile">topic: physics</p>
