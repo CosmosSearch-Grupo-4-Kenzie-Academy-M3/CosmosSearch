@@ -8,6 +8,7 @@ export const DashboardStyled = styled.div`
   width: 100%;
 
   main {
+
     margin-inline: auto;
     display: flex;
     flex-direction: column;
@@ -58,6 +59,7 @@ export const DashboardStyled = styled.div`
 
     .main__desktop {
       margin-top: 0;
+      /* padding-top: 8rem; */
     }
   }
 `;

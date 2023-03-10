@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const FixedDiv = styled.div`
+  width: 100%;
+  height: max-content;
+
+  z-index: 100;
+
+  position: fixed;
+`;
+
 export const HeaderStyled = styled.header`
   width: 100%;
   height: 6.625rem;
