@@ -14,11 +14,7 @@ export const Dashboard = () => {
   const { userState, setUserState } = useContext(UserContext);
 
   useEffect(() => {
-    const actualUserState = localStorage.getItem("@CosmosSearch:USERSTATE") as
-      | "userLoggedInPerfil"
-      | "userLogged"
-      | "userDeslogged";
-    setUserState(actualUserState);
+    setUserState("userLogged");
   }, []);
 
   return (

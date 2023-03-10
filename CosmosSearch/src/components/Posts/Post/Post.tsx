@@ -20,6 +20,7 @@ import { CommentsContext } from "../../../contexts/CommentsContext/CommentsConte
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 
 import { ButtonStyled } from "../../Button/ButtonStyled";
+import { UserContext } from "../../../contexts/UserContext/UserContext";
 
 interface IPostProps {
   title: string;
@@ -38,12 +39,9 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
   } = useContext(LinksContext);
   const { deletePost, setActualPostId } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
+  const { userState } = useContext(UserContext);
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
-
-  const deletePosts = (postId: number) => {
-    deletePost(postId);
-  };
 
   return (
     <PostStyled>
@@ -55,35 +53,39 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
           <p className="title__posts title__posts--desktop">
             {title} - {name}
           </p>
-          <DivsButtonsStyled>
-            {hamburgerOpen ? (
-              <div className="buttons">
-                <ButtonsStyled onClick={() => setHamburgerOpen(false)}>
-                  <ArrowUp />
+          {userState === "userLoggedInPerfil" ? (
+            <DivsButtonsStyled>
+              {hamburgerOpen ? (
+                <div className="buttons">
+                  <ButtonsStyled onClick={() => setHamburgerOpen(false)}>
+                    <ArrowUp />
+                  </ButtonsStyled>
+                  <ButtonsStyled
+                    onClick={() => {
+                      setEditModalIsOpen(true);
+                      setActualPostId(postId);
+                    }}
+                  >
+                    <Pencil />
+                  </ButtonsStyled>
+                  <ButtonsStyled
+                    onClick={() => {
+                      setDeleteModalIsOpen(true);
+                      setActualPostId(postId);
+                    }}
+                  >
+                    <CloseX />
+                  </ButtonsStyled>
+                </div>
+              ) : (
+                <ButtonsStyled onClick={() => setHamburgerOpen(true)}>
+                  <Hamburguer />
                 </ButtonsStyled>
-                <ButtonsStyled
-                  onClick={() => {
-                    setEditModalIsOpen(true);
-                    setActualPostId(postId);
-                  }}
-                >
-                  <Pencil />
-                </ButtonsStyled>
-                <ButtonsStyled
-                  onClick={() => {
-                    setDeleteModalIsOpen(true);
-                    setActualPostId(postId);
-                  }}
-                >
-                  <CloseX />
-                </ButtonsStyled>
-              </div>
-            ) : (
-              <ButtonsStyled onClick={() => setHamburgerOpen(true)}>
-                <Hamburguer />
-              </ButtonsStyled>
-            )}
-          </DivsButtonsStyled>
+              )}
+            </DivsButtonsStyled>
+          ) : (
+            <></>
+          )}
         </div>
         <p className="post__text__preview">{body}</p>
         <div className="date__and__button">
