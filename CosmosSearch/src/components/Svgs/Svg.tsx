@@ -57,7 +57,6 @@ export const PlusComment = () => {
   return <SvgPlusComment src={plusComment} alt="Close icon" />;
 };
 
-
 export const Hamburguer = () => {
   return <SvgStyled src={hamburguer} alt="Astronaut icon" />;
 };

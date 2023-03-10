@@ -30,8 +30,13 @@ interface IPostProps {
 }
 
 export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
-  const { setModalIsOpen, setModalId, setEditModalIsOpen } = useContext(LinksContext);
-  const { deletePost } = useContext(PostContext);
+  const {
+    setModalIsOpen,
+    setModalId,
+    setEditModalIsOpen,
+    setDeleteModalIsOpen,
+  } = useContext(LinksContext);
+  const { deletePost, setActualPostId } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
@@ -56,10 +61,20 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
                 <ButtonsStyled onClick={() => setHamburgerOpen(false)}>
                   <ArrowUp />
                 </ButtonsStyled>
-                <ButtonsStyled onClick={() => setEditModalIsOpen(true)}>
+                <ButtonsStyled
+                  onClick={() => {
+                    setEditModalIsOpen(true);
+                    setActualPostId(postId);
+                  }}
+                >
                   <Pencil />
                 </ButtonsStyled>
-                <ButtonsStyled onClick={() => deletePosts(postId)}>
+                <ButtonsStyled
+                  onClick={() => {
+                    setDeleteModalIsOpen(true);
+                    setActualPostId(postId);
+                  }}
+                >
                   <CloseX />
                 </ButtonsStyled>
               </div>
@@ -69,7 +84,6 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
               </ButtonsStyled>
             )}
           </DivsButtonsStyled>
-
         </div>
         <p className="post__text__preview">{body}</p>
         <div className="date__and__button">

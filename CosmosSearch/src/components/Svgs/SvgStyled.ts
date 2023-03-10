@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const SvgStyled = styled.img`
   max-width: max-content;
-
+  height: max-content;
+  border: transparent;
   cursor: pointer;
 `;
 
@@ -16,4 +17,6 @@ export const SvgPlusComment = styled.img`
 export const SvgCloseModal = styled.img`
   width: 100%;
   height: 100%;
+
+  cursor: pointer;
 `;

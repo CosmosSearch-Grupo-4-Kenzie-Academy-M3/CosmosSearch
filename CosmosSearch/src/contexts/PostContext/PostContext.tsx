@@ -9,6 +9,7 @@ export const PostContext = createContext({} as IPostContext);
 export const PostProvider = ({ children }: iChildren) => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [userPosts, setUserPosts] = useState<IPost[]>([]);
+  const [actualPostId, setActualPostId] = useState(0);
 
   const getAllPosts = async () => {
     try {
@@ -83,6 +84,8 @@ export const PostProvider = ({ children }: iChildren) => {
         getAllUserPosts,
         createPost,
         deletePost,
+        actualPostId,
+        setActualPostId
       }}
     >
       {children}

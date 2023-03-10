@@ -9,6 +9,7 @@ export const LinksProvider = ({ children }: iChildren) => {
   const [burgerOpen, setBurgerOpen] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const [modalId, setModalId] = useState(0);
   const [mainComponent, setMainComponent] = useState("posts");
 
@@ -24,7 +25,9 @@ export const LinksProvider = ({ children }: iChildren) => {
         modalId,
         setModalId,
         editModalIsOpen,
-        setEditModalIsOpen
+        setEditModalIsOpen,
+        deleteModalIsOpen,
+        setDeleteModalIsOpen
       }}
     >
       {children}

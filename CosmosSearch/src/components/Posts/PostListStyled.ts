@@ -119,6 +119,8 @@ export const DivsButtonsStyled = styled.div`
 
 export const ButtonsStyled = styled.button`
   background-color: transparent;
+  
+  border: 2px solid transparent;
 
   cursor: pointer
 `

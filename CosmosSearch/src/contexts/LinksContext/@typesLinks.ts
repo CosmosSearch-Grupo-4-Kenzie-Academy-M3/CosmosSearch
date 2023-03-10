@@ -11,4 +11,6 @@ export interface iLinks {
   setModalId: React.Dispatch<React.SetStateAction<number>>;
   editModalIsOpen: boolean;
   setEditModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteModalIsOpen: boolean;
+  setDeleteModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
