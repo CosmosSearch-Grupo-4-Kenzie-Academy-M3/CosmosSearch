@@ -61,5 +61,7 @@ export interface IUserContext {
   >;
   user: IUser | string | null;
   setUser: React.Dispatch<React.SetStateAction<IUser | string | null>>;
+
   patchProfile: (data: IPatchProfile) => Promise<void>
+
 }

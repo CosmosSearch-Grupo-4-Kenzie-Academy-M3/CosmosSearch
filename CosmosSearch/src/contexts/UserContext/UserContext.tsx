@@ -12,7 +12,9 @@ import {
   IFormUserRegister,
   IUserContext,
   IUser,
+
   IPatchProfile,
+
 } from "./@types_User";
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -120,6 +122,7 @@ export const UserProvider = ({ children }: iChildren) => {
         setUserState,
         user,
         setUser,
+
         patchProfile
       }}
     >

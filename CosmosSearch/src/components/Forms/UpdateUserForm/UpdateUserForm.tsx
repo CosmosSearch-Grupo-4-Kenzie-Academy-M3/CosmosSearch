@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/UserContext/UserContext";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,8 +11,6 @@ import { UpdateUserFormStyled } from "./UpdateUserFormStyled";
 
 import { IFormUserUpdate } from "../../../contexts/UserContext/@types_User";
 import { userUpdateSchema } from "../../../contexts/UserContext/validation";
-import { useContext } from "react";
-import { UserContext } from "../../../contexts/UserContext/UserContext";
 
 export const UpdateUserForm = () => {
 

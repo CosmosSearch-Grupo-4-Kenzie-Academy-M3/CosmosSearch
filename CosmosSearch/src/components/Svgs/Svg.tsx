@@ -9,6 +9,12 @@ import closeModal from "../../assets/svgs/close__modal--teste.svg";
 import spaceInvaders from "../../assets/svgs/space_invaders.svg";
 import plusComment from "../../assets/svgs/plus__comment.svg";
 
+import hamburguer from "../../assets/svgs/hamburger.svg"
+import closeX from "../../assets/svgs/close_x.svg"
+import pencil from "../../assets/svgs/pencil.svg"
+import arrowUp from "../../assets/svgs/arrow_up.svg"
+
+
 import { SvgCloseModal, SvgPlusComment, SvgStyled } from "./SvgStyled";
 
 export const BurgerMenu = () => {
@@ -50,3 +56,21 @@ export const CloseModal = () => {
 export const PlusComment = () => {
   return <SvgPlusComment src={plusComment} alt="Close icon" />;
 };
+
+
+export const Hamburguer = () => {
+  return <SvgStyled src={hamburguer} alt="Astronaut icon" />;
+};
+
+export const CloseX = () => {
+  return <SvgStyled src={closeX} alt="Astronaut icon" />;
+};
+
+export const Pencil = () => {
+  return <SvgStyled src={pencil} alt="Astronaut icon" />;
+};
+
+export const ArrowUp = () => {
+  return <SvgStyled src={arrowUp} alt="Astronaut icon" />;
+};
+

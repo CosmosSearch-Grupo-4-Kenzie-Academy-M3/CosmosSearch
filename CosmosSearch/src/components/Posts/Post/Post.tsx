@@ -1,13 +1,30 @@
+
 import { useContext } from "react";
 
 import { PostContext } from "../../../contexts/PostContext/PostContext";
-import { ButtonStyled } from "../../Button/ButtonStyled";
-import { PlanetGrey, SpaceInvaders } from "../../Svgs/Svg";
+
+import { useContext, useState } from "react";
+
+import { PostContext } from "../../../contexts/PostContext/PostContext";
+import {
+  ArrowUp,
+  CloseX,
+  Hamburguer,
+  Pencil,
+  PlanetGrey,
+  SpaceInvaders,
+} from "../../Svgs/Svg";
 import { CloseModal } from "../../Svgs/Svg";
-import { CloseButtonStyled, PostStyled } from "../PostListStyled";
+import {
+  DivsButtonsStyled,
+  PostStyled,
+  ButtonsStyled,
+} from "../PostListStyled";
 
 import { CommentsContext } from "../../../contexts/CommentsContext/CommentsContext";
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
+
+import { ButtonStyled } from "../../Button/ButtonStyled";
 
 interface IPostProps {
   title: string;
@@ -21,6 +38,10 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
   const { setModalIsOpen, setModalId } = useContext(LinksContext);
   const { deletePost } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
+
+
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
+
 
   const deletePosts = () => {
     deletePost(postId);
@@ -36,9 +57,31 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
           <p className="title__posts title__posts--desktop">
             {title} - {name}
           </p>
+
           <CloseButtonStyled onClick={deletePosts}>
             <CloseModal />
           </CloseButtonStyled>
+
+          <DivsButtonsStyled>
+            {hamburgerOpen ? (
+              <div className="buttons">
+                <ButtonsStyled onClick={() => setHamburgerOpen(false)}>
+                  <ArrowUp />
+                </ButtonsStyled>
+                <ButtonsStyled>
+                  <Pencil />
+                </ButtonsStyled>
+                <ButtonsStyled onClick={() => deletePost(postId)}>
+                  <CloseX />
+                </ButtonsStyled>
+              </div>
+            ) : (
+              <ButtonsStyled onClick={() => setHamburgerOpen(true)}>
+                <Hamburguer />
+              </ButtonsStyled>
+            )}
+          </DivsButtonsStyled>
+
         </div>
         <p className="post__text__preview">{body}</p>
         <div className="date__and__button">
