@@ -12,8 +12,6 @@ export const Dashboard = () => {
   const { burgerOpen, modalIsOpen } = useContext(LinksContext);
   const { userState, setUserState } = useContext(UserContext);
 
-  console.log(userState);
-
   useEffect(() => {
     const actualUserState = localStorage.getItem("@CosmosSearch:USERSTATE") as
       | "userLoggedInPerfil"

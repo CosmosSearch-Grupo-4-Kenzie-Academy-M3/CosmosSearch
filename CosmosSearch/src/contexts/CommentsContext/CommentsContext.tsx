@@ -17,12 +17,11 @@ export const CommentsProvider = ({ children }: iChildren) => {
         },
       });
       setAllComments(response.data)
-      console.log(allComments);
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(allComments);
+
   return (
     <CommentsContext.Provider value={{ readAllComments, allComments, setAllComments }}>
       {children}

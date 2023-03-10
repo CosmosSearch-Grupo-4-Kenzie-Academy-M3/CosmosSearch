@@ -3,7 +3,7 @@ export interface IAllComments {
     name: string,
     postId: number,    
     userId: number,
-    body: string,    
+    text: string,    
 };
 
 export interface IComments {

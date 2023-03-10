@@ -15,14 +15,14 @@ interface IPostProps {
   postId: number;
 }
 
-export const Post = ({title, name, body, topic, postId}: IPostProps) => {
-  const { setModalIsOpen } = useContext(LinksContext);
+export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
+  const { setModalIsOpen, setModalId } = useContext(LinksContext);
   const { deletePost } = useContext(PostContext);
-  const {readAllComments} = useContext(CommentsContext)
+  const { readAllComments } = useContext(CommentsContext);
 
   const deletePosts = () => {
-    deletePost(postId)
-  }
+    deletePost(postId);
+  };
 
   return (
     <PostStyled>
@@ -38,27 +38,27 @@ export const Post = ({title, name, body, topic, postId}: IPostProps) => {
             <CloseModal />
           </CloseButtonStyled>
         </div>
-        <p className="post__text__preview">
-          {body}
-        </p>
+        <p className="post__text__preview">{body}</p>
         <div className="date__and__button">
           <div className="date">
             <p className="post__text__preview">date: xx/xx/xx</p>
             <p className="post__text__preview">topic: {topic}</p>
           </div>
-          <div className="button" onClick={() => setModalIsOpen(true)}>
-            <SpaceInvaders />
-            <div id={postId.toString()} onClick={(()=>{
+          <div
+            className="button"
+            onClick={() => {
+              setModalIsOpen(true);
+              setModalId(postId);
               readAllComments(postId);
-            })} >
-              <ButtonStyled      
-                textColor="var(--primary-blue)"
-                borderColor="var(--primary-blue)"
-                
-              >
-                open
-              </ButtonStyled>
-            </div>
+            }}
+          >
+            <SpaceInvaders />
+            <ButtonStyled
+              textColor="var(--primary-blue)"
+              borderColor="var(--primary-blue)"
+            >
+              open
+            </ButtonStyled>
           </div>
         </div>
       </div>

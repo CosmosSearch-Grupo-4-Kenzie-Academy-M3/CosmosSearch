@@ -15,7 +15,7 @@ export const PostProvider = ({children}: iChildren) => {
             const response = await api.get(`/posts`)
             setPosts(response.data) 
         } catch (error) {
-            console.log("Erro")
+            console.log(error)
         }        
     }
 
@@ -51,9 +51,6 @@ export const PostProvider = ({children}: iChildren) => {
             } catch (error) {
                 console.log(error)
             }
-            finally{
-                console.log(data)
-            }
         }
     }
 
@@ -68,7 +65,8 @@ export const PostProvider = ({children}: iChildren) => {
                 })
                 getAllPosts()
             } catch (error) {
-                console.log(error)
+                null
+                // console.log(error)
             } 
         }    
     }
