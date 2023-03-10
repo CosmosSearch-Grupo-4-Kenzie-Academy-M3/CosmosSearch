@@ -1,3 +1,8 @@
+
+import { useContext } from "react";
+
+import { PostContext } from "../../../contexts/PostContext/PostContext";
+
 import { useContext, useState } from "react";
 
 import { PostContext } from "../../../contexts/PostContext/PostContext";
@@ -18,6 +23,7 @@ import {
 
 import { CommentsContext } from "../../../contexts/CommentsContext/CommentsContext";
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
+
 import { ButtonStyled } from "../../Button/ButtonStyled";
 
 interface IPostProps {
@@ -33,7 +39,9 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
   const { deletePost } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
 
+
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
+
 
   const deletePosts = () => {
     deletePost(postId);
@@ -49,6 +57,11 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
           <p className="title__posts title__posts--desktop">
             {title} - {name}
           </p>
+
+          <CloseButtonStyled onClick={deletePosts}>
+            <CloseModal />
+          </CloseButtonStyled>
+
           <DivsButtonsStyled>
             {hamburgerOpen ? (
               <div className="buttons">
@@ -68,6 +81,7 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
               </ButtonsStyled>
             )}
           </DivsButtonsStyled>
+
         </div>
         <p className="post__text__preview">{body}</p>
         <div className="date__and__button">

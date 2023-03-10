@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/UserContext/UserContext";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,6 +13,9 @@ import { IFormUserUpdate } from "../../../contexts/UserContext/@types_User";
 import { userUpdateSchema } from "../../../contexts/UserContext/validation";
 
 export const UpdateUserForm = () => {
+
+  const {patchProfile} = useContext(UserContext)
+
   const {
     register,
     handleSubmit,
@@ -19,8 +25,11 @@ export const UpdateUserForm = () => {
   });
 
   const userUpdateSubmit: SubmitHandler<IFormUserUpdate> = (data) => {
-    console.log(data);
+
+    patchProfile(data);
+
   };
+
 
   return (
     <UpdateUserFormStyled onSubmit={handleSubmit(userUpdateSubmit)}>

@@ -37,7 +37,9 @@ export const PostProvider = ({ children }: iChildren) => {
 
   const createPost = async (data: IFormPostRegister) => {
     const userId = Number(localStorage.getItem("@CosmosSearch:USERID"));
-    const name = localStorage.getItem("@CosmosSearch: USERNAME") as string;
+
+    const name = localStorage.getItem("@CosmosSearch:USERNAME") as string;
+
     const newData = { ...data, userId, name };
     const token = localStorage.getItem("@CosmosSearch:TOKEN");
     if (token) {

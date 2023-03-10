@@ -12,6 +12,9 @@ import {
   IFormUserRegister,
   IUserContext,
   IUser,
+
+  IPatchProfile,
+
 } from "./@types_User";
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -77,6 +80,33 @@ export const UserProvider = ({ children }: iChildren) => {
     navigate("/userdashboard");
   };
 
+  
+
+  const patchProfile = async (data: IPatchProfile) => {
+
+    const id = localStorage.getItem("@CosmosSearch:USERID")
+    const token = localStorage.getItem("@CosmosSearch:TOKEN")
+
+    try {
+
+      const response = await api.patch(`/users/${id}`, data , {
+        headers: {
+          Authorization: ` Bearer ${token} `
+        }
+      
+      });
+       
+      toast.success("Perfil atualizado com sucesso.");
+      localStorage.setItem("@CosmosSearch:USERNAME", response.data.name);
+
+    } catch (error) {
+      console.log(error);
+      toast.error("Por favor revise seus dados.");
+    }
+  };
+
+
+
   return (
     <UserContext.Provider
       value={{
@@ -92,6 +122,8 @@ export const UserProvider = ({ children }: iChildren) => {
         setUserState,
         user,
         setUser,
+
+        patchProfile
       }}
     >
       {children}

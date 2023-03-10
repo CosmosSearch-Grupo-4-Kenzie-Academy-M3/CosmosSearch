@@ -38,6 +38,14 @@ export interface IUser {
   id: number;
 }
 
+export interface IPatchProfile{
+
+  email: string;
+  name:string;
+  password: string;
+
+}
+
 export interface IUserContext {
   userRegister: (data: IFormUserRegister) => Promise<void>;
   userLogin: (data: IFormUserLogin) => Promise<void>;
@@ -53,4 +61,7 @@ export interface IUserContext {
   >;
   user: IUser | string | null;
   setUser: React.Dispatch<React.SetStateAction<IUser | string | null>>;
+
+  patchProfile: (data: IPatchProfile) => Promise<void>
+
 }
