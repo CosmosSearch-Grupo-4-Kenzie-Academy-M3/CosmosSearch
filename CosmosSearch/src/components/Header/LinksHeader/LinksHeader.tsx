@@ -48,7 +48,7 @@ export const LinksHeader = ({ path }: iLinksHeader) => {
     case "userDeslogged":
       return (
         <LinksHeaderStyled>
-          <LinkButton path="/" text="Start" />
+          <LinkButton path="/login" text="Login" />
           <div className="colum"></div>
           <LinkButton path="/register" text="Sign Up" />
         </LinksHeaderStyled>
