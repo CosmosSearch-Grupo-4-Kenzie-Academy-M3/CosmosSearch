@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { PostContext } from "../../../contexts/PostContext/PostContext";
 
@@ -34,11 +34,9 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
   const { deletePost } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
 
-
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
-
-  const deletePosts = () => {
+  const deletePosts = (postId: number) => {
     deletePost(postId);
   };
 
@@ -61,7 +59,7 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
                 <ButtonsStyled onClick={() => setEditModalIsOpen(true)}>
                   <Pencil />
                 </ButtonsStyled>
-                <ButtonsStyled onClick={() => deletePosts()}>
+                <ButtonsStyled onClick={() => deletePosts(postId)}>
                   <CloseX />
                 </ButtonsStyled>
               </div>

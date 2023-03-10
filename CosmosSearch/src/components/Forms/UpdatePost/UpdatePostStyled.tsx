@@ -6,5 +6,9 @@ export const UpdatePostStyled = styled.div`
 
     padding: 1rem;
 
-    border: 2px solid var(--primary-blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 `

@@ -39,7 +39,7 @@ export const RegisterPostForm = () => {
         type="text"
         labelName="Topic"
       />
-      <Textarea error={errors.body?.message} register={register("body")} />
+      <Textarea error={errors.body?.message} register={register("body")} text="Post"/>
       <ButtonStyled
         type="submit"
         borderColor={"var(--primary-blue)"}

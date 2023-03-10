@@ -15,11 +15,9 @@ export const PostEdit = () => {
           <CloseModal />
         </CloseButton>
         <HeaderModal>
-        <p className="title__posts">Update</p>
+        <p className="title__posts">Update Post</p>
         </HeaderModal>
-        <UpdatePost></UpdatePost>
-
-        
+        <UpdatePost/>
         </PostEditModalStyled>
     </PostEditModalDivStyled>
   )

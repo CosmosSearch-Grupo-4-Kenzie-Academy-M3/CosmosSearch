@@ -1,13 +1,21 @@
 import styled from "styled-components";
 
+
 export const TextareaStyled = styled.div`
   border: none;
+
+  width: 100%;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 20px;
-  width: 100%;
 
+  .label {
+    align-self: flex-start;
+  }
+  
   .containerInputSpan {
     display: flex;
     flex-direction: column;
@@ -35,6 +43,7 @@ export const TextareaStyled = styled.div`
   }
 
   @media (min-width: 380px) {
-    width: 300px;
+    width: 380px;
+    padding-inline: 40px;
   }
 `;

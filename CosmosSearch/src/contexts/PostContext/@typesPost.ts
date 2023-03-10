@@ -17,3 +17,4 @@ export interface IPostContext {
   createPost: (data: IFormPostRegister) => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
 }
+

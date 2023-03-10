@@ -65,15 +65,14 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        getAllPosts();
+        const userId = Number(localStorage.getItem("@CosmosSearch:USERID") as string)
+        getAllUserPosts(userId);
       } catch (error) {
         null;
         // console.log(error)
       }
     }
   };
-
-
 
   return (
     <PostContext.Provider

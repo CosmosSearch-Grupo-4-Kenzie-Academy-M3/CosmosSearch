@@ -18,7 +18,7 @@ export const PostEditModalDivStyled = styled.div`
 export const PostEditModalStyled = styled.div`
   position: relative;
 
-  height: 650px;
+  height: 450px;
   width: 100%;
   max-width: 650px;
 

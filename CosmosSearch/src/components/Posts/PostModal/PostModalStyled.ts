@@ -119,12 +119,7 @@ export const CommentsList = styled.div`
 
 export const CommentDiv = styled.li`
   width: 100%;
-  min-height: 50px;
-  height: 210px;
 
-  overflow-y: auto;
-
-  /* border-bottom: 2px solid var(--primary-blue); */
   border-right: 2px solid var(--primary-blue);
 `;
 
