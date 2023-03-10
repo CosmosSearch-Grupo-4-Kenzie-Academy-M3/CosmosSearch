@@ -15,7 +15,7 @@ import pencil from "../../assets/svgs/pencil.svg"
 import arrowUp from "../../assets/svgs/arrow_up.svg"
 
 
-import { SvgCloseModal, SvgPlusComment, SvgStyled } from "./SvgStyled";
+import { SvgCloseModal, SvgPlusComment, SvgStyled, SvgStyledFliped } from "./SvgStyled";
 
 export const BurgerMenu = () => {
   return <SvgStyled src={burger} alt="Burger Menu Button" />;
@@ -63,6 +63,14 @@ export const Hamburguer = () => {
 
 export const CloseX = () => {
   return <SvgStyled src={closeX} alt="Astronaut icon" />;
+};
+
+export const PlusXRotate = () => {
+  return <SvgStyledFliped src={closeX} alt="Astronaut icon" />;
+};
+
+export const PlusX = () => {
+  return <SvgPlusComment src={closeX} alt="Astronaut icon" />;
 };
 
 export const Pencil = () => {
