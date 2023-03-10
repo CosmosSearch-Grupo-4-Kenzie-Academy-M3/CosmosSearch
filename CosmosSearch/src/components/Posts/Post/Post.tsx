@@ -1,11 +1,8 @@
 
-import { useContext } from "react";
-
-import { PostContext } from "../../../contexts/PostContext/PostContext";
-
 import { useContext, useState } from "react";
 
 import { PostContext } from "../../../contexts/PostContext/PostContext";
+
 import {
   ArrowUp,
   CloseX,
@@ -58,9 +55,7 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
             {title} - {name}
           </p>
 
-          <CloseButtonStyled onClick={deletePosts}>
-            <CloseModal />
-          </CloseButtonStyled>
+  
 
           <DivsButtonsStyled>
             {hamburgerOpen ? (
