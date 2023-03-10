@@ -10,15 +10,19 @@ import { UserDashboardStyled } from "./UserDashboardStyled";
 
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { UserContext } from "../../contexts/UserContext/UserContext";
+import { PostContext } from "../../contexts/PostContext/PostContext";
+import { UserPosts } from "../../components/Posts/UserPosts";
 
 export const UserDashboard = () => {
   const { burgerOpen, mainComponent, modalIsOpen } = useContext(LinksContext);
-  const { userState, setUserState } = useContext(UserContext);
+  const { userState, setUserState , } = useContext(UserContext);
+  const {userPosts} = useContext(PostContext)
 
   useEffect(() => {
     setUserState("userLoggedInPerfil");
+   
   }, []);
-
+  console.log(userPosts)
   return (
     <UserDashboardStyled>
       {modalIsOpen ? <PostModal /> : <></>}
@@ -27,7 +31,9 @@ export const UserDashboard = () => {
         <Header path={userState} />
         <DivForButtons />
         {mainComponent === "posts" ? (
-          <Posts />
+          <UserPosts />
+          
+
         ) : mainComponent === "updatePerfil" ? (
           <div className="container__form">
             <UpdateUserForm />
@@ -45,7 +51,7 @@ export const UserDashboard = () => {
           <main className="main__burgerOpen">
             <DivForButtons />
             {mainComponent === "posts" ? (
-              <Posts />
+              <UserPosts />
             ) : mainComponent === "updatePerfil" ? (
               <UpdateUserForm />
             ) : mainComponent === "registerPost" ? (
@@ -56,7 +62,7 @@ export const UserDashboard = () => {
           <main className="main__bugerClosed">
             <DivForButtons />
             {mainComponent === "posts" ? (
-              <Posts />
+              <UserPosts />
             ) : mainComponent === "updatePerfil" ? (
               <UpdateUserForm />
             ) : mainComponent === "registerPost" ? (
