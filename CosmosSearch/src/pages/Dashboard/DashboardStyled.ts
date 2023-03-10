@@ -12,6 +12,7 @@ export const DashboardStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 700px;
   }
 
   .main__burgerOpen {
@@ -29,7 +30,7 @@ export const DashboardStyled = styled.div`
   /* MediaQuery */
   @media (min-width: 800px) {
     main {
-      width: max-content;
+      width: 700px;
     }
   }
 

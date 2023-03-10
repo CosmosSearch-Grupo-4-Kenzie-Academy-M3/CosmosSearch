@@ -1,13 +1,13 @@
 import { useContext } from "react";
 
-import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
-
 import { Astronaut, Planet, Plus } from "../../../components/Svgs/Svg";
 import {
   DivForButtonsStyled,
   DivForButtonsStyledMobile,
 } from "./DivForButtonsStyled";
 import { LinkButtonWithSvg } from "./LinkButtonWithSvg/LinkButtonWithSvg";
+
+import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 
 export const DivForButtons = () => {
   const { burgerOpen, setMainComponent } = useContext(LinksContext);

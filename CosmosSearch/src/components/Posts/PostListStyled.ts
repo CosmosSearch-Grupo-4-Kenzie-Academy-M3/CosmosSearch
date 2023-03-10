@@ -13,7 +13,7 @@ export const PostListStyled = styled.ul`
 
   /* MediaQuery */
   @media (min-width: 1130px) {
-    max-width: 873px;
+    min-width: 873px;
   }
 `;
 
@@ -75,7 +75,7 @@ export const PostStyled = styled.li`
       }
     }
 
-    @media (min-width: 560px) {
+    @media (min-width: 550px) {
       height: 250px;
 
       .date__and__button {
@@ -96,7 +96,7 @@ export const PostStyled = styled.li`
   }
 `;
 
-export const CloseButtonStyled = styled.button`
+export const DivsButtonsStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,4 +107,20 @@ export const CloseButtonStyled = styled.button`
   background-color: transparent;
 
   cursor: pointer;
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+
+    align-self: flex-start;
+    gap: 1rem;
+  }
 `;
+
+export const ButtonsStyled = styled.button`
+  background-color: transparent;
+
+  cursor: pointer
+`
+
+

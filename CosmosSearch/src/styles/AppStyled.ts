@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { iAppStyled } from "./@types__styles";
 
 export const AppStyled = styled.div<iAppStyled>`
-
   min-height: 100vh;
   max-height: max-content;
 
@@ -32,5 +31,5 @@ export const DivOpacity = styled.div`
   height: 100%;
   width: 100%;
 
-  background-color: rgba(0,0,0, .4);
-`
+  background-color: rgba(0, 0, 0, 0.4);
+`;

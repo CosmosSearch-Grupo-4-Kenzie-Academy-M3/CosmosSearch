@@ -1,4 +1,4 @@
-import { LoginForm } from "../../components/Forms/LoginForm/LoginForm";;
+import { LoginForm } from "../../components/Forms/LoginForm/LoginForm";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { Title } from "../../components/Title/Title";
 import { LoginPageStyled } from "./LoginPageStyled";

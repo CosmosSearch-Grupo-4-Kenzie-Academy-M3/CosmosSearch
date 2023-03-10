@@ -1,30 +1,31 @@
 import styled from "styled-components";
 
 interface iButtonStyled {
-    borderColor: string
-    textColor: string 
+  borderColor: string;
+  textColor: string;
+  id?: number;
 }
 
 export const ButtonStyled = styled.button<iButtonStyled>`
-    height: 2.625rem;
+  height: 2.625rem;
 
-    padding-inline: 1.25rem;
+  padding-inline: 1.25rem;
 
-    border: 2px solid ${props => props.borderColor};
+  border: 2px solid ${(props) => props.borderColor};
 
-    color: ${props => props.textColor};
+  color: ${(props) => props.textColor};
 
-    background-color: transparent;
+  background-color: transparent;
 
-    border-radius: var(--br-8);
+  border-radius: var(--br-8);
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    :hover {
-        background-color: var(--primary-blue-opct);
-    }
-`
+  :hover {
+    background-color: var(--primary-blue-opct);
+  }
+`;

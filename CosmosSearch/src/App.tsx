@@ -13,7 +13,7 @@ export const App = () => {
       <AppStyled bg={galaxy}>
         <DivOpacity>
           <Providers>
-            <AppRoutes/>
+            <AppRoutes />
           </Providers>
         </DivOpacity>
       </AppStyled>

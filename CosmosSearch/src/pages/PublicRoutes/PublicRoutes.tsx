@@ -9,9 +9,9 @@ export const PublicRoutes = () => {
     const userToken = localStorage.getItem("@CosmosSearch:TOKEN");
 
     if (userToken) {
-      setUser(userToken)
+      setUser(userToken);
     }
-  }, [])
+  }, []);
 
-  return <>{user ? <Navigate to="/userDashboard"/> : <Outlet />}</>;
+  return <>{user ? <Navigate to="/userDashboard" /> : <Outlet />}</>;
 };

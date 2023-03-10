@@ -8,6 +8,7 @@ export const LinksContext = createContext({} as iLinks);
 export const LinksProvider = ({ children }: iChildren) => {
   const [burgerOpen, setBurgerOpen] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalId, setModalId] = useState(0);
   const [mainComponent, setMainComponent] = useState("posts");
 
   return (
@@ -19,6 +20,8 @@ export const LinksProvider = ({ children }: iChildren) => {
         setMainComponent,
         modalIsOpen,
         setModalIsOpen,
+        modalId,
+        setModalId,
       }}
     >
       {children}

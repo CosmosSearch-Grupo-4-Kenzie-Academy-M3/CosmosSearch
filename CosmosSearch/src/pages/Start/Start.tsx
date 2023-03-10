@@ -3,13 +3,19 @@ import { useContext, useEffect } from "react";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { Title } from "../../components/Title/Title";
 import { StartStyled } from "./StartStyled";
-
 import { TitleBordersStyled } from "../../components/Title/TitleStyled";
-import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { BurgerMenu } from "../../components/Svgs/Svg";
+
+import { LinksContext } from "../../contexts/LinksContext/LinksContext";
+import { CommentsContext } from "../../contexts/CommentsContext/CommentsContext";
 
 export const Start = () => {
   const { burgerOpen, setBurgerOpen } = useContext(LinksContext);
+  const { readAllComments } = useContext(CommentsContext);
+
+  useEffect(() => {
+    readAllComments(1);
+  }, []);
 
   return (
     <StartStyled>
