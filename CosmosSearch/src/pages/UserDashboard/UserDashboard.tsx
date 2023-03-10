@@ -22,9 +22,8 @@ export const UserDashboard = () => {
 
   useEffect(() => {
     setUserState("userLoggedInPerfil");
-   
   }, []);
-  console.log(userPosts)
+
   return (
     <UserDashboardStyled>
       {modalIsOpen ? <PostModal /> : <></>}

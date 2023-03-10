@@ -59,6 +59,10 @@ export interface IUserContext {
   setUserState: React.Dispatch<
     React.SetStateAction<"userLoggedInPerfil" | "userLogged" | "userDeslogged">
   >;
+  // userState: string;
+  // setUserState: React.Dispatch<
+  //   React.SetStateAction<string>
+  // >;
   user: IUser | string | null;
   setUser: React.Dispatch<React.SetStateAction<IUser | string | null>>;
 

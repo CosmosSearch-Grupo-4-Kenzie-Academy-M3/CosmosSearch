@@ -13,10 +13,6 @@ export const Dashboard = () => {
   const { burgerOpen, modalIsOpen } = useContext(LinksContext);
   const { userState, setUserState } = useContext(UserContext);
 
-  useEffect(() => {
-    setUserState("userLogged");
-  }, []);
-
   return (
     <DashboardStyled>
       {modalIsOpen ? <PostModal /> : <></>}
@@ -24,7 +20,7 @@ export const Dashboard = () => {
       {/* Mobile */}
       {burgerOpen ? (
         <main className="main__burgerOpen">
-          <NewPost />
+          <NewPost/>
           <Posts />
         </main>
       ) : (

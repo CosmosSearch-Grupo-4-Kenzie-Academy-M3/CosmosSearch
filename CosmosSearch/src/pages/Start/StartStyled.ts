@@ -4,6 +4,12 @@ export const StartStyled = styled.div`
   min-height: 100vh;
   width: 100%;
 
+  button {
+    background-color: transparent;
+    
+    width: max-content;
+  }
+
   .burger__div {
     height: 103px;
     width: 100%;
