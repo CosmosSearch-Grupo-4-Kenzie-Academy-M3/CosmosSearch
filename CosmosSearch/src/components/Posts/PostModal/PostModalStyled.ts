@@ -6,7 +6,8 @@ export const PostModalDivStyled = styled.div`
   display: flex;
   justify-content: center;
 
-  height: 100%;
+  min-height: 100%;
+  max-height: max-content;
   width: 100%;
 
   padding-inline: 1rem;
@@ -15,7 +16,7 @@ export const PostModalDivStyled = styled.div`
 `;
 
 export const PostModalStyled = styled.div`
- position: relative;
+  position: relative;
 
   height: 650px;
   width: 100%;
@@ -27,7 +28,9 @@ export const PostModalStyled = styled.div`
 
   padding: 2.25rem 2.75rem;
 
-  margin-top: 10rem;
+  z-index: 100;
+
+  margin-top: 1rem;
 
   border: 2px solid var(--primary-blue);
   border-radius: 8px;
@@ -36,22 +39,22 @@ export const PostModalStyled = styled.div`
 `;
 
 export const CloseButton = styled.button`
-    position: absolute;
+  position: absolute;
 
-    top: 0;
-    right: 0;
+  top: 0;
+  right: 0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 
-    background-color: transparent;
+  background-color: transparent;
 
-    cursor: pointer;
-`
+  cursor: pointer;
+`;
 
 export const HeaderModal = styled.header`
   width: 100%;
@@ -86,6 +89,19 @@ export const CommentsList = styled.div`
 
   border: 2px solid var(--primary-blue);
 
+  ul {
+    width: 100%;
+    height: 220px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    padding: 1rem;
+
+    overflow-y: auto;
+  }
+
   .comments__header {
     width: 100%;
     height: 30px;
@@ -93,7 +109,7 @@ export const CommentsList = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-  } 
+  }
 
   .plus__comment {
     width: max-content;
@@ -101,7 +117,7 @@ export const CommentsList = styled.div`
   }
 `;
 
-export const CommentDiv = styled.div`
+export const CommentDiv = styled.li`
   width: 100%;
   min-height: 50px;
   height: 210px;
@@ -113,18 +129,18 @@ export const CommentDiv = styled.div`
 `;
 
 export const InfosDiv = styled.div`
-    width: 100%;
+  width: 100%;
 
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const DivInput = styled.div`
   position: relative;
-`
+`;
 
 export const NewCommentInput = styled.input`
-  width:100%;
+  width: 100%;
   min-height: 50px;
 
   padding-left: 1rem;
@@ -151,4 +167,4 @@ export const NewCommentInputButton = styled.button`
   background-color: transparent;
 
   cursor: pointer;
-`
+`;

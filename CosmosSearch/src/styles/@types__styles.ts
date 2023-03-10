@@ -1,3 +1,3 @@
 export interface iAppStyled {
-    bg: string
+  bg: string;
 }

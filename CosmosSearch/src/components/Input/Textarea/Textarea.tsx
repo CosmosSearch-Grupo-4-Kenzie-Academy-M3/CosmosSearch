@@ -14,7 +14,11 @@ export const Textarea = ({ register, error }: iTextarea) => {
         Post
       </label>
       <div className="containerInputSpan">
-        <textarea id={register.name} {...register} placeholder="Type your post"></textarea>
+        <textarea
+          id={register.name}
+          {...register}
+          placeholder="Type your post"
+        ></textarea>
         {error ? <span className="spanError">{error}</span> : null}
       </div>
     </TextareaStyled>

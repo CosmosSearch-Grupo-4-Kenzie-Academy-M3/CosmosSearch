@@ -1,29 +1,29 @@
 import styled from "styled-components";
 
 export const UpdateUserFormStyled = styled.form`
-    width: 100%;
-    
-    padding: 1rem;
+  width: 100%;
 
-    margin-top: 1rem;
+  padding: 1rem;
 
-    box-sizing: border-box;
+  margin-top: 1rem;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
+  box-sizing: border-box;
 
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 
-    /* MediaQuery */
-    @media (min-width: 380px) {
-        width: max-content;
-    }
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 
-    @media (min-width: 560px) {
-        margin-right: 20px;
-    }
-`
+  /* MediaQuery */
+  @media (min-width: 380px) {
+    width: max-content;
+  }
+
+  @media (min-width: 560px) {
+    margin-right: 20px;
+  }
+`;

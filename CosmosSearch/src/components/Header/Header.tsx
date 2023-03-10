@@ -1,17 +1,18 @@
 import { useContext } from "react";
 
 import { HeaderStyled } from "./HeaderStyled";
-
 import { LinksHeader } from "./LinksHeader/LinksHeader";
+
 import { BurgerMenu, CloseMenu, SmallLogo } from "../Svgs/Svg";
+
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 
 interface iLinksHeader {
-  path: "userLoggedInPerfil" | "userLogged" | "userDeslogged"
+  path: "userLoggedInPerfil" | "userLogged" | "userDeslogged";
 }
 
 export const Header = ({ path }: iLinksHeader) => {
-  const {burgerOpen, setBurgerOpen} = useContext(LinksContext);  
+  const { burgerOpen, setBurgerOpen } = useContext(LinksContext);
 
   return (
     <HeaderStyled>
@@ -23,7 +24,7 @@ export const Header = ({ path }: iLinksHeader) => {
         <div className="icons">
           {burgerOpen ? (
             <div className="close__menu" onClick={() => setBurgerOpen(false)}>
-              <CloseMenu/>
+              <CloseMenu />
             </div>
           ) : (
             <div className="burger__menu" onClick={() => setBurgerOpen(true)}>

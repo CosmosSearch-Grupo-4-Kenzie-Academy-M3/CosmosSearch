@@ -1,24 +1,22 @@
-import { useContext, useEffect} from "react";
+import { useContext, useEffect } from "react";
+
 import { RegisterPostForm } from "../../components/Forms/RegisterPostForm/RegisterPostForm";
 import { UpdateUserForm } from "../../components/Forms/UpdateUserForm/UpdateUserForm";
 import { Header } from "../../components/Header/Header";
 import { Posts } from "../../components/Posts/PostList";
 import { PostModal } from "../../components/Posts/PostModal/PostModal";
-import { LinksContext } from "../../contexts/LinksContext/LinksContext";
-import { UserContext } from "../../contexts/UserContext/UserContext";
 import { DivForButtons } from "./DivForButtons/DivForButtons";
 import { UserDashboardStyled } from "./UserDashboardStyled";
+
+import { LinksContext } from "../../contexts/LinksContext/LinksContext";
+import { UserContext } from "../../contexts/UserContext/UserContext";
 
 export const UserDashboard = () => {
   const { burgerOpen, mainComponent, modalIsOpen } = useContext(LinksContext);
   const { userState, setUserState } = useContext(UserContext);
 
   useEffect(() => {
-    const actualUserState = localStorage.getItem("@CosmosSearch:USERSTATE") as
-      | "userLoggedInPerfil"
-      | "userLogged"
-      | "userDeslogged";
-    setUserState(actualUserState);
+    setUserState("userLoggedInPerfil");
   }, []);
 
   return (

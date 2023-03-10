@@ -1,4 +1,5 @@
 import { UseFormRegisterReturn } from "react-hook-form";
+
 import { ImputStyled } from "./InputStyled";
 
 interface IInput {
@@ -16,7 +17,6 @@ export const Input = ({
   type,
   labelName,
 }: IInput) => {
-
   return (
     <ImputStyled>
       <label className="input__label" htmlFor={register.name}>

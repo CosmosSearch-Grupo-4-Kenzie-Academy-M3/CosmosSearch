@@ -13,7 +13,7 @@ export const PostListStyled = styled.ul`
 
   /* MediaQuery */
   @media (min-width: 1130px) {
-    max-width: 873px;
+    min-width: 873px;
   }
 `;
 
@@ -75,7 +75,7 @@ export const PostStyled = styled.li`
       }
     }
 
-    @media (min-width: 560px) {
+    @media (min-width: 550px) {
       height: 250px;
 
       .date__and__button {

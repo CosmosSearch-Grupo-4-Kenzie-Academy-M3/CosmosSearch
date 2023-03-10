@@ -1,9 +1,11 @@
 import { useContext } from "react";
+
 import { LinkButton } from "../../../../components/LinkButton/LinkButton";
 import { Astronaut, Planet, Plus } from "../../../../components/Svgs/Svg";
+import { LinkButtonWithSvgStyled } from "./LinkButtonWithSvgStyled";
+
 import { LinksContext } from "../../../../contexts/LinksContext/LinksContext";
 import { UserContext } from "../../../../contexts/UserContext/UserContext";
-import { LinkButtonWithSvgStyled } from "./LinkButtonWithSvgStyled";
 
 interface iLinkButtonWithSvg {
   icon: "astronaut" | "planet" | "plus";
@@ -19,7 +21,7 @@ export const LinkButtonWithSvg = ({ icon }: iLinkButtonWithSvg) => {
         <LinkButtonWithSvgStyled
           onClick={() => {
             setMainComponent("updatePerfil");
-            setUserState("userLoggedInPerfil")
+            setUserState("userLoggedInPerfil");
           }}
         >
           <Astronaut />

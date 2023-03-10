@@ -28,7 +28,7 @@ export const DivForButtonsStyled = styled.div`
 
   @media (min-width: 920px) {
     .divForButtonStyled__burgerOpen {
-        margin-top: 1rem;
+      margin-top: 1rem;
     }
   }
 `;
