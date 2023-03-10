@@ -7,8 +7,8 @@ import { Input } from "../../Input/Input";
 import { RegisterUserFormStyled } from "./RegisterUserFormStyled";
 
 import { fromSchema } from "../../../contexts/UserContext/validation";
-import { IformUserRegister } from "../../../contexts/UserContext/@types_User";
-import { api } from "../../../services/api";
+import { IFormUserRegister } from "../../../contexts/UserContext/@types_User";
+
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../../contexts/UserContext/UserContext";
@@ -20,11 +20,11 @@ export const RegisterUserForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IformUserRegister>({
+  } = useForm<IFormUserRegister>({
     resolver: yupResolver(fromSchema),
   });
 
-  const userRegisterSubmit: SubmitHandler<IformUserRegister> = (data) => {
+  const userRegisterSubmit: SubmitHandler<IFormUserRegister> = (data) => {
     userRegister(data);
   };
 
