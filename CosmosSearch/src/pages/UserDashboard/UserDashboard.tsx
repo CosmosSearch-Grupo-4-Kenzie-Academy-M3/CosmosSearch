@@ -10,9 +10,10 @@ import { UserDashboardStyled } from "./UserDashboardStyled";
 
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { UserContext } from "../../contexts/UserContext/UserContext";
+import { PostEdit } from "../../components/Posts/PostModal/PostEdit/PostEdit";
 
 export const UserDashboard = () => {
-  const { burgerOpen, mainComponent, modalIsOpen } = useContext(LinksContext);
+  const { burgerOpen, mainComponent, modalIsOpen, editModalIsOpen } = useContext(LinksContext);
   const { userState, setUserState } = useContext(UserContext);
 
   useEffect(() => {
@@ -22,6 +23,7 @@ export const UserDashboard = () => {
   return (
     <UserDashboardStyled>
       {modalIsOpen ? <PostModal /> : <></>}
+      {editModalIsOpen ? <PostEdit/> : <></>}
       {/* Mobile */}
       <div className="userdash__mobile">
         <Header path={userState} />

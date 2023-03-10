@@ -30,7 +30,7 @@ interface IPostProps {
 }
 
 export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
-  const { setModalIsOpen, setModalId } = useContext(LinksContext);
+  const { setModalIsOpen, setModalId, setEditModalIsOpen } = useContext(LinksContext);
   const { deletePost } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
 
@@ -58,7 +58,7 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
                 <ButtonsStyled onClick={() => setHamburgerOpen(false)}>
                   <ArrowUp />
                 </ButtonsStyled>
-                <ButtonsStyled>
+                <ButtonsStyled onClick={() => setEditModalIsOpen(true)}>
                   <Pencil />
                 </ButtonsStyled>
                 <ButtonsStyled onClick={() => deletePosts()}>
