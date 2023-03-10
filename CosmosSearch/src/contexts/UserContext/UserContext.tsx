@@ -12,9 +12,7 @@ import {
   IFormUserRegister,
   IUserContext,
   IUser,
-
   IPatchProfile,
-
 } from "./@types_User";
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -45,7 +43,7 @@ export const UserProvider = ({ children }: iChildren) => {
       localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
       setUser(response.data.user);
       navigate("/dashboard");
-      console.log(response.data.user);
+      toast.success("Usuário registrado com sucesso!");
     } catch (error) {
       console.log(error);
       toast.error("Por favor revise seus dados.");
@@ -61,6 +59,7 @@ export const UserProvider = ({ children }: iChildren) => {
       localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
       setUser(response.data.user);
       navigate("/dashboard");
+      toast.success("Login efetuado!");
     } catch (error) {
       toast.error("Usuário ou Senha inválidos.");
       reset();
@@ -73,6 +72,7 @@ export const UserProvider = ({ children }: iChildren) => {
     setUserState("userDeslogged");
     setUser(null);
     navigate("/");
+    toast("Usuário deslogado!");
   };
 
   const redirectToNewPost = () => {
@@ -80,32 +80,24 @@ export const UserProvider = ({ children }: iChildren) => {
     navigate("/userdashboard");
   };
 
-  
-
   const patchProfile = async (data: IPatchProfile) => {
-
-    const id = localStorage.getItem("@CosmosSearch:USERID")
-    const token = localStorage.getItem("@CosmosSearch:TOKEN")
+    const id = localStorage.getItem("@CosmosSearch:USERID");
+    const token = localStorage.getItem("@CosmosSearch:TOKEN");
 
     try {
-
-      const response = await api.patch(`/users/${id}`, data , {
+      const response = await api.patch(`/users/${id}`, data, {
         headers: {
-          Authorization: ` Bearer ${token} `
-        }
-      
+          Authorization: ` Bearer ${token} `,
+        },
       });
-       
+
       toast.success("Perfil atualizado com sucesso.");
       localStorage.setItem("@CosmosSearch:USERNAME", response.data.name);
-
     } catch (error) {
       console.log(error);
       toast.error("Por favor revise seus dados.");
     }
   };
-
-
 
   return (
     <UserContext.Provider
@@ -122,8 +114,7 @@ export const UserProvider = ({ children }: iChildren) => {
         setUserState,
         user,
         setUser,
-
-        patchProfile
+        patchProfile,
       }}
     >
       {children}
