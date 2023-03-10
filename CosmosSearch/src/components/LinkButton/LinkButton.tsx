@@ -1,16 +1,18 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 interface iLinkButton {
-    text: string
-    line?: boolean
-    path: string
+  text: string;
+  line?: boolean;
+  path: string;
 }
 
-export const LinkButton = ({text, line, path}: iLinkButton) => {
+export const LinkButton = ({ text, line, path }: iLinkButton) => {
   return (
     <div>
-        <Link to={path} className="links">{text}</Link>
-        {line ? <div className="links__line"/> : null}
+      <Link to={path} className="links">
+        {text}
+      </Link>
+      {line ? <div className="links__line" /> : null}
     </div>
-  )
-}
+  );
+};

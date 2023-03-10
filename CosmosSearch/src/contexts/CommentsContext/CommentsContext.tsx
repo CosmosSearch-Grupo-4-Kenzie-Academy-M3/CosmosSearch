@@ -1,5 +1,7 @@
 import { createContext, useState } from "react";
+
 import { api } from "../../services/api";
+
 import { iChildren } from "../@childrenType";
 import { IAllComments, IComments } from "./@typesComments";
 
@@ -16,14 +18,16 @@ export const CommentsProvider = ({ children }: iChildren) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setAllComments(response.data)
+      setAllComments(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <CommentsContext.Provider value={{ readAllComments, allComments, setAllComments }}>
+    <CommentsContext.Provider
+      value={{ readAllComments, allComments, setAllComments }}
+    >
       {children}
     </CommentsContext.Provider>
   );

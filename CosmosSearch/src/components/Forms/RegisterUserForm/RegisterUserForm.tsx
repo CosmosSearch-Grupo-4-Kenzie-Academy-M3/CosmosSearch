@@ -6,11 +6,10 @@ import { ButtonStyled } from "../../Button/ButtonStyled";
 import { Input } from "../../Input/Input";
 import { RegisterUserFormStyled } from "./RegisterUserFormStyled";
 
-import { fromSchema } from "../../../contexts/UserContext/validation";
-import { IformUserRegister } from "../../../contexts/UserContext/@types_User";
-import { api } from "../../../services/api";
-import { useNavigate } from "react-router-dom";
+import { formmSchema } from "../../../contexts/UserContext/validation";
+
 import { useContext } from "react";
+import { IFormUserRegister } from "../../../contexts/UserContext/@types_User";
 import { UserContext } from "../../../contexts/UserContext/UserContext";
 
 export const RegisterUserForm = () => {
@@ -20,11 +19,11 @@ export const RegisterUserForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IformUserRegister>({
-    resolver: yupResolver(fromSchema),
+  } = useForm<IFormUserRegister>({
+    resolver: yupResolver(formmSchema),
   });
 
-  const userRegisterSubmit: SubmitHandler<IformUserRegister> = (data) => {
+  const userRegisterSubmit: SubmitHandler<IFormUserRegister> = (data) => {
     userRegister(data);
   };
 

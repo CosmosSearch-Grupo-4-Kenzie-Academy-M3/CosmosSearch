@@ -1,18 +1,17 @@
-import { useForm } from "react-hook-form";
+import { useContext } from "react";
 
-import { SubmitHandler } from "react-hook-form";
-
-import { IFormPostRegister } from "../../../contexts/UserContext/@types_User";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import { Input } from "../../Input/Input";
 import { ButtonStyled } from "../../Button/ButtonStyled";
 import { UpdateUserFormStyled } from "../UpdateUserForm/UpdateUserFormStyled";
 import { Textarea } from "../../Input/Textarea/Textarea";
-import { useContext } from "react";
+
 import { PostContext } from "../../../contexts/PostContext/PostContext";
+import { IFormPostRegister } from "../../../contexts/UserContext/@types_User";
 
 export const RegisterPostForm = () => {
-  const {createPost} = useContext(PostContext)
+  const { createPost } = useContext(PostContext);
 
   const {
     register,
@@ -21,7 +20,7 @@ export const RegisterPostForm = () => {
   } = useForm<IFormPostRegister>();
 
   const userPostSubmit: SubmitHandler<IFormPostRegister> = (data) => {
-    createPost(data)
+    createPost(data);
   };
 
   return (
@@ -40,10 +39,7 @@ export const RegisterPostForm = () => {
         type="text"
         labelName="Topic"
       />
-      <Textarea
-        error={errors.body?.message}
-        register={register("body")}
-      />
+      <Textarea error={errors.body?.message} register={register("body")} />
       <ButtonStyled
         type="submit"
         borderColor={"var(--primary-blue)"}

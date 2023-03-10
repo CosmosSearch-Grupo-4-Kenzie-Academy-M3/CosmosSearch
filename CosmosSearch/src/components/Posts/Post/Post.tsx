@@ -1,11 +1,13 @@
 import { useContext } from "react";
-import { CommentsContext } from "../../../contexts/CommentsContext/CommentsContext";
-import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
+
 import { PostContext } from "../../../contexts/PostContext/PostContext";
 import { ButtonStyled } from "../../Button/ButtonStyled";
 import { PlanetGrey, SpaceInvaders } from "../../Svgs/Svg";
 import { CloseModal } from "../../Svgs/Svg";
 import { CloseButtonStyled, PostStyled } from "../PostListStyled";
+
+import { CommentsContext } from "../../../contexts/CommentsContext/CommentsContext";
+import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 
 interface IPostProps {
   title: string;

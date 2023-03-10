@@ -20,12 +20,11 @@ import {
 
 export const PostModal = () => {
   const { setModalIsOpen, modalId } = useContext(LinksContext);
-  const {posts} = useContext(PostContext);
+  const { posts } = useContext(PostContext);
   const { allComments } = useContext(CommentsContext);
   const [openCommentInput, setOpenCommentInput] = useState(false);
 
-    const userPost = posts.find(post => post.id == modalId) as IPost
-
+  const userPost = posts.find((post) => post.id == modalId) as IPost;
 
   return (
     <PostModalDivStyled>
@@ -38,9 +37,7 @@ export const PostModal = () => {
           <p className="title__posts">{userPost.name}</p>
         </HeaderModal>
         <ContentDiv>
-          <p className="post__text__preview--mobile">
-            {userPost.body}
-          </p>
+          <p className="post__text__preview--mobile">{userPost.body}</p>
         </ContentDiv>
         {/* <CommentUl /> */}
         <CommentsList>

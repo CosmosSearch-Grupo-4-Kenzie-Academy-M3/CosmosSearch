@@ -1,22 +1,15 @@
 import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { IFormUserLogin } from "../../../contexts/UserContext/@types_User";
-import { UserContext } from "../../../contexts/UserContext/UserContext";
-
 import { ButtonStyled } from "../../Button/ButtonStyled";
 import { Input } from "../../Input/Input";
 import { LoginFormStyled } from "./LoginFormStyled";
 
-export const LoginForm = () => {
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  //   reset,
-  // } = useForm<IFormUserLogin>();
+import { IFormUserLogin } from "../../../contexts/UserContext/@types_User";
+import { UserContext } from "../../../contexts/UserContext/UserContext";
 
-  const { userLogin, register, errors, handleSubmit} = useContext(UserContext);
+export const LoginForm = () => {
+  const { userLogin, register, errors, handleSubmit } = useContext(UserContext);
 
   const userLoginSubmit: SubmitHandler<IFormUserLogin> = async (data) => {
     userLogin(data);

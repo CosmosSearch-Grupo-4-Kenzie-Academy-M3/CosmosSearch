@@ -15,7 +15,7 @@ export const StartStyled = styled.div`
     justify-content: center;
     align-items: flex-start;
   }
-  
+
   .links__start {
     display: flex;
     flex-direction: column;

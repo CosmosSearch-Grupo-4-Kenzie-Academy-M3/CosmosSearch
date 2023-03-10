@@ -99,7 +99,7 @@ export const CommentsList = styled.div`
 
     padding: 1rem;
 
-    overflow-y: auto;    
+    overflow-y: auto;
   }
 
   .comments__header {

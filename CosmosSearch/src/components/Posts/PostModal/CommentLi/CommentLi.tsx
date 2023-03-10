@@ -1,5 +1,6 @@
-import { IAllComments } from "../../../../contexts/CommentsContext/@typesComments";
 import { CommentDiv } from "../PostModalStyled";
+
+import { IAllComments } from "../../../../contexts/CommentsContext/@typesComments";
 
 export const CommentLi = ({ name, text, postId, id, userId }: IAllComments) => {
   return (

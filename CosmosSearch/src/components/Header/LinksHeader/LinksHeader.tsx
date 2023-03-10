@@ -1,7 +1,9 @@
 import { useContext } from "react";
-import { UserContext } from "../../../contexts/UserContext/UserContext";
+
 import { LinkButton } from "../../LinkButton/LinkButton";
 import { LinksHeaderStyled } from "./LinksHeaderStyled";
+
+import { UserContext } from "../../../contexts/UserContext/UserContext";
 
 interface iLinksHeader {
   path: "userLoggedInPerfil" | "userLogged" | "userDeslogged";
@@ -16,10 +18,7 @@ export const LinksHeader = ({ path }: iLinksHeader) => {
         <LinksHeaderStyled>
           <div
             onClick={() =>
-              localStorage.setItem(
-                "@CosmosSearch:USERSTATE",
-                "userLogged"
-              )
+              localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged")
             }
           >
             <LinkButton path="/dashboard" text="Home" />

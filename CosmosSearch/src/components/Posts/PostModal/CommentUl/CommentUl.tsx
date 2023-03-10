@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
+
 import { CommentsContext } from "../../../../contexts/CommentsContext/CommentsContext";
 import { PlusComment } from "../../../Svgs/Svg";
-import { CommentLi } from "../CommentLi/CommentLi";
 import {
   CommentsList,
   DivInput,
@@ -12,7 +12,7 @@ import {
 export const CommentUl = () => {
   const { allComments, readAllComments } = useContext(CommentsContext);
   const [openCommentInput, setOpenCommentInput] = useState(false);
-  console.log(allComments)
+  console.log(allComments);
 
   return (
     <CommentsList>
@@ -37,7 +37,7 @@ export const CommentUl = () => {
         </DivInput>
       ) : (
         <></>
-      )}      
+      )}
     </CommentsList>
   );
 };

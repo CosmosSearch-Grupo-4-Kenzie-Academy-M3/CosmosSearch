@@ -1,4 +1,9 @@
-import { UseFormRegister, UseFormHandleSubmit, FieldErrors, UseFormReset } from "react-hook-form";
+import {
+  UseFormRegister,
+  UseFormHandleSubmit,
+  FieldErrors,
+  UseFormReset,
+} from "react-hook-form";
 
 export interface IFormUserRegister {
   name: string;
@@ -34,8 +39,8 @@ export interface IUser {
 }
 
 export interface IUserContext {
-  userRegister: (data: IFormUserRegister) => Promise<void>
-  userLogin: (data: IFormUserLogin) => Promise<void>
+  userRegister: (data: IFormUserRegister) => Promise<void>;
+  userLogin: (data: IFormUserLogin) => Promise<void>;
   register: UseFormRegister<IFormUserLogin>;
   handleSubmit: UseFormHandleSubmit<IFormUserLogin>;
   errors: FieldErrors<IFormUserLogin>;
@@ -43,9 +48,9 @@ export interface IUserContext {
   logout: () => void;
   redirectToNewPost: () => void;
   userState: "userLoggedInPerfil" | "userLogged" | "userDeslogged";
-  setUserState: React.Dispatch<React.SetStateAction< "userLoggedInPerfil" | "userLogged" | "userDeslogged">>;
+  setUserState: React.Dispatch<
+    React.SetStateAction<"userLoggedInPerfil" | "userLogged" | "userDeslogged">
+  >;
   user: IUser | string | null;
-  setUser: React.Dispatch<React.SetStateAction<IUser | string |null>>
+  setUser: React.Dispatch<React.SetStateAction<IUser | string | null>>;
 }
-
-
