@@ -1,4 +1,3 @@
-
 import { useContext, useState } from "react";
 
 import { PostContext } from "../../../contexts/PostContext/PostContext";
@@ -11,7 +10,6 @@ import {
   PlanetGrey,
   SpaceInvaders,
 } from "../../Svgs/Svg";
-import { CloseModal } from "../../Svgs/Svg";
 import {
   DivsButtonsStyled,
   PostStyled,
@@ -54,9 +52,6 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
           <p className="title__posts title__posts--desktop">
             {title} - {name}
           </p>
-
-  
-
           <DivsButtonsStyled>
             {hamburgerOpen ? (
               <div className="buttons">
@@ -66,7 +61,7 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
                 <ButtonsStyled>
                   <Pencil />
                 </ButtonsStyled>
-                <ButtonsStyled onClick={() => deletePost(postId)}>
+                <ButtonsStyled onClick={() => deletePosts()}>
                   <CloseX />
                 </ButtonsStyled>
               </div>
