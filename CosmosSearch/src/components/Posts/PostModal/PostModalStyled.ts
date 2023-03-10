@@ -139,6 +139,7 @@ export const NewCommentInput = styled.input`
   min-height: 50px;
 
   padding-left: 1rem;
+  padding-right: 4rem;
 
   margin-inline: auto;
 
