@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { toast } from "react-toastify";
 import { api } from "../../services/api";
 import { iChildren } from "../@childrenType";
 import { IFormPostRegister } from "../UserContext/@types_User";
@@ -50,8 +51,10 @@ export const PostProvider = ({ children }: iChildren) => {
           },
         });
         setPosts([...posts, response.data]);
+        toast.success("Post criado com sucesso!")
       } catch (error) {
         console.log(error);
+        toast.error("Não foi possível criar porst.")
       }
     }
   };
@@ -66,9 +69,11 @@ export const PostProvider = ({ children }: iChildren) => {
           },
         });
         getAllPosts();
+        toast.success("Post deletado com sucesso!")
       } catch (error) {
         null;
-        // console.log(error)
+        console.log(error)
+        toast.error("Não foi possível excluir o post")
       }
     }
   };
