@@ -31,5 +31,7 @@ export const DivOpacity = styled.div`
   height: 100%;
   width: 100%;
 
+  padding-bottom: 4rem;
+
   background-color: rgba(0, 0, 0, 0.4);
 `;

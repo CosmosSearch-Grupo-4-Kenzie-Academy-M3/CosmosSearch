@@ -7,7 +7,7 @@ export const PostModalDivStyled = styled.div`
   justify-content: center;
 
   min-height: 100%;
-  max-height: max-content;
+  max-height: 100vmax;
   width: 100%;
 
   padding-inline: 1rem;
