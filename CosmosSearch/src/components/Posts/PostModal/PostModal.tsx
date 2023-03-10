@@ -1,4 +1,6 @@
 import { useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { INewComment } from "../../../contexts/CommentsContext/@typesComments";
 import { CommentsContext } from "../../../contexts/CommentsContext/CommentsContext";
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 import { IPost } from "../../../contexts/PostContext/@typesPost";
@@ -21,11 +23,17 @@ import {
 export const PostModal = () => {
   const { setModalIsOpen, modalId } = useContext(LinksContext);
   const { posts } = useContext(PostContext);
-  const { allComments } = useContext(CommentsContext);
+  const { allComments, createNewComment } = useContext(CommentsContext);
   const [openCommentInput, setOpenCommentInput] = useState(false);
 
   const userPost = posts.find((post) => post.id == modalId) as IPost;
 
+  const {register, handleSubmit} = useForm<INewComment>()
+
+  const submit = (data: INewComment) => {
+    createNewComment(data, userPost.id.toString())
+  }
+    
   return (
     <PostModalDivStyled>
       <PostModalStyled>
@@ -52,13 +60,16 @@ export const PostModal = () => {
           </div>
           {openCommentInput ? (
             <DivInput>
-              <NewCommentInput
-                className="post__text__preview--mobile"
-                type="text"
-              />
-              <NewCommentInputButton className="title__comments">
-                ENVIAR
-              </NewCommentInputButton>
+              <form onSubmit={handleSubmit(submit)}>
+                <NewCommentInput
+                  className="post__text__preview--mobile"
+                  type="text"
+                  {...register("text")}
+                />
+                <NewCommentInputButton className="title__comments">
+                  ENVIAR
+                </NewCommentInputButton>
+              </form>
             </DivInput>
           ) : (
             <></>
@@ -83,3 +94,7 @@ export const PostModal = () => {
     </PostModalDivStyled>
   );
 };
+function data(data: any, id: number) {
+  throw new Error("Function not implemented.");
+}
+

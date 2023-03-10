@@ -7,7 +7,7 @@ export const UpdatePost = () => {
 
   return (
     <UpdatePostStyled>
-        <Textarea register={register} />
+        {/* <Textarea register={register} /> */}
     </UpdatePostStyled>
   )
 }

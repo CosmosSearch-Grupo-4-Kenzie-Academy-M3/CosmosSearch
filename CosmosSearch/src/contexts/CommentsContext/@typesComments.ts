@@ -14,4 +14,9 @@ export interface IComments {
   readAllComments: (postId: number) => Promise<void>;
   allComments: IAllComments[];
   setAllComments: React.Dispatch<React.SetStateAction<IAllComments[]>>;
+  createNewComment: (data: INewComment, postId: string) => Promise<void>;
+}
+
+export interface INewComment {
+  text: string;
 }
