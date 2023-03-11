@@ -1,7 +1,8 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
 import { iChildren } from "../@childrenType";
+import { LinksContext } from "../LinksContext/LinksContext";
 import { IFormPostRegister } from "../UserContext/@types_User";
 import { IPost, IPostContext, IUpdatePost } from "./@typesPost";
 
@@ -12,6 +13,7 @@ export const PostProvider = ({ children }: iChildren) => {
   const [userPosts, setUserPosts] = useState<IPost[]>([]);
   const [actualPostId, setActualPostId] = useState(0);
   const [likeClicked, setLikeClicked] = useState(false);
+  const {setMainComponent} = useContext(LinksContext)
 
   const getAllPosts = async () => {
     try {
@@ -38,12 +40,20 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
+  const getPostDate = () => {
+    const methodDate = new Date()
+    const day = methodDate.getDate();
+    const mounth = methodDate.getMonth() + 1;
+    const year = `${methodDate.getFullYear()}`.substring(2);
+    const postDate = `${day}/${mounth}/${year}`;
+    return postDate;
+  };
+
   const createPost = async (data: IFormPostRegister) => {
     const userId = Number(localStorage.getItem("@CosmosSearch:USERID"));
-
     const name = localStorage.getItem("@CosmosSearch:USERNAME") as string;
-
-    const newData = { ...data, userId, name };
+    const date = getPostDate()
+    const newData = { ...data, userId, name, date};
     const token = localStorage.getItem("@CosmosSearch:TOKEN");
     if (token) {
       try {
@@ -52,8 +62,10 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log(newData)
         setPosts([...posts, response.data]);
         toast.success("Post criado com sucesso!")
+        setMainComponent("posts")
       } catch (error) {
         console.log(error);
         toast.error("Não foi possível criar porst.")
@@ -121,3 +133,5 @@ export const PostProvider = ({ children }: iChildren) => {
     </PostContext.Provider>
   );
 };
+
+

@@ -1,5 +1,4 @@
 import React from "react";
-import { INewComment } from "../CommentsContext/@typesComments";
 import { IFormPostRegister } from "../UserContext/@types_User";
 
 export interface IPost {
@@ -9,6 +8,7 @@ export interface IPost {
   name: string;
   topic: string;
   body: string;
+  date: string
 }
 
 export interface IUpdatePost {

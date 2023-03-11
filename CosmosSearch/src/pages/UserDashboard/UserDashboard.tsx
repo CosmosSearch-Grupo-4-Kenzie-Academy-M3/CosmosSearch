@@ -14,11 +14,20 @@ import { PostContext } from "../../contexts/PostContext/PostContext";
 import { UserPosts } from "../../components/Posts/UserPostsList";
 import { PostEdit } from "../../components/Posts/PostModal/PostEdit/PostEdit";
 import { PostDelete } from "../../components/Posts/PostModal/PostDelete/PostDelete";
+import { UserInfos } from "../../components/UserInfos/UserInfos";
 
 export const UserDashboard = () => {
-  const { burgerOpen, mainComponent, modalIsOpen, editModalIsOpen, deleteModalIsOpen } = useContext(LinksContext);
-  const { userState, setUserState , } = useContext(UserContext);
-  const {userPosts} = useContext(PostContext)
+  const {
+    burgerOpen,
+    mainComponent,
+    modalIsOpen,
+    editModalIsOpen,
+    deleteModalIsOpen,
+  } = useContext(LinksContext);
+  const { userState, setUserState } = useContext(UserContext);
+  const { userPosts } = useContext(PostContext);
+  const userName = localStorage.getItem("@CosmosSearch:USERNAME")
+  const userEmail = localStorage.getItem("@CosmosSearch:EMAIL")
 
   useEffect(() => {
     setUserState("userLoggedInPerfil");
@@ -27,8 +36,8 @@ export const UserDashboard = () => {
   return (
     <UserDashboardStyled>
       {modalIsOpen ? <PostModal /> : <></>}
-      {editModalIsOpen ? <PostEdit/> : <></>}
-      {deleteModalIsOpen ? <PostDelete/> : <></>}
+      {editModalIsOpen ? <PostEdit /> : <></>}
+      {deleteModalIsOpen ? <PostDelete /> : <></>}
       {/* Mobile */}
       <div className="userdash__mobile">
         <Header path={userState} />
@@ -37,7 +46,10 @@ export const UserDashboard = () => {
           <UserPosts />
         ) : mainComponent === "updatePerfil" ? (
           <div className="container__form">
-            <UpdateUserForm />
+            <div>
+                <UserInfos name={userName} email={userEmail} />
+                <UpdateUserForm />
+              </div>
           </div>
         ) : mainComponent === "registerPost" ? (
           <div className="container__form">
@@ -54,7 +66,10 @@ export const UserDashboard = () => {
             {mainComponent === "posts" ? (
               <UserPosts />
             ) : mainComponent === "updatePerfil" ? (
-              <UpdateUserForm />
+              <div className="user__section">
+                <UserInfos name={userName} email={userEmail} />
+                <UpdateUserForm />
+              </div>
             ) : mainComponent === "registerPost" ? (
               <RegisterPostForm />
             ) : null}
@@ -65,7 +80,10 @@ export const UserDashboard = () => {
             {mainComponent === "posts" ? (
               <UserPosts />
             ) : mainComponent === "updatePerfil" ? (
-              <UpdateUserForm />
+              <div className="user__section">
+                <UserInfos name={userName} email={userEmail} />
+                <UpdateUserForm />
+              </div>
             ) : mainComponent === "registerPost" ? (
               <RegisterPostForm />
             ) : null}
