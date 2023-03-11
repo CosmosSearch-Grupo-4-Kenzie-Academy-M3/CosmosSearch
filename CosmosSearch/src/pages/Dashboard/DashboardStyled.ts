@@ -19,7 +19,7 @@ export const DashboardStyled = styled.div`
   }
 
   .main__burgerClosed {
-    margin-top: 1rem;
+    margin-top: 2.5rem;
   }
 
   .main__desktop {
