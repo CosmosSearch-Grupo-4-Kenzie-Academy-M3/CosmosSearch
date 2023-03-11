@@ -21,8 +21,7 @@ export const UserProvider = ({ children }: iChildren) => {
   const { setMainComponent } = useContext(LinksContext);
 
   const [userState, setUserState] = useState<
-    // "userLoggedInPerfil" | "userLogged" | "userDeslogged"
-    string
+    "userLoggedInPerfil" | "userLogged" | "userDeslogged"
   >("userDeslogged");
   const [user, setUser] = useState<IUser | string | null>(null);
 
@@ -41,6 +40,7 @@ export const UserProvider = ({ children }: iChildren) => {
       localStorage.setItem("@CosmosSearch:TOKEN", response.data.accessToken);
       localStorage.setItem("@CosmosSearch:USERID", response.data.user.id);
       localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
+      localStorage.setItem("@CosmosSearch:EMAIL", response.data.user.email);
       setUserState("userLogged");
       setUser(response.data.user);
       navigate("/dashboard");
@@ -57,6 +57,7 @@ export const UserProvider = ({ children }: iChildren) => {
       localStorage.setItem("@CosmosSearch:TOKEN", response.data.accessToken);
       localStorage.setItem("@CosmosSearch:USERID", response.data.user.id);
       localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
+      localStorage.setItem("@CosmosSearch:EMAIL", response.data.user.email);
       setUserState("userLogged");
       setUser(response.data.user);
       navigate("/dashboard");

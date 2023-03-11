@@ -24,6 +24,7 @@ export const UserPosts = () => {
           topic={post.topic}
           postId={post.id}
           title={post.title}
+          date={post.date}
         />
       ))}
     </PostListStyled>

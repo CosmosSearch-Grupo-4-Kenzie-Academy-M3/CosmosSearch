@@ -6,6 +6,8 @@ import {
   ArrowUp,
   CloseX,
   Hamburguer,
+  LikeClicked,
+  LikeUnclicked,
   Pencil,
   PlanetGrey,
   SpaceInvaders,
@@ -29,21 +31,22 @@ interface IPostProps {
   body: string;
   topic: string;
   postId: number;
+  date: string
 }
 
-export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
+export const Post = ({ title, name, body, topic, postId, date }: IPostProps) => {
   const {
     setModalIsOpen,
     setModalId,
     setEditModalIsOpen,
     setDeleteModalIsOpen,
   } = useContext(LinksContext);
-  const { deletePost, setActualPostId } = useContext(PostContext);
+  const { setActualPostId, likeClicked } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
   const { userState } = useContext(UserContext);
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
-
+  
   return (
     <PostStyled>
       <div className="icon">
@@ -93,21 +96,21 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
         <p className="post__text__preview">{body}</p>
         <div className="date__and__button">
           <div className="date">
-            <p className="post__text__preview">date: xx/xx/xx</p>
+            <p className="post__text__preview">date: {date}</p>
             <p className="post__text__preview">topic: {topic}</p>
           </div>
           <div
             className="button"
-            onClick={() => {
-              setModalIsOpen(true);
-              setModalId(postId);
-              readAllComments(postId);
-            }}
           >
-            <SpaceInvaders />
+            {likeClicked ? <LikeClicked/> : <LikeUnclicked/>}
             <ButtonStyled
               textColor="var(--primary-blue)"
               borderColor="var(--primary-blue)"
+              onClick={() => {
+                setModalIsOpen(true);
+                setModalId(postId);
+                readAllComments(postId);
+              }}
             >
               open
             </ButtonStyled>

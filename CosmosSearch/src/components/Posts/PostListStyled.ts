@@ -51,14 +51,9 @@ export const PostStyled = styled.li`
     .button {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 1rem;
       align-self: flex-end;
-
-      cursor: pointer;
-
-      :hover button {
-        background-color: var(--primary-blue-opct);
-      }
     }
 
     /* MediaQuery */

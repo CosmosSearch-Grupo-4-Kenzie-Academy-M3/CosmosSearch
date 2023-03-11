@@ -8,6 +8,11 @@ export interface IPost {
   name: string;
   topic: string;
   body: string;
+  date: string
+}
+
+export interface IUpdatePost {
+  body: string
 }
 
 export interface IPostContext {
@@ -19,5 +24,8 @@ export interface IPostContext {
   deletePost: (postId: number) => Promise<void>;
   actualPostId: number;
   setActualPostId:  React.Dispatch<React.SetStateAction<number>>;
+  likeClicked: boolean;
+  setLikeClicked:  React.Dispatch<React.SetStateAction<boolean>>;
+  editPost: (postId: number, data: IUpdatePost) => Promise<void>;
 }
 

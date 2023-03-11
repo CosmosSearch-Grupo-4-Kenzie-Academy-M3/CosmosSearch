@@ -35,3 +35,20 @@ export const SvgCloseModal = styled.img`
 
   cursor: pointer;
 `;
+
+export const SvgLike = styled.img`
+  max-width: max-content;
+  height: max-content;
+
+  transform: scale(1.1);
+
+  border: transparent;
+
+  cursor: pointer;
+
+  transition: .25s;
+
+  :hover {
+    transform: scale(1.3);
+  }
+`
