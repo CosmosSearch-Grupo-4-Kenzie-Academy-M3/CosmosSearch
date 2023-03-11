@@ -19,5 +19,7 @@ export interface IPostContext {
   deletePost: (postId: number) => Promise<void>;
   actualPostId: number;
   setActualPostId:  React.Dispatch<React.SetStateAction<number>>;
+  likeClicked: boolean;
+  setLikeClicked:  React.Dispatch<React.SetStateAction<boolean>>;
 }
 

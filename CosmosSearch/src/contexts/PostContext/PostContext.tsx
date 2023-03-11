@@ -11,6 +11,7 @@ export const PostProvider = ({ children }: iChildren) => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [userPosts, setUserPosts] = useState<IPost[]>([]);
   const [actualPostId, setActualPostId] = useState(0);
+  const [likeClicked, setLikeClicked] = useState(false);
 
   const getAllPosts = async () => {
     try {
@@ -91,7 +92,9 @@ export const PostProvider = ({ children }: iChildren) => {
         createPost,
         deletePost,
         actualPostId,
-        setActualPostId
+        setActualPostId,
+        likeClicked,
+        setLikeClicked
       }}
     >
       {children}

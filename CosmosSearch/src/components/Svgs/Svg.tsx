@@ -8,14 +8,16 @@ import astronaut from "../../assets/svgs/astronaut.svg";
 import closeModal from "../../assets/svgs/close__modal--teste.svg";
 import spaceInvaders from "../../assets/svgs/space_invaders.svg";
 import plusComment from "../../assets/svgs/plus__comment.svg";
-
 import hamburguer from "../../assets/svgs/hamburger.svg"
 import closeX from "../../assets/svgs/close_x.svg"
 import pencil from "../../assets/svgs/pencil.svg"
 import arrowUp from "../../assets/svgs/arrow_up.svg"
+import likeUnclicked from "../../assets/svgs/like_unclicked.svg"
+import likeClicked from "../../assets/svgs/like_clicked.svg"
 
-
-import { SvgCloseModal, SvgPlusComment, SvgStyled, SvgStyledFliped } from "./SvgStyled";
+import { SvgCloseModal, SvgLike, SvgPlusComment, SvgStyled, SvgStyledFliped } from "./SvgStyled";
+import { useContext } from "react";
+import { PostContext } from "../../contexts/PostContext/PostContext";
 
 export const BurgerMenu = () => {
   return <SvgStyled src={burger} alt="Burger Menu Button" />;
@@ -47,6 +49,18 @@ export const Astronaut = () => {
 
 export const SpaceInvaders = () => {
   return <SvgCloseModal src={spaceInvaders} alt="Astronaut icon" />;
+};
+
+export const LikeUnclicked = () => {
+  const { setLikeClicked } = useContext(PostContext)
+
+  return <SvgLike src={likeUnclicked} alt="Astronaut icon" onClick={() => setLikeClicked(true)}/>;
+};
+
+export const LikeClicked = () => {
+  const { setLikeClicked } = useContext(PostContext)
+
+  return <SvgLike src={likeClicked} alt="Astronaut icon" onClick={() => setLikeClicked(false)}/>;
 };
 
 export const CloseModal = () => {

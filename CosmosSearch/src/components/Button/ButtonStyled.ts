@@ -25,7 +25,10 @@ export const ButtonStyled = styled.button<iButtonStyled>`
 
   cursor: pointer;
 
+  transition: .25s;
+
   :hover {
     background-color: var(--primary-blue-opct);
+    transform: scale(1.1);
   }
 `;

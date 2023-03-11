@@ -6,6 +6,8 @@ import {
   ArrowUp,
   CloseX,
   Hamburguer,
+  LikeClicked,
+  LikeUnclicked,
   Pencil,
   PlanetGrey,
   SpaceInvaders,
@@ -38,7 +40,7 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
     setEditModalIsOpen,
     setDeleteModalIsOpen,
   } = useContext(LinksContext);
-  const { deletePost, setActualPostId } = useContext(PostContext);
+  const { setActualPostId, likeClicked } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
   const { userState } = useContext(UserContext);
 
@@ -98,16 +100,16 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
           </div>
           <div
             className="button"
-            onClick={() => {
-              setModalIsOpen(true);
-              setModalId(postId);
-              readAllComments(postId);
-            }}
           >
-            <SpaceInvaders />
+            {likeClicked ? <LikeClicked/> : <LikeUnclicked/>}
             <ButtonStyled
               textColor="var(--primary-blue)"
               borderColor="var(--primary-blue)"
+              onClick={() => {
+                setModalIsOpen(true);
+                setModalId(postId);
+                readAllComments(postId);
+              }}
             >
               open
             </ButtonStyled>
