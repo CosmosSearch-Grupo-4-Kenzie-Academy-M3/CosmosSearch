@@ -1,4 +1,5 @@
 import React from "react";
+import { INewComment } from "../CommentsContext/@typesComments";
 import { IFormPostRegister } from "../UserContext/@types_User";
 
 export interface IPost {
@@ -8,6 +9,10 @@ export interface IPost {
   name: string;
   topic: string;
   body: string;
+}
+
+export interface IUpdatePost {
+  body: string
 }
 
 export interface IPostContext {
@@ -21,5 +26,6 @@ export interface IPostContext {
   setActualPostId:  React.Dispatch<React.SetStateAction<number>>;
   likeClicked: boolean;
   setLikeClicked:  React.Dispatch<React.SetStateAction<boolean>>;
+  editPost: (postId: number, data: IUpdatePost) => Promise<void>;
 }
 
