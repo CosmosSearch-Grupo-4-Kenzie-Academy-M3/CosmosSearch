@@ -24,6 +24,7 @@ export const PostStyled = styled.li`
   .post__header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .icon {
@@ -109,15 +110,36 @@ export const DivsButtonsStyled = styled.div`
   cursor: pointer;
 
   .buttons {
+    position: relative;
+
     display: flex;
     flex-direction: column;
 
-    align-self: flex-start;
     gap: 1rem;
   }
 `;
 
+interface IButtonsStyled {
+  top: string
+}
+
 export const ButtonsStyled = styled.button`
+  position: relative;
+
+  background-color: transparent;
+  
+  border: 2px solid transparent;
+
+  cursor: pointer
+`
+
+export const ButtonsAbsoluteStyled = styled.button<IButtonsStyled>`
+  position: absolute;
+
+  top: ${(props) => props.top};
+
+  right: .2rem;
+
   background-color: transparent;
   
   border: 2px solid transparent;

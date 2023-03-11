@@ -14,6 +14,7 @@ import {
   DivsButtonsStyled,
   PostStyled,
   ButtonsStyled,
+  ButtonsAbsoluteStyled,
 } from "../PostListStyled";
 
 import { CommentsContext } from "../../../contexts/CommentsContext/CommentsContext";
@@ -57,25 +58,27 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
             <DivsButtonsStyled>
               {hamburgerOpen ? (
                 <div className="buttons">
-                  <ButtonsStyled onClick={() => setHamburgerOpen(false)}>
+                  <ButtonsStyled  onClick={() => setHamburgerOpen(false)}>
                     <ArrowUp />
                   </ButtonsStyled>
-                  <ButtonsStyled
+                  <ButtonsAbsoluteStyled
+                    top="2.3rem"
                     onClick={() => {
                       setEditModalIsOpen(true);
                       setActualPostId(postId);
                     }}
                   >
                     <Pencil />
-                  </ButtonsStyled>
-                  <ButtonsStyled
+                  </ButtonsAbsoluteStyled>
+                  <ButtonsAbsoluteStyled
+                  top="5.2rem"
                     onClick={() => {
                       setDeleteModalIsOpen(true);
                       setActualPostId(postId);
                     }}
                   >
                     <CloseX />
-                  </ButtonsStyled>
+                  </ButtonsAbsoluteStyled>
                 </div>
               ) : (
                 <ButtonsStyled onClick={() => setHamburgerOpen(true)}>
