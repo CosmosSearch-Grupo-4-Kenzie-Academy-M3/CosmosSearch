@@ -18,7 +18,7 @@ export const UpdatePost = () => {
 
   return (
     <UpdatePostStyled onSubmit={handleSubmit(updateSubmit)}>
-        <Textarea register={register("text")} error={errors.text?.message}/>
+        <Textarea register={register("text")} error={errors.text?.message} width="100%"/>
         <ButtonStyled borderColor="var(--primary-blue)" textColor="var(--primary-blue)">Send</ButtonStyled>
     </UpdatePostStyled>
   )

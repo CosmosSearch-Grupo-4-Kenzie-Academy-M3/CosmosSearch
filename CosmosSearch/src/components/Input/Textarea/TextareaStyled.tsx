@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
+interface ITextareaStyled {
+  width?: string;
+}
 
-export const TextareaStyled = styled.div`
+export const TextareaStyled = styled.div<ITextareaStyled>`
   border: none;
 
   width: 100%;
@@ -10,21 +13,23 @@ export const TextareaStyled = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   gap: 20px;
 
   .label {
     align-self: flex-start;
   }
-  
+
   .containerInputSpan {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 300px;
+    max-width: ${(props) => props.width ? props.width : "380px"};
     gap: 5px;
   }
 
   textarea {
+    /* width: ${(props) => (props.width ? "440px" : "unset")}; */
     height: 200px;
 
     border-radius: 4px;
@@ -40,10 +45,5 @@ export const TextareaStyled = styled.div`
     color: var(--error-form);
     font-size: 14px;
     font-family: var(--ff-Inter);
-  }
-
-  @media (min-width: 380px) {
-    width: 380px;
-    padding-inline: 40px;
   }
 `;

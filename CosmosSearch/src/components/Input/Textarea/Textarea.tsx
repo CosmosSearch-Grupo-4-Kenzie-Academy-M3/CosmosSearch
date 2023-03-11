@@ -5,17 +5,19 @@ import { TextareaStyled } from "./TextareaStyled";
 interface iTextarea {
   error?: string;
   register: UseFormRegisterReturn<string>;
-  text?: string
+  text?: string;
+  width?: string;
 }
 
-export const Textarea = ({ register, error, text }: iTextarea) => {
+export const Textarea = ({ register, error, text, width }: iTextarea) => {
   return (
-    <TextareaStyled>
+    <TextareaStyled width={width}>
       <label className="input__label label" htmlFor={register.name}>
         {text}
       </label>
       <div className="containerInputSpan">
         <textarea
+          className="input__label"
           id={register.name}
           {...register}
           placeholder="Type your post"
