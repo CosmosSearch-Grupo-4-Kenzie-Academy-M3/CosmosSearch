@@ -27,9 +27,15 @@ export const DashboardStyled = styled.div`
   }
 
   /* MediaQuery */
+  @media (min-width: 400px) {
+    .main__burgerOpen {
+      margin-top: 2.3rem;
+    }
+  }
+
   @media (min-width: 800px) {
     main {
-      width: max-content;
+      width: 800px;
     }
   }
 
@@ -41,22 +47,33 @@ export const DashboardStyled = styled.div`
       display: none;
     }
     .main__desktop {
+      position: relative;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      margin-top: 1rem;
+      align-items: 
+      center;
+      margin-top: 2rem;
+    }
+    .newpost__position {
+      position: absolute; 
+
+      top: -1.5rem;
+      right: -.1rem;
     }
   }
 
-  @media (min-width: 1056px) {
+  @media (min-width: 1096px) {
+
+
     .newpost__position {
       position: absolute;
 
-      right: 20px;
+      right: 0px;
       top: 7.8rem;
     }
 
     .main__desktop {
+      position: static;
       margin-top: 0;
       /* padding-top: 8rem; */
     }
