@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const PostModalDivStyled = styled.div`
-  position: absolute;
+  position: fixed;
+  z-index: 100;
 
   display: flex;
   justify-content: center;
+  align-items: center;
 
   min-height: 100%;
   max-height: 100vmax;
@@ -36,6 +38,19 @@ export const PostModalStyled = styled.div`
   border-radius: 8px;
 
   background-color: var(--grey-1);
+
+  .header__modal--desktop {
+    display: none;
+  }
+
+  @media (min-width: 370px) {
+    .header__modal--desktop {
+      display: block;
+    }
+    .header__modal--mobile {
+      display: none;
+    }
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -61,8 +76,13 @@ export const HeaderModal = styled.header`
   height: max-content;
 
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  @media (min-width: 370px) {
+    flex-direction: row;
+  }
 `;
 export const ContentDiv = styled.div`
   width: 100%;

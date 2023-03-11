@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const PostEditModalDivStyled = styled.div`
-  position: absolute;
+  position: fixed;
+  z-index: 100;
 
   display: flex;
   justify-content: center;
+  align-items: center;
 
   min-height: 100%;
   max-height: max-content;

@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const PostDeleteDivStyled = styled.div`
-  position: absolute;
+  position: fixed;
+  z-index: 100;
 
   display: flex;
   justify-content: center;

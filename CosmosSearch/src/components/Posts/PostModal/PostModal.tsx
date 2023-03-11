@@ -42,10 +42,18 @@ export const PostModal = () => {
         <CloseButton onClick={() => setModalIsOpen(false)}>
           <CloseModal />
         </CloseButton>
-        <HeaderModal>
-          <p className="title__posts">{userPost.title}</p>
-          <p className="title__posts">{userPost.name}</p>
-        </HeaderModal>
+        <div className="header__modal--desktop">
+          <HeaderModal>
+            <p className="title__posts">{userPost.title}</p>
+            <p className="title__posts">{userPost.name}</p>
+          </HeaderModal>
+        </div>
+        <div className="header__modal--mobile">
+          <HeaderModal>
+            <p className="title__posts--mobile">{userPost.title}</p>
+            <p className="title__posts--mobile">{userPost.name}</p>
+          </HeaderModal>
+        </div>
         <ContentDiv>
           <p className="post__text__preview--mobile">{userPost.body}</p>
         </ContentDiv>
