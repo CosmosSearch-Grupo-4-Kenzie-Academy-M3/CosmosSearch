@@ -10,7 +10,7 @@ export const Posts = () => {
 
   useEffect(() => {
     getAllPosts();
-  }, [posts]);
+  }, []);
 
   return (
     <PostListStyled className="container__pages">
@@ -22,6 +22,7 @@ export const Posts = () => {
           topic={post.topic}
           postId={post.id}
           title={post.title}
+          date={post.date}
         />
       ))}
     </PostListStyled>

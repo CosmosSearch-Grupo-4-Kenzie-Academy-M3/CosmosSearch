@@ -31,9 +31,10 @@ interface IPostProps {
   body: string;
   topic: string;
   postId: number;
+  date: string
 }
 
-export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
+export const Post = ({ title, name, body, topic, postId, date }: IPostProps) => {
   const {
     setModalIsOpen,
     setModalId,
@@ -45,7 +46,7 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
   const { userState } = useContext(UserContext);
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
-
+  
   return (
     <PostStyled>
       <div className="icon">
@@ -95,7 +96,7 @@ export const Post = ({ title, name, body, topic, postId }: IPostProps) => {
         <p className="post__text__preview">{body}</p>
         <div className="date__and__button">
           <div className="date">
-            <p className="post__text__preview">date: xx/xx/xx</p>
+            <p className="post__text__preview">date: {date}</p>
             <p className="post__text__preview">topic: {topic}</p>
           </div>
           <div
