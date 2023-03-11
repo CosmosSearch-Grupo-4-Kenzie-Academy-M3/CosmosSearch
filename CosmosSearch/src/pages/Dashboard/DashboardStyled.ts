@@ -8,12 +8,10 @@ export const DashboardStyled = styled.div`
   width: 100%;
 
   main {
-
     margin-inline: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 700px;
   }
 
   .main__burgerOpen {
@@ -31,7 +29,7 @@ export const DashboardStyled = styled.div`
   /* MediaQuery */
   @media (min-width: 800px) {
     main {
-      width: 700px;
+      width: max-content;
     }
   }
 
@@ -45,6 +43,7 @@ export const DashboardStyled = styled.div`
     .main__desktop {
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
       margin-top: 1rem;
     }
   }
