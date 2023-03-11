@@ -34,6 +34,7 @@ export const GlobalStyle = createGlobalStyle`
         --fs-30: 1.875rem;
         --fs-29: 1.8125rem;
         --fs-25: 1.5625rem;
+        --fs-20: 1.25rem;
         --fs-16: 1rem;
         --fs-10: .625rem;
 
@@ -116,6 +117,14 @@ export const GlobalStyle = createGlobalStyle`
     .title__posts--mobile {
         font-family: var(--ff-Oswald);
         font-size: var(--fs-25);
+        font-weight: var(--fw-500);
+        letter-spacing: 12%;
+        color: var(--primary-blue);
+    }
+
+    .title__userInfo {
+        font-family: var(--ff-Oswald);
+        font-size: var(--fs-20);
         font-weight: var(--fw-500);
         letter-spacing: 12%;
         color: var(--primary-blue);
