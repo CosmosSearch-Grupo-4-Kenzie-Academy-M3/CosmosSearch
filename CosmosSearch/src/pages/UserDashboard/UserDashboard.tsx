@@ -11,29 +11,30 @@ import { UserDashboardStyled } from "./UserDashboardStyled";
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import { PostContext } from "../../contexts/PostContext/PostContext";
-import { UserPosts } from "../../components/Posts/UserPosts";
+import { UserPosts } from "../../components/Posts/UserPostsList";
+import { PostEdit } from "../../components/Posts/PostModal/PostEdit/PostEdit";
+import { PostDelete } from "../../components/Posts/PostModal/PostDelete/PostDelete";
 
 export const UserDashboard = () => {
-  const { burgerOpen, mainComponent, modalIsOpen } = useContext(LinksContext);
+  const { burgerOpen, mainComponent, modalIsOpen, editModalIsOpen, deleteModalIsOpen } = useContext(LinksContext);
   const { userState, setUserState , } = useContext(UserContext);
   const {userPosts} = useContext(PostContext)
 
   useEffect(() => {
     setUserState("userLoggedInPerfil");
-   
   }, []);
-  console.log(userPosts)
+
   return (
     <UserDashboardStyled>
       {modalIsOpen ? <PostModal /> : <></>}
+      {editModalIsOpen ? <PostEdit/> : <></>}
+      {deleteModalIsOpen ? <PostDelete/> : <></>}
       {/* Mobile */}
       <div className="userdash__mobile">
         <Header path={userState} />
         <DivForButtons />
         {mainComponent === "posts" ? (
           <UserPosts />
-          
-
         ) : mainComponent === "updatePerfil" ? (
           <div className="container__form">
             <UpdateUserForm />

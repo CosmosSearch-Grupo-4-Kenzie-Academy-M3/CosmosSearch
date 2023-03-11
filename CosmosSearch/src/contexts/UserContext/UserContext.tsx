@@ -21,7 +21,8 @@ export const UserProvider = ({ children }: iChildren) => {
   const { setMainComponent } = useContext(LinksContext);
 
   const [userState, setUserState] = useState<
-    "userLoggedInPerfil" | "userLogged" | "userDeslogged"
+    // "userLoggedInPerfil" | "userLogged" | "userDeslogged"
+    string
   >("userDeslogged");
   const [user, setUser] = useState<IUser | string | null>(null);
 
@@ -38,9 +39,9 @@ export const UserProvider = ({ children }: iChildren) => {
     try {
       const response = await api.post("/users", data);
       localStorage.setItem("@CosmosSearch:TOKEN", response.data.accessToken);
-      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       localStorage.setItem("@CosmosSearch:USERID", response.data.user.id);
       localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
+      setUserState("userLogged");
       setUser(response.data.user);
       navigate("/dashboard");
       toast.success("Usuário registrado com sucesso!");
@@ -54,9 +55,9 @@ export const UserProvider = ({ children }: iChildren) => {
     try {
       const response = await api.post("/login", data);
       localStorage.setItem("@CosmosSearch:TOKEN", response.data.accessToken);
-      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       localStorage.setItem("@CosmosSearch:USERID", response.data.user.id);
       localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
+      setUserState("userLogged");
       setUser(response.data.user);
       navigate("/dashboard");
       toast.success("Login efetuado!");

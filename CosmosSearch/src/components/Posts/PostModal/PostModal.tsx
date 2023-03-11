@@ -5,7 +5,7 @@ import { CommentsContext } from "../../../contexts/CommentsContext/CommentsConte
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 import { IPost } from "../../../contexts/PostContext/@typesPost";
 import { PostContext } from "../../../contexts/PostContext/PostContext";
-import { CloseModal, PlusComment } from "../../Svgs/Svg";
+import { CloseModal, PlusComment, PlusX, PlusXRotate } from "../../Svgs/Svg";
 import { CommentLi } from "./CommentLi/CommentLi";
 import {
   CommentsList,
@@ -21,29 +21,39 @@ import {
 } from "./PostModalStyled";
 
 export const PostModal = () => {
+  const [openCommentInput, setOpenCommentInput] = useState(false);
+  const [commentButtonIsRotate, setCommentButtonIsRotate] = useState(false);
+
   const { setModalIsOpen, modalId } = useContext(LinksContext);
   const { posts } = useContext(PostContext);
   const { allComments, createNewComment } = useContext(CommentsContext);
-  const [openCommentInput, setOpenCommentInput] = useState(false);
 
   const userPost = posts.find((post) => post.id == modalId) as IPost;
 
-  const {register, handleSubmit} = useForm<INewComment>()
+  const { register, handleSubmit } = useForm<INewComment>();
 
   const submit = (data: INewComment) => {
-    createNewComment(data, userPost.id.toString())
-  }
-    
+    createNewComment(data, userPost.id.toString());
+  };
+
   return (
     <PostModalDivStyled>
       <PostModalStyled>
         <CloseButton onClick={() => setModalIsOpen(false)}>
           <CloseModal />
         </CloseButton>
-        <HeaderModal>
-          <p className="title__posts">{userPost.title}</p>
-          <p className="title__posts">{userPost.name}</p>
-        </HeaderModal>
+        <div className="header__modal--desktop">
+          <HeaderModal>
+            <p className="title__posts">{userPost.title}</p>
+            <p className="title__posts">{userPost.name}</p>
+          </HeaderModal>
+        </div>
+        <div className="header__modal--mobile">
+          <HeaderModal>
+            <p className="title__posts--mobile">{userPost.title}</p>
+            <p className="title__posts--mobile">{userPost.name}</p>
+          </HeaderModal>
+        </div>
         <ContentDiv>
           <p className="post__text__preview--mobile">{userPost.body}</p>
         </ContentDiv>
@@ -53,9 +63,12 @@ export const PostModal = () => {
             <p className="title__comments">Comments</p>
             <div
               className="plus__comment"
-              onClick={() => setOpenCommentInput(!openCommentInput)}
+              onClick={() => {
+                setOpenCommentInput(!openCommentInput);
+                setCommentButtonIsRotate(!commentButtonIsRotate);
+              }}
             >
-              <PlusComment />
+              {commentButtonIsRotate ? <PlusX /> : <PlusXRotate />}
             </div>
           </div>
           {openCommentInput ? (
@@ -97,4 +110,3 @@ export const PostModal = () => {
 function data(data: any, id: number) {
   throw new Error("Function not implemented.");
 }
-

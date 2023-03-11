@@ -19,5 +19,8 @@ export const NewPostStyled = styled.button`
   font-weight: 400;
   color: var(--primary-blue);
 
+  align-self: flex-end;
+  margin-right: 22px;
+
   cursor: pointer;
 `;

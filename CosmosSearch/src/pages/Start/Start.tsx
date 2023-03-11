@@ -8,14 +8,11 @@ import { BurgerMenu } from "../../components/Svgs/Svg";
 
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { CommentsContext } from "../../contexts/CommentsContext/CommentsContext";
+import { UserContext } from "../../contexts/UserContext/UserContext";
 
 export const Start = () => {
   const { burgerOpen, setBurgerOpen } = useContext(LinksContext);
-  const { readAllComments } = useContext(CommentsContext);
-
-  useEffect(() => {
-    readAllComments(1);
-  }, []);
+  const { setUserState } = useContext(UserContext);
 
   return (
     <StartStyled>
@@ -23,13 +20,9 @@ export const Start = () => {
         {/* Mobile */}
         <div className="top__start">
           <Title />
-          <div
-            onClick={() =>
-              localStorage.setItem("@CosmosSearch:USERSTATE", "userDeslogged")
-            }
-          >
+          <button onClick={() => setUserState("userDeslogged")}>
             <LinkButton path="/dashboard" text="Home" line={true} />
-          </div>
+          </button>
           <div className="burger__div">
             {burgerOpen ? (
               <div className="links__start">
@@ -37,9 +30,12 @@ export const Start = () => {
                 <LinkButton path="/register" text="Singup" />
               </div>
             ) : (
-              <div className="burger__menu" onClick={() => setBurgerOpen(true)}>
+              <button
+                className="burger__menu"
+                onClick={() => setBurgerOpen(true)}
+              >
                 <BurgerMenu />
-              </div>
+              </button>
             )}
           </div>
         </div>
@@ -50,13 +46,9 @@ export const Start = () => {
           </TitleBordersStyled>
         </div>
         <div className="links__start--desktop">
-          <div
-            onClick={() =>
-              localStorage.setItem("@CosmosSearch:USERSTATE", "userDeslogged")
-            }
-          >
+          <button onClick={() => setUserState("userDeslogged")}>
             <LinkButton path="/dashboard" text="Home" line={true} />
-          </div>
+          </button>
           <div className="links__start">
             <LinkButton path="/login" text="Login" line={true} />
             <LinkButton path="/register" text="Sign Up" />

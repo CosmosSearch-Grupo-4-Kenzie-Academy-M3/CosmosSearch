@@ -13,14 +13,6 @@ export const Dashboard = () => {
   const { burgerOpen, modalIsOpen } = useContext(LinksContext);
   const { userState, setUserState } = useContext(UserContext);
 
-  useEffect(() => {
-    const actualUserState = localStorage.getItem("@CosmosSearch:USERSTATE") as
-      | "userLoggedInPerfil"
-      | "userLogged"
-      | "userDeslogged";
-    setUserState(actualUserState);
-  }, []);
-
   return (
     <DashboardStyled>
       {modalIsOpen ? <PostModal /> : <></>}
@@ -28,7 +20,7 @@ export const Dashboard = () => {
       {/* Mobile */}
       {burgerOpen ? (
         <main className="main__burgerOpen">
-          <NewPost />
+          <NewPost/>
           <Posts />
         </main>
       ) : (

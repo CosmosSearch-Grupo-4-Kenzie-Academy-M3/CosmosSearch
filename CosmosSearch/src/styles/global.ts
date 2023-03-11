@@ -113,6 +113,14 @@ export const GlobalStyle = createGlobalStyle`
         color: var(--primary-blue);
     }
 
+    .title__posts--mobile {
+        font-family: var(--ff-Oswald);
+        font-size: var(--fs-25);
+        font-weight: var(--fw-500);
+        letter-spacing: 12%;
+        color: var(--primary-blue);
+    }
+
     .title__comments {
         font-family: var(--ff-Oswald);
         font-size: 1rem;

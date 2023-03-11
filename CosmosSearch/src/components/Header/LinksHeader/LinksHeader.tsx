@@ -10,48 +10,45 @@ interface iLinksHeader {
 }
 
 export const LinksHeader = ({ path }: iLinksHeader) => {
-  const { logout } = useContext(UserContext);
+  const { logout, setUserState } = useContext(UserContext);
 
   switch (path) {
     case "userLoggedInPerfil":
       return (
         <LinksHeaderStyled>
-          <div
+          <button
             onClick={() =>
-              localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged")
+              setUserState("userLogged")
             }
           >
             <LinkButton path="/dashboard" text="Home" />
-          </div>
+          </button>
           <div className="colum"></div>
-          <div onClick={() => logout()}>
+          <button onClick={() => logout()}>
             <LinkButton path="/" text="Logout" />
-          </div>
+          </button>
         </LinksHeaderStyled>
       );
     case "userLogged":
       return (
         <LinksHeaderStyled>
-          <div
+          <button
             onClick={() =>
-              localStorage.setItem(
-                "@CosmosSearch:USERSTATE",
-                "userLoggedInPerfil"
-              )
+              setUserState("userLoggedInPerfil")
             }
           >
             <LinkButton path="/userdashboard" text="Perfil" />
-          </div>
+          </button>
           <div className="colum"></div>
-          <div onClick={() => logout()}>
+          <button onClick={() => logout()}>
             <LinkButton path="/" text="Logout" />
-          </div>
+          </button>
         </LinksHeaderStyled>
       );
     case "userDeslogged":
       return (
         <LinksHeaderStyled>
-          <LinkButton path="/" text="Start" />
+          <LinkButton path="/login" text="Login" />
           <div className="colum"></div>
           <LinkButton path="/register" text="Sign Up" />
         </LinksHeaderStyled>

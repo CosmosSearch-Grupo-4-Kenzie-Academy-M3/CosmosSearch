@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { HeaderStyled } from "./HeaderStyled";
+import { FixedDiv, HeaderStyled } from "./HeaderStyled";
 import { LinksHeader } from "./LinksHeader/LinksHeader";
 
 import { BurgerMenu, CloseMenu, SmallLogo } from "../Svgs/Svg";
@@ -15,6 +15,7 @@ export const Header = ({ path }: iLinksHeader) => {
   const { burgerOpen, setBurgerOpen } = useContext(LinksContext);
 
   return (
+    // <FixedDiv>
     <HeaderStyled>
       <div className="container__header--mobileSmall">
         <div className="small__logo--header">
@@ -42,5 +43,6 @@ export const Header = ({ path }: iLinksHeader) => {
         </div>
       </div>
     </HeaderStyled>
+    /* </FixedDiv> */
   );
 };

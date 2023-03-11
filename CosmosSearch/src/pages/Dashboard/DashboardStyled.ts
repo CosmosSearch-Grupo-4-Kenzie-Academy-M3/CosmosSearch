@@ -12,7 +12,6 @@ export const DashboardStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 700px;
   }
 
   .main__burgerOpen {
@@ -20,7 +19,7 @@ export const DashboardStyled = styled.div`
   }
 
   .main__burgerClosed {
-    margin-top: 1rem;
+    margin-top: 2.5rem;
   }
 
   .main__desktop {
@@ -30,7 +29,7 @@ export const DashboardStyled = styled.div`
   /* MediaQuery */
   @media (min-width: 800px) {
     main {
-      width: 700px;
+      width: max-content;
     }
   }
 
@@ -44,6 +43,7 @@ export const DashboardStyled = styled.div`
     .main__desktop {
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
       margin-top: 1rem;
     }
   }
@@ -58,6 +58,7 @@ export const DashboardStyled = styled.div`
 
     .main__desktop {
       margin-top: 0;
+      /* padding-top: 8rem; */
     }
   }
 `;

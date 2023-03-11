@@ -1,3 +1,4 @@
+import React from "react";
 import { IFormPostRegister } from "../UserContext/@types_User";
 
 export interface IPost {
@@ -16,4 +17,7 @@ export interface IPostContext {
   getAllUserPosts: (id: number) => Promise<void>;
   createPost: (data: IFormPostRegister) => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
+  actualPostId: number;
+  setActualPostId:  React.Dispatch<React.SetStateAction<number>>;
 }
+

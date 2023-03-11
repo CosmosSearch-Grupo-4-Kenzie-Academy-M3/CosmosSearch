@@ -10,6 +10,7 @@ export const PostContext = createContext({} as IPostContext);
 export const PostProvider = ({ children }: iChildren) => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [userPosts, setUserPosts] = useState<IPost[]>([]);
+  const [actualPostId, setActualPostId] = useState(0);
 
   const getAllPosts = async () => {
     try {
@@ -68,6 +69,8 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
+        const userId = Number(localStorage.getItem("@CosmosSearch:USERID") as string)
+        getAllUserPosts(userId);
         getAllPosts();
         toast.success("Post deletado com sucesso!")
       } catch (error) {
@@ -78,8 +81,6 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
-
-
   return (
     <PostContext.Provider
       value={{
@@ -89,6 +90,8 @@ export const PostProvider = ({ children }: iChildren) => {
         getAllUserPosts,
         createPost,
         deletePost,
+        actualPostId,
+        setActualPostId
       }}
     >
       {children}
