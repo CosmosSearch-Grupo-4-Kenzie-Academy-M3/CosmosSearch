@@ -1,25 +1,45 @@
-import { SubmitHandler, useForm } from "react-hook-form"
-import { INewComment } from "../../../contexts/CommentsContext/@typesComments"
-import { Textarea } from "../../Input/Textarea/Textarea"
-import { UpdatePostStyled } from "./UpdatePostStyled"
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Textarea } from "../../Input/Textarea/Textarea";
+import { UpdatePostStyled } from "./UpdatePostStyled";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { updateUserPost } from "../../../contexts/PostContext/validation";
+import { updatePostSchema } from "../../../contexts/PostContext/validation";
 import { ButtonStyled } from "../../Button/ButtonStyled";
+import { useContext } from "react";
+import { PostContext } from "../../../contexts/PostContext/PostContext";
+import { IUpdatePost } from "../../../contexts/PostContext/@typesPost";
+import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 
 export const UpdatePost = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm<INewComment>({
-        resolver: yupResolver(updateUserPost)
-    })
+  const { editPost, actualPostId } = useContext(PostContext);
+  const {setEditModalIsOpen} = useContext(LinksContext)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IUpdatePost>({
+    resolver: yupResolver(updatePostSchema),
+  });
 
-    const updateSubmit: SubmitHandler<INewComment> = (data) => {
-        console.log(data)
-    }
+  const updateSubmit: SubmitHandler<IUpdatePost> = (data) => {
+    editPost(actualPostId, data);
+    setEditModalIsOpen(false)
+  };
 
   return (
     <UpdatePostStyled onSubmit={handleSubmit(updateSubmit)}>
-        <Textarea register={register("text")} error={errors.text?.message} width="100%"/>
-        <ButtonStyled borderColor="var(--primary-blue)" textColor="var(--primary-blue)">Send</ButtonStyled>
+      <Textarea
+        register={register("body")}
+        error={errors.body?.message}
+        width="100%"
+      />
+      <ButtonStyled
+        borderColor="var(--primary-blue)"
+        textColor="var(--primary-blue)"
+        type="submit"
+      >
+        Send
+      </ButtonStyled>
     </UpdatePostStyled>
-  )
-}
+  );
+};

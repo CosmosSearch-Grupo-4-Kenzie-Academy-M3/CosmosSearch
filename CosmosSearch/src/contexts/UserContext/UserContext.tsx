@@ -21,8 +21,7 @@ export const UserProvider = ({ children }: iChildren) => {
   const { setMainComponent } = useContext(LinksContext);
 
   const [userState, setUserState] = useState<
-    // "userLoggedInPerfil" | "userLogged" | "userDeslogged"
-    string
+    "userLoggedInPerfil" | "userLogged" | "userDeslogged"
   >("userDeslogged");
   const [user, setUser] = useState<IUser | string | null>(null);
 

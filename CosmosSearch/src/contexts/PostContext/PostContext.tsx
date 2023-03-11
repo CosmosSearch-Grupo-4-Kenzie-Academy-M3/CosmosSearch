@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { api } from "../../services/api";
 import { iChildren } from "../@childrenType";
 import { IFormPostRegister } from "../UserContext/@types_User";
-import { IPost, IPostContext } from "./@typesPost";
+import { IPost, IPostContext, IUpdatePost } from "./@typesPost";
 
 export const PostContext = createContext({} as IPostContext);
 
@@ -81,6 +81,25 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
+  const editPost = async (postId: number, data: IUpdatePost) => {
+    const token = localStorage.getItem("@CosmosSearch:TOKEN")
+    const userId = localStorage.getItem("@CosmosSearch:USERID")
+    const newData = {...data, userId}
+    try {
+      await api.patch(`/posts/${postId}`, newData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      getAllUserPosts(Number(userId))
+      getAllPosts()
+      toast.success("Post atualizado com sucesso")
+    } catch (error) {
+      console.log(error)
+      toast.error("Não foi possível atualizar posts!")
+    }
+  }
+
   return (
     <PostContext.Provider
       value={{
@@ -91,7 +110,8 @@ export const PostProvider = ({ children }: iChildren) => {
         createPost,
         deletePost,
         actualPostId,
-        setActualPostId
+        setActualPostId,
+        editPost
       }}
     >
       {children}
