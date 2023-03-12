@@ -25,12 +25,13 @@ export const UserDashboard = () => {
     deleteModalIsOpen,
   } = useContext(LinksContext);
   const { userState, setUserState } = useContext(UserContext);
-  const { userPosts } = useContext(PostContext);
+  const { userPosts, setIsDashboard } = useContext(PostContext);
   const userName = localStorage.getItem("@CosmosSearch:USERNAME")
   const userEmail = localStorage.getItem("@CosmosSearch:EMAIL")
 
   useEffect(() => {
     setUserState("userLoggedInPerfil");
+    setIsDashboard(false)
   }, []);
 
   return (

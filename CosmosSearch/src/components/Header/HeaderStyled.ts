@@ -67,7 +67,13 @@ export const HeaderStyled = styled.header`
       display: none;
     }
     .links__start--headerDesktop {
-      display: block;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+
+      height: 30px;
+
+      background-color: transparent;
     }
   }
 `;

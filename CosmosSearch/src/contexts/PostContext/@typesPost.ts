@@ -27,5 +27,14 @@ export interface IPostContext {
   likeClicked: boolean;
   setLikeClicked:  React.Dispatch<React.SetStateAction<boolean>>;
   editPost: (postId: number, data: IUpdatePost) => Promise<void>;
+  setPosts: React.Dispatch<React.SetStateAction<IPost[]>>;
+  isSearch: boolean;
+  setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
+  searchedPosts: IPost[];
+  setSearchedPosts: React.Dispatch<React.SetStateAction<IPost[]>>;
+  value: string | null;
+  setValue: React.Dispatch<React.SetStateAction<string | null>>;
+  isDashboard: boolean;
+  setIsDashboard: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

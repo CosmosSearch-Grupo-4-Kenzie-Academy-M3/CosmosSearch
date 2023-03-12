@@ -6,6 +6,8 @@ import { LinksHeader } from "./LinksHeader/LinksHeader";
 import { BurgerMenu, CloseMenu, SmallLogo } from "../Svgs/Svg";
 
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
+import { SearchBar } from "../SearchBar/SearchBar";
+import { PostContext } from "../../contexts/PostContext/PostContext";
 
 interface iLinksHeader {
   path: "userLoggedInPerfil" | "userLogged" | "userDeslogged";
@@ -13,6 +15,7 @@ interface iLinksHeader {
 
 export const Header = ({ path }: iLinksHeader) => {
   const { burgerOpen, setBurgerOpen } = useContext(LinksContext);
+  const {isDashboard} = useContext(PostContext)
 
   return (
     // <FixedDiv>
@@ -34,11 +37,13 @@ export const Header = ({ path }: iLinksHeader) => {
           )}
           {burgerOpen ? (
             <div className="links__start--header">
+              {/* {isDashboard ? <SearchBar /> : <></>} */}
               <LinksHeader path={path} />
             </div>
           ) : null}
         </div>
         <div className="links__start--headerDesktop">
+          {isDashboard ? <SearchBar /> : <></>}
           <LinksHeader path={path} />
         </div>
       </div>
