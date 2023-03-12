@@ -99,12 +99,6 @@ export const GlobalStyle = createGlobalStyle`
         color: var(--primary-blue);
     }
 
-    .links__div {
-        :hover .links__line {
-            width: 20px;
-        }
-    }
-
     .links {
         font-family: var(--ff-Inter);
         font-size: var(--fs-30);

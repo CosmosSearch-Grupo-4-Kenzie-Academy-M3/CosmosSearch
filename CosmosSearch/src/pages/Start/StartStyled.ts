@@ -32,6 +32,12 @@ export const StartStyled = styled.div`
     }
   }
 
+  .links__hover {
+    :hover .links__line {
+      width: 20px;
+    }
+  }
+
   .links__start--desktop {
     display: none;
   }
@@ -69,10 +75,6 @@ export const StartStyled = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-
-      :hover .links__line {
-        width: 20px;
-      }
     }
   }
 `;
