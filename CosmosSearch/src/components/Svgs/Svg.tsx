@@ -14,8 +14,9 @@ import pencil from "../../assets/svgs/pencil.svg"
 import arrowUp from "../../assets/svgs/arrow_up.svg"
 import likeUnclicked from "../../assets/svgs/like_unclicked.svg"
 import likeClicked from "../../assets/svgs/like_clicked.svg"
+import searchIcon from "../../assets/svgs/search-icon.svg"
 
-import { SvgCloseModal, SvgLike, SvgPlusComment, SvgStyled, SvgStyledFliped } from "./SvgStyled";
+import { SvgCloseModal, SvgLike, SvgPlusComment, SvgSearch, SvgStyled, SvgStyledFliped } from "./SvgStyled";
 import { useContext } from "react";
 import { PostContext } from "../../contexts/PostContext/PostContext";
 
@@ -48,50 +49,54 @@ export const Astronaut = () => {
 };
 
 export const SpaceInvaders = () => {
-  return <SvgCloseModal src={spaceInvaders} alt="Astronaut icon" />;
+  return <SvgCloseModal src={spaceInvaders} alt="Space invaders icon" />;
 };
 
 export const LikeUnclicked = () => {
   const { setLikeClicked } = useContext(PostContext)
 
-  return <SvgLike src={likeUnclicked} alt="Astronaut icon" onClick={() => setLikeClicked(true)}/>;
+  return <SvgLike src={likeUnclicked} alt="Like unclicked icon" onClick={() => setLikeClicked(true)}/>;
 };
 
 export const LikeClicked = () => {
   const { setLikeClicked } = useContext(PostContext)
 
-  return <SvgLike src={likeClicked} alt="Astronaut icon" onClick={() => setLikeClicked(false)}/>;
+  return <SvgLike src={likeClicked} alt="Like clicked icon" onClick={() => setLikeClicked(false)}/>;
 };
 
 export const CloseModal = () => {
-  return <SvgCloseModal src={closeModal} alt="Close icon" />;
+  return <SvgCloseModal src={closeModal} alt="Close modal icon" />;
 };
 
 export const PlusComment = () => {
-  return <SvgPlusComment src={plusComment} alt="Close icon" />;
+  return <SvgPlusComment src={plusComment} alt="Plus Comment icon" />;
 };
 
 export const Hamburguer = () => {
-  return <SvgStyled src={hamburguer} alt="Astronaut icon" />;
+  return <SvgStyled src={hamburguer} alt="Hamburguer icon" />;
 };
 
 export const CloseX = () => {
-  return <SvgStyled src={closeX} alt="Astronaut icon" />;
+  return <SvgStyled src={closeX} alt="CloseX icon" />;
 };
 
 export const PlusXRotate = () => {
-  return <SvgStyledFliped src={closeX} alt="Astronaut icon" />;
+  return <SvgStyledFliped src={closeX} alt="PlusX rotate icon" />;
 };
 
 export const PlusX = () => {
-  return <SvgPlusComment src={closeX} alt="Astronaut icon" />;
+  return <SvgPlusComment src={closeX} alt="PlusX icon" />;
 };
 
 export const Pencil = () => {
-  return <SvgStyled src={pencil} alt="Astronaut icon" />;
+  return <SvgStyled src={pencil} alt="Pencil icon" />;
 };
 
 export const ArrowUp = () => {
-  return <SvgStyled src={arrowUp} alt="Astronaut icon" />;
+  return <SvgStyled src={arrowUp} alt="Arrow up icon" />;
+};
+
+export const SearchIcon = () => {
+  return <SvgSearch src={searchIcon} alt="Search icon" />;
 };
 

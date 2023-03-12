@@ -8,9 +8,16 @@ import { NewPost } from "./NewPost/NewPost";
 
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { UserContext } from "../../contexts/UserContext/UserContext";
+import { PostContext } from "../../contexts/PostContext/PostContext";
 
 export const Dashboard = () => {
   const { burgerOpen, modalIsOpen } = useContext(LinksContext);
+  const { userState, setUserState } = useContext(UserContext);
+  const {setIsDashboard} = useContext(PostContext)
+
+  useEffect(() => {
+    setIsDashboard(true)
+  }, [])
   const { userState } = useContext(UserContext);
 
   return (
