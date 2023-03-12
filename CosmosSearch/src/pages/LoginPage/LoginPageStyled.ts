@@ -16,6 +16,10 @@ export const LoginPageStyled = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
+    :hover .links__line {
+      width: 20px;
+    }
   }
 
   .linksMobile {

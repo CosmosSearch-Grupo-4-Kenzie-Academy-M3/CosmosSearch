@@ -99,6 +99,12 @@ export const GlobalStyle = createGlobalStyle`
         color: var(--primary-blue);
     }
 
+    .links__div {
+        :hover .links__line {
+            width: 20px;
+        }
+    }
+
     .links {
         font-family: var(--ff-Inter);
         font-size: var(--fs-30);
@@ -172,6 +178,8 @@ export const GlobalStyle = createGlobalStyle`
 
         border-top: 2px solid var(--primary-blue);
         margin-top: var(--links-distance-line-to-text);
+
+        transition: .25s;
     }
 
     /* MediaQuery */
