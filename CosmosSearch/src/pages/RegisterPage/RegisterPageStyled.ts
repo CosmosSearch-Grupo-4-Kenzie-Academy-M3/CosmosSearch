@@ -17,6 +17,9 @@ export const RegisterPageStyled = styled.main`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    :hover .links__line {
+      width: 20px;
+    }
   }
 
   .linksMobile {
@@ -29,6 +32,10 @@ export const RegisterPageStyled = styled.main`
 
     .linksMobile {
       display: flex;
+
+      :hover .links__line {
+        width: 20px;
+      }
     }
 
     .linksDesktop {
