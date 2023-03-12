@@ -1,18 +1,21 @@
+import { useContext } from "react";
+
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Textarea } from "../../Input/Textarea/Textarea";
-import { UpdatePostStyled } from "./UpdatePostStyled";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { updatePostSchema } from "../../../contexts/PostContext/validation";
+
+import { Textarea } from "../../Input/Textarea/Textarea";
+import { UpdatePostStyled } from "./UpdatePostStyled";
 import { ButtonStyled } from "../../Button/ButtonStyled";
-import { useContext } from "react";
-import { PostContext } from "../../../contexts/PostContext/PostContext";
+
 import { IUpdatePost } from "../../../contexts/PostContext/@typesPost";
+import { PostContext } from "../../../contexts/PostContext/PostContext";
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 
 export const UpdatePost = () => {
   const { editPost, actualPostId } = useContext(PostContext);
-  const {setEditModalIsOpen} = useContext(LinksContext)
+  const { setEditModalIsOpen } = useContext(LinksContext);
   const {
     register,
     handleSubmit,
@@ -23,7 +26,7 @@ export const UpdatePost = () => {
 
   const updateSubmit: SubmitHandler<IUpdatePost> = (data) => {
     editPost(actualPostId, data);
-    setEditModalIsOpen(false)
+    setEditModalIsOpen(false);
   };
 
   return (

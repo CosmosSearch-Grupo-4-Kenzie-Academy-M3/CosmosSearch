@@ -15,7 +15,7 @@ interface iLinksHeader {
 
 export const Header = ({ path }: iLinksHeader) => {
   const { burgerOpen, setBurgerOpen } = useContext(LinksContext);
-  const {isDashboard} = useContext(PostContext)
+  const { isDashboard } = useContext(PostContext);
 
   return (
     // <FixedDiv>

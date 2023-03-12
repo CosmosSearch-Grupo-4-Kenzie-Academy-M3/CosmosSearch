@@ -8,15 +8,22 @@ import astronaut from "../../assets/svgs/astronaut.svg";
 import closeModal from "../../assets/svgs/close__modal--teste.svg";
 import spaceInvaders from "../../assets/svgs/space_invaders.svg";
 import plusComment from "../../assets/svgs/plus__comment.svg";
-import hamburguer from "../../assets/svgs/hamburger.svg"
-import closeX from "../../assets/svgs/close_x.svg"
-import pencil from "../../assets/svgs/pencil.svg"
-import arrowUp from "../../assets/svgs/arrow_up.svg"
-import likeUnclicked from "../../assets/svgs/like_unclicked.svg"
-import likeClicked from "../../assets/svgs/like_clicked.svg"
-import searchIcon from "../../assets/svgs/search-icon.svg"
+import hamburguer from "../../assets/svgs/hamburger.svg";
+import closeX from "../../assets/svgs/close_x.svg";
+import pencil from "../../assets/svgs/pencil.svg";
+import arrowUp from "../../assets/svgs/arrow_up.svg";
+import likeUnclicked from "../../assets/svgs/like_unclicked.svg";
+import likeClicked from "../../assets/svgs/like_clicked.svg";
+import searchIcon from "../../assets/svgs/search-icon.svg";
 
-import { SvgCloseModal, SvgLike, SvgPlusComment, SvgSearch, SvgStyled, SvgStyledFliped } from "./SvgStyled";
+import {
+  SvgCloseModal,
+  SvgLike,
+  SvgPlusComment,
+  SvgSearch,
+  SvgStyled,
+  SvgStyledFliped,
+} from "./SvgStyled";
 import { useContext } from "react";
 import { PostContext } from "../../contexts/PostContext/PostContext";
 
@@ -53,15 +60,27 @@ export const SpaceInvaders = () => {
 };
 
 export const LikeUnclicked = () => {
-  const { setLikeClicked } = useContext(PostContext)
+  const { setLikeClicked } = useContext(PostContext);
 
-  return <SvgLike src={likeUnclicked} alt="Like unclicked icon" onClick={() => setLikeClicked(true)}/>;
+  return (
+    <SvgLike
+      src={likeUnclicked}
+      alt="Like unclicked icon"
+      onClick={() => setLikeClicked(true)}
+    />
+  );
 };
 
 export const LikeClicked = () => {
-  const { setLikeClicked } = useContext(PostContext)
+  const { setLikeClicked } = useContext(PostContext);
 
-  return <SvgLike src={likeClicked} alt="Like clicked icon" onClick={() => setLikeClicked(false)}/>;
+  return (
+    <SvgLike
+      src={likeClicked}
+      alt="Like clicked icon"
+      onClick={() => setLikeClicked(false)}
+    />
+  );
 };
 
 export const CloseModal = () => {
@@ -99,4 +118,3 @@ export const ArrowUp = () => {
 export const SearchIcon = () => {
   return <SvgSearch src={searchIcon} alt="Search icon" />;
 };
-

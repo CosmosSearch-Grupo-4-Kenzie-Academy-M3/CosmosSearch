@@ -12,13 +12,12 @@ import { PostContext } from "../../contexts/PostContext/PostContext";
 
 export const Dashboard = () => {
   const { burgerOpen, modalIsOpen } = useContext(LinksContext);
-  const { userState, setUserState } = useContext(UserContext);
-  const {setIsDashboard} = useContext(PostContext)
+  const { userState } = useContext(UserContext);
+  const { setIsDashboard } = useContext(PostContext);
 
   useEffect(() => {
-    setIsDashboard(true)
-  }, [])
-  const { userState } = useContext(UserContext);
+    setIsDashboard(true);
+  }, []);
 
   return (
     <DashboardStyled>
@@ -39,7 +38,7 @@ export const Dashboard = () => {
       {/* Desktop */}
       <main className="main__desktop">
         <div className="newpost__position">
-        {userState === "userDeslogged" ? <></> : <NewPost />}
+          {userState === "userDeslogged" ? <></> : <NewPost />}
         </div>
         <Posts />
       </main>

@@ -50,21 +50,18 @@ export const DashboardStyled = styled.div`
       position: relative;
       display: flex;
       flex-direction: column;
-      align-items: 
-      center;
+      align-items: center;
       margin-top: 2rem;
     }
     .newpost__position {
-      position: absolute; 
+      position: absolute;
 
       top: -1.5rem;
-      right: -.1rem;
+      right: -0.1rem;
     }
   }
 
   @media (min-width: 1096px) {
-
-
     .newpost__position {
       position: absolute;
 
@@ -75,7 +72,6 @@ export const DashboardStyled = styled.div`
     .main__desktop {
       position: static;
       margin-top: 0;
-      /* padding-top: 8rem; */
     }
   }
 `;

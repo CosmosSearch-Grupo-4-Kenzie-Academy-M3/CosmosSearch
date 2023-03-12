@@ -46,7 +46,7 @@ export const UserDashboardStyled = styled.div`
       .main__burgerOpen {
         margin-top: 1rem;
       }
-      .user__section{
+      .user__section {
         display: flex;
         justify-content: space-between;
 

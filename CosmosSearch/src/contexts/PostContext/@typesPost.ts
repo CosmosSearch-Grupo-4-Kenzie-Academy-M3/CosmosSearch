@@ -8,11 +8,11 @@ export interface IPost {
   name: string;
   topic: string;
   body: string;
-  date: string
+  date: string;
 }
 
 export interface IUpdatePost {
-  body: string
+  body: string;
 }
 
 export interface IPostContext {
@@ -23,9 +23,9 @@ export interface IPostContext {
   createPost: (data: IFormPostRegister) => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
   actualPostId: number;
-  setActualPostId:  React.Dispatch<React.SetStateAction<number>>;
+  setActualPostId: React.Dispatch<React.SetStateAction<number>>;
   likeClicked: boolean;
-  setLikeClicked:  React.Dispatch<React.SetStateAction<boolean>>;
+  setLikeClicked: React.Dispatch<React.SetStateAction<boolean>>;
   editPost: (postId: number, data: IUpdatePost) => Promise<void>;
   setPosts: React.Dispatch<React.SetStateAction<IPost[]>>;
   isSearch: boolean;
@@ -37,4 +37,3 @@ export interface IPostContext {
   isDashboard: boolean;
   setIsDashboard: React.Dispatch<React.SetStateAction<boolean>>;
 }
-

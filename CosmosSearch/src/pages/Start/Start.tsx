@@ -7,7 +7,6 @@ import { TitleBordersStyled } from "../../components/Title/TitleStyled";
 import { BurgerMenu } from "../../components/Svgs/Svg";
 
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
-import { CommentsContext } from "../../contexts/CommentsContext/CommentsContext";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 
 export const Start = () => {

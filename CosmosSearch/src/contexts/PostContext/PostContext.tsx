@@ -1,23 +1,26 @@
 import { createContext, useContext, useState } from "react";
+
 import { toast } from "react-toastify";
+
 import { api } from "../../services/api";
+
 import { iChildren } from "../@childrenType";
-import { LinksContext } from "../LinksContext/LinksContext";
 import { IFormPostRegister } from "../UserContext/@types_User";
 import { IPost, IPostContext, IUpdatePost } from "./@typesPost";
+import { LinksContext } from "../LinksContext/LinksContext";
 
 export const PostContext = createContext({} as IPostContext);
 
 export const PostProvider = ({ children }: iChildren) => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [userPosts, setUserPosts] = useState<IPost[]>([]);
-  const [isSearch, setIsSearch] = useState(false)
-  const [searchedPosts, setSearchedPosts] = useState<IPost[]>([]) 
+  const [isSearch, setIsSearch] = useState(false);
+  const [searchedPosts, setSearchedPosts] = useState<IPost[]>([]);
   const [actualPostId, setActualPostId] = useState(0);
   const [likeClicked, setLikeClicked] = useState(false);
-  const [value, setValue] = useState<string | null>("")
-  const [isDashboard, setIsDashboard] = useState(false)
-  const {setMainComponent} = useContext(LinksContext)
+  const [value, setValue] = useState<string | null>("");
+  const [isDashboard, setIsDashboard] = useState(false);
+  const { setMainComponent } = useContext(LinksContext);
 
   const getAllPosts = async () => {
     try {
@@ -45,7 +48,7 @@ export const PostProvider = ({ children }: iChildren) => {
   };
 
   const getPostDate = () => {
-    const methodDate = new Date()
+    const methodDate = new Date();
     const day = methodDate.getDate();
     const mounth = methodDate.getMonth() + 1;
     const year = `${methodDate.getFullYear()}`.substring(2);
@@ -56,8 +59,8 @@ export const PostProvider = ({ children }: iChildren) => {
   const createPost = async (data: IFormPostRegister) => {
     const userId = Number(localStorage.getItem("@CosmosSearch:USERID"));
     const name = localStorage.getItem("@CosmosSearch:USERNAME") as string;
-    const date = getPostDate()
-    const newData = { ...data, userId, name, date};
+    const date = getPostDate();
+    const newData = { ...data, userId, name, date };
     const token = localStorage.getItem("@CosmosSearch:TOKEN");
     if (token) {
       try {
@@ -66,13 +69,13 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(newData)
+        console.log(newData);
         setPosts([...posts, response.data]);
-        toast.success("Post criado com sucesso!")
-        setMainComponent("posts")
+        toast.success("Post criado com sucesso!");
+        setMainComponent("posts");
       } catch (error) {
         console.log(error);
-        toast.error("Não foi possível criar porst.")
+        toast.error("Não foi possível criar porst.");
       }
     }
   };
@@ -86,36 +89,38 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        const userId = Number(localStorage.getItem("@CosmosSearch:USERID") as string)
+        const userId = Number(
+          localStorage.getItem("@CosmosSearch:USERID") as string
+        );
         getAllUserPosts(userId);
         getAllPosts();
-        toast.success("Post deletado com sucesso!")
+        toast.success("Post deletado com sucesso!");
       } catch (error) {
         null;
-        console.log(error)
-        toast.error("Não foi possível excluir o post")
+        console.log(error);
+        toast.error("Não foi possível excluir o post");
       }
     }
   };
 
   const editPost = async (postId: number, data: IUpdatePost) => {
-    const token = localStorage.getItem("@CosmosSearch:TOKEN")
-    const userId = localStorage.getItem("@CosmosSearch:USERID")
-    const newData = {...data, userId}
+    const token = localStorage.getItem("@CosmosSearch:TOKEN");
+    const userId = localStorage.getItem("@CosmosSearch:USERID");
+    const newData = { ...data, userId };
     try {
       await api.patch(`/posts/${postId}`, newData, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      getAllUserPosts(Number(userId))
-      getAllPosts()
-      toast.success("Post atualizado com sucesso")
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      getAllUserPosts(Number(userId));
+      getAllPosts();
+      toast.success("Post atualizado com sucesso");
     } catch (error) {
-      console.log(error)
-      toast.error("Não foi possível atualizar posts!")
+      console.log(error);
+      toast.error("Não foi possível atualizar posts!");
     }
-  }
+  };
 
   return (
     <PostContext.Provider
@@ -139,12 +144,10 @@ export const PostProvider = ({ children }: iChildren) => {
         setValue,
         value,
         isDashboard,
-        setIsDashboard
+        setIsDashboard,
       }}
     >
       {children}
     </PostContext.Provider>
   );
 };
-
-

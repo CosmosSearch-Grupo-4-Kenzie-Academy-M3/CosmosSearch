@@ -7,7 +7,6 @@ export const RegisterPageStyled = styled.main`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  /* gap: 100px; */
 
   .colum {
     border-left: 2px solid var(--primary-blue);

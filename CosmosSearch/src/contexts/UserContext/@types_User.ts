@@ -38,12 +38,10 @@ export interface IUser {
   id: number;
 }
 
-export interface IPatchProfile{
-
+export interface IPatchProfile {
   email: string;
-  name:string;
+  name: string;
   password: string;
-
 }
 
 export interface IUserContext {
@@ -59,13 +57,7 @@ export interface IUserContext {
   setUserState: React.Dispatch<
     React.SetStateAction<"userLoggedInPerfil" | "userLogged" | "userDeslogged">
   >;
-  // userState: string;
-  // setUserState: React.Dispatch<
-  //   React.SetStateAction<string>
-  // >;
   user: IUser | string | null;
   setUser: React.Dispatch<React.SetStateAction<IUser | string | null>>;
-
-  patchProfile: (data: IPatchProfile) => Promise<void>
-
+  patchProfile: (data: IPatchProfile) => Promise<void>;
 }
