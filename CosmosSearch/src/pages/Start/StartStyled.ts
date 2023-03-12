@@ -77,4 +77,9 @@ export const StartStyled = styled.div`
       justify-content: space-between;
     }
   }
+
+  @media (min-width: 1700px) {
+    width: 1700px;  
+    margin-inline: auto;
+  }
 `;

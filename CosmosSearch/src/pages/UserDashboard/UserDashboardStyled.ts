@@ -54,4 +54,11 @@ export const UserDashboardStyled = styled.div`
       }
     }
   }
+
+  @media (min-width: 1700px) {
+    .main__user {
+      max-width: 1700px;
+      margin-inline: auto;
+    }
+  }
 `;

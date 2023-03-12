@@ -10,16 +10,18 @@ export const FixedDiv = styled.div`
 `;
 
 export const HeaderStyled = styled.header`
-  width: 100%;
-  height: 6.625rem;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  position: relative;
-
   border-bottom: 2px solid var(--primary-blue);
+
+  .header__container {
+    width: 100%;
+    height: 6.625rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+  }
 
   .container__header--mobileSmall {
     width: 100%;
@@ -74,6 +76,13 @@ export const HeaderStyled = styled.header`
       height: 30px;
 
       background-color: transparent;
+    }
+  }
+
+  @media (min-width: 1700px) {
+    .header__container {
+      width: 1700px;
+      margin-inline: auto;
     }
   }
 `;

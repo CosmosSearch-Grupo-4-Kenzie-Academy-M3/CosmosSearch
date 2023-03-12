@@ -74,4 +74,17 @@ export const DashboardStyled = styled.div`
       margin-top: 0;
     }
   }
+
+  @media (min-width: 1700px) {
+    .main__desktop {
+      position: relative;
+      border: 2px solid red;
+      width: 1700px;
+    }
+
+    .newpost__position {
+      top: 1rem;
+      right: -.5rem;
+    }
+  }
 `;

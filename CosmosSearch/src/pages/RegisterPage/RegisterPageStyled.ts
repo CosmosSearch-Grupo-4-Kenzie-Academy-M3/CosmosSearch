@@ -57,4 +57,9 @@ export const RegisterPageStyled = styled.main`
       gap: 20px;
     }
   }
+
+  @media (min-width: 1700px) {
+    width: 1700px;  
+    margin-inline: auto;
+  }
 `;

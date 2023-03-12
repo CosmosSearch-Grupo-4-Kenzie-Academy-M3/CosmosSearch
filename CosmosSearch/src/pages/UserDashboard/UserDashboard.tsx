@@ -61,7 +61,7 @@ export const UserDashboard = () => {
       <div className="userdash__desktop">
         <Header path={userState} />
         {burgerOpen ? (
-          <main className="main__burgerOpen">
+          <main className="main__user main__burgerOpen">
             <DivForButtons />
             {mainComponent === "posts" ? (
               <UserPosts />
@@ -75,7 +75,7 @@ export const UserDashboard = () => {
             ) : null}
           </main>
         ) : (
-          <main className="main__bugerClosed">
+          <main className="main__user main__burgerClosed">
             <DivForButtons />
             {mainComponent === "posts" ? (
               <UserPosts />
