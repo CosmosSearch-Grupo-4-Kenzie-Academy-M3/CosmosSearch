@@ -27,7 +27,7 @@ export const DashboardStyled = styled.div`
   }
 
   /* MediaQuery */
-  @media (min-width: 400px) {
+  @media (min-width: 380px) {
     .main__burgerOpen--logged {
       margin-top: 2.3rem;
     }
@@ -51,12 +51,12 @@ export const DashboardStyled = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 2rem;
+      margin-top: 3rem;
     }
     .newpost__position {
       position: absolute;
 
-      top: -1.5rem;
+      top: -2rem;
       right: -0.1rem;
     }
   }
