@@ -24,14 +24,24 @@ export const Dashboard = () => {
       {modalIsOpen ? <PostModal /> : <></>}
       <Header path={userState} />
       {/* Mobile */}
-      {burgerOpen ? (
-        <main className="main__burgerOpen">
-          {userState === "userDeslogged" ? <></> : <NewPost />}
+      {userState === "userDeslogged" ? (
+        burgerOpen ? (
+          <main className="main__burgerOpen main__burgerOpen--deslogged">
+            <Posts />
+          </main>
+        ) : (
+          <main className="main__burgerClosed">
+            <Posts />
+          </main>
+        )
+      ) : burgerOpen ? (
+        <main className="main__burgerOpen main__burgerOpen--logged">
+          <NewPost />
           <Posts />
         </main>
       ) : (
         <main className="main__burgerClosed">
-          {userState === "userDeslogged" ? <></> : <NewPost />}
+          <NewPost/>
           <Posts />
         </main>
       )}

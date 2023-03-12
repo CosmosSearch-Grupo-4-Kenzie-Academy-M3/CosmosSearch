@@ -15,7 +15,7 @@ export const DashboardStyled = styled.div`
   }
 
   .main__burgerOpen {
-    margin-top: 7rem;
+    margin-top: 5.5rem;
   }
 
   .main__burgerClosed {
@@ -28,7 +28,7 @@ export const DashboardStyled = styled.div`
 
   /* MediaQuery */
   @media (min-width: 400px) {
-    .main__burgerOpen {
+    .main__burgerOpen--logged {
       margin-top: 2.3rem;
     }
   }
