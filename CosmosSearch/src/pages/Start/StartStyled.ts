@@ -6,7 +6,7 @@ export const StartStyled = styled.div`
 
   button {
     background-color: transparent;
-    
+
     width: max-content;
   }
 
@@ -26,6 +26,10 @@ export const StartStyled = styled.div`
     display: flex;
     flex-direction: column;
     gap: var(--links-distance-line-to-text);
+
+    :hover .links__line {
+      width: 20px;
+    }
   }
 
   .links__start--desktop {
@@ -65,6 +69,10 @@ export const StartStyled = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
+      :hover .links__line {
+        width: 20px;
+      }
     }
   }
 `;

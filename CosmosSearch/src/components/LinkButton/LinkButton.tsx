@@ -8,11 +8,11 @@ interface iLinkButton {
 
 export const LinkButton = ({ text, line, path }: iLinkButton) => {
   return (
-    <div>
+    <div className="links__div">
       <Link to={path} className="links">
         {text}
       </Link>
-      {line ? <div className="links__line" /> : null}
+      {line ? <div className="links__line" /> : <></>}
     </div>
   );
 };

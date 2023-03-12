@@ -18,6 +18,7 @@ export const Dashboard = () => {
   useEffect(() => {
     setIsDashboard(true)
   }, [])
+  const { userState } = useContext(UserContext);
 
   return (
     <DashboardStyled>
@@ -26,19 +27,19 @@ export const Dashboard = () => {
       {/* Mobile */}
       {burgerOpen ? (
         <main className="main__burgerOpen">
-          <NewPost/>
+          {userState === "userDeslogged" ? <></> : <NewPost />}
           <Posts />
         </main>
       ) : (
         <main className="main__burgerClosed">
-          <NewPost />
+          {userState === "userDeslogged" ? <></> : <NewPost />}
           <Posts />
         </main>
       )}
       {/* Desktop */}
       <main className="main__desktop">
         <div className="newpost__position">
-          <NewPost />
+        {userState === "userDeslogged" ? <></> : <NewPost />}
         </div>
         <Posts />
       </main>
