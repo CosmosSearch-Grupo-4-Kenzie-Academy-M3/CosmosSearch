@@ -54,7 +54,7 @@ export const HeaderStyled = styled.header`
 
       position: absolute;
 
-      top: 9rem;
+      top: 11rem;
       left: 20px;
     }
   }
@@ -71,11 +71,14 @@ export const HeaderStyled = styled.header`
     .links__start--headerDesktop {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 1rem;
 
       height: 30px;
 
       background-color: transparent;
+
+      border: transparent;
     }
   }
 

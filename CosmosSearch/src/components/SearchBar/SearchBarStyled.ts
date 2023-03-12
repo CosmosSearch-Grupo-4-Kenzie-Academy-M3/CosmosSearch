@@ -14,6 +14,6 @@ export const SearchBarContainer = styled.div`
     padding-left: 0.5rem;
   }
   button {
-    background-color: transparent;
+    cursor: pointer;
   }
 `;

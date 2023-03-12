@@ -38,7 +38,6 @@ export const Header = ({ path }: iLinksHeader) => {
             )}
             {burgerOpen ? (
               <div className="links__start--header">
-                {/* {isDashboard ? <SearchBar /> : <></>} */}
                 <LinksHeader path={path} />
               </div>
             ) : null}

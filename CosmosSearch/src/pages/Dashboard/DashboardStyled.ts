@@ -15,7 +15,7 @@ export const DashboardStyled = styled.div`
   }
 
   .main__burgerOpen {
-    margin-top: 5.5rem;
+    margin-top: 7.5rem;
   }
 
   .main__burgerClosed {
@@ -26,10 +26,24 @@ export const DashboardStyled = styled.div`
     display: none;
   }
 
+  .searchbar {
+    height: 30px;
+    width: 100%;
+
+    padding-left: 20px;
+
+    position: absolute;
+    top: 8rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
   /* MediaQuery */
   @media (min-width: 380px) {
     .main__burgerOpen--logged {
-      margin-top: 2.3rem;
+      margin-top: 4.3rem;
     }
   }
 
@@ -52,6 +66,9 @@ export const DashboardStyled = styled.div`
       flex-direction: column;
       align-items: center;
       margin-top: 3rem;
+    }
+    .searchbar {
+      display: none;
     }
     .newpost__position {
       position: absolute;
@@ -78,7 +95,6 @@ export const DashboardStyled = styled.div`
   @media (min-width: 1700px) {
     .main__desktop {
       position: relative;
-      border: 2px solid red;
       width: 1700px;
     }
 

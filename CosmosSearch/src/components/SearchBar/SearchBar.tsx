@@ -18,6 +18,7 @@ export const SearchBar = () => {
   return (
     <SearchBarContainer>
       <input
+       className="input__placeholder"
         type="text"
         placeholder="Type something..."
         onChange={(event) => setValue(event.target.value)}
