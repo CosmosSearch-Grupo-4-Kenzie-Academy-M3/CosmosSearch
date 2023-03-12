@@ -11,8 +11,12 @@ export const PostContext = createContext({} as IPostContext);
 export const PostProvider = ({ children }: iChildren) => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [userPosts, setUserPosts] = useState<IPost[]>([]);
+  const [isSearch, setIsSearch] = useState(false)
+  const [searchedPosts, setSearchedPosts] = useState<IPost[]>([]) 
   const [actualPostId, setActualPostId] = useState(0);
   const [likeClicked, setLikeClicked] = useState(false);
+  const [value, setValue] = useState<string | null>("")
+  const [isDashboard, setIsDashboard] = useState(false)
   const {setMainComponent} = useContext(LinksContext)
 
   const getAllPosts = async () => {
@@ -126,7 +130,16 @@ export const PostProvider = ({ children }: iChildren) => {
         setActualPostId,
         likeClicked,
         setLikeClicked,
-        editPost
+        editPost,
+        setPosts,
+        isSearch,
+        searchedPosts,
+        setIsSearch,
+        setSearchedPosts,
+        setValue,
+        value,
+        isDashboard,
+        setIsDashboard
       }}
     >
       {children}

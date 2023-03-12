@@ -52,3 +52,10 @@ export const SvgLike = styled.img`
     transform: scale(1.3);
   }
 `
+
+export const SvgSearch = styled.img`
+  width: 100%;
+  height: 100%;
+
+  background-color: white;
+`
