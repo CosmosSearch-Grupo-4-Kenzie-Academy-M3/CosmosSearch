@@ -17,13 +17,8 @@ export const Dashboard = () => {
   const { setIsDashboard, isDashboard } = useContext(PostContext);
 
   useEffect(() => {
-<<<<<<< HEAD
     setIsDashboard(true)
   }, [])
-=======
-    setIsDashboard(true);
-  }, []);
->>>>>>> 877c5ce1114b67b16d18f92402f8f9f8f072617f
 
   return (
     <DashboardStyled>
