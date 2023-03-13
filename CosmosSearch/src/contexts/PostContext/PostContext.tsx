@@ -22,6 +22,7 @@ export const PostProvider = ({ children }: iChildren) => {
   const [isSearch, setIsSearch] = useState(false);
   const [isDashboard, setIsDashboard] = useState(false);
   const [likeClicked, setLikeClicked] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [value, setValue] = useState<string | null>("");
 
   const { setMainComponent } = useContext(LinksContext);
@@ -112,6 +113,12 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
+  const resetSearchInUpdatePost = () => {
+    setIsSearch(false); 
+    setSearchOpen(false);
+    setValue("");
+  }
+
   const editPost = async (postId: number, data: IUpdatePost) => {
     const token = localStorage.getItem("@CosmosSearch:TOKEN");
     const userId = localStorage.getItem("@CosmosSearch:USERID");
@@ -125,6 +132,7 @@ export const PostProvider = ({ children }: iChildren) => {
       getAllUserPosts(Number(userId));
       getAllPosts();
       toast.success("Post successfully updated");
+      resetSearchInUpdatePost();
     } catch (error) {
       toast.error("Unable to update post!");
     }
@@ -186,6 +194,14 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
+  const resetSearch = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+
+    setIsSearch(false); 
+    setSearchOpen(false);
+    setValue("");
+  }
+
   return (
     <PostContext.Provider
       value={{
@@ -211,6 +227,9 @@ export const PostProvider = ({ children }: iChildren) => {
         setIsDashboard,
         searchFunction,
         likePost,
+        searchOpen,
+        setSearchOpen,
+        resetSearch
       }}
     >
       {children}
