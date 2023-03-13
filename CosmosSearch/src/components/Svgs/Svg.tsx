@@ -83,6 +83,11 @@ export const LikeClicked = () => {
   );
 };
 
+export const Like = () => {
+  const { likeClicked } = useContext(PostContext);
+  return <>{likeClicked ? <LikeClicked /> : <LikeUnclicked />}</>;
+};
+
 export const CloseModal = () => {
   return <SvgCloseModal src={closeModal} alt="Close modal icon" />;
 };

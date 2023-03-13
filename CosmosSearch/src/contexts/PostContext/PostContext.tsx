@@ -1,5 +1,7 @@
 import { createContext, useContext, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import { toast } from "react-toastify";
 
 import { api } from "../../services/api";
@@ -14,20 +16,25 @@ export const PostContext = createContext({} as IPostContext);
 export const PostProvider = ({ children }: iChildren) => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [userPosts, setUserPosts] = useState<IPost[]>([]);
-  const [isSearch, setIsSearch] = useState(false);
   const [searchedPosts, setSearchedPosts] = useState<IPost[]>([]);
   const [actualPostId, setActualPostId] = useState(0);
+  const [isSearch, setIsSearch] = useState(false);
+  const [isDashboard, setIsDashboard] = useState(false);
   const [likeClicked, setLikeClicked] = useState(false);
   const [value, setValue] = useState<string | null>("");
-  const [isDashboard, setIsDashboard] = useState(false);
+
   const { setMainComponent } = useContext(LinksContext);
+
+  const navigate = useNavigate()
 
   const getAllPosts = async () => {
     try {
       const response = await api.get(`/posts`);
-      setPosts(response.data);
+      const postsList: IPost[] = response.data
+      setPosts(postsList);
     } catch (error) {
-      console.log(error);
+      toast.error("An error has occurred, plese login again.")
+      navigate("/login")
     }
   };
 
@@ -40,9 +47,11 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setUserPosts(response.data);
+        const postsList: IPost[] = response.data
+        setUserPosts(postsList);
       } catch (error) {
-        console.log("Erro, token expirado");
+        toast.error("An error has occurred, plese login again.")
+        navigate("/login")
       }
     }
   };
@@ -71,11 +80,10 @@ export const PostProvider = ({ children }: iChildren) => {
         });
         console.log(newData);
         setPosts([...posts, response.data]);
-        toast.success("Post criado com sucesso!");
+        toast.success("Post successfully created");
         setMainComponent("posts");
       } catch (error) {
-        console.log(error);
-        toast.error("Não foi possível criar porst.");
+        toast.error("Unable to create post!");
       }
     }
   };
@@ -94,11 +102,9 @@ export const PostProvider = ({ children }: iChildren) => {
         );
         getAllUserPosts(userId);
         getAllPosts();
-        toast.success("Post deletado com sucesso!");
+        toast.success("Post successfully deleted");
       } catch (error) {
-        null;
-        console.log(error);
-        toast.error("Não foi possível excluir o post");
+        toast.error("Unable to delete post!");
       }
     }
   };
@@ -115,10 +121,9 @@ export const PostProvider = ({ children }: iChildren) => {
       });
       getAllUserPosts(Number(userId));
       getAllPosts();
-      toast.success("Post atualizado com sucesso");
+      toast.success("Post successfully updated");
     } catch (error) {
-      console.log(error);
-      toast.error("Não foi possível atualizar posts!");
+      toast.error("Unable to update post!");
     }
   };
 

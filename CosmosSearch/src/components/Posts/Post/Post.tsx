@@ -6,6 +6,7 @@ import {
   ArrowUp,
   CloseX,
   Hamburguer,
+  Like,
   LikeClicked,
   LikeUnclicked,
   Pencil,
@@ -41,7 +42,7 @@ export const Post = ({ title, name, body, topic, postId, date }: IPostProps) => 
     setEditModalIsOpen,
     setDeleteModalIsOpen,
   } = useContext(LinksContext);
-  const { setActualPostId, likeClicked } = useContext(PostContext);
+  const { setActualPostId } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
   const { userState } = useContext(UserContext);
 
@@ -102,7 +103,7 @@ export const Post = ({ title, name, body, topic, postId, date }: IPostProps) => 
           <div
             className="button"
           >
-            {likeClicked ? <LikeClicked/> : <LikeUnclicked/>}
+            <Like/>
             <ButtonStyled
               textColor="var(--primary-blue)"
               borderColor="var(--primary-blue)"
