@@ -29,7 +29,7 @@ export const UserProvider = ({ children }: iChildren) => {
     "userLoggedInPerfil" | "userLogged" | "userDeslogged"
   >("userDeslogged");
   const [user, setUser] = useState<IUser | string | null>(null);
-  const [userInfos, setUserInfos] = useState<IUserInfos | null>(null)
+  const [userInfos, setUserInfos] = useState<IUserInfos | null>(null);
 
   const navigate = useNavigate();
 
@@ -50,10 +50,13 @@ export const UserProvider = ({ children }: iChildren) => {
       localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       setUserState("userLogged");
       setUser(response.data.user);
-      const { name, email } = response.data.user
-      const userInfosData = { name, email}
-      setUserInfos(userInfosData) 
-      localStorage.setItem("@CosmosSearch:USERINFOS", JSON.stringify(userInfosData))
+      const { name, email } = response.data.user;
+      const userInfosData = { name, email };
+      setUserInfos(userInfosData);
+      localStorage.setItem(
+        "@CosmosSearch:USERINFOS",
+        JSON.stringify(userInfosData)
+      );
       navigate("/dashboard");
       toast.success("Usuário registrado com sucesso!");
     } catch (error) {
@@ -72,10 +75,13 @@ export const UserProvider = ({ children }: iChildren) => {
       localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       setUserState("userLogged");
       setUser(response.data.user);
-      const { name, email } = response.data.user
-      const userInfosData = { name, email}
-      setUserInfos(userInfosData)
-      localStorage.setItem("@CosmosSearch:USERINFOS", JSON.stringify(userInfosData))
+      const { name, email } = response.data.user;
+      const userInfosData = { name, email };
+      setUserInfos(userInfosData);
+      localStorage.setItem(
+        "@CosmosSearch:USERINFOS",
+        JSON.stringify(userInfosData)
+      );
       navigate("/dashboard");
       toast.success("Login efetuado!");
     } catch (error) {
@@ -99,7 +105,7 @@ export const UserProvider = ({ children }: iChildren) => {
   };
 
   const patchProfile = async (data: IPatchProfile) => {
-    const id = Number(localStorage.getItem("@CosmosSearch:USERID"))
+    const id = Number(localStorage.getItem("@CosmosSearch:USERID"));
     const token = localStorage.getItem("@CosmosSearch:TOKEN");
     try {
       const response = await api.patch(`/users/${id}`, data, {
@@ -111,9 +117,12 @@ export const UserProvider = ({ children }: iChildren) => {
       const userInfosData = {
         name: response.data.name,
         email: response.data.email,
-      }
-      setUserInfos(userInfosData)
-      localStorage.setItem("@CosmosSearch:USERINFOS", JSON.stringify(userInfosData))
+      };
+      setUserInfos(userInfosData);
+      localStorage.setItem(
+        "@CosmosSearch:USERINFOS",
+        JSON.stringify(userInfosData)
+      );
     } catch (error) {
       console.log(error);
       toast.error("Por favor revise seus dados.");
@@ -137,7 +146,7 @@ export const UserProvider = ({ children }: iChildren) => {
         setUser,
         patchProfile,
         userInfos,
-        setUserInfos
+        setUserInfos,
       }}
     >
       {children}
