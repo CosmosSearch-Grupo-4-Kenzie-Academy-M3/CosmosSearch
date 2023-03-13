@@ -6,7 +6,8 @@ export const UserInfosContainer = styled.div`
   height: max-content;
 
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 
   padding-inline: 0.5rem;
@@ -17,7 +18,6 @@ export const UserInfosContainer = styled.div`
     margin-right: 20px;
   }
   @media (min-width: 920px) {
-    flex-direction: column;
     align-items: flex-start;
     height: max-content;
     gap: 2rem;
