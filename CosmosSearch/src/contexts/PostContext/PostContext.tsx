@@ -38,53 +38,78 @@ export const PostProvider = ({ children }: iChildren) => {
         Number(postB.date.slice(0, 1)) +
         Number(postB.date.slice(3, 4)) +
         Number(postB.date.slice(6, 7));
-        const postMonth = postA.date.slice(3,4)
-        switch (postMonth) {
+        const postAMonth = postA.date.slice(3,4)
+        const postBMonth = postA.date.slice(3,4)
+        switch (postAMonth) {
           case "02":
             dateAInNumber = dateAInNumber + 31
-            dateBInNumber = dateAInNumber + 31
             break;
           case "03":
-            dateAInNumber = dateAInNumber + (31 * 2)
-            dateBInNumber = dateAInNumber + (31 * 2)
+            dateAInNumber = dateAInNumber + (31 * 2)          
             break;
           case "04":
-            dateAInNumber = dateAInNumber + (31 * 3)
-            dateBInNumber = dateAInNumber + (31 * 3)
+            dateAInNumber = dateAInNumber + (31 * 3)          
             break;
           case "05":
-            dateAInNumber = dateAInNumber + (31 * 4)
-            dateBInNumber = dateAInNumber + (31 * 4)
+            dateAInNumber = dateAInNumber + (31 * 4)         
             break;
           case "06":
-            dateAInNumber = dateAInNumber + (31 * 5)
-            dateBInNumber = dateAInNumber + (31 * 5)
+            dateAInNumber = dateAInNumber + (31 * 5)        
             break;
           case "07":
-            dateAInNumber = dateAInNumber + (31 * 6)
-            dateBInNumber = dateAInNumber + (31 * 6)
+            dateAInNumber = dateAInNumber + (31 * 6)         
             break;
           case "08":
-            dateAInNumber = dateAInNumber + (31 * 7)
-            dateBInNumber = dateAInNumber + (31 * 7)
+            dateAInNumber = dateAInNumber + (31 * 7)         
             break;
           case "09":
-            dateAInNumber = dateAInNumber + (31 * 8)
-            dateBInNumber = dateAInNumber + (31 * 8)
+            dateAInNumber = dateAInNumber + (31 * 8)         
             break;
           case "10":
-            dateAInNumber = dateAInNumber + (31 * 9)
-            dateBInNumber = dateAInNumber + (31 * 9)
+            dateAInNumber = dateAInNumber + (31 * 9)         
             break;
           case "11":
-            dateAInNumber = dateAInNumber + (31 * 10)
-            dateBInNumber = dateAInNumber + (31 * 10)
+            dateAInNumber = dateAInNumber + (31 * 10)           
             break;
           case "12":
             dateAInNumber = dateAInNumber + (31 * 11)
-            dateBInNumber = dateAInNumber + (31 * 11)
             break;
           }
+          switch (postBMonth) {
+            case "02":
+              dateBInNumber = dateBInNumber + 31
+              break;
+            case "03":
+              dateBInNumber = dateBInNumber + (31 * 2)
+              break;
+            case "04":
+              dateBInNumber = dateBInNumber + (31 * 3)
+              break;
+            case "05":
+              dateBInNumber = dateBInNumber + (31 * 4)
+              break;
+            case "06":
+              dateBInNumber = dateBInNumber + (31 * 5)
+              break;
+            case "07":
+              dateBInNumber = dateBInNumber + (31 * 6)
+              break;
+            case "08":
+              dateBInNumber = dateBInNumber + (31 * 7)
+              break;
+            case "09":
+              dateBInNumber = dateBInNumber + (31 * 8)
+              break;
+            case "10":
+              dateBInNumber = dateBInNumber + (31 * 9)
+              break;
+            case "11":
+              dateBInNumber = dateBInNumber + (31 * 10)
+              break;
+            case "12":
+              dateBInNumber = dateBInNumber + (31 * 11)
+              break;
+            }
           if (dateAInNumber > dateBInNumber) {
             return 1 
           } else if (dateAInNumber < dateBInNumber) {
