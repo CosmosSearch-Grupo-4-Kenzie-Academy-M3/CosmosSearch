@@ -20,12 +20,14 @@ export const UpdateUserForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm<IFormUserUpdate>({
     resolver: yupResolver(userUpdateSchema),
   });
 
   const userUpdateSubmit: SubmitHandler<IFormUserUpdate> = (data) => {
     patchProfile(data);
+    reset();
   };
 
   return (

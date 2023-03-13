@@ -45,13 +45,6 @@ export const Header = ({ path }: iLinksHeader) => {
                 <BurgerMenu />
               </div>
             )}
-            {/* {burgerOpen ? (
-              <div className="links__start--header">
-                <LinksHeader path={path} />
-              </div>
-            ) : (
-              <></>
-            )} */}
             {burgerOpen ? (
               userState === "userLogged" || userState === "userDeslogged" ? (
                 <div className="links__start--header">
