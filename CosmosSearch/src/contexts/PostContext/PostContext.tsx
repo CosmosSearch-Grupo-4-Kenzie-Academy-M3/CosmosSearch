@@ -131,8 +131,8 @@ export const PostProvider = ({ children }: iChildren) => {
       const orderedList = orderPostsByData(postsListToUserLogged);
       setPosts(orderedList);
     } catch (error) {
-      toast.error("An error has occurred, plese login again.");
       if (userState !== "userDeslogged") {
+        toast.error("An error has occurred, plese login again.");
         logout();
       }
     }
