@@ -97,8 +97,8 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
         <p className="post__text__preview">{body}</p>
         <div className="date__and__button">
           <div className="date">
-            <p className="post__text__preview">date: {date}</p>
-            <p className="post__text__preview">topic: {topic}</p>
+            <p className="post__infos">date: {date}</p>
+            <p className="post__infos">topic: {topic}</p>
           </div>
           <div
             className="button"

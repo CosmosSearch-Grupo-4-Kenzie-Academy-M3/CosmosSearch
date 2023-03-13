@@ -30,7 +30,6 @@ export const App = () => {
         pauseOnHover
         theme="light"
       />
-      <ToastContainer />
     </>
   );
 };

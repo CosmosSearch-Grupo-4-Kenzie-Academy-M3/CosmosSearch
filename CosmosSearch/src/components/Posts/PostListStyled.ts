@@ -88,6 +88,23 @@ export const PostStyled = styled.li`
       display: flex;
       justify-content: center;
       align-items: center;
+
+      :hover img {
+        animation: planetAnimation infinite;
+      }
+    }
+  }
+
+  /* KeyFrames */
+  @keyframes planetAnimation {
+    0% {
+      transform: translateY(10%);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-10%);
     }
   }
 `;

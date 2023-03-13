@@ -10,12 +10,14 @@ import { api } from "../../services/api";
 
 import { iChildren } from "../@childrenType";
 import { LinksContext } from "../LinksContext/LinksContext";
+import { PostContext } from "../PostContext/PostContext";
 import {
   IFormUserLogin,
   IFormUserRegister,
   IUserContext,
   IUser,
   IPatchProfile,
+  IUserInfos,
 } from "./@types_User";
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -27,6 +29,7 @@ export const UserProvider = ({ children }: iChildren) => {
     "userLoggedInPerfil" | "userLogged" | "userDeslogged"
   >("userDeslogged");
   const [user, setUser] = useState<IUser | string | null>(null);
+  const [userInfos, setUserInfos] = useState<IUserInfos | null>(null)
 
   const navigate = useNavigate();
 
@@ -44,8 +47,13 @@ export const UserProvider = ({ children }: iChildren) => {
       localStorage.setItem("@CosmosSearch:USERID", response.data.user.id);
       localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
       localStorage.setItem("@CosmosSearch:EMAIL", response.data.user.email);
+      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       setUserState("userLogged");
       setUser(response.data.user);
+      const { name, email } = response.data.user
+      const userInfosData = { name, email}
+      setUserInfos(userInfosData) 
+      localStorage.setItem("@CosmosSearch:USERINFOS", JSON.stringify(userInfosData))
       navigate("/dashboard");
       toast.success("Usuário registrado com sucesso!");
     } catch (error) {
@@ -61,8 +69,13 @@ export const UserProvider = ({ children }: iChildren) => {
       localStorage.setItem("@CosmosSearch:USERID", response.data.user.id);
       localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
       localStorage.setItem("@CosmosSearch:EMAIL", response.data.user.email);
+      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       setUserState("userLogged");
       setUser(response.data.user);
+      const { name, email } = response.data.user
+      const userInfosData = { name, email}
+      setUserInfos(userInfosData)
+      localStorage.setItem("@CosmosSearch:USERINFOS", JSON.stringify(userInfosData))
       navigate("/dashboard");
       toast.success("Login efetuado!");
     } catch (error) {
@@ -86,18 +99,21 @@ export const UserProvider = ({ children }: iChildren) => {
   };
 
   const patchProfile = async (data: IPatchProfile) => {
-    const id = localStorage.getItem("@CosmosSearch:USERID");
+    const id = Number(localStorage.getItem("@CosmosSearch:USERID"))
     const token = localStorage.getItem("@CosmosSearch:TOKEN");
-
     try {
       const response = await api.patch(`/users/${id}`, data, {
         headers: {
           Authorization: ` Bearer ${token} `,
         },
       });
-
       toast.success("Perfil atualizado com sucesso.");
-      localStorage.setItem("@CosmosSearch:USERNAME", response.data.name);
+      const userInfosData = {
+        name: response.data.name,
+        email: response.data.email,
+      }
+      setUserInfos(userInfosData)
+      localStorage.setItem("@CosmosSearch:USERINFOS", JSON.stringify(userInfosData))
     } catch (error) {
       console.log(error);
       toast.error("Por favor revise seus dados.");
@@ -120,6 +136,8 @@ export const UserProvider = ({ children }: iChildren) => {
         user,
         setUser,
         patchProfile,
+        userInfos,
+        setUserInfos
       }}
     >
       {children}

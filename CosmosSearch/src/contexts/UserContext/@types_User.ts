@@ -44,6 +44,11 @@ export interface IPatchProfile {
   password: string;
 }
 
+export interface IUserInfos {
+  name: string;
+  email: string;
+}
+
 export interface IUserContext {
   userRegister: (data: IFormUserRegister) => Promise<void>;
   userLogin: (data: IFormUserLogin) => Promise<void>;
@@ -60,4 +65,7 @@ export interface IUserContext {
   user: IUser | string | null;
   setUser: React.Dispatch<React.SetStateAction<IUser | string | null>>;
   patchProfile: (data: IPatchProfile) => Promise<void>;
+  userInfos: IUserInfos | null;
+  setUserInfos: React.Dispatch<React.SetStateAction<IUserInfos | null>>;
 }
+

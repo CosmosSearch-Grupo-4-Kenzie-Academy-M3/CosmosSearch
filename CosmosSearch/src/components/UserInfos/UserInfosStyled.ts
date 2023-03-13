@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const UserInfosContainer = styled.div`
   border: 1px solid var(--primary-blue);
 
-  height: 38px;
+  height: max-content;
 
   display: flex;
   justify-content: space-between;
