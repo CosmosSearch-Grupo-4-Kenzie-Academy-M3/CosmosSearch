@@ -112,7 +112,7 @@ export const PostProvider = ({ children }: iChildren) => {
   const editPost = async (postId: number, data: IUpdatePost) => {
     const token = localStorage.getItem("@CosmosSearch:TOKEN");
     const userId = localStorage.getItem("@CosmosSearch:USERID");
-    const newData = { ...data, userId };
+    const newData = { ...data, userId, date: getPostDate() };
     try {
       await api.patch(`/posts/${postId}`, newData, {
         headers: {
