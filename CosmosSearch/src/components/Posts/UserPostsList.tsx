@@ -16,6 +16,8 @@ export const UserPosts = () => {
     setIsSearch(false)
   }, []);
 
+  console.log(userPosts)
+
   return (
     <PostListStyled className="container__pages">
       {isSearch ? searchedPosts.length === 0 

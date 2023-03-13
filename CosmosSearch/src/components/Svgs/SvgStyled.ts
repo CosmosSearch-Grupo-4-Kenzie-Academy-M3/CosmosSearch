@@ -56,7 +56,9 @@ export const SvgLike = styled.img`
 
 export const SvgSearch = styled.img`
   width: 100%;
-  height: 100%;
+  height: 20px;
 
-  background-color: white;
+  border: 2px solid var(--primary--blue);
+
+  background-color: transparent;
 `

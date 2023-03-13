@@ -89,8 +89,12 @@ export const PostStyled = styled.li`
       justify-content: center;
       align-items: center;
 
+      transition: .25s;
+      :hover {
+        transform: scale(1.3);
+      }
       :hover img {
-        animation: planetAnimation infinite;
+        animation: planetAnimation ease-in-out 1s infinite;
       }
     }
   }
@@ -98,13 +102,31 @@ export const PostStyled = styled.li`
   /* KeyFrames */
   @keyframes planetAnimation {
     0% {
+      transform: translateY(0);
+    }
+    12% {
+      transform: translateY(5%);
+    }
+    25% {
       transform: translateY(10%);
+    }
+    37% {
+      transform: translateY(5%);
     }
     50% {
       transform: translateY(0);
     }
-    100% {
+    62% {
+      transform: translateY(-5%);
+    }
+    75% {
       transform: translateY(-10%);
+    }
+    87% {
+      transform: translateY(-5%);
+    }
+    100% {
+      transform: translateY(0);
     }
   }
 `;

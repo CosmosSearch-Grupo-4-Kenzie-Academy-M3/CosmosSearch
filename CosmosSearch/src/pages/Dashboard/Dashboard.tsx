@@ -37,7 +37,7 @@ export const Dashboard = () => {
             <Posts />
           </main>
         ) : (
-          <main className="main__burgerClosed">
+          <main className="main__burgerClosed main__burgerClosed--deslogged">
             <Posts />
           </main>
         )

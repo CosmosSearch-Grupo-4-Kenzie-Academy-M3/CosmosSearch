@@ -8,6 +8,7 @@ import {
 import { LinkButtonWithSvg } from "./LinkButtonWithSvg/LinkButtonWithSvg";
 
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
+import { SearchBar } from "../../../components/SearchBar/SearchBar";
 
 export const DivForButtons = () => {
   const { burgerOpen, setMainComponent } = useContext(LinksContext);
@@ -45,6 +46,9 @@ export const DivForButtons = () => {
       {/* Desktop */}
       <DivForButtonsStyled className="container__pages">
         <div className=" divForButtonStyled__burgerClosed">
+            <div className="searchbar__burguer--desktop">
+              <SearchBar />
+            </div>
           <LinkButtonWithSvg icon="astronaut" />
           <LinkButtonWithSvg icon="planet" />
           <LinkButtonWithSvg icon="plus" />

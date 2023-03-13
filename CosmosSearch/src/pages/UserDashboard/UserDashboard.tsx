@@ -49,11 +49,15 @@ export const UserDashboard = () => {
       <div className="userdash__mobile">
         <Header path={userState} />
         <DivForButtons />
-        {burgerOpen ? <div className="searchbar__burgueropen">
-          <SearchBar/>
-        </div> : <div className="searchbar">
-          <SearchBar/>
-        </div>}
+        {burgerOpen ? (
+          <div className="searchbar__burgueropen">
+            <SearchBar />
+          </div>
+        ) : (
+          <div className="searchbar">
+            <SearchBar />
+          </div>
+        )}
         {mainComponent === "posts" ? (
           <UserPosts />
         ) : mainComponent === "updatePerfil" ? (

@@ -63,9 +63,11 @@ export const DashboardStyled = styled.div`
     .main__burgerOpen--deslogged {
       margin-top: 3.3rem;
     }
-    .main__burgerClosed {
-      margin-top: 0;
-      border: 2px solid rebeccapurple;
+    .main__burgerClosed--logged {
+      margin-top: 1.3rem !important;
+    }
+    .main__burgerClosed--deslogged {
+      margin-top: 3.3rem !important;
     } 
   }
 

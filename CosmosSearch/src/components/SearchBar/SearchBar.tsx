@@ -49,14 +49,14 @@ export const SearchBar = () => {
               placeholder="Type something..."
               onChange={(event) => setValue(event.target.value)}
             />
-            <button>
+            <button className="search__border">
               <SearchIcon />
             </button>
           </div>
         </SearchBarContainer>
       ) : (
         <SearchBarContainer>
-          <button className="open__search" onClick={() => setSearchOpen(true)}>
+          <button className="open__search  search__border--close" onClick={() => setSearchOpen(true)}>
             <SearchIcon />
           </button>
         </SearchBarContainer>

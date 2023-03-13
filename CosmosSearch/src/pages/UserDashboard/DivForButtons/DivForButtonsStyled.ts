@@ -2,7 +2,15 @@ import styled from "styled-components";
 
 export const DivForButtonsStyled = styled.div`
   display: none;
+  width: 390px;
 
+  .searchbar__burguer--desktop {
+    height: 30px;
+    margin-left: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
   .divForButtonStyled__burgerClosed {
     margin-top: 1rem;
     display: flex;

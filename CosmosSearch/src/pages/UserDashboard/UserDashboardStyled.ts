@@ -28,7 +28,7 @@ export const UserDashboardStyled = styled.div`
     justify-content: flex-start;
   }
 
-  .searchbar__burgueropen{
+  .searchbar__burgueropen {
     height: 30px;
     width: 100%;
     padding-left: 20px;
@@ -58,6 +58,15 @@ export const UserDashboardStyled = styled.div`
         display: flex;
         justify-content: space-between;
       }
+
+      .searchbar__burguer--desktop {
+        height: 30px;
+        width: 100%;
+        padding-left: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
     }
 
     .userdash__mobile {
@@ -73,6 +82,9 @@ export const UserDashboardStyled = styled.div`
         justify-content: space-between;
 
         width: 80%;
+      }
+      .searchbar__burguer--desktop {
+        display: none !important;
       }
     }
   }

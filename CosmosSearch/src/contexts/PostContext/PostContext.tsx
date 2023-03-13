@@ -146,8 +146,8 @@ export const PostProvider = ({ children }: iChildren) => {
           },
         });
         const postsList: IPost[] = response.data;
-        const orderedList = orderPostsByData(postsList);
-        setPosts(orderedList);
+        const orderedList: IPost[] = orderPostsByData(postsList);
+        setUserPosts(orderedList);
       } catch (error) {
         toast.error("An error has occurred, plese login again.");
         logout();
