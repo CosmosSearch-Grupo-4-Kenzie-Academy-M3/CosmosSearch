@@ -10,6 +10,7 @@ import { iChildren } from "../@childrenType";
 import { IFormPostRegister } from "../UserContext/@types_User";
 import { IPost, IPostContext, IUpdatePost } from "./@typesPost";
 import { LinksContext } from "../LinksContext/LinksContext";
+import { UserContext } from "../UserContext/UserContext";
 
 export const PostContext = createContext({} as IPostContext);
 
@@ -24,6 +25,7 @@ export const PostProvider = ({ children }: iChildren) => {
   const [value, setValue] = useState<string | null>("");
 
   const { setMainComponent } = useContext(LinksContext);
+  const { logout } = useContext(UserContext)
 
   const navigate = useNavigate();
 
@@ -37,7 +39,7 @@ export const PostProvider = ({ children }: iChildren) => {
       setPosts(postsListToUserLogged);
     } catch (error) {
       toast.error("An error has occurred, plese login again.");
-      navigate("/login");
+      logout();
     }
   };
 
@@ -54,7 +56,7 @@ export const PostProvider = ({ children }: iChildren) => {
         setUserPosts(postsList);
       } catch (error) {
         toast.error("An error has occurred, plese login again.");
-        navigate("/login");
+        logout();
       }
     }
   };
