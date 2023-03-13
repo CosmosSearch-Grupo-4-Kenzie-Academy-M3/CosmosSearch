@@ -14,6 +14,7 @@ import { UserInfos } from "../../components/UserInfos/UserInfos";
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import { PostContext } from "../../contexts/PostContext/PostContext";
+import { SearchBar } from "../../components/SearchBar/SearchBar";
 
 export const UserDashboard = () => {
   const {
@@ -23,16 +24,19 @@ export const UserDashboard = () => {
     editModalIsOpen,
     deleteModalIsOpen,
   } = useContext(LinksContext);
-  const { userState, setUserState, userInfos, setUserInfos} = useContext(UserContext);
+  const { userState, setUserState, userInfos, setUserInfos } =
+    useContext(UserContext);
   const { setIsDashboard, getAllPosts } = useContext(PostContext);
-  const userName = userInfos?.name as string
-  const userEmail = userInfos?.email as string
-  
+  const userName = userInfos?.name as string;
+  const userEmail = userInfos?.email as string;
+
   useEffect(() => {
     setUserState("userLoggedInPerfil");
     setIsDashboard(false);
-    const userInfosData = JSON.parse(localStorage.getItem("@CosmosSearch:USERINFOS") as string) 
-    setUserInfos(userInfosData)
+    const userInfosData = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    );
+    setUserInfos(userInfosData);
     getAllPosts();
   }, []);
 
@@ -45,6 +49,11 @@ export const UserDashboard = () => {
       <div className="userdash__mobile">
         <Header path={userState} />
         <DivForButtons />
+        {burgerOpen ? <div className="searchbar__burgueropen">
+          <SearchBar/>
+        </div> : <div className="searchbar">
+          <SearchBar/>
+        </div>}
         {mainComponent === "posts" ? (
           <UserPosts />
         ) : mainComponent === "updatePerfil" ? (
