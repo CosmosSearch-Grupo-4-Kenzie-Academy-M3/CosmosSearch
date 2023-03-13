@@ -9,6 +9,7 @@ export interface IPost {
   topic: string;
   body: string;
   date: string;
+  postLiked?: boolean
 }
 
 export interface IUpdatePost {
@@ -37,4 +38,5 @@ export interface IPostContext {
   isDashboard: boolean;
   setIsDashboard: React.Dispatch<React.SetStateAction<boolean>>;
   searchFunction: (post: IPost) => IPost | undefined;
+  likePost: (postId: number) => void;
 }

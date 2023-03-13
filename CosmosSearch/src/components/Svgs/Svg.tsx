@@ -66,7 +66,7 @@ export const LikeUnclicked = () => {
     <SvgLike
       src={likeUnclicked}
       alt="Like unclicked icon"
-      onClick={() => setLikeClicked(true)}
+      // onClick={() => setLikeClicked(true)}
     />
   );
 };
@@ -78,7 +78,7 @@ export const LikeClicked = () => {
     <SvgLike
       src={likeClicked}
       alt="Like clicked icon"
-      onClick={() => setLikeClicked(false)}
+      // onClick={() => setLikeClicked(false)}
     />
   );
 };

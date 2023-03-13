@@ -25,16 +25,19 @@ export const PostProvider = ({ children }: iChildren) => {
 
   const { setMainComponent } = useContext(LinksContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const getAllPosts = async () => {
     try {
       const response = await api.get(`/posts`);
-      const postsList: IPost[] = response.data
-      setPosts(postsList);
+      const postsList: IPost[] = response.data;
+      const postsListToUserLogged = postsList.map((post) => {
+        return { ...post, postLiked: likeClicked };
+      });
+      setPosts(postsListToUserLogged);
     } catch (error) {
-      toast.error("An error has occurred, plese login again.")
-      navigate("/login")
+      toast.error("An error has occurred, plese login again.");
+      navigate("/login");
     }
   };
 
@@ -47,11 +50,11 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        const postsList: IPost[] = response.data
+        const postsList: IPost[] = response.data;
         setUserPosts(postsList);
       } catch (error) {
-        toast.error("An error has occurred, plese login again.")
-        navigate("/login")
+        toast.error("An error has occurred, plese login again.");
+        navigate("/login");
       }
     }
   };
@@ -127,14 +130,51 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
-const searchFunction = (post: IPost) => {
+  const likePost = (postId: number) => {
+    if (isSearch) {
+      const postsWithLickedAlteration: IPost[] = searchedPosts.map((post) => {
+        if (post.id === postId) {
+          return { ...post, postLiked: !post.postLiked };
+        } else if (postId !== post.id) {
+          return post;
+        }
+      }) as IPost[];
+      setSearchedPosts(postsWithLickedAlteration);
+      const actualizedPostsList = posts.map((post) => {
+        const actualizedPost = postsWithLickedAlteration.find(
+          (searchedPost) => {
+            if (post.id === searchedPost.id) {
+              return searchedPost;
+            }
+          }
+        );
+        if (actualizedPost) {
+          return actualizedPost;
+        } else {
+          return post;
+        }
+      });
+      setPosts(actualizedPostsList);
+    } else {
+      const postsWithLickedAlteration: IPost[] = posts.map((post) => {
+        if (post.id === postId) {
+          return { ...post, postLiked: !post.postLiked };
+        } else if (postId !== post.id) {
+          return post;
+        }
+      }) as IPost[];
+      setPosts(postsWithLickedAlteration);
+    }
+  };
+
+  const searchFunction = (post: IPost) => {
     setIsSearch(true);
     const searchString = value?.toLowerCase() as string;
     const title = post.title.toLowerCase();
     const topic = post.topic.toLowerCase();
     const body = post.body.toLowerCase();
     const name = post.name.toLowerCase();
-    const date = post.date
+    const date = post.date;
     if (
       title.includes(searchString) ||
       topic.includes(searchString) ||
@@ -169,7 +209,8 @@ const searchFunction = (post: IPost) => {
         value,
         isDashboard,
         setIsDashboard,
-        searchFunction
+        searchFunction,
+        likePost,
       }}
     >
       {children}

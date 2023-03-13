@@ -9,7 +9,7 @@ export const SearchBar = () => {
   const { posts, setSearchedPosts, setValue, searchFunction } =
     useContext(PostContext);
 
-  const onSubmit = (e: React.MouseEvent<HTMLFormElement, MouseEvent>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const filteredPosts = posts.filter((post) => searchFunction(post));
@@ -17,7 +17,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <SearchBarContainer onClick={(e) => onSubmit(e)}>
+    <SearchBarContainer onSubmit={(e) => onSubmit(e)}>
       <input
         className="input__placeholder"
         type="text"

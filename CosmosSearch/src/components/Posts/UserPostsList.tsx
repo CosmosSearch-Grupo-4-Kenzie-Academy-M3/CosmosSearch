@@ -6,7 +6,7 @@ import { PostListStyled } from "./PostListStyled";
 import { PostContext } from "../../contexts/PostContext/PostContext";
 
 export const UserPosts = () => {
-  const { userPosts, getAllUserPosts } = useContext(PostContext);
+  const { userPosts, getAllUserPosts, likeClicked } = useContext(PostContext);
 
   useEffect(() => {
     const userId = Number(
@@ -26,6 +26,7 @@ export const UserPosts = () => {
           postId={post.id}
           title={post.title}
           date={post.date}
+          postLiked={post.postLiked}
         />
       ))}
     </PostListStyled>

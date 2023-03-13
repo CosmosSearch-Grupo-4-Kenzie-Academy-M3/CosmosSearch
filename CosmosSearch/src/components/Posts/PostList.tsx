@@ -26,6 +26,7 @@ export const Posts = () => {
           postId={post.id}
           title={post.title}
           date={post.date}
+          postLiked={post.postLiked}
         />
       )) : posts.map((post) => (
         <Post
@@ -36,6 +37,7 @@ export const Posts = () => {
           postId={post.id}
           title={post.title}
           date={post.date}
+          postLiked={post.postLiked}
         />
       ))} 
     </PostListStyled>

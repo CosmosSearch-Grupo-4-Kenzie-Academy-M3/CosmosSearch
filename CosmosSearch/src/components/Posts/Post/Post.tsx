@@ -11,7 +11,6 @@ import {
   LikeUnclicked,
   Pencil,
   PlanetGrey,
-  SpaceInvaders,
 } from "../../Svgs/Svg";
 import {
   DivsButtonsStyled,
@@ -33,16 +32,17 @@ interface IPostProps {
   topic: string;
   postId: number;
   date: string
+  postLiked?: boolean
 }
 
-export const Post = ({ title, name, body, topic, postId, date }: IPostProps) => {
+export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPostProps) => {
   const {
     setModalIsOpen,
     setModalId,
     setEditModalIsOpen,
     setDeleteModalIsOpen,
   } = useContext(LinksContext);
-  const { setActualPostId } = useContext(PostContext);
+  const { setActualPostId, likePost } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
   const { userState } = useContext(UserContext);
 
@@ -103,7 +103,9 @@ export const Post = ({ title, name, body, topic, postId, date }: IPostProps) => 
           <div
             className="button"
           >
-            <Like/>
+            <div onClick={() => likePost(postId)}>
+              {postLiked ? <LikeClicked/> : <LikeUnclicked/>} 
+            </div>
             <ButtonStyled
               textColor="var(--primary-blue)"
               borderColor="var(--primary-blue)"
