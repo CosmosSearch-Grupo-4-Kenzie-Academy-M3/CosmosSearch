@@ -89,10 +89,6 @@ export const HeaderStyled = styled.header`
       height: 30px;
       gap: 1rem;
     }
-    /* .searchbar__inIcons--inperfil {
-      display: block;
-      height: 100%;
-    } */
   }
 
   @media (min-width: 790px) {

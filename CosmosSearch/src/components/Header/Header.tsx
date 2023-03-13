@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { FixedDiv, HeaderStyled } from "./HeaderStyled";
 import { LinksHeader } from "./LinksHeader/LinksHeader";
@@ -16,8 +16,11 @@ interface iLinksHeader {
 
 export const Header = ({ path }: iLinksHeader) => {
   const { burgerOpen, setBurgerOpen } = useContext(LinksContext);
-  const { isDashboard } = useContext(PostContext);
   const { userState } = useContext(UserContext);
+
+  const [animationClass, setAnimationClass] = useState<
+    "links__header--in" | "links__header--out" | "non__animation"
+  >("non__animation");
 
   return (
     // <FixedDiv>
@@ -29,28 +32,47 @@ export const Header = ({ path }: iLinksHeader) => {
           </div>
           <p className="title__box--header title__primary">CosmosSearch</p>
           <div className="icons">
-            {userState === "userLoggedInPerfil" ? <div className="searchbar__inIcons--inperfil">
-              <SearchBar />
-            </div> : <div className="searchbar__inIcons">
-              <SearchBar />
-            </div>}
+            {userState === "userLoggedInPerfil" ? (
+              <div className="searchbar__inIcons--inperfil">
+                <SearchBar />
+              </div>
+            ) : (
+              <div className="searchbar__inIcons">
+                <SearchBar />
+              </div>
+            )}
             {burgerOpen ? (
-              <div className="close__menu" onClick={() => setBurgerOpen(false)}>
+              <div
+                className="close__menu"
+                onClick={() => {
+                  const timeToRenderAnimation = 1000;
+                  setAnimationClass("links__header--out");
+                  setTimeout(() => {
+                    setBurgerOpen(false);
+                  }, timeToRenderAnimation);
+                }}
+              >
                 <CloseMenu />
               </div>
             ) : (
-              <div className="burger__menu" onClick={() => setBurgerOpen(true)}>
+              <div
+                className="burger__menu"
+                onClick={() => {
+                  setAnimationClass("links__header--in");
+                  setBurgerOpen(true);
+                }}
+              >
                 <BurgerMenu />
               </div>
             )}
             {burgerOpen ? (
               userState === "userLogged" || userState === "userDeslogged" ? (
                 <div className="links__start--header">
-                  <LinksHeader path={path} />
+                  <LinksHeader animationClass={animationClass} path={path} />
                 </div>
               ) : userState === "userLoggedInPerfil" ? (
                 <div className="links__start--header--logged">
-                  <LinksHeader path={path} />
+                  <LinksHeader animationClass={animationClass} path={path} />
                 </div>
               ) : (
                 <></>
@@ -61,7 +83,7 @@ export const Header = ({ path }: iLinksHeader) => {
           </div>
           <div className="links__start--headerDesktop">
             <SearchBar />
-            <LinksHeader path={path} />
+            <LinksHeader animationClass="non__animation" path={path} />
           </div>
         </div>
       </div>

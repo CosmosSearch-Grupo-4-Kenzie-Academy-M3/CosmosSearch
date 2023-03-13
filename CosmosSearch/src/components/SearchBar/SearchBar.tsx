@@ -35,28 +35,33 @@ export const SearchBar = () => {
     <>
       {searchOpen ? (
         <SearchBarContainer onSubmit={(e) => onSubmit(e)}>
-          <button
-            className="close__button"
-            type="button"
-            onClick={(e) => resetSearch(e)}
-          >
-            <CloseModal />
-          </button>
-          <div className="searchbar__header">
-            <input
-              className="input__placeholder"
-              type="text"
-              placeholder="Type something..."
-              onChange={(event) => setValue(event.target.value)}
-            />
-            <button className="search__border">
-              <SearchIcon />
+          <div className="animation">
+            <button
+              className="close__button"
+              type="button"
+              onClick={(e) => resetSearch(e)}
+            >
+              <CloseModal />
             </button>
+            <div className="searchbar__header">
+              <input
+                className="input__placeholder"
+                type="text"
+                placeholder="Type something..."
+                onChange={(event) => setValue(event.target.value)}
+              />
+              <button className="search__border">
+                <SearchIcon />
+              </button>
+            </div>
           </div>
         </SearchBarContainer>
       ) : (
         <SearchBarContainer>
-          <button className="open__search  search__border--close" onClick={() => setSearchOpen(true)}>
+          <button 
+            className="animation--btn open__search  search__border--close"
+            onClick={() => setSearchOpen(true)}
+          >
             <SearchIcon />
           </button>
         </SearchBarContainer>
