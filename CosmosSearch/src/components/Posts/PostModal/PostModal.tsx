@@ -5,7 +5,7 @@ import { CommentsContext } from "../../../contexts/CommentsContext/CommentsConte
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 import { IPost } from "../../../contexts/PostContext/@typesPost";
 import { PostContext } from "../../../contexts/PostContext/PostContext";
-import { CloseModal, PlusComment, PlusX, PlusXRotate } from "../../Svgs/Svg";
+import { CloseModal, PlusX, PlusXRotate } from "../../Svgs/Svg";
 import { CommentLi } from "./CommentLi/CommentLi";
 import {
   CommentsList,
@@ -100,13 +100,11 @@ export const PostModal = () => {
           ))}
         </CommentsList>
         <InfosDiv>
-          <p className="post__text__preview--mobile">data: xx/xx/xx</p>
-          <p className="post__text__preview--mobile">topic: {userPost.topic}</p>
+          <p className="post__infos--mobile">data: {userPost.date}</p>
+          <p className="post__infos--mobile">topic: {userPost.topic}</p>
         </InfosDiv>
       </PostModalStyled>
     </PostModalDivStyled>
   );
 };
-function data(data: any, id: number) {
-  throw new Error("Function not implemented.");
-}
+

@@ -13,11 +13,16 @@ import { SearchBar } from "../../components/SearchBar/SearchBar";
 
 export const Dashboard = () => {
   const { burgerOpen, modalIsOpen } = useContext(LinksContext);
-  const { userState } = useContext(UserContext);
+  const { userState, setUserState } = useContext(UserContext);
   const { setIsDashboard, isDashboard } = useContext(PostContext);
 
   useEffect(() => {
     setIsDashboard(true);
+    const currentUserState = localStorage.getItem("@CosmosSearch:USERSTATE") as
+      | "userLoggedInPerfil"
+      | "userLogged"
+      | "userDeslogged";
+    setUserState(currentUserState);
   }, []);
 
   return (

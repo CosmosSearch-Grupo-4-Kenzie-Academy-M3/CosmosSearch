@@ -27,8 +27,6 @@ export const PostProvider = ({ children }: iChildren) => {
   const { setMainComponent } = useContext(LinksContext);
   const { logout } = useContext(UserContext)
 
-  const navigate = useNavigate();
-
   const getAllPosts = async () => {
     try {
       const response = await api.get(`/posts`);

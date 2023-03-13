@@ -35,6 +35,7 @@ export const GlobalStyle = createGlobalStyle`
         --fs-29: 1.8125rem;
         --fs-25: 1.5625rem;
         --fs-20: 1.25rem;
+        --fs-19: 1.2rem;
         --fs-16: 1rem;
         --fs-10: .625rem;
 
@@ -140,9 +141,17 @@ export const GlobalStyle = createGlobalStyle`
 
     .post__text__preview {
         font-family: var(--ff-Inter);
-        font-size: var(--fs-25);
+        font-size: var(--fs-19);
         font-weight: var(--fw-400);
         color: var(--white);
+    }
+
+    .post__infos {
+        font-family: var(--ff-Inter);
+        font-size: var(--fs-16);
+        font-weight: var(--fw-400);
+        color: var(--white);
+        opacity: .5;
     }
 
     .post__text__preview--mobile {
@@ -150,6 +159,14 @@ export const GlobalStyle = createGlobalStyle`
         font-size: 1rem;
         font-weight: var(--fw-400);
         color: var(--white);
+    }
+
+    .post__infos--mobile {
+        font-family: var(--ff-Inter);
+        font-size: 1rem;
+        font-weight: var(--fw-400);
+        color: var(--white);
+        opacity: .5;
     }
 
     .input__label {
