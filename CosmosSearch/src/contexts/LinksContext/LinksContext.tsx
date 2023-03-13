@@ -27,7 +27,7 @@ export const LinksProvider = ({ children }: iChildren) => {
         editModalIsOpen,
         setEditModalIsOpen,
         deleteModalIsOpen,
-        setDeleteModalIsOpen
+        setDeleteModalIsOpen,
       }}
     >
       {children}

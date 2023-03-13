@@ -1,30 +1,45 @@
 import { createContext, useContext, useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+
 import { toast } from "react-toastify";
+
 import { api } from "../../services/api";
+
 import { iChildren } from "../@childrenType";
-import { LinksContext } from "../LinksContext/LinksContext";
 import { IFormPostRegister } from "../UserContext/@types_User";
 import { IPost, IPostContext, IUpdatePost } from "./@typesPost";
+import { LinksContext } from "../LinksContext/LinksContext";
+import { UserContext } from "../UserContext/UserContext";
 
 export const PostContext = createContext({} as IPostContext);
 
 export const PostProvider = ({ children }: iChildren) => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [userPosts, setUserPosts] = useState<IPost[]>([]);
-  const [isSearch, setIsSearch] = useState(false)
-  const [searchedPosts, setSearchedPosts] = useState<IPost[]>([]) 
+  const [searchedPosts, setSearchedPosts] = useState<IPost[]>([]);
   const [actualPostId, setActualPostId] = useState(0);
+  const [isSearch, setIsSearch] = useState(false);
+  const [isDashboard, setIsDashboard] = useState(false);
   const [likeClicked, setLikeClicked] = useState(false);
-  const [value, setValue] = useState<string | null>("")
-  const [isDashboard, setIsDashboard] = useState(false)
-  const {setMainComponent} = useContext(LinksContext)
+  const [value, setValue] = useState<string | null>("");
+
+  const { setMainComponent } = useContext(LinksContext);
+  const { logout } = useContext(UserContext)
+
+  const navigate = useNavigate();
 
   const getAllPosts = async () => {
     try {
       const response = await api.get(`/posts`);
-      setPosts(response.data);
+      const postsList: IPost[] = response.data;
+      const postsListToUserLogged = postsList.map((post) => {
+        return { ...post, postLiked: likeClicked };
+      });
+      setPosts(postsListToUserLogged);
     } catch (error) {
-      console.log(error);
+      toast.error("An error has occurred, plese login again.");
+      logout();
     }
   };
 
@@ -37,15 +52,17 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setUserPosts(response.data);
+        const postsList: IPost[] = response.data;
+        setUserPosts(postsList);
       } catch (error) {
-        console.log("Erro, token expirado");
+        toast.error("An error has occurred, plese login again.");
+        logout();
       }
     }
   };
 
   const getPostDate = () => {
-    const methodDate = new Date()
+    const methodDate = new Date();
     const day = methodDate.getDate();
     const mounth = methodDate.getMonth() + 1;
     const year = `${methodDate.getFullYear()}`.substring(2);
@@ -56,8 +73,8 @@ export const PostProvider = ({ children }: iChildren) => {
   const createPost = async (data: IFormPostRegister) => {
     const userId = Number(localStorage.getItem("@CosmosSearch:USERID"));
     const name = localStorage.getItem("@CosmosSearch:USERNAME") as string;
-    const date = getPostDate()
-    const newData = { ...data, userId, name, date};
+    const date = getPostDate();
+    const newData = { ...data, userId, name, date };
     const token = localStorage.getItem("@CosmosSearch:TOKEN");
     if (token) {
       try {
@@ -66,13 +83,12 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(newData)
+        console.log(newData);
         setPosts([...posts, response.data]);
-        toast.success("Post criado com sucesso!")
-        setMainComponent("posts")
+        toast.success("Post successfully created");
+        setMainComponent("posts");
       } catch (error) {
-        console.log(error);
-        toast.error("Não foi possível criar porst.")
+        toast.error("Unable to create post!");
       }
     }
   };
@@ -86,36 +102,91 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        const userId = Number(localStorage.getItem("@CosmosSearch:USERID") as string)
+        const userId = Number(
+          localStorage.getItem("@CosmosSearch:USERID") as string
+        );
         getAllUserPosts(userId);
         getAllPosts();
-        toast.success("Post deletado com sucesso!")
+        toast.success("Post successfully deleted");
       } catch (error) {
-        null;
-        console.log(error)
-        toast.error("Não foi possível excluir o post")
+        toast.error("Unable to delete post!");
       }
     }
   };
 
   const editPost = async (postId: number, data: IUpdatePost) => {
-    const token = localStorage.getItem("@CosmosSearch:TOKEN")
-    const userId = localStorage.getItem("@CosmosSearch:USERID")
-    const newData = {...data, userId}
+    const token = localStorage.getItem("@CosmosSearch:TOKEN");
+    const userId = localStorage.getItem("@CosmosSearch:USERID");
+    const newData = { ...data, userId, date: getPostDate() };
     try {
       await api.patch(`/posts/${postId}`, newData, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      getAllUserPosts(Number(userId))
-      getAllPosts()
-      toast.success("Post atualizado com sucesso")
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      getAllUserPosts(Number(userId));
+      getAllPosts();
+      toast.success("Post successfully updated");
     } catch (error) {
-      console.log(error)
-      toast.error("Não foi possível atualizar posts!")
+      toast.error("Unable to update post!");
     }
-  }
+  };
+
+  const likePost = (postId: number) => {
+    if (isSearch) {
+      const postsWithLickedAlteration: IPost[] = searchedPosts.map((post) => {
+        if (post.id === postId) {
+          return { ...post, postLiked: !post.postLiked };
+        } else if (postId !== post.id) {
+          return post;
+        }
+      }) as IPost[];
+      setSearchedPosts(postsWithLickedAlteration);
+      const actualizedPostsList = posts.map((post) => {
+        const actualizedPost = postsWithLickedAlteration.find(
+          (searchedPost) => {
+            if (post.id === searchedPost.id) {
+              return searchedPost;
+            }
+          }
+        );
+        if (actualizedPost) {
+          return actualizedPost;
+        } else {
+          return post;
+        }
+      });
+      setPosts(actualizedPostsList);
+    } else {
+      const postsWithLickedAlteration: IPost[] = posts.map((post) => {
+        if (post.id === postId) {
+          return { ...post, postLiked: !post.postLiked };
+        } else if (postId !== post.id) {
+          return post;
+        }
+      }) as IPost[];
+      setPosts(postsWithLickedAlteration);
+    }
+  };
+
+  const searchFunction = (post: IPost) => {
+    setIsSearch(true);
+    const searchString = value?.toLowerCase() as string;
+    const title = post.title.toLowerCase();
+    const topic = post.topic.toLowerCase();
+    const body = post.body.toLowerCase();
+    const name = post.name.toLowerCase();
+    const date = post.date;
+    if (
+      title.includes(searchString) ||
+      topic.includes(searchString) ||
+      body.includes(searchString) ||
+      name.includes(searchString) ||
+      date.includes(searchString)
+    ) {
+      return post;
+    }
+  };
 
   return (
     <PostContext.Provider
@@ -139,12 +210,12 @@ export const PostProvider = ({ children }: iChildren) => {
         setValue,
         value,
         isDashboard,
-        setIsDashboard
+        setIsDashboard,
+        searchFunction,
+        likePost,
       }}
     >
       {children}
     </PostContext.Provider>
   );
 };
-
-

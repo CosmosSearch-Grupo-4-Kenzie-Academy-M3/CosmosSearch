@@ -99,12 +99,6 @@ export const GlobalStyle = createGlobalStyle`
         color: var(--primary-blue);
     }
 
-    .links__div {
-        :hover .links__line {
-            width: 20px;
-        }
-    }
-
     .links {
         font-family: var(--ff-Inter);
         font-size: var(--fs-30);
@@ -171,6 +165,13 @@ export const GlobalStyle = createGlobalStyle`
         font-weight: var(--fw-400);
         color: var(--primary-blue);
     } 
+
+    .error {
+        font-family: var(--ff-Oswald);
+        font-size: var(--fs-25);
+        font-weight: var(--fw-500);
+        color: var(--error-form);
+    }
 
     /* LinksLine */
     .links__line {

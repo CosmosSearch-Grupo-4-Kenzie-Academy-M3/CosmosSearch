@@ -115,31 +115,29 @@ export const DivsButtonsStyled = styled.div`
 `;
 
 interface IButtonsStyled {
-  top: string
+  top: string;
 }
 
 export const ButtonsStyled = styled.button`
   position: relative;
 
   background-color: transparent;
-  
+
   border: 2px solid transparent;
 
-  cursor: pointer
-`
+  cursor: pointer;
+`;
 
 export const ButtonsAbsoluteStyled = styled.button<IButtonsStyled>`
   position: absolute;
 
   top: ${(props) => props.top};
 
-  right: .2rem;
+  right: 0.2rem;
 
   background-color: transparent;
-  
+
   border: 2px solid transparent;
 
-  cursor: pointer
-`
-
-
+  cursor: pointer;
+`;

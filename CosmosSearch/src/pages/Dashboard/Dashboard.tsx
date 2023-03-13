@@ -9,36 +9,53 @@ import { NewPost } from "./NewPost/NewPost";
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import { PostContext } from "../../contexts/PostContext/PostContext";
+import { SearchBar } from "../../components/SearchBar/SearchBar";
 
 export const Dashboard = () => {
   const { burgerOpen, modalIsOpen } = useContext(LinksContext);
-  const { userState, setUserState } = useContext(UserContext);
-  const {setIsDashboard} = useContext(PostContext)
+  const { userState } = useContext(UserContext);
+  const { setIsDashboard, isDashboard } = useContext(PostContext);
 
   useEffect(() => {
+<<<<<<< HEAD
     setIsDashboard(true)
   }, [])
+=======
+    setIsDashboard(true);
+  }, []);
+>>>>>>> 877c5ce1114b67b16d18f92402f8f9f8f072617f
 
   return (
     <DashboardStyled>
       {modalIsOpen ? <PostModal /> : <></>}
       <Header path={userState} />
       {/* Mobile */}
-      {burgerOpen ? (
-        <main className="main__burgerOpen">
-          {userState === "userDeslogged" ? <></> : <NewPost />}
+      <div className="searchbar">{isDashboard ? <SearchBar /> : <></>}</div>
+      {userState === "userDeslogged" ? (
+        burgerOpen ? (
+          <main className="main__burgerOpen main__burgerOpen--deslogged">
+            <Posts />
+          </main>
+        ) : (
+          <main className="main__burgerClosed">
+            <Posts />
+          </main>
+        )
+      ) : burgerOpen ? (
+        <main className="main__burgerOpen main__burgerOpen--logged">
+          <NewPost />
           <Posts />
         </main>
       ) : (
         <main className="main__burgerClosed">
-          {userState === "userDeslogged" ? <></> : <NewPost />}
+          <NewPost />
           <Posts />
         </main>
       )}
       {/* Desktop */}
       <main className="main__desktop">
         <div className="newpost__position">
-        {userState === "userDeslogged" ? <></> : <NewPost />}
+          {userState === "userDeslogged" ? <></> : <NewPost />}
         </div>
         <Posts />
       </main>

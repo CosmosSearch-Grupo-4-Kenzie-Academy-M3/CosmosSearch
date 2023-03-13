@@ -7,7 +7,6 @@ import { TitleBordersStyled } from "../../components/Title/TitleStyled";
 import { BurgerMenu } from "../../components/Svgs/Svg";
 
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
-import { CommentsContext } from "../../contexts/CommentsContext/CommentsContext";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 
 export const Start = () => {
@@ -20,7 +19,7 @@ export const Start = () => {
         {/* Mobile */}
         <div className="top__start">
           <Title />
-          <button onClick={() => setUserState("userDeslogged")}>
+          <button className="links__hover" onClick={() => setUserState("userDeslogged")}>
             <LinkButton path="/dashboard" text="Home" line={true} />
           </button>
           <div className="burger__div">
@@ -46,7 +45,7 @@ export const Start = () => {
           </TitleBordersStyled>
         </div>
         <div className="links__start--desktop">
-          <button onClick={() => setUserState("userDeslogged")}>
+          <button className="links__hover" onClick={() => setUserState("userDeslogged")}>
             <LinkButton path="/dashboard" text="Home" line={true} />
           </button>
           <div className="links__start">

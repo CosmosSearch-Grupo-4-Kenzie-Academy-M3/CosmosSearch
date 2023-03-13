@@ -2,11 +2,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { formmSchema } from "../../../contexts/UserContext/validation";
+
 import { ButtonStyled } from "../../Button/ButtonStyled";
 import { Input } from "../../Input/Input";
 import { RegisterUserFormStyled } from "./RegisterUserFormStyled";
-
-import { formmSchema } from "../../../contexts/UserContext/validation";
 
 import { useContext } from "react";
 import { IFormUserRegister } from "../../../contexts/UserContext/@types_User";

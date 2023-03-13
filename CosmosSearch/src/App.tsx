@@ -1,11 +1,12 @@
+import { AppRoutes } from "./routes/Router";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { AppStyled, DivOpacity } from "./styles/AppStyled";
 import galaxy from "./assets/background_images/galaxy.jpg";
 
 import { Providers } from "./contexts/Providers";
-
-import { AppRoutes } from "./routes/Router";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export const App = () => {
   return (

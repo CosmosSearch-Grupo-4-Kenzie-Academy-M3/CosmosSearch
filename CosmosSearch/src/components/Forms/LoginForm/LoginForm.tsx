@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
 
 import { ButtonStyled } from "../../Button/ButtonStyled";
 import { Input } from "../../Input/Input";
