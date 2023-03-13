@@ -127,6 +127,25 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
+const searchFunction = (post: IPost) => {
+    setIsSearch(true);
+    const searchString = value?.toLowerCase() as string;
+    const title = post.title.toLowerCase();
+    const topic = post.topic.toLowerCase();
+    const body = post.body.toLowerCase();
+    const name = post.name.toLowerCase();
+    const date = post.date
+    if (
+      title.includes(searchString) ||
+      topic.includes(searchString) ||
+      body.includes(searchString) ||
+      name.includes(searchString) ||
+      date.includes(searchString)
+    ) {
+      return post;
+    }
+  };
+
   return (
     <PostContext.Provider
       value={{
@@ -150,6 +169,7 @@ export const PostProvider = ({ children }: iChildren) => {
         value,
         isDashboard,
         setIsDashboard,
+        searchFunction
       }}
     >
       {children}

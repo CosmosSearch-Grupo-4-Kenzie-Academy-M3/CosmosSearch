@@ -36,4 +36,5 @@ export interface IPostContext {
   setValue: React.Dispatch<React.SetStateAction<string | null>>;
   isDashboard: boolean;
   setIsDashboard: React.Dispatch<React.SetStateAction<boolean>>;
+  searchFunction: (post: IPost) => IPost | undefined;
 }

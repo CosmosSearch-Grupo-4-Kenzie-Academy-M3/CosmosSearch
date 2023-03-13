@@ -6,25 +6,12 @@ import { SearchIcon } from "../Svgs/Svg";
 import { SearchBarContainer } from "./SearchBarStyled";
 
 export const SearchBar = () => {
-  const { posts, setIsSearch, setSearchedPosts, value, setValue } =
+  const { posts, setSearchedPosts, setValue, searchFunction } =
     useContext(PostContext);
 
   const onSubmit = (e: React.MouseEvent<HTMLFormElement, MouseEvent>) => {
     e.preventDefault();
-    setIsSearch(true);
-    const searchString = value?.toLowerCase() as string;
-    const searchFunction = (post: IPost) => {
-      const title = post.title.toLowerCase();
-      const topic = post.topic.toLowerCase();
-      const name = post.name.toLowerCase();
-      if (
-        title.includes(searchString) ||
-        topic.includes(searchString) ||
-        name.includes(searchString)
-      ) {
-        return post;
-      }
-    };
+
     const filteredPosts = posts.filter((post) => searchFunction(post));
     setSearchedPosts(filteredPosts);
   };
