@@ -19,7 +19,7 @@ export const DashboardStyled = styled.div`
   }
 
   .main__burgerClosed {
-    margin-top: 2.5rem;
+    margin-top: 4.5rem;
   }
 
   .main__desktop {
@@ -47,6 +47,18 @@ export const DashboardStyled = styled.div`
     }
   }
 
+  @media (min-width: 400px) {
+    .main__burgerClosed--logged {
+      margin-top: 1.1rem;
+    }
+  }
+
+  @media (min-width: 790px) {
+    .searchbar {
+      display: none;
+    }
+  }
+
   @media (min-width: 800px) {
     main {
       width: 800px;
@@ -67,9 +79,9 @@ export const DashboardStyled = styled.div`
       align-items: center;
       margin-top: 3rem;
     }
-    .searchbar {
+    /* .searchbar {
       display: none;
-    }
+    } */
     .newpost__position {
       position: absolute;
 
@@ -100,7 +112,7 @@ export const DashboardStyled = styled.div`
 
     .newpost__position {
       top: 1rem;
-      right: -.5rem;
+      right: -0.5rem;
     }
   }
 `;

@@ -21,7 +21,7 @@ export const Dashboard = () => {
     const currentUserState = localStorage.getItem("@CosmosSearch:USERSTATE") as
       | "userLoggedInPerfil"
       | "userLogged"
-      | "userDeslogged";
+      | "userDeslogged"
     setUserState(currentUserState);
   }, []);
 
@@ -47,7 +47,7 @@ export const Dashboard = () => {
           <Posts />
         </main>
       ) : (
-        <main className="main__burgerClosed">
+        <main className="main__burgerClosed main__burgerClosed--logged">
           <NewPost />
           <Posts />
         </main>

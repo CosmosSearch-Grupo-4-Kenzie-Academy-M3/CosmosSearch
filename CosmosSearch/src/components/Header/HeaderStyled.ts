@@ -57,13 +57,38 @@ export const HeaderStyled = styled.header`
       top: 11rem;
       left: 20px;
     }
+    .links__start--header--logged {
+      display: flex;
+      gap: 1rem;
+
+      position: absolute;
+
+      top: 9rem;
+      left: 20px;
+    }
   }
 
   .links__start--headerDesktop {
     display: none;
   }
 
+  .searchbar__inIcons {
+    display: none;
+  }
+
   /* MediaQuerys */
+  @media (min-width: 790px) {
+    .icons {
+      display: flex;
+      align-items: center;
+      height: 30px;
+      gap: 1rem;
+    }
+    .searchbar__inIcons {
+      display: block;
+      height: 100%;
+    }
+  }
   @media (min-width: 920px) {
     .icons {
       display: none;
