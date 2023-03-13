@@ -88,6 +88,23 @@ export const PostStyled = styled.li`
       display: flex;
       justify-content: center;
       align-items: center;
+
+      :hover img {
+        animation: planetAnimation infinite;
+      }
+    }
+  }
+
+  /* KeyFrames */
+  @keyframes planetAnimation {
+    0% {
+      transform: translateY(10%);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-10%);
     }
   }
 `;
@@ -115,31 +132,29 @@ export const DivsButtonsStyled = styled.div`
 `;
 
 interface IButtonsStyled {
-  top: string
+  top: string;
 }
 
 export const ButtonsStyled = styled.button`
   position: relative;
 
   background-color: transparent;
-  
+
   border: 2px solid transparent;
 
-  cursor: pointer
-`
+  cursor: pointer;
+`;
 
 export const ButtonsAbsoluteStyled = styled.button<IButtonsStyled>`
   position: absolute;
 
   top: ${(props) => props.top};
 
-  right: .2rem;
+  right: 0.2rem;
 
   background-color: transparent;
-  
+
   border: 2px solid transparent;
 
-  cursor: pointer
-`
-
-
+  cursor: pointer;
+`;

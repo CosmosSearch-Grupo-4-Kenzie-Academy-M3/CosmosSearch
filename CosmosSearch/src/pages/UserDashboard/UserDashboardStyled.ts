@@ -17,6 +17,28 @@ export const UserDashboardStyled = styled.div`
     display: none;
   }
 
+  .searchbar {
+    height: 30px;
+    width: 100%;
+    padding-left: 20px;
+    position: absolute;
+    top: 12rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .searchbar__burgueropen{
+    height: 30px;
+    width: 100%;
+    padding-left: 20px;
+    position: absolute;
+    top: 17rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
   /* MediaQuery */
   @media (min-width: 380px) {
     .container__form {
@@ -46,12 +68,19 @@ export const UserDashboardStyled = styled.div`
       .main__burgerOpen {
         margin-top: 1rem;
       }
-      .user__section{
+      .user__section {
         display: flex;
         justify-content: space-between;
 
         width: 80%;
       }
+    }
+  }
+
+  @media (min-width: 1700px) {
+    .main__user {
+      max-width: 1700px;
+      margin-inline: auto;
     }
   }
 `;

@@ -6,11 +6,11 @@ import {
   ArrowUp,
   CloseX,
   Hamburguer,
+  Like,
   LikeClicked,
   LikeUnclicked,
   Pencil,
   PlanetGrey,
-  SpaceInvaders,
 } from "../../Svgs/Svg";
 import {
   DivsButtonsStyled,
@@ -32,16 +32,17 @@ interface IPostProps {
   topic: string;
   postId: number;
   date: string
+  postLiked?: boolean
 }
 
-export const Post = ({ title, name, body, topic, postId, date }: IPostProps) => {
+export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPostProps) => {
   const {
     setModalIsOpen,
     setModalId,
     setEditModalIsOpen,
     setDeleteModalIsOpen,
   } = useContext(LinksContext);
-  const { setActualPostId, likeClicked } = useContext(PostContext);
+  const { setActualPostId, likePost } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
   const { userState } = useContext(UserContext);
 
@@ -96,13 +97,15 @@ export const Post = ({ title, name, body, topic, postId, date }: IPostProps) => 
         <p className="post__text__preview">{body}</p>
         <div className="date__and__button">
           <div className="date">
-            <p className="post__text__preview">date: {date}</p>
-            <p className="post__text__preview">topic: {topic}</p>
+            <p className="post__infos">date: {date}</p>
+            <p className="post__infos">topic: {topic}</p>
           </div>
           <div
             className="button"
           >
-            {likeClicked ? <LikeClicked/> : <LikeUnclicked/>}
+            <div onClick={() => likePost(postId)}>
+              {postLiked ? <LikeClicked/> : <LikeUnclicked/>} 
+            </div>
             <ButtonStyled
               textColor="var(--primary-blue)"
               borderColor="var(--primary-blue)"
