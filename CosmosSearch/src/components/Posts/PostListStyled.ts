@@ -8,7 +8,7 @@ export const PostListStyled = styled.ul`
   margin-top: 1rem;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 1rem;
 
   /* MediaQuery */

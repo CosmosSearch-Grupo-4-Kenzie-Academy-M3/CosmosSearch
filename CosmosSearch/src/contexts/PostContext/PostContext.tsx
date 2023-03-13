@@ -28,6 +28,74 @@ export const PostProvider = ({ children }: iChildren) => {
   const { setMainComponent } = useContext(LinksContext);
   const { logout } = useContext(UserContext)
 
+  const orderPostsByData = (list: IPost[]) => {
+    const orderedList = list.sort((postA, postB) => {
+      let dateAInNumber =
+        Number(postA.date.slice(0, 1)) +
+        Number(postA.date.slice(3, 4)) +
+        Number(postA.date.slice(6, 7));
+      let dateBInNumber =
+        Number(postB.date.slice(0, 1)) +
+        Number(postB.date.slice(3, 4)) +
+        Number(postB.date.slice(6, 7));
+        const postMonth = postA.date.slice(3,4)
+        switch (postMonth) {
+          case "02":
+            dateAInNumber = dateAInNumber + 31
+            dateBInNumber = dateAInNumber + 31
+            break;
+          case "03":
+            dateAInNumber = dateAInNumber + (31 * 2)
+            dateBInNumber = dateAInNumber + (31 * 2)
+            break;
+          case "04":
+            dateAInNumber = dateAInNumber + (31 * 3)
+            dateBInNumber = dateAInNumber + (31 * 3)
+            break;
+          case "05":
+            dateAInNumber = dateAInNumber + (31 * 4)
+            dateBInNumber = dateAInNumber + (31 * 4)
+            break;
+          case "06":
+            dateAInNumber = dateAInNumber + (31 * 5)
+            dateBInNumber = dateAInNumber + (31 * 5)
+            break;
+          case "07":
+            dateAInNumber = dateAInNumber + (31 * 6)
+            dateBInNumber = dateAInNumber + (31 * 6)
+            break;
+          case "08":
+            dateAInNumber = dateAInNumber + (31 * 7)
+            dateBInNumber = dateAInNumber + (31 * 7)
+            break;
+          case "09":
+            dateAInNumber = dateAInNumber + (31 * 8)
+            dateBInNumber = dateAInNumber + (31 * 8)
+            break;
+          case "10":
+            dateAInNumber = dateAInNumber + (31 * 9)
+            dateBInNumber = dateAInNumber + (31 * 9)
+            break;
+          case "11":
+            dateAInNumber = dateAInNumber + (31 * 10)
+            dateBInNumber = dateAInNumber + (31 * 10)
+            break;
+          case "12":
+            dateAInNumber = dateAInNumber + (31 * 11)
+            dateBInNumber = dateAInNumber + (31 * 11)
+            break;
+          }
+          if (dateAInNumber > dateBInNumber) {
+            return 1 
+          } else if (dateAInNumber < dateBInNumber) {
+            return -1 
+          } else {
+            return 0
+          }
+    }) 
+    return orderedList
+  };
+
   const getAllPosts = async () => {
     try {
       const response = await api.get(`/posts`);
@@ -35,7 +103,9 @@ export const PostProvider = ({ children }: iChildren) => {
       const postsListToUserLogged = postsList.map((post) => {
         return { ...post, postLiked: likeClicked };
       });
-      setPosts(postsListToUserLogged);
+      const orderedList = orderPostsByData(postsListToUserLogged);
+          console.log(orderedList)
+      setPosts(orderedList);
     } catch (error) {
       toast.error("An error has occurred, plese login again.");
       logout();
