@@ -21,7 +21,7 @@ export const Dashboard = () => {
     const currentUserState = localStorage.getItem("@CosmosSearch:USERSTATE") as
       | "userLoggedInPerfil"
       | "userLogged"
-      | "userDeslogged"
+      | "userDeslogged";
     setUserState(currentUserState);
   }, []);
 
@@ -53,12 +53,18 @@ export const Dashboard = () => {
         </main>
       )}
       {/* Desktop */}
-      <main className="main__desktop">
-        <div className="newpost__position">
-          {userState === "userDeslogged" ? <></> : <NewPost />}
-        </div>
-        <Posts />
-      </main>
+      {userState === "userDeslogged" ? (
+        <main className="main__desktop main__desktop--deslogged">
+          <Posts />
+        </main>
+      ) : (
+        <main className="main__desktop main__desktop--logged">
+          <div className="newpost__position">
+             <NewPost />
+          </div>
+          <Posts />
+        </main>
+      )}
     </DashboardStyled>
   );
 };

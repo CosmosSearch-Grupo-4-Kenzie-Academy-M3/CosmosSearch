@@ -57,6 +57,7 @@ export const HeaderStyled = styled.header`
       top: 11rem;
       left: 20px;
     }
+
     .links__start--header--logged {
       display: flex;
       gap: 1rem;
@@ -81,7 +82,7 @@ export const HeaderStyled = styled.header`
   }
 
   /* MediaQuerys */
-  @media(min-width: 560px){
+  @media (min-width: 560px) {
     .icons {
       display: flex;
       align-items: center;
@@ -99,6 +100,12 @@ export const HeaderStyled = styled.header`
       display: block;
       height: 100%;
     }
+    .links__start--header {
+      top: 8rem !important;
+    }
+  }
+
+  @media (min-width: 800px) {
   }
   @media (min-width: 920px) {
     .icons {
