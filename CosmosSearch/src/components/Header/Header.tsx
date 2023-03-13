@@ -29,13 +29,11 @@ export const Header = ({ path }: iLinksHeader) => {
           </div>
           <p className="title__box--header title__primary">CosmosSearch</p>
           <div className="icons">
-            {isDashboard ? (
-              <div className="searchbar__inIcons">
-                <SearchBar />
-              </div>
-            ) : (
-              <></>
-            )}
+            {userState === "userLoggedInPerfil" ? <div className="searchbar__inIcons--inperfil">
+              <SearchBar />
+            </div> : <div className="searchbar__inIcons">
+              <SearchBar />
+            </div>}
             {burgerOpen ? (
               <div className="close__menu" onClick={() => setBurgerOpen(false)}>
                 <CloseMenu />
@@ -50,15 +48,19 @@ export const Header = ({ path }: iLinksHeader) => {
                 <div className="links__start--header">
                   <LinksHeader path={path} />
                 </div>
-              ) : userState === "userLoggedInPerfil" 
-              ?  <div className="links__start--header--logged">
+              ) : userState === "userLoggedInPerfil" ? (
+                <div className="links__start--header--logged">
                   <LinksHeader path={path} />
-                 </div>
-              : <></>
-            ) : <></>}
+                </div>
+              ) : (
+                <></>
+              )
+            ) : (
+              <></>
+            )}
           </div>
           <div className="links__start--headerDesktop">
-            {isDashboard ? <SearchBar /> : <></>}
+            <SearchBar />
             <LinksHeader path={path} />
           </div>
         </div>

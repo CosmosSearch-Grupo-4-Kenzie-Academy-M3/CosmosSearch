@@ -41,6 +41,8 @@ export const DivForButtonsStyledMobile = styled.div`
 
     margin-top: 1rem;
 
+    margin-bottom: 5rem;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -50,6 +52,8 @@ export const DivForButtonsStyledMobile = styled.div`
     width: 100%;
 
     margin-top: 6rem;
+
+    margin-bottom: 5rem;
 
     display: flex;
     justify-content: space-between;

@@ -76,14 +76,25 @@ export const HeaderStyled = styled.header`
     display: none;
   }
 
+  .searchbar__inIcons--inperfil {
+    display: none;
+  }
+
   /* MediaQuerys */
-  @media (min-width: 790px) {
+  @media(min-width: 560px){
     .icons {
       display: flex;
       align-items: center;
       height: 30px;
       gap: 1rem;
     }
+    .searchbar__inIcons--inperfil {
+      display: block;
+      height: 100%;
+    }
+  }
+
+  @media (min-width: 790px) {
     .searchbar__inIcons {
       display: block;
       height: 100%;
