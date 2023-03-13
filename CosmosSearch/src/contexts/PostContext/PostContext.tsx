@@ -104,7 +104,6 @@ export const PostProvider = ({ children }: iChildren) => {
         return { ...post, postLiked: likeClicked };
       });
       const orderedList = orderPostsByData(postsListToUserLogged);
-          console.log(orderedList)
       setPosts(orderedList);
     } catch (error) {
       toast.error("An error has occurred, plese login again.");
@@ -122,7 +121,8 @@ export const PostProvider = ({ children }: iChildren) => {
           },
         });
         const postsList: IPost[] = response.data;
-        setUserPosts(postsList);
+        const orderedList = orderPostsByData(postsList);
+        setPosts(orderedList);
       } catch (error) {
         toast.error("An error has occurred, plese login again.");
         logout();
@@ -153,7 +153,8 @@ export const PostProvider = ({ children }: iChildren) => {
           },
         });
         console.log(newData);
-        setPosts([...posts, response.data]);
+        const orderedList = orderPostsByData([...posts, response.data]);
+        setPosts(orderedList);
         toast.success("Post successfully created");
         setMainComponent("posts");
       } catch (error) {
