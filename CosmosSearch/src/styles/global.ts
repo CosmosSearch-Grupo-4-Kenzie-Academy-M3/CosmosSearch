@@ -166,6 +166,13 @@ export const GlobalStyle = createGlobalStyle`
         color: var(--primary-blue);
     } 
 
+    .error {
+        font-family: var(--ff-Oswald);
+        font-size: var(--fs-25);
+        font-weight: var(--fw-500);
+        color: var(--error-form);
+    }
+
     /* LinksLine */
     .links__line {
         width: 73px;

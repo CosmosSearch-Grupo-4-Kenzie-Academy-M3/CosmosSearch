@@ -15,7 +15,9 @@ export const Posts = () => {
 
   return (
     <PostListStyled className="container__pages">
-      {isSearch ? searchedPosts.map((post) => (
+      {isSearch ? searchedPosts.length === 0 
+      ? <p className="error">Search return any results</p>
+      : searchedPosts.map((post) => (
         <Post
           key={post.id}
           body={post.body}
