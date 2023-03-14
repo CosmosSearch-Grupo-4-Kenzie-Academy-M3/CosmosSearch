@@ -60,7 +60,7 @@ export const SpaceInvaders = () => {
 };
 
 export const LikeUnclicked = () => {
-  const { setLikeClicked } = useContext(PostContext);
+
 
   return (
     <SvgLike
@@ -72,7 +72,7 @@ export const LikeUnclicked = () => {
 };
 
 export const LikeClicked = () => {
-  const { setLikeClicked } = useContext(PostContext);
+
 
   return (
     <SvgLike

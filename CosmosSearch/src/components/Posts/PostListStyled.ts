@@ -50,8 +50,9 @@ export const PostStyled = styled.li`
     }
     .button {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-end;
+ 
+
       gap: 1rem;
       align-self: flex-end;
     }
@@ -67,18 +68,12 @@ export const PostStyled = styled.li`
       .date__and__button {
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-end;
       }
     }
 
     @media (min-width: 550px) {
       height: 250px;
-
-      .date__and__button {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
     }
   }
 

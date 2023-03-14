@@ -11,8 +11,6 @@ import { api } from "../../services/api";
 
 import { iChildren } from "../@childrenType";
 import { LinksContext } from "../LinksContext/LinksContext";
-import { IPost } from "../PostContext/@typesPost";
-import { PostContext } from "../PostContext/PostContext";
 import {
   IFormUserLogin,
   IFormUserRegister,
@@ -46,7 +44,8 @@ export const UserProvider = ({ children }: iChildren) => {
 
   const userRegister = async (data: IFormUserRegister) => {
     try {
-      const response = await api.post("/users", data);
+      const fullDataToRegister = {...data, postLikeds: []}
+      const response = await api.post("/users", fullDataToRegister);
       localStorage.setItem("@CosmosSearch:TOKEN", response.data.accessToken);
       localStorage.setItem("@CosmosSearch:USERID", response.data.user.id);
       localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
@@ -54,8 +53,8 @@ export const UserProvider = ({ children }: iChildren) => {
       localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       setUserState("userLogged");
       setUser(response.data.user);
-      const { name, email } = response.data.user;
-      const userInfosData = { name, email };
+      const { name, email, postLikeds } = response.data.user;
+      const userInfosData = { name, email, postLikeds };
       setUserInfos(userInfosData);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
@@ -79,8 +78,8 @@ export const UserProvider = ({ children }: iChildren) => {
       localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       setUserState("userLogged");
       setUser(response.data.user);
-      const { name, email } = response.data.user;
-      const userInfosData = { name, email };
+      const { name, email, postLikeds } = response.data.user;
+      const userInfosData = { name, email, postLikeds };
       setUserInfos(userInfosData);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
@@ -121,7 +120,7 @@ export const UserProvider = ({ children }: iChildren) => {
       const userInfosData = {
         name: response.data.name,
         email: response.data.email,
-      };
+      } as IUserInfos
       setUserInfos(userInfosData);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",

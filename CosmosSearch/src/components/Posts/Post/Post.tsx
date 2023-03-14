@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import { PostContext } from "../../../contexts/PostContext/PostContext";
 
@@ -6,7 +6,6 @@ import {
   ArrowUp,
   CloseX,
   Hamburguer,
-  Like,
   LikeClicked,
   LikeUnclicked,
   Pencil,
@@ -33,6 +32,8 @@ interface IPostProps {
   postId: number;
   date: string;
   postLiked?: boolean;
+  qntOfLikes?: number;
+  likeId?: number
 }
 
 export const Post = ({
@@ -43,6 +44,8 @@ export const Post = ({
   postId,
   date,
   postLiked,
+  qntOfLikes,
+  likeId,
 }: IPostProps) => {
   const {
     setModalIsOpen,
@@ -50,7 +53,7 @@ export const Post = ({
     setEditModalIsOpen,
     setDeleteModalIsOpen,
   } = useContext(LinksContext);
-  const { setActualPostId, likePost } = useContext(PostContext);
+  const { setActualPostId, alterLikeCount, likePost } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
   const { userState } = useContext(UserContext);
 
@@ -116,9 +119,14 @@ export const Post = ({
             <p className="post__infos">topic: {topic}</p>
           </div>
           <div className="button">
-            <div onClick={() => likePost(postId)}>
-              {postLiked ? <LikeClicked /> : <LikeUnclicked />}
-            </div>
+            {userState !== "userDeslogged" ? (
+              <div onClick={() => {alterLikeCount(likeId as number, qntOfLikes as number, postId, postLiked as boolean)}}>
+                <p className="input__placeholder">{qntOfLikes}</p>
+                {postLiked ? <LikeClicked /> : <LikeUnclicked />}
+              </div>
+            ) : (
+              <></>
+            )}
             <ButtonStyled
               textColor="var(--primary-blue)"
               borderColor="var(--primary-blue)"
