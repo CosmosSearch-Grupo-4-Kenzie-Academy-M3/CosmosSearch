@@ -202,7 +202,6 @@ export const PostProvider = ({ children }: iChildren) => {
         },
       });
       const postsList: IPost[] = response.data;
-
       const allLikes = JSON.parse(
         localStorage.getItem("@CosmosSearch:LIKELIST") as string
       ) as IAllLikes[];
@@ -263,16 +262,20 @@ export const PostProvider = ({ children }: iChildren) => {
       });
       const newLike = newLikeResponse.data;
       const allLikes = [...allLikesList, newLike];
-      const postsWithLikes = list.map((post) => {
-        const postToAddLike = allLikes.find(
-          (like) => post.id === like.postId
-        ) as IAllLikes;
-        return { ...post, qntOfLikes: postToAddLike.qnt };
-      });
-      const orderedList = orderPostsByData(postsWithLikes);
-      setPosts(orderedList);
-      setAllLikesList(allLikes);
-      setMainComponent("posts");
+      // const postsWithLikes = list.map((post) => {
+      //   const postToAddLike = allLikes.find(
+      //     (like) => post.id === like.postId
+      //   ) as IAllLikes;
+      //   return { ...post, qntOfLikes: 0, postLiked: false };
+      // });
+      // console.log(postsWithLikes)
+      // const orderedList = orderPostsByData(postsWithLikes);
+      // setPosts(orderedList);
+      // setMainComponent("posts");
+      localStorage.setItem(
+        "@CosmosSearch:LIKELIST",
+        JSON.stringify(allLikes)
+      );
     } catch (error) {
       toast.error("erro na criação de end point de like");
       toast.error("Something went wrong.");
@@ -283,7 +286,7 @@ export const PostProvider = ({ children }: iChildren) => {
     const userId = Number(localStorage.getItem("@CosmosSearch:USERID"));
     const name = localStorage.getItem("@CosmosSearch:USERNAME") as string;
     const date = getPostDate();
-    const newData = { ...data, userId, name, date };
+    const newData = { ...data, userId, name, date, };
     const token = localStorage.getItem("@CosmosSearch:TOKEN");
     if (token) {
       try {
@@ -292,9 +295,17 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        const postsList = [...posts, response.data];
-        toast.success("Post successfully created");
+        console.log(response.data)
+        const newPost = {...response.data, qntOfLikes: 0, postLiked: false}
+        console.log(newPost)
+        const postsList = [...posts, newPost];
         createLikeEndPointForPost(response.data.id, postsList, token);
+        toast.success("Post successfully created");
+        const orderedList = orderPostsByData(postsList);
+        setPosts(orderedList);
+        getAllLikes(token);
+        getAllUserPosts();
+        setMainComponent("posts");
       } catch (error) {
         console.log(error);
         toast.error("Unable to create post!");
@@ -303,7 +314,7 @@ export const PostProvider = ({ children }: iChildren) => {
   };
 
   const deletePost = async (postId: number) => {
-    const token = localStorage.getItem("@CosmosSearch:TOKEN");
+    const token = localStorage.getItem("@CosmosSearch:TOKEN") as string
     if (token) {
       try {
         await api.delete(`/posts/${postId}`, {
@@ -311,6 +322,7 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
+        getAllLikes(token);
         getAllUserPosts();
         getAllPosts();
         toast.success("Post successfully deleted");
@@ -327,7 +339,7 @@ export const PostProvider = ({ children }: iChildren) => {
   };
 
   const editPost = async (postId: number, data: IUpdatePost) => {
-    const token = localStorage.getItem("@CosmosSearch:TOKEN");
+    const token = localStorage.getItem("@CosmosSearch:TOKEN") as string
     const userId = localStorage.getItem("@CosmosSearch:USERID");
     const newData = { ...data, userId, date: getPostDate() };
     try {
@@ -336,6 +348,7 @@ export const PostProvider = ({ children }: iChildren) => {
           Authorization: `Bearer ${token}`,
         },
       });
+      getAllLikes(token);
       getAllUserPosts();
       getAllPosts();
       toast.success("Post successfully updated");
@@ -345,80 +358,7 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
-  const likePost = (postId: number) => {
-    if (userState === "userLogged") {
-      if (isSearch) {
-        const postsWithLickedAlteration: IPost[] = searchedPosts.map((post) => {
-          if (post.id === postId) {
-            return { ...post, postLiked: !post.postLiked };
-          } else if (postId !== post.id) {
-            return post;
-          }
-        }) as IPost[];
-        setSearchedPosts(postsWithLickedAlteration);
-        const actualizedPostsList = posts.map((post) => {
-          const actualizedPost = postsWithLickedAlteration.find(
-            (searchedPost) => {
-              if (post.id === searchedPost.id) {
-                return searchedPost;
-              }
-            }
-          );
-          if (actualizedPost) {
-            return actualizedPost;
-          } else {
-            return post;
-          }
-        });
-        setPosts(actualizedPostsList);
-      } else {
-        const postsWithLickedAlteration: IPost[] = posts.map((post) => {
-          if (post.id === postId) {
-            return { ...post, postLiked: !post.postLiked };
-          } else if (postId !== post.id) {
-            return post;
-          }
-        }) as IPost[];
-        setPosts(postsWithLickedAlteration);
-      }
-    } else if (userState === "userLoggedInPerfil") {
-      if (isSearch) {
-        const postsWithLickedAlteration: IPost[] = searchedPosts.map((post) => {
-          if (post.id === postId) {
-            return { ...post, postLiked: !post.postLiked };
-          } else if (postId !== post.id) {
-            return post;
-          }
-        }) as IPost[];
-        setSearchedPosts(postsWithLickedAlteration);
-        const actualizedPostsList = userPosts.map((post) => {
-          const actualizedPost = postsWithLickedAlteration.find(
-            (searchedPost) => {
-              if (post.id === searchedPost.id) {
-                return searchedPost;
-              }
-            }
-          );
-          if (actualizedPost) {
-            return actualizedPost;
-          } else {
-            return post;
-          }
-        });
-        setUserPosts(actualizedPostsList);
-      } else {
-        const postsWithLickedAlteration: IPost[] = userPosts.map((post) => {
-          if (post.id === postId) {
-            return { ...post, postLiked: !post.postLiked };
-          } else if (postId !== post.id) {
-            return post;
-          }
-        }) as IPost[];
-        setUserPosts(postsWithLickedAlteration);
-      }
-    }
-  };
-
+  
   const actualizePostLikedsUserArray = async (
     postId: number,
     postLiked: boolean
@@ -629,7 +569,6 @@ export const PostProvider = ({ children }: iChildren) => {
         isDashboard,
         setIsDashboard,
         searchFunction,
-        likePost,
         searchOpen,
         setSearchOpen,
         resetSearch,

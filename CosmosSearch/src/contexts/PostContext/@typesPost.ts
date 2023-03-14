@@ -46,7 +46,6 @@ export interface IPostContext {
   isDashboard: boolean;
   setIsDashboard: React.Dispatch<React.SetStateAction<boolean>>;
   searchFunction: (post: IPost) => IPost | undefined;
-  likePost: (postId: number) => void;
   searchOpen: boolean;
   setSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
   resetSearch: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;

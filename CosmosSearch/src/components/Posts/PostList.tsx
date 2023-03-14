@@ -12,7 +12,7 @@ export const Posts = () => {
   useEffect(() => {
     const token = localStorage.getItem("@CosmosSearch:TOKEN") as string
     setIsSearch(false);
-    // getAllLikes(token);
+    getAllLikes(token);
     getAllPosts();
   }, []);
 

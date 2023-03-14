@@ -4,7 +4,6 @@ import { PostContext } from "../../../contexts/PostContext/PostContext";
 
 import {
   ArrowUp,
-  CloseX,
   CloseXPost,
   Hamburguer,
   LikeClicked,
@@ -16,7 +15,6 @@ import {
   DivsButtonsStyled,
   PostStyled,
   ButtonsStyled,
-  ButtonsAbsoluteStyled,
 } from "../PostListStyled";
 
 import { CommentsContext } from "../../../contexts/CommentsContext/CommentsContext";
@@ -54,7 +52,7 @@ export const Post = ({
     setEditModalIsOpen,
     setDeleteModalIsOpen,
   } = useContext(LinksContext);
-  const { setActualPostId, alterLikeCount, likePost } = useContext(PostContext);
+  const { setActualPostId, alterLikeCount } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
   const { userState } = useContext(UserContext);
 

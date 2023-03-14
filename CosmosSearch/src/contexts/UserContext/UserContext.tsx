@@ -54,6 +54,7 @@ export const UserProvider = ({ children }: iChildren) => {
       setUser(response.data.user);
       const { name, email, postLikeds } = response.data.user;
       const userInfosData = { name, email, postLikeds };
+      console.log(userInfosData)
       setUserInfos(userInfosData);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
@@ -149,6 +150,7 @@ export const UserProvider = ({ children }: iChildren) => {
       const userInfosData = {
         name: response.data.name,
         email: response.data.email,
+        postLikeds: response.data.postLikeds,
       } as IUserInfos
       setUserInfos(userInfosData);
       localStorage.setItem(
