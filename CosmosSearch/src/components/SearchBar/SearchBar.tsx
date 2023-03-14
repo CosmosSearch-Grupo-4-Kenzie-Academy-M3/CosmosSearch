@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { CloseModal, SearchIcon } from "../Svgs/Svg";
+import { CloseMenu, CloseModal, CloseX, CloseXLitle, SearchIcon } from "../Svgs/Svg";
 import { SearchBarContainer } from "./SearchBarStyled";
 
 import { PostContext } from "../../contexts/PostContext/PostContext";
@@ -41,7 +41,7 @@ export const SearchBar = () => {
               type="button"
               onClick={(e) => resetSearch(e)}
             >
-              <CloseModal />
+              <CloseXLitle />
             </button>
             <div className="searchbar__header">
               <input
@@ -59,7 +59,7 @@ export const SearchBar = () => {
       ) : (
         <SearchBarContainer>
           <button 
-            className="animation--btn open__search  search__border--close"
+            className="animation--btn open__search search__border--close"
             onClick={() => setSearchOpen(true)}
           >
             <SearchIcon />
