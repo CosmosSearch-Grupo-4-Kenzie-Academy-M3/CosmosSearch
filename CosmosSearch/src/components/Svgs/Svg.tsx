@@ -18,6 +18,7 @@ import searchIcon from "../../assets/svgs/search-icon.svg";
 
 import {
   SvgCloseModal,
+  SvgForCloseInput,
   SvgLike,
   SvgPlusComment,
   SvgPosts,
@@ -103,6 +104,10 @@ export const Hamburguer = () => {
 
 export const CloseX = () => {
   return <SvgStyled src={closeX} alt="CloseX icon" />;
+};
+
+export const CloseXLitle = () => {
+  return <SvgForCloseInput src={closeModal} alt="CloseX icon" />;
 };
 
 export const PlusXRotate = () => {

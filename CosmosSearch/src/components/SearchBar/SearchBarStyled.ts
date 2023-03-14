@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const SearchBarContainer = styled.form`
   height: 100%;
-  margin-left: -1.4rem;
-  display: flex;
 
   .animation {
     height: 100%;
-
     animation: input--in ease-in-out .5s forwards;
     display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap: .2rem
   }
 
   .animation--btn {
@@ -20,7 +20,8 @@ export const SearchBarContainer = styled.form`
   }
   
   .open__search {
-    margin-left: 1.4rem;
+    /* margin-left: 1.4rem; */
+    border: 2px solid red;
   }
 
   .search__border {
@@ -43,7 +44,7 @@ export const SearchBarContainer = styled.form`
   }
   .close__button {
     background-color: transparent;
-    margin-right: -0.8rem;
+    margin-top: .2rem;
   }
   input {
     height: 100%;
