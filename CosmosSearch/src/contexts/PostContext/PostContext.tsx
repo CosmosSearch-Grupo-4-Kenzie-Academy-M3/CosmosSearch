@@ -22,10 +22,104 @@ export const PostProvider = ({ children }: iChildren) => {
   const [isSearch, setIsSearch] = useState(false);
   const [isDashboard, setIsDashboard] = useState(false);
   const [likeClicked, setLikeClicked] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [value, setValue] = useState<string | null>("");
 
   const { setMainComponent } = useContext(LinksContext);
-  const { logout } = useContext(UserContext)
+  const { logout, userState } = useContext(UserContext);
+
+  const orderPostsByData = (list: IPost[]) => {
+    const orderedList = list.sort((postA, postB) => {
+      let dateAInNumber =
+        Number(postA.date.slice(0, 1)) +
+        Number(postA.date.slice(3, 4)) +
+        Number(postA.date.slice(6, 7));
+      let dateBInNumber =
+        Number(postB.date.slice(0, 1)) +
+        Number(postB.date.slice(3, 4)) +
+        Number(postB.date.slice(6, 7));
+      const postAMonth = postA.date.slice(3, 4);
+      const postBMonth = postA.date.slice(3, 4);
+      switch (postAMonth) {
+        case "02":
+          dateAInNumber = dateAInNumber + 31;
+          break;
+        case "03":
+          dateAInNumber = dateAInNumber + 31 * 2;
+          break;
+        case "04":
+          dateAInNumber = dateAInNumber + 31 * 3;
+          break;
+        case "05":
+          dateAInNumber = dateAInNumber + 31 * 4;
+          break;
+        case "06":
+          dateAInNumber = dateAInNumber + 31 * 5;
+          break;
+        case "07":
+          dateAInNumber = dateAInNumber + 31 * 6;
+          break;
+        case "08":
+          dateAInNumber = dateAInNumber + 31 * 7;
+          break;
+        case "09":
+          dateAInNumber = dateAInNumber + 31 * 8;
+          break;
+        case "10":
+          dateAInNumber = dateAInNumber + 31 * 9;
+          break;
+        case "11":
+          dateAInNumber = dateAInNumber + 31 * 10;
+          break;
+        case "12":
+          dateAInNumber = dateAInNumber + 31 * 11;
+          break;
+      }
+      switch (postBMonth) {
+        case "02":
+          dateBInNumber = dateBInNumber + 31;
+          break;
+        case "03":
+          dateBInNumber = dateBInNumber + 31 * 2;
+          break;
+        case "04":
+          dateBInNumber = dateBInNumber + 31 * 3;
+          break;
+        case "05":
+          dateBInNumber = dateBInNumber + 31 * 4;
+          break;
+        case "06":
+          dateBInNumber = dateBInNumber + 31 * 5;
+          break;
+        case "07":
+          dateBInNumber = dateBInNumber + 31 * 6;
+          break;
+        case "08":
+          dateBInNumber = dateBInNumber + 31 * 7;
+          break;
+        case "09":
+          dateBInNumber = dateBInNumber + 31 * 8;
+          break;
+        case "10":
+          dateBInNumber = dateBInNumber + 31 * 9;
+          break;
+        case "11":
+          dateBInNumber = dateBInNumber + 31 * 10;
+          break;
+        case "12":
+          dateBInNumber = dateBInNumber + 31 * 11;
+          break;
+      }
+      if (dateAInNumber > dateBInNumber) {
+        return 1;
+      } else if (dateAInNumber < dateBInNumber) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    return orderedList;
+  };
 
   const getAllPosts = async () => {
     try {
@@ -34,10 +128,13 @@ export const PostProvider = ({ children }: iChildren) => {
       const postsListToUserLogged = postsList.map((post) => {
         return { ...post, postLiked: likeClicked };
       });
-      setPosts(postsListToUserLogged);
+      const orderedList = orderPostsByData(postsListToUserLogged);
+      setPosts(orderedList);
     } catch (error) {
-      toast.error("An error has occurred, plese login again.");
-      logout();
+      if (userState !== "userDeslogged") {
+        toast.error("An error has occurred, plese login again.");
+        logout();
+      }
     }
   };
 
@@ -51,7 +148,8 @@ export const PostProvider = ({ children }: iChildren) => {
           },
         });
         const postsList: IPost[] = response.data;
-        setUserPosts(postsList);
+        const orderedList: IPost[] = orderPostsByData(postsList);
+        setUserPosts(orderedList);
       } catch (error) {
         toast.error("An error has occurred, plese login again.");
         logout();
@@ -82,7 +180,8 @@ export const PostProvider = ({ children }: iChildren) => {
           },
         });
         console.log(newData);
-        setPosts([...posts, response.data]);
+        const orderedList = orderPostsByData([...posts, response.data]);
+        setPosts(orderedList);
         toast.success("Post successfully created");
         setMainComponent("posts");
       } catch (error) {
@@ -112,6 +211,12 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
+  const resetSearchInUpdatePost = () => {
+    setIsSearch(false);
+    setSearchOpen(false);
+    setValue("");
+  };
+
   const editPost = async (postId: number, data: IUpdatePost) => {
     const token = localStorage.getItem("@CosmosSearch:TOKEN");
     const userId = localStorage.getItem("@CosmosSearch:USERID");
@@ -125,6 +230,7 @@ export const PostProvider = ({ children }: iChildren) => {
       getAllUserPosts(Number(userId));
       getAllPosts();
       toast.success("Post successfully updated");
+      resetSearchInUpdatePost();
     } catch (error) {
       toast.error("Unable to update post!");
     }
@@ -186,6 +292,14 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
+  const resetSearch = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+
+    setIsSearch(false);
+    setSearchOpen(false);
+    setValue("");
+  };
+
   return (
     <PostContext.Provider
       value={{
@@ -211,6 +325,9 @@ export const PostProvider = ({ children }: iChildren) => {
         setIsDashboard,
         searchFunction,
         likePost,
+        searchOpen,
+        setSearchOpen,
+        resetSearch,
       }}
     >
       {children}

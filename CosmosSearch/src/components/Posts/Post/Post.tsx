@@ -31,11 +31,19 @@ interface IPostProps {
   body: string;
   topic: string;
   postId: number;
-  date: string
-  postLiked?: boolean
+  date: string;
+  postLiked?: boolean;
 }
 
-export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPostProps) => {
+export const Post = ({
+  title,
+  name,
+  body,
+  topic,
+  postId,
+  date,
+  postLiked,
+}: IPostProps) => {
   const {
     setModalIsOpen,
     setModalId,
@@ -47,10 +55,17 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
   const { userState } = useContext(UserContext);
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
-  
+
   return (
     <PostStyled>
-      <div className="icon">
+      <div
+        className="icon"
+        onClick={() => {
+          setModalIsOpen(true);
+          setModalId(postId);
+          readAllComments(postId);
+        }}
+      >
         <PlanetGrey />
       </div>
       <div className="post">
@@ -62,7 +77,7 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
             <DivsButtonsStyled>
               {hamburgerOpen ? (
                 <div className="buttons">
-                  <ButtonsStyled  onClick={() => setHamburgerOpen(false)}>
+                  <ButtonsStyled onClick={() => setHamburgerOpen(false)}>
                     <ArrowUp />
                   </ButtonsStyled>
                   <ButtonsAbsoluteStyled
@@ -75,7 +90,7 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
                     <Pencil />
                   </ButtonsAbsoluteStyled>
                   <ButtonsAbsoluteStyled
-                  top="5.2rem"
+                    top="5.2rem"
                     onClick={() => {
                       setDeleteModalIsOpen(true);
                       setActualPostId(postId);
@@ -100,11 +115,9 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
             <p className="post__infos">date: {date}</p>
             <p className="post__infos">topic: {topic}</p>
           </div>
-          <div
-            className="button"
-          >
+          <div className="button">
             <div onClick={() => likePost(postId)}>
-              {postLiked ? <LikeClicked/> : <LikeUnclicked/>} 
+              {postLiked ? <LikeClicked /> : <LikeUnclicked />}
             </div>
             <ButtonStyled
               textColor="var(--primary-blue)"
