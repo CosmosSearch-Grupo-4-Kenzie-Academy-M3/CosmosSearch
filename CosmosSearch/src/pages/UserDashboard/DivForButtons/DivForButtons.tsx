@@ -46,9 +46,9 @@ export const DivForButtons = () => {
       {/* Desktop */}
       <DivForButtonsStyled className="container__pages">
         <div className=" divForButtonStyled__burgerClosed">
-            <div className="searchbar__burguer--desktop">
-              <SearchBar />
-            </div>
+          <div className="searchbar__burguer--desktop">
+            <SearchBar />
+          </div>
           <LinkButtonWithSvg icon="astronaut" />
           <LinkButtonWithSvg icon="planet" />
           <LinkButtonWithSvg icon="plus" />

@@ -64,4 +64,4 @@ export const PostDeleteButtonStyled = styled.button`
   color: var(--primary-blue);
 
   cursor: pointer;
-`
+`;

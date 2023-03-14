@@ -5,14 +5,11 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
-import { number } from "yup";
 
 import { api } from "../../services/api";
 
 import { iChildren } from "../@childrenType";
 import { LinksContext } from "../LinksContext/LinksContext";
-import { IPost } from "../PostContext/@typesPost";
-import { PostContext } from "../PostContext/PostContext";
 import {
   IFormUserLogin,
   IFormUserRegister,
@@ -42,8 +39,6 @@ export const UserProvider = ({ children }: iChildren) => {
     reset,
   } = useForm<IFormUserLogin>();
 
-
-
   const userRegister = async (data: IFormUserRegister) => {
     try {
       const response = await api.post("/users", data);
@@ -62,10 +57,9 @@ export const UserProvider = ({ children }: iChildren) => {
         JSON.stringify(userInfosData)
       );
       navigate("/dashboard");
-      toast.success("Usuário registrado com sucesso!");
+      toast.success("User registered successfully!");
     } catch (error) {
-      console.log(error);
-      toast.error("Por favor revise seus dados.");
+      toast.error("Please review your data.");
     }
   };
 
@@ -128,8 +122,7 @@ export const UserProvider = ({ children }: iChildren) => {
         JSON.stringify(userInfosData)
       );
     } catch (error) {
-      console.log(error);
-      toast.error("Por favor revise seus dados.");
+      toast.error("Please review your data.");
     }
   };
 

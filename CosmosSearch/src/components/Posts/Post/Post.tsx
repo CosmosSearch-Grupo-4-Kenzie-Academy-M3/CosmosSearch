@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import { PostContext } from "../../../contexts/PostContext/PostContext";
 
@@ -6,7 +6,6 @@ import {
   ArrowUp,
   CloseX,
   Hamburguer,
-  Like,
   LikeClicked,
   LikeUnclicked,
   Pencil,

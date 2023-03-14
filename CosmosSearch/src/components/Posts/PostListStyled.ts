@@ -89,7 +89,7 @@ export const PostStyled = styled.li`
       justify-content: center;
       align-items: center;
 
-      transition: .25s;
+      transition: 0.25s;
       :hover {
         transform: scale(1.3);
       }

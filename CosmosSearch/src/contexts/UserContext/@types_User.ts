@@ -68,4 +68,3 @@ export interface IUserContext {
   userInfos: IUserInfos | null;
   setUserInfos: React.Dispatch<React.SetStateAction<IUserInfos | null>>;
 }
-

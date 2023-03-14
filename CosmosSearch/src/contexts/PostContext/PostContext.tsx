@@ -1,7 +1,5 @@
 import { createContext, useContext, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
-
 import { toast } from "react-toastify";
 
 import { api } from "../../services/api";
@@ -179,7 +177,6 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(newData);
         const orderedList = orderPostsByData([...posts, response.data]);
         setPosts(orderedList);
         toast.success("Post successfully created");
