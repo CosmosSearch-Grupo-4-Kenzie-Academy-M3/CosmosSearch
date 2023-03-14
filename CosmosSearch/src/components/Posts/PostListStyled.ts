@@ -33,7 +33,7 @@ export const PostStyled = styled.li`
 
   .post {
     width: 100%;
-    height: 440px;
+    height: max-content;
 
     padding: 1.25rem;
 
@@ -57,11 +57,7 @@ export const PostStyled = styled.li`
     }
 
     /* MediaQuery */
-    @media (min-width: 330px) {
-      height: 370px;
-    }
-
-    @media (min-width: 440px) {
+    @media (min-width: 460px) {
       height: 250px;
 
       .date__and__button {

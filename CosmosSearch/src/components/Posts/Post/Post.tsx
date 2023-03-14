@@ -56,7 +56,7 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
       <div className="post">
         <div className="post__header">
           <p className="title__posts title__posts--desktop">
-            {title} - {name}
+            {title}... - {name}
           </p>
           {userState === "userLoggedInPerfil" ? (
             <DivsButtonsStyled>
@@ -94,7 +94,7 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
             <></>
           )}
         </div>
-        <p className="post__text__preview">{body.slice(1, 320)}...</p>
+        <p className="post__text__preview">{body.slice(0, 120)}...</p>
         <div className="date__and__button">
           <div className="date">
             <p className="post__infos">date: {date}</p>
