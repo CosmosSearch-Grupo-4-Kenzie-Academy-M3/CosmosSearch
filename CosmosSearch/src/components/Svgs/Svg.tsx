@@ -20,6 +20,7 @@ import {
   SvgCloseModal,
   SvgLike,
   SvgPlusComment,
+  SvgPosts,
   SvgSearch,
   SvgStyled,
   SvgStyledFliped,
@@ -113,13 +114,17 @@ export const PlusX = () => {
 };
 
 export const Pencil = () => {
-  return <SvgStyled src={pencil} alt="Pencil icon" />;
+  return <SvgPosts src={pencil} alt="Pencil icon" />;
+};
+
+export const CloseXPost = () => {
+  return <SvgPosts src={closeX} alt="CloseX icon" />;
 };
 
 export const ArrowUp = () => {
-  return <SvgStyled src={arrowUp} alt="Arrow up icon" />;
+  return <SvgPosts src={arrowUp} alt="Arrow up icon" />;
 };
 
 export const SearchIcon = () => {
-  return <SvgSearch src={searchIcon} alt="Search icon" />;
+  return <SvgPosts src={searchIcon} alt="Search icon" />;
 };

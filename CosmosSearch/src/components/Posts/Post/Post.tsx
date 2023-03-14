@@ -5,6 +5,7 @@ import { PostContext } from "../../../contexts/PostContext/PostContext";
 import {
   ArrowUp,
   CloseX,
+  CloseXPost,
   Hamburguer,
   Like,
   LikeClicked,
@@ -65,24 +66,22 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
                   <ButtonsStyled  onClick={() => setHamburgerOpen(false)}>
                     <ArrowUp />
                   </ButtonsStyled>
-                  <ButtonsAbsoluteStyled
-                    top="2.3rem"
+                  <ButtonsStyled
                     onClick={() => {
                       setEditModalIsOpen(true);
                       setActualPostId(postId);
                     }}
                   >
                     <Pencil />
-                  </ButtonsAbsoluteStyled>
-                  <ButtonsAbsoluteStyled
-                  top="5.2rem"
+                  </ButtonsStyled>
+                  <ButtonsStyled
                     onClick={() => {
                       setDeleteModalIsOpen(true);
                       setActualPostId(postId);
                     }}
                   >
-                    <CloseX />
-                  </ButtonsAbsoluteStyled>
+                    <CloseXPost/>
+                  </ButtonsStyled>
                 </div>
               ) : (
                 <ButtonsStyled onClick={() => setHamburgerOpen(true)}>
@@ -94,7 +93,7 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
             <></>
           )}
         </div>
-        <p className="post__text__preview">{body.slice(0, 120)}...</p>
+        <p className="post__text__preview">{body.slice(0, 220)}...</p>
         <div className="date__and__button">
           <div className="date">
             <p className="post__infos">date: {date}</p>

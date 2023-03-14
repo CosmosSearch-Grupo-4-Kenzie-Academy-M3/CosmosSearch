@@ -75,7 +75,7 @@ export const PostStyled = styled.li`
     }
 
     @media (min-width: 1000px) {
-      height: 300px;
+      height: 350px;
     }
   }
 
@@ -129,9 +129,13 @@ export const PostStyled = styled.li`
 `;
 
 export const DivsButtonsStyled = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+  /* border: 2px solid rebeccapurple; */
+  align-self: flex-start;
+
+
 
   width: 40px;
   height: 40px;
@@ -142,11 +146,12 @@ export const DivsButtonsStyled = styled.div`
 
   .buttons {
     position: relative;
-
     display: flex;
     flex-direction: column;
+    height: 50px;
+    object-fit: contain;
 
-    gap: 1rem;
+    gap: .5rem;
   }
 `;
 
@@ -165,11 +170,11 @@ export const ButtonsStyled = styled.button`
 `;
 
 export const ButtonsAbsoluteStyled = styled.button<IButtonsStyled>`
-  position: absolute;
+  /* position: absolute; */
 
-  top: ${(props) => props.top};
+  /* top: ${(props) => props.top}; */
 
-  right: 0.2rem;
+  /* right: 0.2rem; */
 
   background-color: transparent;
 
