@@ -37,9 +37,6 @@ export const UserDashboard = () => {
       localStorage.getItem("@CosmosSearch:USERINFOS") as string
     );
     setUserInfos(userInfosData);
-    getAllPosts();
-    getAllLikes();
-    getAllUserPosts();
   }, []);
 
   return (

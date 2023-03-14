@@ -10,6 +10,7 @@ import { api } from "../../services/api";
 
 import { iChildren } from "../@childrenType";
 import { LinksContext } from "../LinksContext/LinksContext";
+import { PostContext } from "../PostContext/PostContext";
 import {
   IFormUserLogin,
   IFormUserRegister,
@@ -23,6 +24,7 @@ export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: iChildren) => {
   const { setMainComponent } = useContext(LinksContext);
+  const { getAllLikes } = useContext(PostContext)
 
   const [userState, setUserState] = useState<
     "userLoggedInPerfil" | "userLogged" | "userDeslogged"
@@ -57,9 +59,24 @@ export const UserProvider = ({ children }: iChildren) => {
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
       );
+      try {
+        const responseLikes = await api.get("/likes", {
+          headers: {
+            Authorization: `Bearer ${response.data.acessToken}`,
+          },
+        });
+        localStorage.setItem(
+          "@CosmosSearch:LIKELIST",
+          JSON.stringify(responseLikes.data)
+        );
+      } catch (error) {
+        console.log(error);
+        toast.error("Erro na get all likes");
+      }
       navigate("/dashboard");
       toast.success("User registered successfully!");
     } catch (error) {
+      console.log(error)
       toast.error("Please review your data.");
     }
   };
@@ -74,18 +91,31 @@ export const UserProvider = ({ children }: iChildren) => {
       localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       setUserState("userLogged");
       setUser(response.data.user);
-      console.log(response.data.user)
       const { name, email, postLikeds } = response.data.user;
       const userInfosData = { name, email, postLikeds };
-      console.log(userInfosData)
       setUserInfos(userInfosData);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
-      );
-      navigate("/dashboard");
-      toast.success("Login efetuado!");
+        );
+        try {
+          const responseLikes = await api.get("/likes", {
+            headers: {
+              Authorization: `Bearer ${response.data.acessToken}`,
+            },
+          });
+          localStorage.setItem(
+            "@CosmosSearch:LIKELIST",
+            JSON.stringify(responseLikes.data)
+          );
+        } catch (error) {
+          console.log(error);
+          toast.error("Erro na get all likes");
+        }
+        toast.success("Login efetuado!");
+        navigate("/dashboard");
     } catch (error) {
+      console.log(error)
       toast.error("Usuário ou Senha inválidos.");
       reset();
     }
@@ -126,6 +156,7 @@ export const UserProvider = ({ children }: iChildren) => {
         JSON.stringify(userInfosData)
       );
     } catch (error) {
+      console.log(error)
       toast.error("Please review your data.");
     }
   };

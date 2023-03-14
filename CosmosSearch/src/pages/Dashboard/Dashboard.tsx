@@ -24,11 +24,6 @@ export const Dashboard = () => {
       | "userDeslogged";
     setUserState(currentUserState);
     const token = localStorage.getItem("@CosmosSearch:TOKEN")
-    if (token) {
-      getAllLikes();
-      getAllPosts();
-      getAllUserPosts();
-    }
   }, []);
 
   return (
