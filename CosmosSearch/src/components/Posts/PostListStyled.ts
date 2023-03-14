@@ -42,6 +42,7 @@ export const PostStyled = styled.li`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 1rem;
 
     .date__and__button {
       display: flex;
@@ -58,8 +59,6 @@ export const PostStyled = styled.li`
 
     /* MediaQuery */
     @media (min-width: 460px) {
-      height: 250px;
-
       .date__and__button {
         flex-direction: row;
         justify-content: space-between;
@@ -68,13 +67,15 @@ export const PostStyled = styled.li`
     }
 
     @media (min-width: 550px) {
-      height: 250px;
-
       .date__and__button {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
       }
+    }
+
+    @media (min-width: 1000px) {
+      height: 300px;
     }
   }
 
