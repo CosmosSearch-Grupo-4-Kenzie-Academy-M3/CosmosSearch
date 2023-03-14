@@ -4,7 +4,6 @@ import { Post } from "./Post/Post";
 import { PostListStyled } from "./PostListStyled";
 
 import { PostContext } from "../../contexts/PostContext/PostContext";
-import { number } from "yup";
 
 export const Posts = () => {
   const { posts, isSearch, setIsSearch, searchedPosts } =

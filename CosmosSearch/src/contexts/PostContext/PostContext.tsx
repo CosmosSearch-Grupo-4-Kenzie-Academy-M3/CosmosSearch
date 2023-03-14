@@ -9,7 +9,6 @@ import { IFormPostRegister, IUserInfos } from "../UserContext/@types_User";
 import { IAllLikes, IPost, IPostContext, IUpdatePost } from "./@typesPost";
 import { LinksContext } from "../LinksContext/LinksContext";
 import { UserContext } from "../UserContext/UserContext";
-import { AxiosError } from "axios";
 
 export const PostContext = createContext({} as IPostContext);
 
@@ -174,10 +173,8 @@ export const PostProvider = ({ children }: iChildren) => {
       const orderedList = orderPostsByData(postsWithLikes);
       setPosts(orderedList);
     } catch (error) {
-      if (userState !== "userDeslogged") {
-        toast.error("An error has occurred, plese login again.");
-        logout();
-      }
+      console.log(error)
+        toast.error("An error has occurred, plese login again."); 
     }
   };
 
@@ -221,8 +218,9 @@ export const PostProvider = ({ children }: iChildren) => {
         const orderedList = orderPostsByData(postsWithLikes);
         setUserPosts(orderedList);
       } catch (error) {
+        console.log(error)
           toast.error("An error has occurred, plese login again.");
-          logout();
+
       }
     }
   };
@@ -444,7 +442,6 @@ export const PostProvider = ({ children }: iChildren) => {
     const likeData = postLiked
       ? { qnt: qntOfLikes - 1 }
       : { qnt: qntOfLikes + 1 };
-    const newPostLiked = postLiked ? false : true
       try {
       const response = await api.patch(`/likes/${likeId}`, likeData, {
         headers: {

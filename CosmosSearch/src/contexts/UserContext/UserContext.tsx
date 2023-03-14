@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
-import { number } from "yup";
 
 import { api } from "../../services/api";
 
@@ -78,8 +77,10 @@ export const UserProvider = ({ children }: iChildren) => {
       localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       setUserState("userLogged");
       setUser(response.data.user);
+      console.log(response.data.user)
       const { name, email, postLikeds } = response.data.user;
       const userInfosData = { name, email, postLikeds };
+      console.log(userInfosData)
       setUserInfos(userInfosData);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
@@ -96,6 +97,7 @@ export const UserProvider = ({ children }: iChildren) => {
   const logout = () => {
     localStorage.removeItem("@CosmosSearch:TOKEN");
     localStorage.removeItem("@CosmosSearch:USERSTATE");
+    localStorage.clear()
     setUserState("userDeslogged");
     setUser(null);
     navigate("/");

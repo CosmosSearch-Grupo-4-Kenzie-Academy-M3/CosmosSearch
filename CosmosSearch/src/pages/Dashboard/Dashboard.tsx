@@ -14,7 +14,7 @@ import { SearchBar } from "../../components/SearchBar/SearchBar";
 export const Dashboard = () => {
   const { burgerOpen, modalIsOpen } = useContext(LinksContext);
   const { userState, setUserState } = useContext(UserContext);
-  const { setIsDashboard, isDashboard, getAllLikes, getAllPosts } = useContext(PostContext);
+  const { setIsDashboard, isDashboard, getAllLikes, getAllPosts, getAllUserPosts } = useContext(PostContext);
 
   useEffect(() => {
     setIsDashboard(true);
@@ -27,6 +27,7 @@ export const Dashboard = () => {
     if (token) {
       getAllLikes();
       getAllPosts();
+      getAllUserPosts();
     }
   }, []);
 
