@@ -62,3 +62,9 @@ export const SvgSearch = styled.img`
 
   background-color: transparent;
 `
+export const SvgPosts = styled.img`
+  width: 20px;
+  height: 20px;
+
+  background-color: transparent;
+`

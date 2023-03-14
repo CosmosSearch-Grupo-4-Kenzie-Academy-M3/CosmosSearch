@@ -6,11 +6,12 @@ import { PostListStyled } from "./PostListStyled";
 import { PostContext } from "../../contexts/PostContext/PostContext";
 
 export const Posts = () => {
-  const { posts, isSearch, setIsSearch, searchedPosts } =
+  const { posts, getAllPosts, isSearch, setIsSearch, searchedPosts } =
     useContext(PostContext);
 
   useEffect(() => {
     setIsSearch(false);
+    getAllPosts();
   }, []);
 
   return (

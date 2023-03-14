@@ -33,7 +33,7 @@ export const PostStyled = styled.li`
 
   .post {
     width: 100%;
-    height: 440px;
+    height: max-content;
 
     padding: 1.25rem;
 
@@ -42,6 +42,7 @@ export const PostStyled = styled.li`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 1rem;
 
     .date__and__button {
       display: flex;
@@ -58,13 +59,7 @@ export const PostStyled = styled.li`
     }
 
     /* MediaQuery */
-    @media (min-width: 330px) {
-      height: 370px;
-    }
-
-    @media (min-width: 440px) {
-      height: 250px;
-
+    @media (min-width: 460px) {
       .date__and__button {
         flex-direction: row;
         justify-content: space-between;
@@ -73,7 +68,15 @@ export const PostStyled = styled.li`
     }
 
     @media (min-width: 550px) {
-      height: 250px;
+      .date__and__button {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    @media (min-width: 1000px) {
+      height: 350px;
     }
   }
 
@@ -84,7 +87,7 @@ export const PostStyled = styled.li`
       justify-content: center;
       align-items: center;
 
-      transition: .25s;
+      transition: 0.25s;
       :hover {
         transform: scale(1.3);
       }
@@ -127,9 +130,13 @@ export const PostStyled = styled.li`
 `;
 
 export const DivsButtonsStyled = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+  /* border: 2px solid rebeccapurple; */
+  align-self: flex-start;
+
+
 
   width: 40px;
   height: 40px;
@@ -140,11 +147,12 @@ export const DivsButtonsStyled = styled.div`
 
   .buttons {
     position: relative;
-
     display: flex;
     flex-direction: column;
+    height: 50px;
+    object-fit: contain;
 
-    gap: 1rem;
+    gap: .5rem;
   }
 `;
 
@@ -163,11 +171,11 @@ export const ButtonsStyled = styled.button`
 `;
 
 export const ButtonsAbsoluteStyled = styled.button<IButtonsStyled>`
-  position: absolute;
+  /* position: absolute; */
 
-  top: ${(props) => props.top};
+  /* top: ${(props) => props.top}; */
 
-  right: 0.2rem;
+  /* right: 0.2rem; */
 
   background-color: transparent;
 

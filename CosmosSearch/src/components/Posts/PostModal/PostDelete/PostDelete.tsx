@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { LinksContext } from "../../../../contexts/LinksContext/LinksContext";
 import { PostContext } from "../../../../contexts/PostContext/PostContext";
 import { CloseModal } from "../../../Svgs/Svg";
-import { CloseButton, HeaderModal } from "../PostModalStyled";
+import { CloseButton } from "../PostModalStyled";
 import {
   PostDeleteButtonStyled,
   PostDeleteDivStyled,
@@ -16,7 +16,7 @@ export const PostDelete = () => {
   const deleteFunction = (id: number) => {
     deletePost(id);
     setDeleteModalIsOpen(false);
-  }
+  };
 
   return (
     <PostDeleteDivStyled>
@@ -25,7 +25,9 @@ export const PostDelete = () => {
           <CloseModal />
         </CloseButton>
         <p className="title__posts">DELETE POST?</p>
-        <PostDeleteButtonStyled onClick={() => deleteFunction(actualPostId)}>DELETE</PostDeleteButtonStyled>
+        <PostDeleteButtonStyled onClick={() => deleteFunction(actualPostId)}>
+          DELETE
+        </PostDeleteButtonStyled>
       </PostDeleteStyled>
     </PostDeleteDivStyled>
   );

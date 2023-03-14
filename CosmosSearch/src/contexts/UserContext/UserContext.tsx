@@ -39,8 +39,6 @@ export const UserProvider = ({ children }: iChildren) => {
     reset,
   } = useForm<IFormUserLogin>();
 
-
-
   const userRegister = async (data: IFormUserRegister) => {
     try {
       const fullDataToRegister = {...data, postLikeds: []}
@@ -60,10 +58,9 @@ export const UserProvider = ({ children }: iChildren) => {
         JSON.stringify(userInfosData)
       );
       navigate("/dashboard");
-      toast.success("Usuário registrado com sucesso!");
+      toast.success("User registered successfully!");
     } catch (error) {
-      console.log(error);
-      toast.error("Por favor revise seus dados.");
+      toast.error("Please review your data.");
     }
   };
 
@@ -129,8 +126,7 @@ export const UserProvider = ({ children }: iChildren) => {
         JSON.stringify(userInfosData)
       );
     } catch (error) {
-      console.log(error);
-      toast.error("Por favor revise seus dados.");
+      toast.error("Please review your data.");
     }
   };
 

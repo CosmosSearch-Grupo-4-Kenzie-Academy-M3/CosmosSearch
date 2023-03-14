@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 
 import { CommentsContext } from "../../../../contexts/CommentsContext/CommentsContext";
 import { PlusComment } from "../../../Svgs/Svg";
@@ -12,7 +12,6 @@ import {
 export const CommentUl = () => {
   const { allComments, readAllComments } = useContext(CommentsContext);
   const [openCommentInput, setOpenCommentInput] = useState(false);
-  console.log(allComments);
 
   return (
     <CommentsList>

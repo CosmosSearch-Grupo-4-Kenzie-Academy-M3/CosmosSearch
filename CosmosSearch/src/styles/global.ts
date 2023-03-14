@@ -109,7 +109,7 @@ export const GlobalStyle = createGlobalStyle`
 
     .title__posts {
         font-family: var(--ff-Oswald);
-        font-size: var(--fs-30);
+        font-size: var(--fs-25);
         font-weight: var(--fw-500);
         letter-spacing: 12%;
         color: var(--primary-blue);

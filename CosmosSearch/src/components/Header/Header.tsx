@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { FixedDiv, HeaderStyled } from "./HeaderStyled";
+import {  HeaderStyled } from "./HeaderStyled";
 import { LinksHeader } from "./LinksHeader/LinksHeader";
 
 import { BurgerMenu, CloseMenu, SmallLogo } from "../Svgs/Svg";
@@ -23,7 +23,6 @@ export const Header = ({ path }: iLinksHeader) => {
   >("non__animation");
 
   return (
-    // <FixedDiv>
     <HeaderStyled>
       <div className="header__container">
         <div className="container__header--mobileSmall">
@@ -88,6 +87,5 @@ export const Header = ({ path }: iLinksHeader) => {
         </div>
       </div>
     </HeaderStyled>
-    /* </FixedDiv> */
   );
 };

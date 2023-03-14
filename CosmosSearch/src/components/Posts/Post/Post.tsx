@@ -5,6 +5,7 @@ import { PostContext } from "../../../contexts/PostContext/PostContext";
 import {
   ArrowUp,
   CloseX,
+  CloseXPost,
   Hamburguer,
   LikeClicked,
   LikeUnclicked,
@@ -58,17 +59,10 @@ export const Post = ({
   const { userState } = useContext(UserContext);
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
-
+  
   return (
     <PostStyled>
-      <div
-        className="icon"
-        onClick={() => {
-          setModalIsOpen(true);
-          setModalId(postId);
-          readAllComments(postId);
-        }}
-      >
+      <div className="icon">
         <PlanetGrey />
       </div>
       <div className="post">
@@ -80,27 +74,25 @@ export const Post = ({
             <DivsButtonsStyled>
               {hamburgerOpen ? (
                 <div className="buttons">
-                  <ButtonsStyled onClick={() => setHamburgerOpen(false)}>
+                  <ButtonsStyled  onClick={() => setHamburgerOpen(false)}>
                     <ArrowUp />
                   </ButtonsStyled>
-                  <ButtonsAbsoluteStyled
-                    top="2.3rem"
+                  <ButtonsStyled
                     onClick={() => {
                       setEditModalIsOpen(true);
                       setActualPostId(postId);
                     }}
                   >
                     <Pencil />
-                  </ButtonsAbsoluteStyled>
-                  <ButtonsAbsoluteStyled
-                    top="5.2rem"
+                  </ButtonsStyled>
+                  <ButtonsStyled
                     onClick={() => {
                       setDeleteModalIsOpen(true);
                       setActualPostId(postId);
                     }}
                   >
-                    <CloseX />
-                  </ButtonsAbsoluteStyled>
+                    <CloseXPost/>
+                  </ButtonsStyled>
                 </div>
               ) : (
                 <ButtonsStyled onClick={() => setHamburgerOpen(true)}>
@@ -112,7 +104,7 @@ export const Post = ({
             <></>
           )}
         </div>
-        <p className="post__text__preview">{body}</p>
+        <p className="post__text__preview">{body.slice(0, 220)}...</p>
         <div className="date__and__button">
           <div className="date">
             <p className="post__infos">date: {date}</p>
