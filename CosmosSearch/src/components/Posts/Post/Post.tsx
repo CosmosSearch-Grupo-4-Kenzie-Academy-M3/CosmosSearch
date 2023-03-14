@@ -56,7 +56,7 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
       <div className="post">
         <div className="post__header">
           <p className="title__posts title__posts--desktop">
-            {title}... - {name}
+            {title} - {name}
           </p>
           {userState === "userLoggedInPerfil" ? (
             <DivsButtonsStyled>
