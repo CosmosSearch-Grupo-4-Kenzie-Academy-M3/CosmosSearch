@@ -47,7 +47,8 @@ export const UserProvider = ({ children }: iChildren) => {
       const newUserRegistered = response.data.user;
       const token = response.data.accessToken;
       const { name, email, id, postLikeds } = newUserRegistered;
-      const userInfosData = { ...newUserRegistered, token };
+      const userRegisteredInfos = { name, email, id, postLikeds }
+      const userInfosData = { ...userRegisteredInfos, token };
       setUser(newUserRegistered);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
@@ -70,7 +71,8 @@ export const UserProvider = ({ children }: iChildren) => {
       const userLogged = response.data.user;
       const token = response.data.accessToken;
       const { name, email, id, postLikeds } = userLogged;
-      const userInfosData = { ...userLogged, token };
+      const userLoggedInfos = { name, email, id, postLikeds }
+      const userInfosData = { ...userLoggedInfos, token };
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
