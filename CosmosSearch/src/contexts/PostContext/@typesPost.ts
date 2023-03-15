@@ -28,7 +28,6 @@ export interface IPostContext {
   posts: IPost[];
   userPosts: IPost[];
   getAllPosts: () => Promise<void>;
-  getAllUserPosts: () => Promise<void>;
   createPost: (data: IFormPostRegister) => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
   actualPostId: number;
@@ -49,6 +48,5 @@ export interface IPostContext {
   searchOpen: boolean;
   setSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
   resetSearch: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  getAllLikes: (token: string) => Promise<void>;
   alterLikeCount: (likeId: number, qntOfLikes: number, postId: number, postLiked: boolean) => Promise<void>
 }

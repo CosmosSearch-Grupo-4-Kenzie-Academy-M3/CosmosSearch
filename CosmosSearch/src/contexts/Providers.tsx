@@ -8,10 +8,9 @@ export const Providers = ({ children }: iChildren) => {
   return (
     <LinksProvider>
       <UserProvider>
-        <PostProvider>
           <CommentsProvider>{children}</CommentsProvider>
-        </PostProvider>
       </UserProvider>
     </LinksProvider>
   );
 };
+

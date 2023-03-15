@@ -47,6 +47,8 @@ export interface IPatchProfile {
 export interface IUserInfos {
   name: string;
   email: string;
+  id: number;
+  token: string;
   postLikeds: number[];
 }
 

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import { toast } from "react-toastify";
 
@@ -26,6 +26,10 @@ export const PostProvider = ({ children }: iChildren) => {
 
   const { setMainComponent } = useContext(LinksContext);
   const { logout, userState, setUserInfos } = useContext(UserContext);
+
+  useEffect(() => {
+    getAllPosts();
+  }, [posts]);
 
   const orderPostsByData = (list: IPost[]) => {
     const orderedList = list.sort((postA, postB) => {
@@ -120,28 +124,7 @@ export const PostProvider = ({ children }: iChildren) => {
     return orderedList;
   };
 
-  const getAllLikes = async (token: string) => {
-    try {
-      const response = await api.get("/likes", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setAllLikesList(response.data);
-      localStorage.setItem(
-        "@CosmosSearch:LIKELIST",
-        JSON.stringify(response.data)
-      );
-    } catch (error) {
-      console.log(error);
-      toast.error("Erro na get all likes");
-    }
-  };
-
   const getAllPosts = async () => {
-    const userInfos = JSON.parse(
-      localStorage.getItem("@CosmosSearch:USERINFOS") as string
-    ) as IUserInfos;
     try {
       const response = await api.get(`/posts`);
       const postsList: IPost[] = response.data;
@@ -149,6 +132,17 @@ export const PostProvider = ({ children }: iChildren) => {
         return { ...post, postLiked: likeClicked };
       });
       if (userState !== "userDeslogged") {
+        const userInfos = JSON.parse(
+          localStorage.getItem("@CosmosSearch:USERINFOS") as string
+          ) as IUserInfos;
+          const token = userInfos.token
+          const userId = userInfos.id
+        const responseLikes = await api.get("/likes", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const allLikes = responseLikes.data;
         const postListToUserLoggedWithLickedPosts = postsListToUserLogged.map(
           (post) => {
             const postLiked = userInfos.postLikeds.find((id) => post.id === id);
@@ -162,13 +156,10 @@ export const PostProvider = ({ children }: iChildren) => {
             }
           }
         );
-        const allLikes = JSON.parse(
-          localStorage.getItem("@CosmosSearch:LIKELIST") as string
-        ) as IAllLikes[]
         const postsWithLikes = postListToUserLoggedWithLickedPosts.map(
           (post) => {
             const postToAddLike = allLikes.find(
-              (like) => post.id === like.postId
+              (like: IAllLikes) => post.id === like.postId
             ) as IAllLikes;
             return {
               ...post,
@@ -179,60 +170,18 @@ export const PostProvider = ({ children }: iChildren) => {
         );
         const orderedList = orderPostsByData(postsWithLikes);
         setPosts(orderedList);
-      } else {
+        const userPostsList = postsWithLikes.filter(
+          (post) => post.userId === userId
+        );
+        const userOrderedList = orderPostsByData(userPostsList);
+        setUserPosts(userOrderedList);
+      } else if (userState === "userDeslogged") {
         const orderedList = orderPostsByData(postsListToUserLogged);
         setPosts(orderedList);
       }
     } catch (error) {
       console.log(error);
       toast.error("erro no post list.");
-    }
-  };
-
-  const getAllUserPosts = async () => {
-    const userInfos = JSON.parse(
-      localStorage.getItem("@CosmosSearch:USERINFOS") as string
-    ) as IUserInfos;
-    const token = localStorage.getItem("@CosmosSearch:TOKEN");
-    const userId = localStorage.getItem("@CosmosSearch:USERID");
-    try {
-      const response = await api.get(`/users/${userId}/posts`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const postsList: IPost[] = response.data;
-      const allLikes = JSON.parse(
-        localStorage.getItem("@CosmosSearch:LIKELIST") as string
-      ) as IAllLikes[];
-      const postListToUserLoggedWithLickedPosts = postsList.map((post) => {
-        const postLiked = userInfos.postLikeds.find((id) => post.id === id);
-        if (postLiked) {
-          return {
-            ...post,
-            postLiked: true,
-          };
-        } else {
-          return post;
-        }
-      });
-      const postsWithLikes: IPost[] = postListToUserLoggedWithLickedPosts.map(
-        (post) => {
-          const postToAddLike = allLikes.find(
-            (like) => post.id === like.postId
-          ) as IAllLikes;
-          return {
-            ...post,
-            qntOfLikes: postToAddLike.qnt,
-            likeId: postToAddLike.id,
-          };
-        }
-      );
-      const orderedList = orderPostsByData(postsWithLikes);
-      setUserPosts(orderedList);
-    } catch (error) {
-      console.log(error);
-      toast.error("Erro no user list");
     }
   };
 
@@ -262,20 +211,6 @@ export const PostProvider = ({ children }: iChildren) => {
       });
       const newLike = newLikeResponse.data;
       const allLikes = [...allLikesList, newLike];
-      // const postsWithLikes = list.map((post) => {
-      //   const postToAddLike = allLikes.find(
-      //     (like) => post.id === like.postId
-      //   ) as IAllLikes;
-      //   return { ...post, qntOfLikes: 0, postLiked: false };
-      // });
-      // console.log(postsWithLikes)
-      // const orderedList = orderPostsByData(postsWithLikes);
-      // setPosts(orderedList);
-      // setMainComponent("posts");
-      localStorage.setItem(
-        "@CosmosSearch:LIKELIST",
-        JSON.stringify(allLikes)
-      );
     } catch (error) {
       toast.error("erro na criação de end point de like");
       toast.error("Something went wrong.");
@@ -283,11 +218,14 @@ export const PostProvider = ({ children }: iChildren) => {
   };
 
   const createPost = async (data: IFormPostRegister) => {
-    const userId = Number(localStorage.getItem("@CosmosSearch:USERID"));
-    const name = localStorage.getItem("@CosmosSearch:USERNAME") as string;
+    const userInfos = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    ) as IUserInfos;
+    const userId = userInfos.id
+    const name = userInfos.name
+    const token = userInfos.token
     const date = getPostDate();
-    const newData = { ...data, userId, name, date, };
-    const token = localStorage.getItem("@CosmosSearch:TOKEN");
+    const newData = { ...data, userId, name, date };
     if (token) {
       try {
         const response = await api.post(`/posts`, newData, {
@@ -295,16 +233,15 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data)
-        const newPost = {...response.data, qntOfLikes: 0, postLiked: false}
-        console.log(newPost)
+        const newPost = { ...response.data, qntOfLikes: 0, postLiked: false };
         const postsList = [...posts, newPost];
         createLikeEndPointForPost(response.data.id, postsList, token);
         toast.success("Post successfully created");
         const orderedList = orderPostsByData(postsList);
         setPosts(orderedList);
-        getAllLikes(token);
-        getAllUserPosts();
+        const userPostsList = posts.filter((post) => post.userId === userId);
+        const userOderedList = orderPostsByData(userPostsList);
+        setUserPosts(userOderedList);
         setMainComponent("posts");
       } catch (error) {
         console.log(error);
@@ -314,7 +251,10 @@ export const PostProvider = ({ children }: iChildren) => {
   };
 
   const deletePost = async (postId: number) => {
-    const token = localStorage.getItem("@CosmosSearch:TOKEN") as string
+    const userInfos = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    ) as IUserInfos;
+    const token = userInfos.token
     if (token) {
       try {
         await api.delete(`/posts/${postId}`, {
@@ -322,8 +262,6 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        getAllLikes(token);
-        getAllUserPosts();
         getAllPosts();
         toast.success("Post successfully deleted");
       } catch (error) {
@@ -339,8 +277,11 @@ export const PostProvider = ({ children }: iChildren) => {
   };
 
   const editPost = async (postId: number, data: IUpdatePost) => {
-    const token = localStorage.getItem("@CosmosSearch:TOKEN") as string
-    const userId = localStorage.getItem("@CosmosSearch:USERID");
+    const userInfos = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    ) as IUserInfos;
+    const token = userInfos.token
+    const userId = userInfos.id
     const newData = { ...data, userId, date: getPostDate() };
     try {
       await api.patch(`/posts/${postId}`, newData, {
@@ -348,8 +289,6 @@ export const PostProvider = ({ children }: iChildren) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      getAllLikes(token);
-      getAllUserPosts();
       getAllPosts();
       toast.success("Post successfully updated");
       resetSearchInUpdatePost();
@@ -358,7 +297,6 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
-  
   const actualizePostLikedsUserArray = async (
     postId: number,
     postLiked: boolean
@@ -366,8 +304,8 @@ export const PostProvider = ({ children }: iChildren) => {
     const userInfos = JSON.parse(
       localStorage.getItem("@CosmosSearch:USERINFOS") as string
     ) as IUserInfos;
-    const userId = localStorage.getItem("@CosmosSearch:USERID");
-    const token = localStorage.getItem("@CosmosSearch:TOKEN");
+    const userId = userInfos.id
+    const token = userInfos.token
     const postLikeds = postLiked
       ? userInfos.postLikeds.filter((id) => id !== postId)
       : [...userInfos.postLikeds, postId];
@@ -402,7 +340,11 @@ export const PostProvider = ({ children }: iChildren) => {
     postId: number,
     postLiked: boolean
   ) => {
-    const token = localStorage.getItem("@CosmosSearch:TOKEN");
+    const userInfos = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    ) as IUserInfos;
+    const token = userInfos.token
+    const allLikes = allLikesList;
     const likeData = postLiked
       ? { qnt: qntOfLikes - 1 }
       : { qnt: qntOfLikes + 1 };
@@ -412,21 +354,15 @@ export const PostProvider = ({ children }: iChildren) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      const allLikes = JSON.parse(
-        localStorage.getItem("@CosmosSearch:LIKELIST") as string
-      ) as IAllLikes[];
+      const currentAlteredLike = response.data;
       const newAllLikes: IAllLikes[] = allLikes.map((like) => {
-        if (like.id === response.data.id) {
-          return response.data;
+        if (like.id === currentAlteredLike.id) {
+          return currentAlteredLike;
         } else {
           return like;
         }
       });
       setAllLikesList(newAllLikes);
-      localStorage.setItem(
-        "@CosmosSearch:LIKELIST",
-        JSON.stringify(newAllLikes)
-      );
       if (isSearch) {
         const postsListActualized = searchedPosts.map((post) => {
           const postToActualize = newAllLikes.find(
@@ -455,64 +391,36 @@ export const PostProvider = ({ children }: iChildren) => {
         ) as IPost[];
         const orderedList = orderPostsByData(postListActualizedWithPostLiked);
         setSearchedPosts(orderedList);
+      } else {
+        const postsListActualized = posts.map((post) => {
+          const postToActualize = newAllLikes.find(
+            (like) => post.id === like.postId
+          ) as IAllLikes;
+          if (postToActualize) {
+            return {
+              ...post,
+              qntOfLikes: postToActualize.qnt,
+            };
+          } else {
+            return post;
+          }
+        });
+        const postListActualizedWithPostLiked = postsListActualized.map(
+          (post) => {
+            if (post.id === postId) {
+              return {
+                ...post,
+                postLiked: !post.postLiked,
+              };
+            } else if (post.id !== postId) {
+              return post;
+            }
+          }
+        ) as IPost[];
+        const orderedList = orderPostsByData(postListActualizedWithPostLiked);
+        setPosts(orderedList);
+        actualizePostLikedsUserArray(postId, postLiked);
       }
-      const postsListActualized = posts.map((post) => {
-        const postToActualize = newAllLikes.find(
-          (like) => post.id === like.postId
-        ) as IAllLikes;
-        if (postToActualize) {
-          return {
-            ...post,
-            qntOfLikes: postToActualize.qnt,
-          };
-        } else {
-          return post;
-        }
-      });
-      const userPostsListActualized = userPosts.map((post) => {
-        const postToActualize = newAllLikes.find(
-          (like) => post.id === like.postId
-        ) as IAllLikes;
-        if (postToActualize) {
-          return {
-            ...post,
-            qntOfLikes: postToActualize.qnt,
-          };
-        } else {
-          return post;
-        }
-      });
-      const postListActualizedWithPostLiked = postsListActualized.map(
-        (post) => {
-          if (post.id === postId) {
-            return {
-              ...post,
-              postLiked: !post.postLiked,
-            };
-          } else if (post.id !== postId) {
-            return post;
-          }
-        }
-      ) as IPost[];
-      const userPostListActualizedWithPostLiked = userPostsListActualized.map(
-        (post) => {
-          if (post.id === postId) {
-            return {
-              ...post,
-              postLiked: !post.postLiked,
-            };
-          } else if (post.id !== postId) {
-            return post;
-          }
-        }
-      ) as IPost[];
-      const orderedList = orderPostsByData(postListActualizedWithPostLiked);
-      setPosts(orderedList);
-      const userOrderedList = orderPostsByData(
-        userPostListActualizedWithPostLiked
-      );
-      setUserPosts(userOrderedList);
-      actualizePostLikedsUserArray(postId, postLiked);
     } catch (error) {
       console.log(error);
     }
@@ -551,7 +459,6 @@ export const PostProvider = ({ children }: iChildren) => {
         posts,
         userPosts,
         getAllPosts,
-        getAllUserPosts,
         createPost,
         deletePost,
         actualPostId,
@@ -572,7 +479,6 @@ export const PostProvider = ({ children }: iChildren) => {
         searchOpen,
         setSearchOpen,
         resetSearch,
-        getAllLikes,
         alterLikeCount,
       }}
     >

@@ -6,14 +6,11 @@ import { PostListStyled } from "./PostListStyled";
 import { PostContext } from "../../contexts/PostContext/PostContext";
 
 export const Posts = () => {
-  const { posts, getAllPosts, isSearch, setIsSearch, searchedPosts, getAllLikes } =
+  const { posts, isSearch, setIsSearch, searchedPosts } =
     useContext(PostContext);
 
   useEffect(() => {
-    const token = localStorage.getItem("@CosmosSearch:TOKEN") as string
     setIsSearch(false);
-    getAllLikes(token);
-    getAllPosts();
   }, []);
 
   return (

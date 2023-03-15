@@ -24,7 +24,6 @@ export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: iChildren) => {
   const { setMainComponent } = useContext(LinksContext);
-  const { getAllLikes } = useContext(PostContext)
 
   const [userState, setUserState] = useState<
     "userLoggedInPerfil" | "userLogged" | "userDeslogged"
@@ -43,41 +42,24 @@ export const UserProvider = ({ children }: iChildren) => {
 
   const userRegister = async (data: IFormUserRegister) => {
     try {
-      const fullDataToRegister = {...data, postLikeds: []}
+      const fullDataToRegister = { ...data, postLikeds: [] };
       const response = await api.post("/users", fullDataToRegister);
-      localStorage.setItem("@CosmosSearch:TOKEN", response.data.accessToken);
-      localStorage.setItem("@CosmosSearch:USERID", response.data.user.id);
-      localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
-      localStorage.setItem("@CosmosSearch:EMAIL", response.data.user.email);
-      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
-      setUserState("userLogged");
-      setUser(response.data.user);
-      const { name, email, postLikeds } = response.data.user;
-      const userInfosData = { name, email, postLikeds };
-      console.log(userInfosData)
-      setUserInfos(userInfosData);
+      const newUserRegistered = response.data.user;
+      const token = response.data.accessToken;
+      const { name, email, id, postLikeds } = newUserRegistered;
+      const userInfosData = { ...newUserRegistered, token };
+      setUser(newUserRegistered);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
       );
-      try {
-        const responseLikes = await api.get("/likes", {
-          headers: {
-            Authorization: `Bearer ${response.data.acessToken}`,
-          },
-        });
-        localStorage.setItem(
-          "@CosmosSearch:LIKELIST",
-          JSON.stringify(responseLikes.data)
-        );
-      } catch (error) {
-        console.log(error);
-        toast.error("Erro na get all likes");
-      }
+      setUserState("userLogged");
+      setUserInfos(userInfosData);
+      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       navigate("/dashboard");
       toast.success("User registered successfully!");
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Please review your data.");
     }
   };
@@ -85,47 +67,27 @@ export const UserProvider = ({ children }: iChildren) => {
   const userLogin = async (data: IFormUserLogin) => {
     try {
       const response = await api.post("/login", data);
-      localStorage.setItem("@CosmosSearch:TOKEN", response.data.accessToken);
-      localStorage.setItem("@CosmosSearch:USERID", response.data.user.id);
-      localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
-      localStorage.setItem("@CosmosSearch:EMAIL", response.data.user.email);
-      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
-      setUserState("userLogged");
-      setUser(response.data.user);
-      const { name, email, postLikeds } = response.data.user;
-      const userInfosData = { name, email, postLikeds };
-      setUserInfos(userInfosData);
+      const userLogged = response.data.user;
+      const token = response.data.accessToken;
+      const { name, email, id, postLikeds } = userLogged;
+      const userInfosData = { ...userLogged, token };
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
-        );
-        try {
-          const responseLikes = await api.get("/likes", {
-            headers: {
-              Authorization: `Bearer ${response.data.acessToken}`,
-            },
-          });
-          localStorage.setItem(
-            "@CosmosSearch:LIKELIST",
-            JSON.stringify(responseLikes.data)
-          );
-        } catch (error) {
-          console.log(error);
-          toast.error("Erro na get all likes");
-        }
-        toast.success("Login efetuado!");
-        navigate("/dashboard");
+      );
+      setUserInfos(userInfosData);
+      toast.success("Login efetuado!");
+      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
+      navigate("/dashboard");
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Usuário ou Senha inválidos.");
       reset();
     }
   };
 
   const logout = () => {
-    localStorage.removeItem("@CosmosSearch:TOKEN");
-    localStorage.removeItem("@CosmosSearch:USERSTATE");
-    localStorage.clear()
+    localStorage.clear();
     setUserState("userDeslogged");
     setUser(null);
     navigate("/");
@@ -151,14 +113,14 @@ export const UserProvider = ({ children }: iChildren) => {
         name: response.data.name,
         email: response.data.email,
         postLikeds: response.data.postLikeds,
-      } as IUserInfos
+      } as IUserInfos;
       setUserInfos(userInfosData);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
       );
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Please review your data.");
     }
   };

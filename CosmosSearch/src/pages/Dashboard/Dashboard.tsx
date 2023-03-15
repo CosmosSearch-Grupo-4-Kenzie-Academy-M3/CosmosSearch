@@ -14,7 +14,7 @@ import { SearchBar } from "../../components/SearchBar/SearchBar";
 export const Dashboard = () => {
   const { burgerOpen, modalIsOpen } = useContext(LinksContext);
   const { userState, setUserState } = useContext(UserContext);
-  const { setIsDashboard, isDashboard, getAllLikes, getAllPosts, getAllUserPosts } = useContext(PostContext);
+  const { setIsDashboard, isDashboard } = useContext(PostContext);
 
   useEffect(() => {
     setIsDashboard(true);
@@ -23,7 +23,6 @@ export const Dashboard = () => {
       | "userLogged"
       | "userDeslogged";
     setUserState(currentUserState);
-    const token = localStorage.getItem("@CosmosSearch:TOKEN")
   }, []);
 
   return (

@@ -113,6 +113,7 @@ export const Post = ({
             {userState !== "userDeslogged" ? (
               <>
                 <div onClick={() => {alterLikeCount(likeId as number, qntOfLikes as number, postId, postLiked as boolean)}}>
+                  <p className="input__placeholder">{qntOfLikes}</p>
                   {postLiked ? <LikeClicked /> : <LikeUnclicked />}
                 </div>
                 <ButtonStyled

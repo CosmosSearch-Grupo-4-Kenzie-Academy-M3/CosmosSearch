@@ -6,16 +6,13 @@ import { PostListStyled } from "./PostListStyled";
 import { PostContext } from "../../contexts/PostContext/PostContext";
 
 export const UserPosts = () => {
-  const { userPosts, isSearch, setIsSearch, searchedPosts, getAllUserPosts, getAllLikes} =
+  const { userPosts, isSearch, setIsSearch, searchedPosts } =
     useContext(PostContext);
 
   useEffect(() => {
-    const token = localStorage.getItem("@CosmosSearch:TOKEN") as string
-    setIsSearch(false);
-    getAllLikes(token);
-    getAllUserPosts();
+    setIsSearch(false); 
   }, []);
-
+  
   return (
     <PostListStyled className="container__pages">
       {isSearch ? (
