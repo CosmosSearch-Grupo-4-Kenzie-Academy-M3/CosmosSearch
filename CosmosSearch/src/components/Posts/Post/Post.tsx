@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { PostContext } from "../../../contexts/PostContext/PostContext";
+import { toast } from "react-toastify";
 
 import {
   ArrowUp,
@@ -16,12 +16,13 @@ import {
   PostStyled,
   ButtonsStyled,
 } from "../PostListStyled";
+import { ButtonStyled } from "../../Button/ButtonStyled";
 
 import { CommentsContext } from "../../../contexts/CommentsContext/CommentsContext";
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
-
-import { ButtonStyled } from "../../Button/ButtonStyled";
 import { UserContext } from "../../../contexts/UserContext/UserContext";
+import { PostContext } from "../../../contexts/PostContext/PostContext";
+
 
 interface IPostProps {
   title: string;
@@ -57,7 +58,7 @@ export const Post = ({
   const { userState } = useContext(UserContext);
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
-  
+
   return (
     <PostStyled>
       <div className="icon">
@@ -72,7 +73,7 @@ export const Post = ({
             <DivsButtonsStyled>
               {hamburgerOpen ? (
                 <div className="buttons">
-                  <ButtonsStyled  onClick={() => setHamburgerOpen(false)}>
+                  <ButtonsStyled onClick={() => setHamburgerOpen(false)}>
                     <ArrowUp />
                   </ButtonsStyled>
                   <ButtonsStyled
@@ -89,7 +90,7 @@ export const Post = ({
                       setActualPostId(postId);
                     }}
                   >
-                    <CloseXPost/>
+                    <CloseXPost />
                   </ButtonsStyled>
                 </div>
               ) : (
@@ -110,24 +111,35 @@ export const Post = ({
           </div>
           <div className="button">
             {userState !== "userDeslogged" ? (
-              <div onClick={() => {alterLikeCount(likeId as number, qntOfLikes as number, postId, postLiked as boolean)}}>
-                <p className="input__placeholder">{qntOfLikes}</p>
-                {postLiked ? <LikeClicked /> : <LikeUnclicked />}
-              </div>
+              <>
+                <div onClick={() => {alterLikeCount(likeId as number, qntOfLikes as number, postId, postLiked as boolean)}}>
+                  {postLiked ? <LikeClicked /> : <LikeUnclicked />}
+                </div>
+                <ButtonStyled
+                  textColor="var(--primary-blue)"
+                  borderColor="var(--primary-blue)"
+                  onClick={() => {
+                    setModalIsOpen(true);
+                    setModalId(postId);
+                    readAllComments(postId);
+                  }}
+                >
+                  open
+                </ButtonStyled>
+              </>
             ) : (
-              <></>
+              <>
+                <ButtonStyled
+                  textColor="var(--primary-blue)"
+                  borderColor="var(--primary-blue)"
+                  onClick={() => {
+                    toast("Login to view more.")
+                  }}
+                >
+                  open
+                </ButtonStyled>
+              </>
             )}
-            <ButtonStyled
-              textColor="var(--primary-blue)"
-              borderColor="var(--primary-blue)"
-              onClick={() => {
-                setModalIsOpen(true);
-                setModalId(postId);
-                readAllComments(postId);
-              }}
-            >
-              open
-            </ButtonStyled>
           </div>
         </div>
       </div>
