@@ -1,13 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
-import { PostContext } from "../../../contexts/PostContext/PostContext";
+import { toast } from "react-toastify";
 
 import {
   ArrowUp,
-  CloseX,
   CloseXPost,
   Hamburguer,
-  Like,
   LikeClicked,
   LikeUnclicked,
   Pencil,
@@ -17,14 +15,14 @@ import {
   DivsButtonsStyled,
   PostStyled,
   ButtonsStyled,
-  ButtonsAbsoluteStyled,
 } from "../PostListStyled";
+import { ButtonStyled } from "../../Button/ButtonStyled";
 
 import { CommentsContext } from "../../../contexts/CommentsContext/CommentsContext";
 import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
-
-import { ButtonStyled } from "../../Button/ButtonStyled";
 import { UserContext } from "../../../contexts/UserContext/UserContext";
+import { PostContext } from "../../../contexts/PostContext/PostContext";
+
 
 interface IPostProps {
   title: string;
@@ -32,11 +30,19 @@ interface IPostProps {
   body: string;
   topic: string;
   postId: number;
-  date: string
-  postLiked?: boolean
+  date: string;
+  postLiked?: boolean;
 }
 
-export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPostProps) => {
+export const Post = ({
+  title,
+  name,
+  body,
+  topic,
+  postId,
+  date,
+  postLiked,
+}: IPostProps) => {
   const {
     setModalIsOpen,
     setModalId,
@@ -48,7 +54,7 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
   const { userState } = useContext(UserContext);
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
-  
+
   return (
     <PostStyled>
       <div className="icon">
@@ -63,7 +69,7 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
             <DivsButtonsStyled>
               {hamburgerOpen ? (
                 <div className="buttons">
-                  <ButtonsStyled  onClick={() => setHamburgerOpen(false)}>
+                  <ButtonsStyled onClick={() => setHamburgerOpen(false)}>
                     <ArrowUp />
                   </ButtonsStyled>
                   <ButtonsStyled
@@ -80,7 +86,7 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
                       setActualPostId(postId);
                     }}
                   >
-                    <CloseXPost/>
+                    <CloseXPost />
                   </ButtonsStyled>
                 </div>
               ) : (
@@ -99,23 +105,37 @@ export const Post = ({ title, name, body, topic, postId, date, postLiked }: IPos
             <p className="post__infos">date: {date}</p>
             <p className="post__infos">topic: {topic}</p>
           </div>
-          <div
-            className="button"
-          >
-            <div onClick={() => likePost(postId)}>
-              {postLiked ? <LikeClicked/> : <LikeUnclicked/>} 
-            </div>
-            <ButtonStyled
-              textColor="var(--primary-blue)"
-              borderColor="var(--primary-blue)"
-              onClick={() => {
-                setModalIsOpen(true);
-                setModalId(postId);
-                readAllComments(postId);
-              }}
-            >
-              open
-            </ButtonStyled>
+          <div className="button">
+            {userState !== "userDeslogged" ? (
+              <>
+                <div onClick={() => likePost(postId)}>
+                  {postLiked ? <LikeClicked /> : <LikeUnclicked />}
+                </div>
+                <ButtonStyled
+                  textColor="var(--primary-blue)"
+                  borderColor="var(--primary-blue)"
+                  onClick={() => {
+                    setModalIsOpen(true);
+                    setModalId(postId);
+                    readAllComments(postId);
+                  }}
+                >
+                  open
+                </ButtonStyled>
+              </>
+            ) : (
+              <>
+                <ButtonStyled
+                  textColor="var(--primary-blue)"
+                  borderColor="var(--primary-blue)"
+                  onClick={() => {
+                    toast("Login to view more.")
+                  }}
+                >
+                  open
+                </ButtonStyled>
+              </>
+            )}
           </div>
         </div>
       </div>
