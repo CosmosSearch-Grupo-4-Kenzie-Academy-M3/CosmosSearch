@@ -50,6 +50,7 @@ export interface IUserInfos {
   id: number;
   token: string;
   postLikeds: number[];
+  currentUserState: "userLoggedInPerfil" | "userLogged" | "userDeslogged";
 }
 
 export interface IUserContext {
@@ -70,4 +71,6 @@ export interface IUserContext {
   patchProfile: (data: IPatchProfile) => Promise<void>;
   userInfos: IUserInfos | null;
   setUserInfos: React.Dispatch<React.SetStateAction<IUserInfos | null>>;
+  token: string | null;
+  setToken: React.Dispatch<React.SetStateAction<string | null>>;
 }

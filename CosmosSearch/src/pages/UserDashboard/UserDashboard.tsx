@@ -26,20 +26,23 @@ export const UserDashboard = () => {
   } = useContext(LinksContext);
   const { userState, setUserState, userInfos, setUserInfos } =
     useContext(UserContext);
-  const { setIsDashboard } =
+  const { setIsDashboard, getAllPosts, posts, setPosts } =
     useContext(PostContext);
   const userName = userInfos?.name as string;
   const userEmail = userInfos?.email as string;
-
 
   useEffect(() => {
     setUserState("userLoggedInPerfil");
     setIsDashboard(false);
     const userInfosData = JSON.parse(
       localStorage.getItem("@CosmosSearch:USERINFOS") as string
-    );
+      );
     setUserInfos(userInfosData);
   }, []);
+
+  useEffect(() => {
+    getAllPosts();
+  }, [posts]);
 
 
   return (

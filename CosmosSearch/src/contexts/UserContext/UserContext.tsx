@@ -10,6 +10,7 @@ import { api } from "../../services/api";
 
 import { iChildren } from "../@childrenType";
 import { LinksContext } from "../LinksContext/LinksContext";
+import { PostContext } from "../PostContext/PostContext";
 
 import {
   IFormUserLogin,
@@ -29,6 +30,7 @@ export const UserProvider = ({ children }: iChildren) => {
     "userLoggedInPerfil" | "userLogged" | "userDeslogged"
   >("userDeslogged");
   const [user, setUser] = useState<IUser | string | null>(null);
+  const [token, setToken] = useState<string | null>(null)
   const [userInfos, setUserInfos] = useState<IUserInfos | null>(null);
 
   const navigate = useNavigate();
@@ -41,22 +43,20 @@ export const UserProvider = ({ children }: iChildren) => {
   } = useForm<IFormUserLogin>();
 
   const userRegister = async (data: IFormUserRegister) => {
+    const fullDataToRegister = { ...data, postLikeds: [] };
     try {
-      const fullDataToRegister = { ...data, postLikeds: [] };
       const response = await api.post("/users", fullDataToRegister);
       const newUserRegistered = response.data.user;
       const token = response.data.accessToken;
-      const { name, email, id, postLikeds } = newUserRegistered;
-      const userRegisteredInfos = { name, email, id, postLikeds }
-      const userInfosData = { ...userRegisteredInfos, token };
+      const userInfosData = { ...newUserRegistered, token, currentUserState: "userLogged" };
       setUser(newUserRegistered);
+      setToken(token)
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
       );
       setUserState("userLogged");
       setUserInfos(userInfosData);
-      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       navigate("/dashboard");
       toast.success("User registered successfully!");
     } catch (error) {
@@ -70,30 +70,30 @@ export const UserProvider = ({ children }: iChildren) => {
       const response = await api.post("/login", data);
       const userLogged = response.data.user;
       const token = response.data.accessToken;
-      const { name, email, id, postLikeds } = userLogged;
-      const userLoggedInfos = { name, email, id, postLikeds }
-      const userInfosData = { ...userLoggedInfos, token };
+      const userInfosData = { ...userLogged , token, currentUserState: "userLogged" };
+      setUser(userLogged)
+      setToken(token)
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
       );
       setUserInfos(userInfosData);
+      setUserState("userLogged");
       toast.success("Login efetuado!");
-      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
-      toast.error("Usuário ou Senha inválidos.");
-      reset();
+      toast.error("Invalid user or password.");
     }
   };
 
   const logout = () => {
-    localStorage.clear();
+    localStorage.removeItem("@CosmosSearch:USERINFOS");
+    setToken(null)
     setUserState("userDeslogged");
     setUser(null);
     navigate("/");
-    toast("Usuário deslogado!");
+    toast("User deslogged!");
   };
 
   const redirectToNewPost = () => {
@@ -145,6 +145,8 @@ export const UserProvider = ({ children }: iChildren) => {
         patchProfile,
         userInfos,
         setUserInfos,
+        token,
+        setToken
       }}
     >
       {children}

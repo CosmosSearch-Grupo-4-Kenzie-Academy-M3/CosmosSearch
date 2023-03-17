@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { Navigate, Outlet } from "react-router-dom";
 
@@ -7,17 +7,15 @@ import { IUserInfos } from "../../contexts/UserContext/@types_User";
 
 export const PublicRoutes = () => {
   const { user, setUser } = useContext(UserContext);
-
   useEffect(() => {
-    const userInfos = JSON.parse(
+    const userInfosInLs = JSON.parse(
       localStorage.getItem("@CosmosSearch:USERINFOS") as string
     ) as IUserInfos;
 
-    if (userInfos) {
-      const token = userInfos.token;
-      setUser(token);
+    if (userInfosInLs) {
+      setUser(userInfosInLs)
     }
   }, []);
 
-  return <>{user ? <Navigate to="/userDashboard" /> : <Outlet />}</>;
+  return <>{user ? <Navigate to="/userdashboard" /> : <Outlet />}</>;
 };

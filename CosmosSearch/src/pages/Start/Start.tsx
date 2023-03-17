@@ -7,9 +7,11 @@ import { TitleBordersStyled } from "../../components/Title/TitleStyled";
 import { BurgerMenu } from "../../components/Svgs/Svg";
 
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
+import { UserContext } from "../../contexts/UserContext/UserContext";
 
 export const Start = () => {
   const { burgerOpen, setBurgerOpen } = useContext(LinksContext);
+  const { setUserState } = useContext(UserContext);
 
   return (
     <StartStyled>
@@ -17,7 +19,12 @@ export const Start = () => {
         {/* Mobile */}
         <div className="top__start">
           <Title />
-          <button className="links__hover" onClick={() => localStorage.setItem("@CosmosSearch:USERSTATE", "userDeslogged")}>
+          <button
+            className="links__hover"
+            onClick={() =>
+              setUserState("userDeslogged")
+            }
+          >
             <LinkButton path="/dashboard" text="Home" line={true} />
           </button>
           <div className="burger__div">
@@ -43,7 +50,12 @@ export const Start = () => {
           </TitleBordersStyled>
         </div>
         <div className="links__start--desktop">
-          <button className="links__hover" onClick={() => localStorage.setItem("@CosmosSearch:USERSTATE", "userDeslogged")}>
+          <button
+            className="links__hover"
+            onClick={() =>
+              setUserState("userDeslogged")
+            }
+          >
             <LinkButton path="/dashboard" text="Home" line={true} />
           </button>
           <div className="links__start">

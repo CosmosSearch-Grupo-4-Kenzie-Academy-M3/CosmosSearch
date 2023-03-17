@@ -5,25 +5,34 @@ import { Posts } from "../../components/Posts/PostList";
 import { PostModal } from "../../components/Posts/PostModal/PostModal";
 import { DashboardStyled } from "./DashboardStyled";
 import { NewPost } from "./NewPost/NewPost";
+import { SearchBar } from "../../components/SearchBar/SearchBar";
 
 import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import { PostContext } from "../../contexts/PostContext/PostContext";
-import { SearchBar } from "../../components/SearchBar/SearchBar";
+import { IUserInfos } from "../../contexts/UserContext/@types_User";
 
 export const Dashboard = () => {
   const { burgerOpen, modalIsOpen } = useContext(LinksContext);
-  const { userState, setUserState } = useContext(UserContext);
-  const { setIsDashboard, isDashboard } = useContext(PostContext);
+  const { userState, setUserState, token } = useContext(UserContext);
+  const { setIsDashboard, isDashboard, getAllPosts, posts } =
+    useContext(PostContext);
 
   useEffect(() => {
     setIsDashboard(true);
-    const currentUserState = localStorage.getItem("@CosmosSearch:USERSTATE") as
-      | "userLoggedInPerfil"
-      | "userLogged"
-      | "userDeslogged";
-    setUserState(currentUserState);
+    const userInfos = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    ) as IUserInfos;
+    if (userInfos) {
+      const token = userInfos.token;
+      const currentUserState = userInfos.currentUserState;
+      setUserState(currentUserState);
+    }
   }, []);
+
+  useEffect(() => {
+    getAllPosts();
+  }, [posts]);
 
   return (
     <DashboardStyled>
@@ -60,7 +69,7 @@ export const Dashboard = () => {
       ) : (
         <main className="main__desktop main__desktop--logged">
           <div className="newpost__position">
-             <NewPost />
+            <NewPost />
           </div>
           <Posts />
         </main>

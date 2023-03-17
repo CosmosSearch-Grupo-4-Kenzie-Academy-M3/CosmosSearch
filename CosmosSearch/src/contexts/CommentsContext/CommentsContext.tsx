@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { api } from "../../services/api";
 
 import { iChildren } from "../@childrenType";
+import { IUserInfos } from "../UserContext/@types_User";
 import { IAllComments, IComments, INewComment } from "./@typesComments";
 
 export const CommentsContext = createContext({} as IComments);
@@ -14,7 +15,8 @@ export const CommentsProvider = ({ children }: iChildren) => {
 
   const readAllComments = async (postId: number) => {
     try {
-      const token = localStorage.getItem("@CosmosSearch:TOKEN");
+      const userInfos = JSON.parse(localStorage.getItem("@CosmosSearch:USERINFOS") as string) as IUserInfos;
+      const token = userInfos.token;
       const response = await api.get(`/posts/${postId}/comments`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -27,9 +29,10 @@ export const CommentsProvider = ({ children }: iChildren) => {
   };
 
   const createNewComment = async (data: INewComment, postId: string) => {
-    const token = localStorage.getItem("@CosmosSearch:TOKEN");
-    const userId = localStorage.getItem("@CosmosSearch:USERID");
-    const name = localStorage.getItem("@CosmosSearch:USERNAME");
+    const userInfos = JSON.parse(localStorage.getItem("@CosmosSearch:USERINFOS") as string) as IUserInfos;
+    const token = userInfos.token
+    const userId = userInfos.id
+    const name = userInfos.name
     const newData = { ...data, postId, userId, name };
     try {
       const response = await api.post(`/posts/${postId}/comments`, newData, {
