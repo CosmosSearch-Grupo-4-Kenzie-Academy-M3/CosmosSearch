@@ -25,11 +25,13 @@ export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: iChildren) => {
   const { setMainComponent } = useContext(LinksContext);
+  const { posts, editUserNameInPost} = useContext(PostContext)
 
   const [userState, setUserState] = useState<
     "userLoggedInPerfil" | "userLogged" | "userDeslogged"
   >("userDeslogged");
-  const [user, setUser] = useState<IUser | string | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
+  const [users, setUsers] = useState<IUser[] | null>(null)
   const [token, setToken] = useState<string | null>(null)
   const [userInfos, setUserInfos] = useState<IUserInfos | null>(null);
 
@@ -41,6 +43,28 @@ export const UserProvider = ({ children }: iChildren) => {
     formState: { errors },
     reset,
   } = useForm<IFormUserLogin>();
+
+  // const getAllUsers = async () => {
+  //   const userInfos = JSON.parse(
+  //     localStorage.getItem("@CosmosSearch:USERINFOS") as string
+  //   ) as IUserInfos;
+  //   const token = userInfos.token
+  //   try {
+  //     const response = await api.get('/users', {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     })
+  //     const allUsers = response.data
+  //     const users = allUsers.map((user) => {
+  //      const {name, email, id} = user 
+  //      return {name, email, id}
+  //     })
+
+  //   } catch {
+
+  //   }
+  // }
 
   const userRegister = async (data: IFormUserRegister) => {
     const fullDataToRegister = { ...data, postLikeds: [] };
@@ -102,25 +126,32 @@ export const UserProvider = ({ children }: iChildren) => {
   };
 
   const patchProfile = async (data: IPatchProfile) => {
-    const id = Number(localStorage.getItem("@CosmosSearch:USERID"));
-    const token = localStorage.getItem("@CosmosSearch:TOKEN");
+    const userInfos = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    ) as IUserInfos;
+    const id = userInfos.id
+    const token = userInfos.token
     try {
       const response = await api.patch(`/users/${id}`, data, {
         headers: {
           Authorization: ` Bearer ${token} `,
         },
       });
+      const newUserInfos = response.data
       toast.success("Perfil atualizado com sucesso.");
       const userInfosData = {
-        name: response.data.name,
-        email: response.data.email,
-        postLikeds: response.data.postLikeds,
+        ...userInfos,
+        name: newUserInfos.name,
+        email: newUserInfos.email,
+        postLikeds: newUserInfos.postLikeds,
       } as IUserInfos;
       setUserInfos(userInfosData);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
       );
+      const newName = newUserInfos.name
+      editUserNameInPost(newName)
     } catch (error) {
       console.log(error);
       toast.error("Please review your data.");

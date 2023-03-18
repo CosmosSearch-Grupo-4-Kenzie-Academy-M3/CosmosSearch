@@ -48,5 +48,6 @@ export interface IPostContext {
   searchOpen: boolean;
   setSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
   resetSearch: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  alterLikeCount: (likeId: number, qntOfLikes: number, postId: number, postLiked: boolean) => Promise<void>
+  alterLikeCount: (likeId: number, qntOfLikes: number, postId: number, postLiked: boolean) => Promise<void>;
+  editUserNameInPost: (newName: string) => void;
 }
