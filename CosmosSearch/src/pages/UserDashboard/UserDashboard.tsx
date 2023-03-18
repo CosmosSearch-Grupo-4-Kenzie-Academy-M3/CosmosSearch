@@ -24,9 +24,9 @@ export const UserDashboard = () => {
     editModalIsOpen,
     deleteModalIsOpen,
   } = useContext(LinksContext);
-  const { userState, setUserState, userInfos, setUserInfos } =
+  const { userState, setUserState, userInfos, setUserInfos, users, getAllUsers } =
     useContext(UserContext);
-  const { setIsDashboard, getAllPosts, posts, setPosts } =
+  const { setIsDashboard, getAllPosts, posts } =
     useContext(PostContext);
   const userName = userInfos?.name as string;
   const userEmail = userInfos?.email as string;
@@ -44,6 +44,9 @@ export const UserDashboard = () => {
     getAllPosts();
   }, [posts]);
 
+  useEffect(() =>  {
+    getAllUsers();
+  }, [users])
 
   return (
     <UserDashboardStyled>

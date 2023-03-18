@@ -19,6 +19,7 @@ import {
   IUser,
   IPatchProfile,
   IUserInfos,
+  IUserFromApi,
 } from "./@types_User";
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -31,8 +32,7 @@ export const UserProvider = ({ children }: iChildren) => {
     "userLoggedInPerfil" | "userLogged" | "userDeslogged"
   >("userDeslogged");
   const [user, setUser] = useState<IUser | null>(null);
-  const [users, setUsers] = useState<IUser[] | null>(null)
-  const [token, setToken] = useState<string | null>(null)
+  const [users, setUsers] = useState<IUserFromApi[] | null>(null)
   const [userInfos, setUserInfos] = useState<IUserInfos | null>(null);
 
   const navigate = useNavigate();
@@ -44,27 +44,28 @@ export const UserProvider = ({ children }: iChildren) => {
     reset,
   } = useForm<IFormUserLogin>();
 
-  // const getAllUsers = async () => {
-  //   const userInfos = JSON.parse(
-  //     localStorage.getItem("@CosmosSearch:USERINFOS") as string
-  //   ) as IUserInfos;
-  //   const token = userInfos.token
-  //   try {
-  //     const response = await api.get('/users', {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     })
-  //     const allUsers = response.data
-  //     const users = allUsers.map((user) => {
-  //      const {name, email, id} = user 
-  //      return {name, email, id}
-  //     })
-
-  //   } catch {
-
-  //   }
-  // }
+  const getAllUsers = async () => {
+    const userInfos = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    ) as IUserInfos;
+    const token = userInfos.token
+    try {
+      const response = await api.get('/users', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      const allUsers: IUserFromApi[] = response.data
+      const users = allUsers.map((user) => {
+       const {name, email, id, postLikeds} = user 
+       return {name, email, id, postLikeds}
+      })
+      setUsers(users)
+    } catch (error) {
+      toast("erro no get all users")
+      console.log(error)
+    }
+  }
 
   const userRegister = async (data: IFormUserRegister) => {
     const fullDataToRegister = { ...data, postLikeds: [] };
@@ -74,7 +75,6 @@ export const UserProvider = ({ children }: iChildren) => {
       const token = response.data.accessToken;
       const userInfosData = { ...newUserRegistered, token, currentUserState: "userLogged" };
       setUser(newUserRegistered);
-      setToken(token)
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
@@ -96,7 +96,6 @@ export const UserProvider = ({ children }: iChildren) => {
       const token = response.data.accessToken;
       const userInfosData = { ...userLogged , token, currentUserState: "userLogged" };
       setUser(userLogged)
-      setToken(token)
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
@@ -113,7 +112,6 @@ export const UserProvider = ({ children }: iChildren) => {
 
   const logout = () => {
     localStorage.removeItem("@CosmosSearch:USERINFOS");
-    setToken(null)
     setUserState("userDeslogged");
     setUser(null);
     navigate("/");
@@ -176,8 +174,9 @@ export const UserProvider = ({ children }: iChildren) => {
         patchProfile,
         userInfos,
         setUserInfos,
-        token,
-        setToken
+        users,
+        setUsers,
+        getAllUsers
       }}
     >
       {children}
