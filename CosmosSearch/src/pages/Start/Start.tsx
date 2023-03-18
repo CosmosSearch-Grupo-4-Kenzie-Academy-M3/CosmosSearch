@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { Title } from "../../components/Title/Title";
@@ -11,7 +11,11 @@ import { UserContext } from "../../contexts/UserContext/UserContext";
 
 export const Start = () => {
   const { burgerOpen, setBurgerOpen } = useContext(LinksContext);
-  const { setUserState } = useContext(UserContext);
+  const { userState ,setUserState } = useContext(UserContext);
+
+  useEffect(() => {
+    setUserState("userDeslogged");
+  }, [userState])
 
   return (
     <StartStyled>

@@ -6,36 +6,46 @@ import { PostListStyled } from "./PostListStyled";
 import { PostContext } from "../../contexts/PostContext/PostContext";
 
 export const UserPosts = () => {
-  const { userPosts, isSearch, setIsSearch, searchedPosts, getAllPosts, posts } =
-    useContext(PostContext);
+  const {
+    userPosts,
+    isSearch,
+    setIsSearch,
+    searchedPosts,
+    getAllPosts,
+    mapPostsListInRelationWithPostsUsersOwners,
+  } = useContext(PostContext);
 
   useEffect(() => {
-    setIsSearch(false); 
+    setIsSearch(false);
+    getAllPosts();
   }, []);
-  
+
   return (
     <PostListStyled className="container__pages">
       {isSearch ? (
         searchedPosts.length === 0 ? (
-          <p className="error">Search return any results</p>
+          <p className="error">Search return any results.</p>
         ) : (
-          searchedPosts.map((post) => (
-            <Post
-              key={post.id}
-              body={post.body}
-              name={post.name}
-              topic={post.topic}
-              postId={post.id}
-              title={post.title}
-              date={post.date}
-              postLiked={post.postLiked}
-              qntOfLikes={post.qntOfLikes}
-              likeId={post.likeId}
-            />
-          ))
+          mapPostsListInRelationWithPostsUsersOwners(searchedPosts).map(
+            (post) => (
+              <Post
+                key={post.id}
+                body={post.body}
+                name={post.name}
+                topic={post.topic}
+                postId={post.id}
+                title={post.title}
+                date={post.date}
+                postLiked={post.postLiked}
+                likes={post.likes}
+              />
+            )
+          )
         )
+      ) : userPosts.length === 0 ? (
+        <p className="error">There's any posts yet.</p>
       ) : (
-        userPosts.map((post) => (
+        mapPostsListInRelationWithPostsUsersOwners(userPosts).map((post) => (
           <Post
             key={post.id}
             body={post.body}
@@ -45,8 +55,7 @@ export const UserPosts = () => {
             title={post.title}
             date={post.date}
             postLiked={post.postLiked}
-            qntOfLikes={post.qntOfLikes}
-            likeId={post.likeId}
+            likes={post.likes}
           />
         ))
       )}

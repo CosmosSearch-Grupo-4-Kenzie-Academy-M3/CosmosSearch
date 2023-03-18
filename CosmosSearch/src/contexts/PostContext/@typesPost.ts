@@ -10,8 +10,7 @@ export interface IPost {
   body: string;
   date: string;
   postLiked?: boolean
-  qntOfLikes?: number;
-  likeId?: number
+  likes?: number;
 }
 
 export interface IUpdatePost {
@@ -28,8 +27,8 @@ export interface IPostContext {
   posts: IPost[];
   userPosts: IPost[];
   getAllPosts: () => Promise<void>;
-  createPost: (data: IFormPostRegister) => Promise<void>;
-  deletePost: (postId: number) => Promise<void>;
+  // createPost: (data: IFormPostRegister) => Promise<void>;
+  // deletePost: (postId: number) => Promise<void>;
   actualPostId: number;
   setActualPostId: React.Dispatch<React.SetStateAction<number>>;
   likeClicked: boolean;
@@ -48,6 +47,7 @@ export interface IPostContext {
   searchOpen: boolean;
   setSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
   resetSearch: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  alterLikeCount: (likeId: number, qntOfLikes: number, postId: number, postLiked: boolean) => Promise<void>;
+  // alterLikeCount: (likeId: number, qntOfLikes: number, postId: number, postLiked: boolean) => Promise<void>;
   editUserNameInPost: (newName: string) => void;
+  mapPostsListInRelationWithPostsUsersOwners: (list: IPost[]) => IPost[]
 }

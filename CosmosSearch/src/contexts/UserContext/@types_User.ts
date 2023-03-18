@@ -81,7 +81,7 @@ export interface IUserContext {
   patchProfile: (data: IPatchProfile) => Promise<void>;
   userInfos: IUserInfos | null;
   setUserInfos: React.Dispatch<React.SetStateAction<IUserInfos | null>>;
-  users: IUserFromApi[] | null;
-  setUsers: React.Dispatch<React.SetStateAction<IUserFromApi[] | null>>;
+  users: IUserFromApi[];
+  setUsers: React.Dispatch<React.SetStateAction<IUserFromApi[]>>;
   getAllUsers: () => Promise<void>
 }

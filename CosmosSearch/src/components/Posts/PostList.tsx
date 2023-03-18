@@ -6,11 +6,18 @@ import { PostListStyled } from "./PostListStyled";
 import { PostContext } from "../../contexts/PostContext/PostContext";
 
 export const Posts = () => {
-  const { posts, isSearch, setIsSearch, searchedPosts } =
-    useContext(PostContext);
+  const {
+    posts,
+    isSearch,
+    setIsSearch,
+    searchedPosts,
+    getAllPosts,
+    mapPostsListInRelationWithPostsUsersOwners,
+  } = useContext(PostContext);
 
   useEffect(() => {
     setIsSearch(false);
+    getAllPosts();
   }, []);
 
   return (
@@ -19,23 +26,24 @@ export const Posts = () => {
         searchedPosts.length === 0 ? (
           <p className="error">Search return any results</p>
         ) : (
-          searchedPosts.map((post) => (
-            <Post
-              key={post.id}
-              body={post.body}
-              name={post.name}
-              topic={post.topic}
-              postId={post.id}
-              title={post.title}
-              date={post.date}
-              postLiked={post.postLiked}
-              qntOfLikes={post.qntOfLikes}
-              likeId={post.likeId}
-            />
-          )) 
+          mapPostsListInRelationWithPostsUsersOwners(searchedPosts).map(
+            (post) => (
+              <Post
+                key={post.id}
+                body={post.body}
+                name={post.name}
+                topic={post.topic}
+                postId={post.id}
+                title={post.title}
+                date={post.date}
+                postLiked={post.postLiked}
+                likes={post.likes}
+              />
+            )
+          )
         )
       ) : (
-        posts.map((post) => (
+        mapPostsListInRelationWithPostsUsersOwners(posts).map((post) => (
           <Post
             key={post.id}
             body={post.body}
@@ -45,8 +53,7 @@ export const Posts = () => {
             title={post.title}
             date={post.date}
             postLiked={post.postLiked}
-            qntOfLikes={post.qntOfLikes}
-            likeId={post.likeId}
+            likes={post.likes}
           />
         ))
       )}

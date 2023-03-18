@@ -32,8 +32,7 @@ interface IPostProps {
   postId: number;
   date: string;
   postLiked?: boolean;
-  qntOfLikes?: number;
-  likeId?: number
+  likes?: number
 }
 
 export const Post = ({
@@ -44,8 +43,7 @@ export const Post = ({
   postId,
   date,
   postLiked,
-  qntOfLikes,
-  likeId,
+  likes
 }: IPostProps) => {
   const {
     setModalIsOpen,
@@ -53,7 +51,8 @@ export const Post = ({
     setEditModalIsOpen,
     setDeleteModalIsOpen,
   } = useContext(LinksContext);
-  const { setActualPostId, alterLikeCount } = useContext(PostContext);
+  // const { setActualPostId, alterLikeCount } = useContext(PostContext);
+  const { setActualPostId,  } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
   const { userState } = useContext(UserContext);
 
@@ -112,8 +111,12 @@ export const Post = ({
           <div className="button">
             {userState !== "userDeslogged" ? (
               <>
-                <div onClick={() => {alterLikeCount(likeId as number, qntOfLikes as number, postId, postLiked as boolean)}}>
+                {/* <div onClick={() => {alterLikeCount(likeId as number, qntOfLikes as number, postId, postLiked as boolean)}}>
                   <p className="input__placeholder">{qntOfLikes}</p>
+                  {postLiked ? <LikeClicked /> : <LikeUnclicked />}
+                </div> */}
+                <div >
+                  <p className="input__placeholder">{likes}</p>
                   {postLiked ? <LikeClicked /> : <LikeUnclicked />}
                 </div>
                 <ButtonStyled

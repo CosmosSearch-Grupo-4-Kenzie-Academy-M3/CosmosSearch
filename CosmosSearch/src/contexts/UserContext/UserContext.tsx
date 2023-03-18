@@ -32,7 +32,7 @@ export const UserProvider = ({ children }: iChildren) => {
     "userLoggedInPerfil" | "userLogged" | "userDeslogged"
   >("userDeslogged");
   const [user, setUser] = useState<IUser | null>(null);
-  const [users, setUsers] = useState<IUserFromApi[] | null>(null)
+  const [users, setUsers] = useState<IUserFromApi[]>([])
   const [userInfos, setUserInfos] = useState<IUserInfos | null>(null);
 
   const navigate = useNavigate();

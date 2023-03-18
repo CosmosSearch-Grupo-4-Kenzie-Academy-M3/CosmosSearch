@@ -40,10 +40,6 @@ export const UserDashboard = () => {
     setUserInfos(userInfosData);
   }, []);
 
-  useEffect(() => {
-    getAllPosts();
-  }, [posts]);
-
   useEffect(() =>  {
     getAllUsers();
   }, [users])

@@ -31,10 +31,6 @@ export const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    getAllPosts();
-  }, [posts]);
-
-  useEffect(() => {
     const userInfos = JSON.parse(
       localStorage.getItem("@CosmosSearch:USERINFOS") as string
     ) as IUserInfos;
