@@ -29,12 +29,14 @@ export const StartStyled = styled.div`
 
     :hover .links__line {
       width: 20px;
+      opacity: .4;
     }
   }
 
   .links__hover {
     :hover .links__line {
       width: 20px;
+      opacity: .4;
     }
   }
 

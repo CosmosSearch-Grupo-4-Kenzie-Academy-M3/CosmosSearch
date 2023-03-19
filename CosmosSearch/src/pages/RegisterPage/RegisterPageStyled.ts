@@ -18,6 +18,7 @@ export const RegisterPageStyled = styled.main`
     gap: 1rem;
     :hover .links__line {
       width: 20px;
+      opacity: .4;
     }
   }
 
