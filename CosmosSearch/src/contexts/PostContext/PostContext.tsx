@@ -7,7 +7,6 @@ import { api } from "../../services/api";
 import { iChildren } from "../@childrenType";
 import {
   IFormPostRegister,
-  IUserFromApi,
   IUserInfos,
 } from "../UserContext/@types_User";
 import { IPost, IPostContext, IUpdatePost } from "./@typesPost";
@@ -187,86 +186,58 @@ export const PostProvider = ({ children }: iChildren) => {
     return postDate;
   };
 
-  // const createLikeEndPointForPost = async (
-  //   id: number,
-  //   list: IPost[],
-  //   token: string
-  // ) => {
-  //   try {
-  //     const newLikeData = {
-  //       qnt: 0,
-  //       postId: id,
-  //     };
-  //     const newLikeResponse = await api.post(`/likes`, newLikeData, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     const newLike = newLikeResponse.data;
-  //     const allLikes = [...allLikesList, newLike];
-  //     setAllLikesList(allLikes);
-  //   } catch (error) {
-  //     toast.error("erro na criação de end point de like");
-  //     toast.error("Something went wrong.");
-  //   }
-  // };
+  const createPost = async (data: IFormPostRegister) => {
+    const userInfos = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    ) as IUserInfos;
+    const userId = userInfos.id;
+    const name = userInfos.name;
+    const token = userInfos.token;
+    const likes = 0
+    const date = getPostDate();
+    const newData = { ...data, userId, name, date, likes };
+    if (token) {
+      try {
+        const response = await api.post(`/posts`, newData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const newPost = { ...response.data, postLiked: false };
+        const newPostList = [...posts, newPost]
+        const orderedList = orderPostsByData(newPostList)
+        setPosts(orderedList)
+        setMainComponent("posts");
+        toast.success("Post successfully created")
+      } catch (error) {
+        console.log(error);
+        toast.error("Unable to create post!");
+      }
+    }
+  };
 
-  // const createPost = async (data: IFormPostRegister) => {
-  //   const userInfos = JSON.parse(
-  //     localStorage.getItem("@CosmosSearch:USERINFOS") as string
-  //   ) as IUserInfos;
-  //   const userId = userInfos.id;
-  //   const name = userInfos.name;
-  //   const token = userInfos.token;
-  //   const date = getPostDate();
-  //   const newData = { ...data, userId, name, date };
-  //   if (token) {
-  //     try {
-  //       const response = await api.post(`/posts`, newData, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       const newPost = { ...response.data, qntOfLikes: 0, postLiked: false };
-  //       const postsList = [...posts, newPost];
-  //       createLikeEndPointForPost(response.data.id, postsList, token);
-  //       toast.success("Post successfully created");
-  //       setMainComponent("posts");
-  //     } catch (error) {
-  //       console.log(error);
-  //       toast.error("Unable to create post!");
-  //     }
-  //   }
-  // };
-
-  // const deletePost = async (postId: number) => {
-  //   const userInfos = JSON.parse(
-  //     localStorage.getItem("@CosmosSearch:USERINFOS") as string
-  //   ) as IUserInfos;
-  //   const token = userInfos.token;
-  //   const postLikesToDelete: IAllLikes = allLikesList.find(
-  //     (likes) => likes.postId === postId
-  //   ) as IAllLikes;
-  //   const postLikesToDeleteId = postLikesToDelete.id;
-  //   if (token) {
-  //     try {
-  //       await api.delete(`/likes/${postLikesToDeleteId}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       await api.delete(`/posts/${postId}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       toast.success("Post successfully deleted");
-  //     } catch (error) {
-  //       console.log(error);
-  //       toast.error("Unable to delete post!");
-  //     }
-  //   }
-  // };
+  const deletePost = async (postId: number) => {
+    const userInfos = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    ) as IUserInfos;
+    const token = userInfos.token;
+    if (token) {
+      try {
+        await api.delete(`/posts/${postId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const postsListFiltered = posts.filter((post) => post.id !== postId)
+        const orderedList = orderPostsByData(postsListFiltered)
+        setPosts(orderedList)
+        toast.success("Post successfully deleted");
+      } catch (error) {
+        console.log(error);
+        toast.error("Unable to delete post!");
+      }
+    }
+  };
 
   const resetSearchInUpdatePost = () => {
     setIsSearch(false);
@@ -424,8 +395,8 @@ export const PostProvider = ({ children }: iChildren) => {
       value={{
         posts,
         getAllPosts,
-        // createPost,
-        // deletePost,
+        createPost,
+        deletePost,
         actualPostId,
         setActualPostId,
         likeClicked,

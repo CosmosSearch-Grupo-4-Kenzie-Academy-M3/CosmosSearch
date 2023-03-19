@@ -1,4 +1,3 @@
-import axios from "axios";
 import { createContext, useContext, useState } from "react";
 
 import { useForm } from "react-hook-form";
@@ -11,7 +10,6 @@ import { api } from "../../services/api";
 
 import { iChildren } from "../@childrenType";
 import { LinksContext } from "../LinksContext/LinksContext";
-import { PostContext } from "../PostContext/PostContext";
 
 import {
   IFormUserLogin,
@@ -32,8 +30,9 @@ export const UserProvider = ({ children }: iChildren) => {
     "userLoggedInPerfil" | "userLogged" | "userDeslogged"
   >("userDeslogged");
   const [user, setUser] = useState<IUser | null>(null);
-  const [users, setUsers] = useState<IUserFromApi[]>([])
   const [userInfos, setUserInfos] = useState<IUserInfos | null>(null);
+  
+  const [users, setUsers] = useState<IUserFromApi[]>([])
 
   const navigate = useNavigate();
 

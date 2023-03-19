@@ -16,7 +16,8 @@ export const Dashboard = () => {
   const { burgerOpen, modalIsOpen } = useContext(LinksContext);
   const { userState, setUserState, users, getAllUsers } =
     useContext(UserContext);
-  const { setIsDashboard, isDashboard, getAllPosts, posts } =
+
+  const { setIsDashboard, isDashboard } =
     useContext(PostContext);
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export const Dashboard = () => {
     const userInfos = JSON.parse(
       localStorage.getItem("@CosmosSearch:USERINFOS") as string
     ) as IUserInfos;
+
     if (userInfos) {
       const currentUserState = userInfos.currentUserState;
       setUserState(currentUserState);
@@ -35,6 +37,7 @@ export const Dashboard = () => {
       localStorage.getItem("@CosmosSearch:USERINFOS") as string
     ) as IUserInfos;
     if (userInfos) {
+      
       const currentUserState = userInfos.currentUserState;
       if (currentUserState !== "userDeslogged") {
         getAllUsers();

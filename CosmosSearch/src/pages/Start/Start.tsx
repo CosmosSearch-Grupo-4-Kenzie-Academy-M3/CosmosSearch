@@ -11,7 +11,7 @@ import { UserContext } from "../../contexts/UserContext/UserContext";
 
 export const Start = () => {
   const { burgerOpen, setBurgerOpen } = useContext(LinksContext);
-  const { userState ,setUserState } = useContext(UserContext);
+  const { setUserState } = useContext(UserContext);
 
   useEffect(() => {
     setUserState("userDeslogged");

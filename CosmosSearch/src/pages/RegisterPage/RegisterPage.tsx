@@ -3,7 +3,6 @@ import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { Title } from "../../components/Title/Title";
 import { RegisterPageStyled } from "./RegisterPageStyled";
 
-
 export const RegisterPage = () => {
   return (
     <div className="container__pages--forms">

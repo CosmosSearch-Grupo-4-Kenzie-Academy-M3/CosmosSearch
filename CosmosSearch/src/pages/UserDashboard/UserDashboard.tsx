@@ -6,7 +6,6 @@ import { Header } from "../../components/Header/Header";
 import { PostModal } from "../../components/Posts/PostModal/PostModal";
 import { DivForButtons } from "./DivForButtons/DivForButtons";
 import { UserDashboardStyled } from "./UserDashboardStyled";
-import { UserPosts } from "../../components/Posts/UserPostsList";
 import { PostEdit } from "../../components/Posts/PostModal/PostEdit/PostEdit";
 import { PostDelete } from "../../components/Posts/PostModal/PostDelete/PostDelete";
 import { UserInfos } from "../../components/UserInfos/UserInfos";
@@ -29,10 +28,8 @@ export const UserDashboard = () => {
   const { userState, setUserState, userInfos, setUserInfos, users, getAllUsers } =
     useContext(UserContext);
 
-  const { setIsDashboard, getAllPosts, posts } =
+  const { setIsDashboard } =
     useContext(PostContext);
-
-  const { setMainComponent } = useContext(LinksContext)
 
   const userName = userInfos?.name as string;
   const userEmail = userInfos?.email as string;

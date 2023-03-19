@@ -26,8 +26,8 @@ export interface IAllLikes {
 export interface IPostContext {
   posts: IPost[];
   getAllPosts: () => Promise<void>;
-  // createPost: (data: IFormPostRegister) => Promise<void>;
-  // deletePost: (postId: number) => Promise<void>;
+  createPost: (data: IFormPostRegister) => Promise<void>;
+  deletePost: (postId: number) => Promise<void>;
   actualPostId: number;
   setActualPostId: React.Dispatch<React.SetStateAction<number>>;
   likeClicked: boolean;
