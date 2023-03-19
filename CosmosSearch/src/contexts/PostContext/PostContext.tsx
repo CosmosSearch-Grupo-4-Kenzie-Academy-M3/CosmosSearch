@@ -338,7 +338,6 @@ export const PostProvider = ({ children }: iChildren) => {
     const postLikeds = postLiked
       ? userInfos.postLikeds.filter((id) => id !== postId)
       : [...userInfos.postLikeds, postId];
-
     try {
       const response = await api.patch(
         `users/${userId}`,
@@ -363,97 +362,53 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
-  // const alterLikeCount = async (
-  //   likeId: number,
-  //   qntOfLikes: number,
-  //   postId: number,
-  //   postLiked: boolean
-  // ) => {
-  //   const userInfos = JSON.parse(
-  //     localStorage.getItem("@CosmosSearch:USERINFOS") as string
-  //   ) as IUserInfos;
-  //   const token = userInfos.token;
-  //   const allLikes = allLikesList;
-  //   const likeData = postLiked
-  //     ? { qnt: qntOfLikes - 1 }
-  //     : { qnt: qntOfLikes + 1 };
-  //   try {
-  //     const response = await api.patch(`/likes/${likeId}`, likeData, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     const currentAlteredLike = response.data;
-  //     const newAllLikes: IAllLikes[] = allLikes.map((like) => {
-  //       if (like.id === currentAlteredLike.id) {
-  //         return currentAlteredLike;
-  //       } else {
-  //         return like;
-  //       }
-  //     });
-  //     setAllLikesList(newAllLikes);
-  //     if (isSearch) {
-  //       const postsListActualized = searchedPosts.map((post) => {
-  //         const postToActualize = newAllLikes.find(
-  //           (like) => post.id === like.postId
-  //         ) as IAllLikes;
-  //         if (postToActualize) {
-  //           return {
-  //             ...post,
-  //             qntOfLikes: postToActualize.qnt,
-  //           };
-  //         } else {
-  //           return post;
-  //         }
-  //       });
-  //       const postListActualizedWithPostLiked = postsListActualized.map(
-  //         (post) => {
-  //           if (post.id === postId) {
-  //             return {
-  //               ...post,
-  //               postLiked: !post.postLiked,
-  //             };
-  //           } else if (post.id !== postId) {
-  //             return post;
-  //           }
-  //         }
-  //       ) as IPost[];
-  //       const orderedList = orderPostsByData(postListActualizedWithPostLiked);
-  //       setSearchedPosts(orderedList);
-  //     } else {
-  //       const postsListActualized = posts.map((post) => {
-  //         const postToActualize = newAllLikes.find(
-  //           (like) => post.id === like.postId
-  //         ) as IAllLikes;
-  //         if (postToActualize) {
-  //           return {
-  //             ...post,
-  //             qntOfLikes: postToActualize.qnt,
-  //           };
-  //         } else {
-  //           return post;
-  //         }
-  //       });
-  //       const postListActualizedWithPostLiked = postsListActualized.map(
-  //         (post) => {
-  //           if (post.id === postId) {
-  //             return {
-  //               ...post,
-  //               postLiked: !post.postLiked,
-  //             };
-  //           } else if (post.id !== postId) {
-  //             return post;
-  //           }
-  //         }
-  //       ) as IPost[];
-  //       const orderedList = orderPostsByData(postListActualizedWithPostLiked);
-  //       setPosts(orderedList);
-  //       actualizePostLikedsUserArray(postId, postLiked);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const alterLikeCount = async (
+    likes: number,
+    postId: number,
+    postLiked: boolean
+  ) => {
+    const userInfos = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    ) as IUserInfos;
+    const token = userInfos.token;
+    const likeData = postLiked
+      ? likes - 1 
+      : likes + 1 ;
+      if (isSearch) {
+        const postListActualizedWithPostLiked = searchedPosts.map(
+          (post) => {
+            if (post.id === postId) {
+              return {
+                ...post,
+                postLiked: !post.postLiked,
+                likes: likeData
+              };
+            } else if (post.id !== postId) {
+              return post;
+            }
+          }
+        ) as IPost[];
+        const orderedList = orderPostsByData(postListActualizedWithPostLiked);
+        setSearchedPosts(orderedList);
+      } else {
+        const postListActualizedWithPostLiked = posts.map(
+          (post) => {
+            if (post.id === postId) {
+              return {
+                ...post,
+                postLiked: !post.postLiked,
+                likes: likeData
+              };
+            } else if (post.id !== postId) {
+              return post;
+            }
+          }
+        ) as IPost[];
+        const orderedList = orderPostsByData(postListActualizedWithPostLiked);
+        setPosts(orderedList);
+        actualizePostLikedsUserArray(postId, postLiked);
+      }
+  };
 
   const searchFunction = (post: IPost) => {
     setIsSearch(true);
@@ -509,7 +464,8 @@ export const PostProvider = ({ children }: iChildren) => {
         setSearchOpen,
         resetSearch,
         editUserNameInPost,
-        mapPostsListInRelationWithPostsUsersOwners
+        mapPostsListInRelationWithPostsUsersOwners,
+        alterLikeCount
       }}
     >
       {children}
