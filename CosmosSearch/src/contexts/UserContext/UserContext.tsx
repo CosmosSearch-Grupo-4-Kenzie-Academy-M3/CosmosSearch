@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useContext, useState } from "react";
 
 import { useForm } from "react-hook-form";
@@ -62,8 +63,7 @@ export const UserProvider = ({ children }: iChildren) => {
       })
       setUsers(users)
     } catch (error) {
-      toast("erro no get all users")
-      console.log(error)
+      null
     }
   }
 

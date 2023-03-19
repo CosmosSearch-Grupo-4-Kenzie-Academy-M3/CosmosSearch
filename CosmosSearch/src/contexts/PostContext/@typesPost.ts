@@ -25,7 +25,6 @@ export interface IAllLikes {
 
 export interface IPostContext {
   posts: IPost[];
-  userPosts: IPost[];
   getAllPosts: () => Promise<void>;
   // createPost: (data: IFormPostRegister) => Promise<void>;
   // deletePost: (postId: number) => Promise<void>;

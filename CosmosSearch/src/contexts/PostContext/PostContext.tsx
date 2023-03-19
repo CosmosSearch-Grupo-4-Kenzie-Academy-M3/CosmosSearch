@@ -10,7 +10,7 @@ import {
   IUserFromApi,
   IUserInfos,
 } from "../UserContext/@types_User";
-import { IAllLikes, IPost, IPostContext, IUpdatePost } from "./@typesPost";
+import { IPost, IPostContext, IUpdatePost } from "./@typesPost";
 import { LinksContext } from "../LinksContext/LinksContext";
 import { UserContext } from "../UserContext/UserContext";
 
@@ -18,7 +18,6 @@ export const PostContext = createContext({} as IPostContext);
 
 export const PostProvider = ({ children }: iChildren) => {
   const [posts, setPosts] = useState<IPost[]>([]);
-  const [userPosts, setUserPosts] = useState<IPost[]>([]);
   const [searchedPosts, setSearchedPosts] = useState<IPost[]>([]);
   const [actualPostId, setActualPostId] = useState(0);
 
@@ -153,18 +152,13 @@ export const PostProvider = ({ children }: iChildren) => {
           postListToUserLoggedWithLickedPosts
         );
         setPosts(orderedList);
-        const userPostsList: IPost[] =
-          postListToUserLoggedWithLickedPosts.filter((post: IPost) => {
-            return post.userId === userId;
-          });
-        const userOrderedList = orderPostsByData(userPostsList);
-        setUserPosts(userOrderedList);
       } else if (userState === "userDeslogged") {
         const orderedList = orderPostsByData(postsListToUserLogged);
         setPosts(orderedList);
       }
     } catch (error) {
       console.log(error);
+      console.log(typeof error);
       toast.error("erro no post list.");
     }
   };
@@ -181,7 +175,7 @@ export const PostProvider = ({ children }: iChildren) => {
         return post;
       }
     });
-    return postsListsWithCorrectUsersOwnersNames
+    return postsListsWithCorrectUsersOwnersNames;
   };
 
   const getPostDate = () => {
@@ -317,7 +311,6 @@ export const PostProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(newPosts);
         resetSearchInUpdatePost();
       } catch (error) {
         console.log(error);
@@ -369,59 +362,57 @@ export const PostProvider = ({ children }: iChildren) => {
       localStorage.getItem("@CosmosSearch:USERINFOS") as string
     ) as IUserInfos;
     const token = userInfos.token;
-    const userId = userInfos.id
-    const likeData = postLiked
-      ? likes - 1 
-      : likes + 1 ;
-      try {
-        const response = await api.patch(`posts/${postId}`, {
+    const userId = userInfos.id;
+    const likeData = postLiked ? likes - 1 : likes + 1;
+    try {
+      const response = await api.patch(
+        `posts/${postId}`,
+        {
           likes: likeData,
-        }, {
+        },
+        {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-        console.log(response)
-        actualizePostLikedsUserArray(postId, postLiked, token, userId, userInfos);
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      actualizePostLikedsUserArray(postId, postLiked, token, userId, userInfos);
       if (isSearch) {
-        const postListActualizedWithPostLiked = searchedPosts.map(
-          (post) => {
-            if (post.id === postId) {
-              return {
-                ...post,
-                postLiked: !post.postLiked,
-                likes: likeData
-              };
-            } else if (post.id !== postId) {
-              return post;
-            }
+        const postListActualizedWithPostLiked = searchedPosts.map((post) => {
+          if (post.id === postId) {
+            return {
+              ...post,
+              postLiked: !post.postLiked,
+              likes: likeData,
+            };
+          } else if (post.id !== postId) {
+            return post;
           }
-        ) as IPost[];
+        }) as IPost[];
         const orderedList = orderPostsByData(postListActualizedWithPostLiked);
         setSearchedPosts(orderedList);
       } else {
-        const postListActualizedWithPostLiked = posts.map(
-          (post) => {
-            if (post.id === postId) {
-              return {
-                ...post,
-                postLiked: !post.postLiked,
-                likes: likeData
-              };
-            } else if (post.id !== postId) {
-              return post;
-            }
+        const postListActualizedWithPostLiked = posts.map((post) => {
+          if (post.id === postId) {
+            return {
+              ...post,
+              postLiked: !post.postLiked,
+              likes: likeData,
+            };
+          } else if (post.id !== postId) {
+            return post;
           }
-        ) as IPost[];
+        }) as IPost[];
         const orderedList = orderPostsByData(postListActualizedWithPostLiked);
-        const userOrderedList = orderedList.filter((post) => post.userId === userId);
-        setPosts(orderedList);  
-        setUserPosts(userOrderedList);
+        const userOrderedList = orderedList.filter(
+          (post) => post.userId === userId
+        );
+        setPosts(orderedList);
       }
-      } catch (error) {
-        console.log(error)
-        toast("erro no alterlikecount")
-      }
+    } catch (error) {
+      console.log(error);
+      toast("erro no alterlikecount");
+    }
   };
 
   const searchFunction = (post: IPost) => {
@@ -449,7 +440,7 @@ export const PostProvider = ({ children }: iChildren) => {
     setIsSearch(false);
     setSearchOpen(false);
     setValue("");
-    setPosts([])
+    setPosts([]);
     getAllPosts();
   };
 
@@ -457,7 +448,6 @@ export const PostProvider = ({ children }: iChildren) => {
     <PostContext.Provider
       value={{
         posts,
-        userPosts,
         getAllPosts,
         // createPost,
         // deletePost,
@@ -481,7 +471,7 @@ export const PostProvider = ({ children }: iChildren) => {
         resetSearch,
         editUserNameInPost,
         mapPostsListInRelationWithPostsUsersOwners,
-        alterLikeCount
+        alterLikeCount,
       }}
     >
       {children}

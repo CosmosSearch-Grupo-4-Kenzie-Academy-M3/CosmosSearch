@@ -13,6 +13,7 @@ export const UserPosts = () => {
     searchedPosts,
     getAllPosts,
     mapPostsListInRelationWithPostsUsersOwners,
+    posts
   } = useContext(PostContext);
 
   useEffect(() => {

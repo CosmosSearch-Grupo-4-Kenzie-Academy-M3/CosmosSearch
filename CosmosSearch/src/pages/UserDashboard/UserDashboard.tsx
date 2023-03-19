@@ -15,6 +15,7 @@ import { LinksContext } from "../../contexts/LinksContext/LinksContext";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import { PostContext } from "../../contexts/PostContext/PostContext";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
+import { Posts } from "../../components/Posts/PostList";
 
 export const UserDashboard = () => {
   const {
@@ -24,10 +25,15 @@ export const UserDashboard = () => {
     editModalIsOpen,
     deleteModalIsOpen,
   } = useContext(LinksContext);
+
   const { userState, setUserState, userInfos, setUserInfos, users, getAllUsers } =
     useContext(UserContext);
+
   const { setIsDashboard, getAllPosts, posts } =
     useContext(PostContext);
+
+  const { setMainComponent } = useContext(LinksContext)
+
   const userName = userInfos?.name as string;
   const userEmail = userInfos?.email as string;
 
@@ -63,7 +69,7 @@ export const UserDashboard = () => {
           </div>
         )}
         {mainComponent === "posts" ? (
-          <UserPosts />
+          <Posts />
         ) : mainComponent === "updatePerfil" ? (
           <div className="container__form">
             <div>
@@ -84,7 +90,7 @@ export const UserDashboard = () => {
           <main className="main__user main__burgerOpen">
             <DivForButtons />
             {mainComponent === "posts" ? (
-              <UserPosts />
+              <Posts />
             ) : mainComponent === "updatePerfil" ? (
               <div className="user__section">
                 <UserInfos name={userName} email={userEmail} />
@@ -98,7 +104,7 @@ export const UserDashboard = () => {
           <main className="main__user main__burgerClosed">
             <DivForButtons />
             {mainComponent === "posts" ? (
-              <UserPosts />
+              <Posts />
             ) : mainComponent === "updatePerfil" ? (
               <div className="user__section">
                 <UserInfos name={userName} email={userEmail} />

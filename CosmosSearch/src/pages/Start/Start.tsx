@@ -15,7 +15,7 @@ export const Start = () => {
 
   useEffect(() => {
     setUserState("userDeslogged");
-  }, [userState])
+  })
 
   return (
     <StartStyled>
