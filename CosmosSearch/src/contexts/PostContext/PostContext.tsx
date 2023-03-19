@@ -328,13 +328,11 @@ export const PostProvider = ({ children }: iChildren) => {
 
   const actualizePostLikedsUserArray = async (
     postId: number,
-    postLiked: boolean
+    postLiked: boolean,
+    token: string,
+    userId: number,
+    userInfos: IUserInfos
   ) => {
-    const userInfos = JSON.parse(
-      localStorage.getItem("@CosmosSearch:USERINFOS") as string
-    ) as IUserInfos;
-    const userId = userInfos.id;
-    const token = userInfos.token;
     const postLikeds = postLiked
       ? userInfos.postLikeds.filter((id) => id !== postId)
       : [...userInfos.postLikeds, postId];
@@ -371,9 +369,20 @@ export const PostProvider = ({ children }: iChildren) => {
       localStorage.getItem("@CosmosSearch:USERINFOS") as string
     ) as IUserInfos;
     const token = userInfos.token;
+    const userId = userInfos.id
     const likeData = postLiked
       ? likes - 1 
       : likes + 1 ;
+      try {
+        const response = await api.patch(`posts/${postId}`, {
+          likes: likeData,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        console.log(response)
+        actualizePostLikedsUserArray(postId, postLiked, token, userId, userInfos);
       if (isSearch) {
         const postListActualizedWithPostLiked = searchedPosts.map(
           (post) => {
@@ -405,8 +414,13 @@ export const PostProvider = ({ children }: iChildren) => {
           }
         ) as IPost[];
         const orderedList = orderPostsByData(postListActualizedWithPostLiked);
-        setPosts(orderedList);
-        actualizePostLikedsUserArray(postId, postLiked);
+        const userOrderedList = orderedList.filter((post) => post.userId === userId);
+        setPosts(orderedList);  
+        setUserPosts(userOrderedList);
+      }
+      } catch (error) {
+        console.log(error)
+        toast("erro no alterlikecount")
       }
   };
 
@@ -435,6 +449,8 @@ export const PostProvider = ({ children }: iChildren) => {
     setIsSearch(false);
     setSearchOpen(false);
     setValue("");
+    setPosts([])
+    getAllPosts();
   };
 
   return (
