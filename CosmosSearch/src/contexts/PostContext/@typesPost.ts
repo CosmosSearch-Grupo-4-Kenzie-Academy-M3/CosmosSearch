@@ -47,6 +47,5 @@ export interface IPostContext {
   setSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
   resetSearch: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   alterLikeCount: (likes: number, postId: number, postLiked: boolean) => void;
-  editUserNameInPost: (newName: string) => void;
   mapPostsListInRelationWithPostsUsersOwners: (list: IPost[]) => IPost[]
 }

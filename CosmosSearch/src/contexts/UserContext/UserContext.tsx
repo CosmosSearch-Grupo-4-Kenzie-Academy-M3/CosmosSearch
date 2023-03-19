@@ -27,7 +27,6 @@ export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: iChildren) => {
   const { setMainComponent } = useContext(LinksContext);
-  const { posts, editUserNameInPost} = useContext(PostContext)
 
   const [userState, setUserState] = useState<
     "userLoggedInPerfil" | "userLogged" | "userDeslogged"
@@ -81,8 +80,8 @@ export const UserProvider = ({ children }: iChildren) => {
       );
       setUserState("userLogged");
       setUserInfos(userInfosData);
-      navigate("/dashboard");
       toast.success("User registered successfully!");
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       toast.error("Please review your data.");
@@ -100,8 +99,8 @@ export const UserProvider = ({ children }: iChildren) => {
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
       );
-      setUserInfos(userInfosData);
       setUserState("userLogged");
+      setUserInfos(userInfosData);
       toast.success("Login efetuado!");
       navigate("/dashboard");
     } catch (error) {
@@ -114,8 +113,8 @@ export const UserProvider = ({ children }: iChildren) => {
     localStorage.removeItem("@CosmosSearch:USERINFOS");
     setUserState("userDeslogged");
     setUser(null);
-    navigate("/");
     toast("User deslogged!");
+    navigate("/");
   };
 
   const redirectToNewPost = () => {
@@ -148,8 +147,6 @@ export const UserProvider = ({ children }: iChildren) => {
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
       );
-      const newName = newUserInfos.name
-      editUserNameInPost(newName)
     } catch (error) {
       console.log(error);
       toast.error("Please review your data.");

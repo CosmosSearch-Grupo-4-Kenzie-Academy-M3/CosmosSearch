@@ -294,31 +294,6 @@ export const PostProvider = ({ children }: iChildren) => {
     }
   };
 
-  const editUserNameInPost = (newName: string) => {
-    const userInfos = JSON.parse(
-      localStorage.getItem("@CosmosSearch:USERINFOS") as string
-    ) as IUserInfos;
-    const token = userInfos.token;
-    const userId = userInfos.id;
-    const newData = { userId, date: getPostDate(), name: newName };
-    const postsToUpdateNames: IPost[] = posts.filter(
-      (post) => post.userId === userId
-    ) as IPost[];
-    postsToUpdateNames.forEach(async (post) => {
-      try {
-        const newPosts = await api.patch(`/posts/${post.id}`, newData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        resetSearchInUpdatePost();
-      } catch (error) {
-        console.log(error);
-        toast.error("Unable to update post!");
-      }
-    });
-  };
-
   const actualizePostLikedsUserArray = async (
     postId: number,
     postLiked: boolean,
@@ -469,7 +444,6 @@ export const PostProvider = ({ children }: iChildren) => {
         searchOpen,
         setSearchOpen,
         resetSearch,
-        editUserNameInPost,
         mapPostsListInRelationWithPostsUsersOwners,
         alterLikeCount,
       }}
