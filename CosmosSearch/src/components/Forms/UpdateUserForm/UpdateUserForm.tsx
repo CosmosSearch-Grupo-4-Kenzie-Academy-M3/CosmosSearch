@@ -14,7 +14,7 @@ import { IFormUserUpdate } from "../../../contexts/UserContext/@types_User";
 import { UserContext } from "../../../contexts/UserContext/UserContext";
 
 export const UpdateUserForm = () => {
-  const { patchProfile } = useContext(UserContext);
+  const { patchProfile, userInfos } = useContext(UserContext);
 
   const {
     register,
@@ -29,6 +29,8 @@ export const UpdateUserForm = () => {
     patchProfile(data);
     reset();
   };
+
+  const userEmail = userInfos?.email
 
   return (
     <UpdateUserFormStyled onSubmit={handleSubmit(userUpdateSubmit)}>
@@ -45,6 +47,7 @@ export const UpdateUserForm = () => {
         register={register("email")}
         type="email"
         labelName="Email"
+        value={userEmail}
       />
       <Input
         placeholder="Type your password"
