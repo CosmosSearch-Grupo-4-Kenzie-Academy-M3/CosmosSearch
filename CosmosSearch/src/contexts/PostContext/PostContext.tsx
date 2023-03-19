@@ -253,11 +253,16 @@ export const PostProvider = ({ children }: iChildren) => {
     const userId = userInfos.id;
     const newData = { ...data, userId, date: getPostDate() };
     try {
-      await api.patch(`/posts/${postId}`, newData, {
+      const response = await api.patch(`/posts/${postId}`, newData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      const newPost = response.data
+      const filteredPostList = posts.filter(post => post.id !== postId)
+      const newPostList = [...filteredPostList, newPost]
+      const orderedList = orderPostsByData(newPostList)
+      setPosts(orderedList)
       toast.success("Post successfully updated");
       resetSearchInUpdatePost();
     } catch (error) {
