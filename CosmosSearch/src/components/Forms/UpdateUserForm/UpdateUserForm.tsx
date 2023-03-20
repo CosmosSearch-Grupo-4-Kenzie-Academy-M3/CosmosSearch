@@ -31,6 +31,7 @@ export const UpdateUserForm = () => {
   };
 
   const userEmail = userInfos?.email
+  const userName = userInfos?.name
 
   return (
     <UpdateUserFormStyled onSubmit={handleSubmit(userUpdateSubmit)}>
@@ -40,6 +41,7 @@ export const UpdateUserForm = () => {
         register={register("name")}
         type="text"
         labelName="Name"
+        value={userName}
       />
       <Input
         placeholder="Type your email"
