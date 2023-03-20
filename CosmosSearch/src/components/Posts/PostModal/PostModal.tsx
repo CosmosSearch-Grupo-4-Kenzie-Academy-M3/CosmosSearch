@@ -25,8 +25,10 @@ export const PostModal = () => {
   const [commentButtonIsRotate, setCommentButtonIsRotate] = useState(false);
 
   const { setModalIsOpen, modalId } = useContext(LinksContext);
+
   const { posts } = useContext(PostContext);
-  const { allComments, createNewComment } = useContext(CommentsContext);
+
+  const { allComments, createNewComment, setAllComments } = useContext(CommentsContext);
 
   const userPost = posts.find((post) => post.id == modalId) as IPost;
 
@@ -39,7 +41,11 @@ export const PostModal = () => {
   return (
     <PostModalDivStyled>
       <PostModalStyled>
-        <CloseButton onClick={() => setModalIsOpen(false)}>
+        <CloseButton onClick={() => {
+          setModalIsOpen(false);
+          setAllComments([]);
+        }
+      }>
           <CloseModal />
         </CloseButton>
         <div className="header__modal--desktop">
