@@ -54,7 +54,7 @@ export const UserDashboardStyled = styled.div`
       display: block;
 
       main {
-        max-width: 100%;
+        width: 100%;
         display: flex;
         justify-content: space-between;
       }
