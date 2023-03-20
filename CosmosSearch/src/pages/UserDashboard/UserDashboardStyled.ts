@@ -11,6 +11,7 @@ export const UserDashboardStyled = styled.div`
 
   .main__burgerOpen {
     margin-top: 7rem;
+    
   }
 
   .userdash__desktop {
@@ -53,8 +54,7 @@ export const UserDashboardStyled = styled.div`
       display: block;
 
       main {
-        width: 100%;
-
+        max-width: 100%;
         display: flex;
         justify-content: space-between;
       }
