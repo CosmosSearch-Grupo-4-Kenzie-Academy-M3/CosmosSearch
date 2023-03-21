@@ -35,23 +35,40 @@ export const CommentsProvider = ({ children }: iChildren) => {
     const name = userInfos.name
     const newData = { ...data, postId, userId, name };
     try {
-      const response = await api.post(`/posts/${postId}/comments`, newData, {
+      const response = await api.post(`/comments`, newData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setAllComments([...allComments, response.data]);
-      toast.success("Comentário postado com sucesso!");
+      toast.success("Comment created sucessifully!");
       console.log(newData);
     } catch (error) {
       console.log(error);
-      toast.error("Não foi possível enviar o comentário!");
+      toast.error("Some error !");
     }
   };
 
+  const deleteComment = async(id: number) => {
+    const userInfos = JSON.parse(localStorage.getItem("@CosmosSearch:USERINFOS") as string) as IUserInfos;
+    const token = userInfos.token
+    try {
+      const response = await api.delete(`/comments/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      const allCommentsFiltered = allComments.filter((comment) => comment.id !== id)
+      setAllComments(allCommentsFiltered)
+      toast.success("Comment deleted sucessifully")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <CommentsContext.Provider
-      value={{ readAllComments, allComments, setAllComments, createNewComment }}
+      value={{ readAllComments, allComments, setAllComments, createNewComment, deleteComment }}
     >
       {children}
     </CommentsContext.Provider>

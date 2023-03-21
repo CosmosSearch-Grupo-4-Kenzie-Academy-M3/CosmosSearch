@@ -28,7 +28,7 @@ export const PostModal = () => {
 
   const { posts } = useContext(PostContext);
 
-  const { allComments, createNewComment, setAllComments } = useContext(CommentsContext);
+  const { allComments, createNewComment, setAllComments, readAllComments } = useContext(CommentsContext);
 
   const userPost = posts.find((post) => post.id == modalId) as IPost;
 
@@ -37,6 +37,10 @@ export const PostModal = () => {
   const submit = (data: INewComment) => {
     createNewComment(data, userPost.id.toString());
   };
+
+  // useEffect(() => {
+  //   readAllComments(modalId);
+  // }, [])
 
   return (
     <PostModalDivStyled>
@@ -93,7 +97,6 @@ export const PostModal = () => {
           ) : (
             <></>
           )}
-
           {allComments.map((comment) => (
             <CommentLi
               key={comment.id}

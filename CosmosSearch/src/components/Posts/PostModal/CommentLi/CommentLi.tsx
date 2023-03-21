@@ -1,21 +1,20 @@
+import { useContext, useState } from "react";
+
 import { CommentDiv } from "../PostModalStyled";
 
 import { IAllComments } from "../../../../contexts/CommentsContext/@typesComments";
 import {
   ArrowRight,
-  ArrowUp,
   CloseXComments,
-  CloseXLitle,
-  CloseXPost,
-  Pencil,
   PencilComments,
   ThreeDotsComments,
 } from "../../../Svgs/Svg";
-import { useState } from "react";
-import { set } from "react-hook-form/dist/utils";
+import { CommentsContext } from "../../../../contexts/CommentsContext/CommentsContext";
 
 export const CommentLi = ({ name, text, postId, id, userId }: IAllComments) => {
   const [editCommentOpen, setEditCommentOpen] = useState(false);
+
+  const { deleteComment } = useContext(CommentsContext)
 
   return (
     <CommentDiv>
@@ -32,7 +31,7 @@ export const CommentLi = ({ name, text, postId, id, userId }: IAllComments) => {
           <button>
             <PencilComments />
           </button>
-          <button>
+          <button onClick={() => deleteComment(id)}>
             <CloseXComments />
           </button>
           <button onClick={() => setEditCommentOpen(false)}>
