@@ -66,6 +66,16 @@ export const CommentsProvider = ({ children }: iChildren) => {
     }
   }
 
+  const editComment = async (id: number, data: string) => {
+    const userInfos = JSON.parse(localStorage.getItem("@CosmosSearch:USERINFOS") as string) as IUserInfos;
+    const token = userInfos.token
+    try {
+      const response = await api.patch(`comments/${id}`, )
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <CommentsContext.Provider
       value={{ readAllComments, allComments, setAllComments, createNewComment, deleteComment }}

@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+interface INewCommentInput {
+  heigth?: string
+  width?: string
+}
+
 export const PostModalDivStyled = styled.div`
   position: fixed;
   z-index: 100;
@@ -172,9 +177,9 @@ export const DivInput = styled.div`
   position: relative;
 `;
 
-export const NewCommentInput = styled.input`
-  width: 100%;
-  min-height: 50px;
+export const NewCommentInput = styled.input<INewCommentInput>`
+  width: ${(props) => props.width ? props.width : "100%"};
+  min-height: ${(props) => props.height ? props.height : "50px"};
 
   padding-left: 1rem;
   padding-right: 4rem;
