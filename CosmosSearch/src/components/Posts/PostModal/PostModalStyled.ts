@@ -140,7 +140,25 @@ export const CommentsList = styled.div`
 export const CommentDiv = styled.li`
   width: 100%;
 
-  border-right: 2px solid var(--primary-blue);
+  display: flex;
+  align-items: center;  
+  justify-content: space-between;
+
+  padding-left: .5rem;
+
+  border-left: 2px solid var(--primary-blue);
+
+  button {
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .edit__menu {
+    display: flex;
+    gap: .3rem;
+
+    
+  }
 `;
 
 export const InfosDiv = styled.div`

@@ -15,16 +15,20 @@ import arrowUp from "../../assets/svgs/arrow_up.svg";
 import likeUnclicked from "../../assets/svgs/like_unclicked.svg";
 import likeClicked from "../../assets/svgs/like_clicked.svg";
 import searchIcon from "../../assets/svgs/search-icon.svg";
+import threeDots from "../../assets/svgs/three_dots.svg"
 
 import {
+  SvgArrowRight,
   SvgCloseModal,
   SvgForCloseInput,
+  SvgForComments,
   SvgLike,
   SvgPlusComment,
   SvgPosts,
   SvgSearch,
   SvgStyled,
   SvgStyledFliped,
+  SvgThreeDots,
 } from "./SvgStyled";
 import { useContext } from "react";
 import { PostContext } from "../../contexts/PostContext/PostContext";
@@ -133,3 +137,19 @@ export const ArrowUp = () => {
 export const SearchIcon = () => {
   return <SvgPosts src={searchIcon} alt="Search icon" />;
 };
+
+export const ThreeDotsComments = () => {
+  return <SvgThreeDots src={threeDots} alt="Three"/>
+}
+
+export const ArrowRight = () => {
+  return <SvgArrowRight src={arrowUp} alt="Arrow up icon" />;
+};
+
+export const CloseXComments = () => {
+  return <SvgForComments src={closeX} alt="CloseX icon" />;
+};
+
+export const PencilComments = () => {
+  return <SvgForComments src={pencil} alt="Pencil icon" />;
+}
