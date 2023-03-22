@@ -175,6 +175,20 @@ export const InfosDiv = styled.div`
 
 export const DivInput = styled.div`
   position: relative;
+
+  margin-bottom: 1rem;
+
+  form {
+
+    .spanError {
+      position: absolute;
+      top: 3.5rem;
+      left: 0;
+      color: var(--error-form);
+      font-size: 14px;
+      font-family: var(--ff-Inter);
+    }
+  }
 `;
 
 export const NewCommentInput = styled.input<INewCommentInput>`

@@ -15,6 +15,8 @@ import { IPost } from "../../../../contexts/PostContext/@typesPost";
 import { CommentsContext } from "../../../../contexts/CommentsContext/CommentsContext";
 import { LinksContext } from "../../../../contexts/LinksContext/LinksContext";
 import { PostContext } from "../../../../contexts/PostContext/PostContext";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { newCommentSchema } from "../../../../contexts/CommentsContext/validation";
 
 export const CreateNewCommentForm = () => {
   const { modalId } = useContext(LinksContext);
@@ -25,7 +27,9 @@ export const CreateNewCommentForm = () => {
 
   const userPost = posts.find((post) => post.id == modalId) as IPost;
 
-  const { register, handleSubmit, reset } = useForm<INewComment>();
+  const { register, handleSubmit, reset, formState: {errors} } = useForm<INewComment>({
+    resolver: yupResolver(newCommentSchema)
+  });
 
   const submit = (data: INewComment) => {
     createNewComment(data, userPost.id.toString());
@@ -33,17 +37,20 @@ export const CreateNewCommentForm = () => {
   };
 
   return (
+    <>
     <DivInput>
       <form onSubmit={handleSubmit(submit)}>
         <NewCommentInput
           className="post__text__preview--mobile"
           type="text"
           {...register("text")}
-        />
+          />
         <NewCommentInputButton className="title__comments">
           ENVIAR
         </NewCommentInputButton>
+          {errors ? <span className="spanError">{errors.text?.message}</span> : <></>}
       </form>
     </DivInput>
+    </>
   );
 };

@@ -33,7 +33,7 @@ export const Input = ({
           {...register}
           value={value}
         />
-        {error ? <span className="spanError">{error}</span> : null}
+        {error ? <span className="spanError">{error}</span> : <></>}
       </div>
     </ImputStyled>
   );
