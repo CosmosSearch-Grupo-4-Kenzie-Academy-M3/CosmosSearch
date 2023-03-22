@@ -16,6 +16,10 @@ export interface IComments {
   setAllComments: React.Dispatch<React.SetStateAction<IAllComments[]>>;
   createNewComment: (data: INewComment, postId: string) => Promise<void>;
   deleteComment: (id:number) => Promise<void>;
+  openCommentInput: boolean;
+  setOpenCommentInput: React.Dispatch<React.SetStateAction<boolean>>;
+  commentButtonIsRotate: boolean;
+  setCommentButtonIsRotate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface INewComment {

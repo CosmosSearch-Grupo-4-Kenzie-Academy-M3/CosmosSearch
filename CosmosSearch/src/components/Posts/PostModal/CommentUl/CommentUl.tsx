@@ -4,26 +4,20 @@ import { useForm } from "react-hook-form";
 
 import { PlusX, PlusXRotate } from "../../../Svgs/Svg";
 import { CommentLi } from "../CommentLi/CommentLi";
-import {
-  CommentsList,
-  DivInput,
-  NewCommentInput,
-  NewCommentInputButton,
-} from "../PostModalStyled";
-
-import { INewComment } from "../../../../contexts/CommentsContext/@typesComments";
-import { IPost } from "../../../../contexts/PostContext/@typesPost";
+import { CommentsList } from "../PostModalStyled";
 
 import { CommentsContext } from "../../../../contexts/CommentsContext/CommentsContext";
-import { LinksContext } from "../../../../contexts/LinksContext/LinksContext";
-import { PostContext } from "../../../../contexts/PostContext/PostContext";
+
 import { CreateNewCommentForm } from "./CreateNewCommentForm";
 
 export const CommentUl = () => {
-  const [openCommentInput, setOpenCommentInput] = useState(false);
-  const [commentButtonIsRotate, setCommentButtonIsRotate] = useState(false);
-  
-  const { allComments } = useContext(CommentsContext);
+  const {
+    allComments,
+    openCommentInput,
+    setOpenCommentInput,
+    commentButtonIsRotate,
+    setCommentButtonIsRotate,
+  } = useContext(CommentsContext);
 
   return (
     <CommentsList>
@@ -39,11 +33,7 @@ export const CommentUl = () => {
           {commentButtonIsRotate ? <PlusX /> : <PlusXRotate />}
         </div>
       </div>
-      {openCommentInput ? (
-          <CreateNewCommentForm/>
-      ) : (
-        <></>
-      )}
+      {openCommentInput ? <CreateNewCommentForm /> : <></>}
       {allComments.map((comment) => (
         <CommentLi
           key={comment.id}

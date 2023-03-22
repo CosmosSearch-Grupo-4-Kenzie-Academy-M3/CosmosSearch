@@ -1,13 +1,10 @@
 import { useContext, useState } from "react";
 
-import {
-  CommentDiv,
-  DivInput,
-  NewCommentInput,
-  NewCommentInputButton,
-} from "../PostModalStyled";
+import { CommentDiv } from "../PostModalStyled";
+import { EditCommentForm } from "./EditCommentForm";
 
 import { IAllComments } from "../../../../contexts/CommentsContext/@typesComments";
+
 import {
   ArrowRight,
   CloseXComments,
@@ -15,7 +12,6 @@ import {
   ThreeDotsComments,
 } from "../../../Svgs/Svg";
 import { CommentsContext } from "../../../../contexts/CommentsContext/CommentsContext";
-import { EditCommentForm } from "./EditCommentForm";
 
 export const CommentLi = ({ name, text, postId, id, userId }: IAllComments) => {
   const [menueditCommentOpen, setMenuEditCommentOpen] = useState(false);
@@ -31,7 +27,7 @@ export const CommentLi = ({ name, text, postId, id, userId }: IAllComments) => {
           {text}
         </p>
       ) : (
-        <EditCommentForm/>
+        <EditCommentForm />
       )}
 
       {!menueditCommentOpen ? (
