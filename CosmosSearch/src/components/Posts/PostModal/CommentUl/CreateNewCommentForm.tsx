@@ -1,13 +1,16 @@
 import {  useContext } from "react";
 
-import { useForm } from "react-hook-form";
-
 import {
     DivInput,
     NewCommentInput,
     NewCommentInputButton,
 } from "../PostModalStyled";
 
+import { useForm } from "react-hook-form";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { newCommentSchema } from "../../../../contexts/CommentsContext/validation";
 
 import { INewComment } from "../../../../contexts/CommentsContext/@typesComments";
 import { IPost } from "../../../../contexts/PostContext/@typesPost";
@@ -15,8 +18,6 @@ import { IPost } from "../../../../contexts/PostContext/@typesPost";
 import { CommentsContext } from "../../../../contexts/CommentsContext/CommentsContext";
 import { LinksContext } from "../../../../contexts/LinksContext/LinksContext";
 import { PostContext } from "../../../../contexts/PostContext/PostContext";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { newCommentSchema } from "../../../../contexts/CommentsContext/validation";
 
 export const CreateNewCommentForm = () => {
   const { modalId } = useContext(LinksContext);

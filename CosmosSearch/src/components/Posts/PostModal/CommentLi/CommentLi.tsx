@@ -27,7 +27,7 @@ export const CommentLi = ({ name, text, postId, id, userId }: IAllComments) => {
           {text}
         </p>
       ) : (
-        <EditCommentForm />
+        <EditCommentForm id={id} setEditInputOpen={setEditInputOpen} setMenuEditCommentOpen={setMenuEditCommentOpen}/>
       )}
 
       {!menueditCommentOpen ? (

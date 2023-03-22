@@ -20,6 +20,9 @@ export interface IComments {
   setOpenCommentInput: React.Dispatch<React.SetStateAction<boolean>>;
   commentButtonIsRotate: boolean;
   setCommentButtonIsRotate: React.Dispatch<React.SetStateAction<boolean>>;
+  editComment: (id: number, data: INewComment) => Promise<void>;
+  commentWasEdited: boolean;
+  setCommentWasEdited: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface INewComment {

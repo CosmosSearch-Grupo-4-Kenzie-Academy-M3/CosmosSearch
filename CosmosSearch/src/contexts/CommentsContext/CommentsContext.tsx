@@ -14,6 +14,7 @@ export const CommentsProvider = ({ children }: iChildren) => {
   const [allComments, setAllComments] = useState<IAllComments[]>([]);
   const [openCommentInput, setOpenCommentInput] = useState(false);
   const [commentButtonIsRotate, setCommentButtonIsRotate] = useState(false);
+  const [commentWasEdited, setCommentWasEdited] = useState(false);
 
   const readAllComments = async (postId: number) => {
     try {
@@ -78,13 +79,23 @@ export const CommentsProvider = ({ children }: iChildren) => {
     }
   };
 
-  const editComment = async (id: number, data: string) => {
+  const editComment = async (id: number, data: INewComment) => {
     const userInfos = JSON.parse(
       localStorage.getItem("@CosmosSearch:USERINFOS") as string
     ) as IUserInfos;
     const token = userInfos.token;
     try {
-      const response = await api.patch(`comments/${id}`);
+      const response = await api.patch(`comments/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const newComment = response.data
+      const filteredCommentList = allComments.filter((comment) => comment.id !== id)
+      const newCommentList = [...filteredCommentList, newComment]
+      setAllComments(newCommentList)
+      setCommentWasEdited(true)
+      toast.success("Comment edited!")
     } catch (error) {
       console.log(error);
     }
@@ -101,7 +112,10 @@ export const CommentsProvider = ({ children }: iChildren) => {
         commentButtonIsRotate,
         setCommentButtonIsRotate,
         openCommentInput,
-        setOpenCommentInput
+        setOpenCommentInput,
+        editComment,
+        commentWasEdited,
+        setCommentWasEdited
       }}
     >
       {children}
