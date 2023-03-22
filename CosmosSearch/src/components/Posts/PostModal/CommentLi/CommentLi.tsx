@@ -15,6 +15,7 @@ import {
   ThreeDotsComments,
 } from "../../../Svgs/Svg";
 import { CommentsContext } from "../../../../contexts/CommentsContext/CommentsContext";
+import { EditCommentForm } from "./EditCommentForm";
 
 export const CommentLi = ({ name, text, postId, id, userId }: IAllComments) => {
   const [menueditCommentOpen, setMenuEditCommentOpen] = useState(false);
@@ -30,18 +31,7 @@ export const CommentLi = ({ name, text, postId, id, userId }: IAllComments) => {
           {text}
         </p>
       ) : (
-        <DivInput>
-          <form action="">
-            <NewCommentInput
-              height="25px"
-              className="post__text__preview--mobile"
-              type="text"
-            />
-            <NewCommentInputButton className="title__comments">
-              ENVIAR
-            </NewCommentInputButton>
-          </form>
-        </DivInput>
+        <EditCommentForm/>
       )}
 
       {!menueditCommentOpen ? (
