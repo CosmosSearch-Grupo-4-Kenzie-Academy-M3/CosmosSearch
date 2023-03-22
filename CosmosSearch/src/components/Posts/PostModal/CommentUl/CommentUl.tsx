@@ -40,7 +40,7 @@ export const CommentUl = () => {
           id={comment.id}
           name={comment.name}
           postId={comment.postId}
-          userId={comment.id}
+          userId={comment.userId}
           text={comment.text}
         />
       ))}
