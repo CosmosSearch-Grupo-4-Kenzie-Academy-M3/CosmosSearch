@@ -31,15 +31,16 @@ export const CommentLi = ({ name, text, postId, id, userId }: IAllComments) => {
         </p>
       ) : (
         <DivInput>
-          <NewCommentInput
-            // width="80%"
-            height="25px"
-            className="post__text__preview--mobile"
-            type="text"
-          />
-          <NewCommentInputButton className="title__comments">
-            ENVIAR
-          </NewCommentInputButton>
+          <form action="">
+            <NewCommentInput
+              height="25px"
+              className="post__text__preview--mobile"
+              type="text"
+            />
+            <NewCommentInputButton className="title__comments">
+              ENVIAR
+            </NewCommentInputButton>
+          </form>
         </DivInput>
       )}
 
