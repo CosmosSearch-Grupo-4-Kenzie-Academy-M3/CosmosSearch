@@ -17,7 +17,6 @@ export const Input = ({
   register,
   type,
   labelName,
-  value
 }: IInput) => {
   return (
     <ImputStyled>
@@ -31,7 +30,6 @@ export const Input = ({
           id={register.name}
           type={type}
           {...register}
-          value={value}
         />
         {error ? <span className="spanError">{error}</span> : <></>}
       </div>
