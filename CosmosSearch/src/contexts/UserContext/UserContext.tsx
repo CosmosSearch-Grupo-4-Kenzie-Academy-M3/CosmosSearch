@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useContext, useState } from "react";
 
 import { useForm } from "react-hook-form";
@@ -31,8 +32,8 @@ export const UserProvider = ({ children }: iChildren) => {
   >("userDeslogged");
   const [user, setUser] = useState<IUser | null>(null);
   const [userInfos, setUserInfos] = useState<IUserInfos | null>(null);
-  
-  const [users, setUsers] = useState<IUserFromApi[]>([])
+
+  const [users, setUsers] = useState<IUserFromApi[]>([]);
 
   const navigate = useNavigate();
 
@@ -47,23 +48,23 @@ export const UserProvider = ({ children }: iChildren) => {
     const userInfos = JSON.parse(
       localStorage.getItem("@CosmosSearch:USERINFOS") as string
     ) as IUserInfos;
-    const token = userInfos.token
+    const token = userInfos.token;
     try {
-      const response = await api.get('/users', {
+      const response = await api.get("/users", {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      const allUsers: IUserFromApi[] = response.data
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const allUsers: IUserFromApi[] = response.data;
       const users = allUsers.map((user) => {
-       const {name, email, id, postLikeds} = user 
-       return {name, email, id, postLikeds}
-      })
-      setUsers(users)
+        const { name, email, id, postLikeds } = user;
+        return { name, email, id, postLikeds };
+      });
+      setUsers(users);
     } catch (error) {
-      null
+      null;
     }
-  }
+  };
 
   const userRegister = async (data: IFormUserRegister) => {
     const fullDataToRegister = { ...data, postLikeds: [] };
@@ -71,7 +72,11 @@ export const UserProvider = ({ children }: iChildren) => {
       const response = await api.post("/users", fullDataToRegister);
       const newUserRegistered = response.data.user;
       const token = response.data.accessToken;
-      const userInfosData = { ...newUserRegistered, token, currentUserState: "userLogged" };
+      const userInfosData = {
+        ...newUserRegistered,
+        token,
+        currentUserState: "userLogged",
+      };
       setUser(newUserRegistered);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
@@ -82,8 +87,11 @@ export const UserProvider = ({ children }: iChildren) => {
       toast.success("User registered successfully!");
       navigate("/dashboard");
     } catch (error) {
-      console.log(error);
-      toast.error("Please review your data.");
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          toast.error("Email already in use.");
+        }
+      }
     }
   };
 
@@ -92,8 +100,12 @@ export const UserProvider = ({ children }: iChildren) => {
       const response = await api.post("/login", data);
       const userLogged = response.data.user;
       const token = response.data.accessToken;
-      const userInfosData = { ...userLogged , token, currentUserState: "userLogged" };
-      setUser(userLogged)
+      const userInfosData = {
+        ...userLogged,
+        token,
+        currentUserState: "userLogged",
+      };
+      setUser(userLogged);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
@@ -103,8 +115,12 @@ export const UserProvider = ({ children }: iChildren) => {
       toast.success("Login efetuado!");
       navigate("/dashboard");
     } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          toast.error("Invalid user or password.");
+        }
+      }
       console.log(error);
-      toast.error("Invalid user or password.");
     }
   };
 
@@ -125,15 +141,15 @@ export const UserProvider = ({ children }: iChildren) => {
     const userInfos = JSON.parse(
       localStorage.getItem("@CosmosSearch:USERINFOS") as string
     ) as IUserInfos;
-    const id = userInfos.id
-    const token = userInfos.token
+    const id = userInfos.id;
+    const token = userInfos.token;
     try {
       const response = await api.patch(`/users/${id}`, data, {
         headers: {
           Authorization: ` Bearer ${token} `,
         },
       });
-      const newUserInfos = response.data
+      const newUserInfos = response.data;
       toast.success("Perfil atualizado com sucesso.");
       const userInfosData = {
         ...userInfos,
@@ -172,7 +188,7 @@ export const UserProvider = ({ children }: iChildren) => {
         setUserInfos,
         users,
         setUsers,
-        getAllUsers
+        getAllUsers,
       }}
     >
       {children}

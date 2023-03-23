@@ -20,36 +20,49 @@ export const UpdateUserForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<IFormUserUpdate>({
     resolver: yupResolver(userUpdateSchema),
   });
 
   const userUpdateSubmit: SubmitHandler<IFormUserUpdate> = (data) => {
-    patchProfile(data);
-    reset();
+    if (data.name === "" && data.email === "") {
+      data.name = userName as string;
+      data.email = userEmail as string;
+      patchProfile(data);
+      reset();
+    } else if (data.name === "" && data.email !== "") {
+      data.name = userName as string;
+      patchProfile(data);
+      reset();
+    } else if (data.email === "" && data.name !== "") {
+      data.email = userEmail as string;
+      patchProfile(data);
+      reset();
+    } else {
+      patchProfile(data);
+      reset();
+    }
   };
 
-  const userEmail = userInfos?.email
-  const userName = userInfos?.name
+  const userEmail = userInfos?.email;
+  const userName = userInfos?.name;
 
   return (
     <UpdateUserFormStyled onSubmit={handleSubmit(userUpdateSubmit)}>
       <Input
-        placeholder="Type your name"
+        placeholder={userName as string}
         error={errors.name?.message}
         register={register("name")}
         type="text"
         labelName="Name"
-        value={userName}
       />
       <Input
-        placeholder="Type your email"
+        placeholder={userEmail as string}
         error={errors.email?.message}
         register={register("email")}
         type="email"
         labelName="Email"
-        value={userEmail}
       />
       <Input
         placeholder="Type your password"

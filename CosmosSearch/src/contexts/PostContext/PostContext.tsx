@@ -12,6 +12,7 @@ import {
 import { IPost, IPostContext, IUpdatePost } from "./@typesPost";
 import { LinksContext } from "../LinksContext/LinksContext";
 import { UserContext } from "../UserContext/UserContext";
+import axios from "axios";
 
 export const PostContext = createContext({} as IPostContext);
 
@@ -157,7 +158,15 @@ export const PostProvider = ({ children }: iChildren) => {
       }
     } catch (error) {
       console.log(error);
-      console.log(typeof error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 401) {
+          logout();
+          toast.error("An error occurred, please login again.");
+        } else if (error.response?.config.timeout === 10000) {
+          logout();
+          toast.error("An error occurred, please login again.");
+        }
+      }
       toast.error("erro no post list.");
     }
   };

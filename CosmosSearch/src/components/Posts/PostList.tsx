@@ -9,7 +9,6 @@ import { UserContext } from "../../contexts/UserContext/UserContext";
 export const Posts = () => {
   const {
     posts,
-
     isSearch,
     setIsSearch,
     searchedPosts,
