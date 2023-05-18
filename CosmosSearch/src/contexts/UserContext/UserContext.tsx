@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useContext, useState } from "react";
 
 import { useForm } from "react-hook-form";
@@ -10,6 +11,7 @@ import { api } from "../../services/api";
 
 import { iChildren } from "../@childrenType";
 import { LinksContext } from "../LinksContext/LinksContext";
+
 import {
   IFormUserLogin,
   IFormUserRegister,
@@ -17,6 +19,7 @@ import {
   IUser,
   IPatchProfile,
   IUserInfos,
+  IUserFromApi,
 } from "./@types_User";
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -27,8 +30,10 @@ export const UserProvider = ({ children }: iChildren) => {
   const [userState, setUserState] = useState<
     "userLoggedInPerfil" | "userLogged" | "userDeslogged"
   >("userDeslogged");
-  const [user, setUser] = useState<IUser | string | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const [userInfos, setUserInfos] = useState<IUserInfos | null>(null);
+
+  const [users, setUsers] = useState<IUserFromApi[]>([]);
 
   const navigate = useNavigate();
 
@@ -39,62 +44,92 @@ export const UserProvider = ({ children }: iChildren) => {
     reset,
   } = useForm<IFormUserLogin>();
 
-  const userRegister = async (data: IFormUserRegister) => {
+  const getAllUsers = async () => {
+    const userInfos = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    ) as IUserInfos;
+    const token = userInfos.token;
     try {
-      const response = await api.post("/users", data);
-      localStorage.setItem("@CosmosSearch:TOKEN", response.data.accessToken);
-      localStorage.setItem("@CosmosSearch:USERID", response.data.user.id);
-      localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
-      localStorage.setItem("@CosmosSearch:EMAIL", response.data.user.email);
-      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
-      setUserState("userLogged");
-      setUser(response.data.user);
-      const { name, email } = response.data.user;
-      const userInfosData = { name, email };
-      setUserInfos(userInfosData);
+      const response = await api.get("/users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const allUsers: IUserFromApi[] = response.data;
+      const users = allUsers.map((user) => {
+        const { name, email, id, postLikeds } = user;
+        return { name, email, id, postLikeds };
+      });
+      setUsers(users);
+    } catch (error) {
+      null;
+    }
+  };
+
+  const userRegister = async (data: IFormUserRegister) => {
+    const fullDataToRegister = { ...data, postLikeds: [] };
+    try {
+      const response = await api.post("/users", fullDataToRegister);
+      const newUserRegistered = response.data.user;
+      const token = response.data.accessToken;
+      const userInfosData = {
+        ...newUserRegistered,
+        token,
+        currentUserState: "userLogged",
+      };
+      setUser(newUserRegistered);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
       );
-      navigate("/dashboard");
+      setUserState("userLogged");
+      setUserInfos(userInfosData);
       toast.success("User registered successfully!");
+      navigate("/dashboard");
     } catch (error) {
-      toast.error("Please review your data.");
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          toast.error("Email already in use.");
+        }
+      }
     }
   };
 
   const userLogin = async (data: IFormUserLogin) => {
     try {
       const response = await api.post("/login", data);
-      localStorage.setItem("@CosmosSearch:TOKEN", response.data.accessToken);
-      localStorage.setItem("@CosmosSearch:USERID", response.data.user.id);
-      localStorage.setItem("@CosmosSearch:USERNAME", response.data.user.name);
-      localStorage.setItem("@CosmosSearch:EMAIL", response.data.user.email);
-      localStorage.setItem("@CosmosSearch:USERSTATE", "userLogged");
-      setUserState("userLogged");
-      setUser(response.data.user);
-      const { name, email } = response.data.user;
-      const userInfosData = { name, email };
-      setUserInfos(userInfosData);
+      const userLogged = response.data.user;
+      const token = response.data.accessToken;
+      const userInfosData = {
+        ...userLogged,
+        token,
+        currentUserState: "userLogged",
+      };
+      setUser(userLogged);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
       );
-      navigate("/dashboard");
+      setUserState("userLogged");
+      setUserInfos(userInfosData);
       toast.success("Login efetuado!");
+      navigate("/dashboard");
     } catch (error) {
-      toast.error("Usuário ou Senha inválidos.");
-      reset();
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          toast.error("Invalid user or password.");
+        }
+      }
+      console.log(error);
     }
   };
 
   const logout = () => {
-    localStorage.removeItem("@CosmosSearch:TOKEN");
-    localStorage.removeItem("@CosmosSearch:USERSTATE");
+    localStorage.removeItem("@CosmosSearch:USERINFOS");
     setUserState("userDeslogged");
     setUser(null);
+    toast("User deslogged!");
     navigate("/");
-    toast("Usuário deslogado!");
   };
 
   const redirectToNewPost = () => {
@@ -103,25 +138,32 @@ export const UserProvider = ({ children }: iChildren) => {
   };
 
   const patchProfile = async (data: IPatchProfile) => {
-    const id = Number(localStorage.getItem("@CosmosSearch:USERID"));
-    const token = localStorage.getItem("@CosmosSearch:TOKEN");
+    const userInfos = JSON.parse(
+      localStorage.getItem("@CosmosSearch:USERINFOS") as string
+    ) as IUserInfos;
+    const id = userInfos.id;
+    const token = userInfos.token;
     try {
       const response = await api.patch(`/users/${id}`, data, {
         headers: {
           Authorization: ` Bearer ${token} `,
         },
       });
+      const newUserInfos = response.data;
       toast.success("Perfil atualizado com sucesso.");
       const userInfosData = {
-        name: response.data.name,
-        email: response.data.email,
-      };
+        ...userInfos,
+        name: newUserInfos.name,
+        email: newUserInfos.email,
+        postLikeds: newUserInfos.postLikeds,
+      } as IUserInfos;
       setUserInfos(userInfosData);
       localStorage.setItem(
         "@CosmosSearch:USERINFOS",
         JSON.stringify(userInfosData)
       );
     } catch (error) {
+      console.log(error);
       toast.error("Please review your data.");
     }
   };
@@ -144,6 +186,9 @@ export const UserProvider = ({ children }: iChildren) => {
         patchProfile,
         userInfos,
         setUserInfos,
+        users,
+        setUsers,
+        getAllUsers,
       }}
     >
       {children}

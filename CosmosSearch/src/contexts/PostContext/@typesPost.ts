@@ -10,17 +10,22 @@ export interface IPost {
   body: string;
   date: string;
   postLiked?: boolean
+  likes?: number;
 }
 
 export interface IUpdatePost {
   body: string;
 }
 
+export interface IAllLikes {
+  id: number;
+  qnt: number;
+  postId: number
+}
+
 export interface IPostContext {
   posts: IPost[];
-  userPosts: IPost[];
   getAllPosts: () => Promise<void>;
-  getAllUserPosts: (id: number) => Promise<void>;
   createPost: (data: IFormPostRegister) => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
   actualPostId: number;
@@ -38,8 +43,9 @@ export interface IPostContext {
   isDashboard: boolean;
   setIsDashboard: React.Dispatch<React.SetStateAction<boolean>>;
   searchFunction: (post: IPost) => IPost | undefined;
-  likePost: (postId: number) => void;
   searchOpen: boolean;
   setSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
   resetSearch: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  alterLikeCount: (likes: number, postId: number, postLiked: boolean) => void;
+  mapPostsListInRelationWithPostsUsersOwners: (list: IPost[]) => IPost[]
 }

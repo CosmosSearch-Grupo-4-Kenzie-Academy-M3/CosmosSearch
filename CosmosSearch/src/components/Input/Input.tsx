@@ -8,6 +8,7 @@ interface IInput {
   labelName: string;
   type: string;
   placeholder: string;
+  value?: string
 }
 
 export const Input = ({
@@ -30,7 +31,7 @@ export const Input = ({
           type={type}
           {...register}
         />
-        {error ? <span className="spanError">{error}</span> : null}
+        {error ? <span className="spanError">{error}</span> : <></>}
       </div>
     </ImputStyled>
   );

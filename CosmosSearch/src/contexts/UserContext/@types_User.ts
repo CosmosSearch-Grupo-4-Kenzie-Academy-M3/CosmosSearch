@@ -1,3 +1,4 @@
+import React from "react";
 import {
   UseFormRegister,
   UseFormHandleSubmit,
@@ -38,6 +39,15 @@ export interface IUser {
   id: number;
 }
 
+export interface IUserFromApi {
+  email: string;
+  name: string;
+  id: number;
+  password?: string;
+  confirmPassword?: string;
+  postLikeds: number[]
+}
+
 export interface IPatchProfile {
   email: string;
   name: string;
@@ -47,6 +57,10 @@ export interface IPatchProfile {
 export interface IUserInfos {
   name: string;
   email: string;
+  id: number;
+  token: string;
+  postLikeds: number[];
+  currentUserState: "userLoggedInPerfil" | "userLogged" | "userDeslogged";
 }
 
 export interface IUserContext {
@@ -63,8 +77,11 @@ export interface IUserContext {
     React.SetStateAction<"userLoggedInPerfil" | "userLogged" | "userDeslogged">
   >;
   user: IUser | string | null;
-  setUser: React.Dispatch<React.SetStateAction<IUser | string | null>>;
+  setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
   patchProfile: (data: IPatchProfile) => Promise<void>;
   userInfos: IUserInfos | null;
   setUserInfos: React.Dispatch<React.SetStateAction<IUserInfos | null>>;
+  users: IUserFromApi[];
+  setUsers: React.Dispatch<React.SetStateAction<IUserFromApi[]>>;
+  getAllUsers: () => Promise<void>
 }

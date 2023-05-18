@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+interface INewCommentInput {
+  heigth?: string
+  width?: string
+}
+
 export const PostModalDivStyled = styled.div`
   position: fixed;
   z-index: 100;
@@ -140,7 +145,25 @@ export const CommentsList = styled.div`
 export const CommentDiv = styled.li`
   width: 100%;
 
-  border-right: 2px solid var(--primary-blue);
+  display: flex;
+  align-items: center;  
+  justify-content: space-between;
+
+  padding-left: .5rem;
+
+  border-left: 2px solid var(--primary-blue);
+
+  button {
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .edit__menu {
+    display: flex;
+    gap: .3rem;
+
+    
+  }
 `;
 
 export const InfosDiv = styled.div`
@@ -152,11 +175,25 @@ export const InfosDiv = styled.div`
 
 export const DivInput = styled.div`
   position: relative;
+
+  margin-bottom: 1rem;
+
+  form {
+
+    .spanError {
+      position: absolute;
+      top: 3.5rem;
+      left: 0;
+      color: var(--error-form);
+      font-size: 14px;
+      font-family: var(--ff-Inter);
+    }
+  }
 `;
 
-export const NewCommentInput = styled.input`
-  width: 100%;
-  min-height: 50px;
+export const NewCommentInput = styled.input<INewCommentInput>`
+  width: ${(props) => props.width ? props.width : "100%"};
+  min-height: ${(props) => props.height ? props.height : "50px"};
 
   padding-left: 1rem;
   padding-right: 4rem;

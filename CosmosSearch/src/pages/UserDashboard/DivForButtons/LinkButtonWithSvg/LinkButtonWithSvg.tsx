@@ -13,6 +13,7 @@ interface iLinkButtonWithSvg {
 
 export const LinkButtonWithSvg = ({ icon }: iLinkButtonWithSvg) => {
   const { setMainComponent } = useContext(LinksContext);
+  
   const { setUserState } = useContext(UserContext);
 
   switch (icon) {

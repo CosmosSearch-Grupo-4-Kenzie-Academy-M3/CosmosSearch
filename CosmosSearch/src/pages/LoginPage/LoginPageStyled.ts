@@ -19,6 +19,7 @@ export const LoginPageStyled = styled.div`
 
     :hover .links__line {
       width: 20px;
+      opacity: .4;
     }
   }
 

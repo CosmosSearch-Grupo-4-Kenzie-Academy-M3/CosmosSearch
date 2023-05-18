@@ -33,6 +33,7 @@ export const PostStyled = styled.li`
 
   .post {
     width: 100%;
+    max-width: 100%;
     height: max-content;
 
     padding: 1.25rem;
@@ -44,6 +45,11 @@ export const PostStyled = styled.li`
     justify-content: space-between;
     gap: 1rem;
 
+    .post__text__preview {
+      display: block;
+      overflow-wrap: break-word;
+    }
+
     .date__and__button {
       display: flex;
       flex-direction: column;
@@ -51,8 +57,9 @@ export const PostStyled = styled.li`
     }
     .button {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-end;
+ 
+
       gap: 1rem;
       align-self: flex-end;
     }
@@ -62,7 +69,7 @@ export const PostStyled = styled.li`
       .date__and__button {
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-end;
       }
     }
 
@@ -129,10 +136,6 @@ export const PostStyled = styled.li`
 `;
 
 export const DivsButtonsStyled = styled.div`
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  /* border: 2px solid rebeccapurple; */
   align-self: flex-start;
 
 
@@ -170,12 +173,6 @@ export const ButtonsStyled = styled.button`
 `;
 
 export const ButtonsAbsoluteStyled = styled.button<IButtonsStyled>`
-  /* position: absolute; */
-
-  /* top: ${(props) => props.top}; */
-
-  /* right: 0.2rem; */
-
   background-color: transparent;
 
   border: 2px solid transparent;

@@ -74,3 +74,26 @@ export const SvgForCloseInput = styled.img`
 
   background-color: transparent;
 `
+export const SvgThreeDots = styled.img`
+  width: 15px;
+  height: 15px;
+
+  background-color: transparent;
+
+  cursor: pointer;
+`
+export const SvgArrowRight = styled.img`
+  width: 15px;
+  height: 15px;
+
+  background-color: transparent;
+
+  transform: rotate(90deg);
+ `
+
+export const SvgForComments = styled.img`
+  width: 15px;
+  height: 15px;
+
+  background-color: transparent;
+ `

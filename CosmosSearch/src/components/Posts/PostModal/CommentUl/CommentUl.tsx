@@ -1,17 +1,23 @@
 import { useContext, useState } from "react";
 
+import { useForm } from "react-hook-form";
+
+import { PlusX, PlusXRotate } from "../../../Svgs/Svg";
+import { CommentLi } from "../CommentLi/CommentLi";
+import { CommentsList } from "../PostModalStyled";
+
 import { CommentsContext } from "../../../../contexts/CommentsContext/CommentsContext";
-import { PlusComment } from "../../../Svgs/Svg";
-import {
-  CommentsList,
-  DivInput,
-  NewCommentInput,
-  NewCommentInputButton,
-} from "../PostModalStyled";
+
+import { CreateNewCommentForm } from "./CreateNewCommentForm";
 
 export const CommentUl = () => {
-  const { allComments, readAllComments } = useContext(CommentsContext);
-  const [openCommentInput, setOpenCommentInput] = useState(false);
+  const {
+    allComments,
+    openCommentInput,
+    setOpenCommentInput,
+    commentButtonIsRotate,
+    setCommentButtonIsRotate,
+  } = useContext(CommentsContext);
 
   return (
     <CommentsList>
@@ -19,24 +25,25 @@ export const CommentUl = () => {
         <p className="title__comments">Comments</p>
         <div
           className="plus__comment"
-          onClick={() => setOpenCommentInput(!openCommentInput)}
+          onClick={() => {
+            setOpenCommentInput(!openCommentInput);
+            setCommentButtonIsRotate(!commentButtonIsRotate);
+          }}
         >
-          <PlusComment />
+          {commentButtonIsRotate ? <PlusX /> : <PlusXRotate />}
         </div>
       </div>
-      {openCommentInput ? (
-        <DivInput>
-          <NewCommentInput
-            className="post__text__preview--mobile"
-            type="text"
-          />
-          <NewCommentInputButton className="title__comments">
-            ENVIAR
-          </NewCommentInputButton>
-        </DivInput>
-      ) : (
-        <></>
-      )}
+      {openCommentInput ? <CreateNewCommentForm /> : <></>}
+      {allComments.map((comment) => (
+        <CommentLi
+          key={comment.id}
+          id={comment.id}
+          name={comment.name}
+          postId={comment.postId}
+          userId={comment.userId}
+          text={comment.text}
+        />
+      ))}
     </CommentsList>
   );
 };

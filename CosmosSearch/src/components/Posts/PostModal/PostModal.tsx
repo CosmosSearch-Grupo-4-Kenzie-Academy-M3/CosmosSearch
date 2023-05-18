@@ -7,6 +7,7 @@ import { IPost } from "../../../contexts/PostContext/@typesPost";
 import { PostContext } from "../../../contexts/PostContext/PostContext";
 import { CloseModal, PlusX, PlusXRotate } from "../../Svgs/Svg";
 import { CommentLi } from "./CommentLi/CommentLi";
+import { CommentUl } from "./CommentUl/CommentUl";
 import {
   CommentsList,
   ContentDiv,
@@ -25,21 +26,21 @@ export const PostModal = () => {
   const [commentButtonIsRotate, setCommentButtonIsRotate] = useState(false);
 
   const { setModalIsOpen, modalId } = useContext(LinksContext);
+
   const { posts } = useContext(PostContext);
-  const { allComments, createNewComment } = useContext(CommentsContext);
+
+  const { setAllComments, } = useContext(CommentsContext);
 
   const userPost = posts.find((post) => post.id == modalId) as IPost;
-
-  const { register, handleSubmit } = useForm<INewComment>();
-
-  const submit = (data: INewComment) => {
-    createNewComment(data, userPost.id.toString());
-  };
 
   return (
     <PostModalDivStyled>
       <PostModalStyled>
-        <CloseButton onClick={() => setModalIsOpen(false)}>
+        <CloseButton onClick={() => {
+          setModalIsOpen(false);
+          setAllComments([]);
+        }
+      }>
           <CloseModal />
         </CloseButton>
         <div className="header__modal--desktop">
@@ -57,48 +58,7 @@ export const PostModal = () => {
         <ContentDiv>
           <p className="post__text__preview--mobile">{userPost.body}</p>
         </ContentDiv>
-        {/* <CommentUl /> */}
-        <CommentsList>
-          <div className="comments__header">
-            <p className="title__comments">Comments</p>
-            <div
-              className="plus__comment"
-              onClick={() => {
-                setOpenCommentInput(!openCommentInput);
-                setCommentButtonIsRotate(!commentButtonIsRotate);
-              }}
-            >
-              {commentButtonIsRotate ? <PlusX /> : <PlusXRotate />}
-            </div>
-          </div>
-          {openCommentInput ? (
-            <DivInput>
-              <form onSubmit={handleSubmit(submit)}>
-                <NewCommentInput
-                  className="post__text__preview--mobile"
-                  type="text"
-                  {...register("text")}
-                />
-                <NewCommentInputButton className="title__comments">
-                  ENVIAR
-                </NewCommentInputButton>
-              </form>
-            </DivInput>
-          ) : (
-            <></>
-          )}
-
-          {allComments.map((comment) => (
-            <CommentLi
-              key={comment.id}
-              id={comment.id}
-              name={comment.name}
-              postId={comment.postId}
-              userId={comment.id}
-              text={comment.text}
-            />
-          ))}
-        </CommentsList>
+        <CommentUl />
         <InfosDiv>
           <p className="post__infos--mobile">data: {userPost.date}</p>
           <p className="post__infos--mobile">topic: {userPost.topic}</p>

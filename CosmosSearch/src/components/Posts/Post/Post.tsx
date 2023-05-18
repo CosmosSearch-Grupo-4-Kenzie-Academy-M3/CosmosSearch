@@ -23,7 +23,6 @@ import { LinksContext } from "../../../contexts/LinksContext/LinksContext";
 import { UserContext } from "../../../contexts/UserContext/UserContext";
 import { PostContext } from "../../../contexts/PostContext/PostContext";
 
-
 interface IPostProps {
   title: string;
   name: string;
@@ -32,6 +31,7 @@ interface IPostProps {
   postId: number;
   date: string;
   postLiked?: boolean;
+  likes?: number;
 }
 
 export const Post = ({
@@ -42,6 +42,7 @@ export const Post = ({
   postId,
   date,
   postLiked,
+  likes,
 }: IPostProps) => {
   const {
     setModalIsOpen,
@@ -49,7 +50,7 @@ export const Post = ({
     setEditModalIsOpen,
     setDeleteModalIsOpen,
   } = useContext(LinksContext);
-  const { setActualPostId, likePost } = useContext(PostContext);
+  const { setActualPostId, alterLikeCount } = useContext(PostContext);
   const { readAllComments } = useContext(CommentsContext);
   const { userState } = useContext(UserContext);
 
@@ -99,7 +100,11 @@ export const Post = ({
             <></>
           )}
         </div>
-        <p className="post__text__preview">{body.slice(0, 220)}...</p>
+        {body.length >= 220 ? (
+            <p className="post__text__preview">{body.slice(0, 220)}...</p>
+        ) : (
+            <p className="post__text__preview">{body}</p>
+        )}
         <div className="date__and__button">
           <div className="date">
             <p className="post__infos">date: {date}</p>
@@ -108,7 +113,16 @@ export const Post = ({
           <div className="button">
             {userState !== "userDeslogged" ? (
               <>
-                <div onClick={() => likePost(postId)}>
+                <div
+                  onClick={() => {
+                    alterLikeCount(
+                      likes as number,
+                      postId,
+                      postLiked as boolean
+                    );
+                  }}
+                >
+                  <p className="input__placeholder">{likes}</p>
                   {postLiked ? <LikeClicked /> : <LikeUnclicked />}
                 </div>
                 <ButtonStyled
@@ -129,7 +143,7 @@ export const Post = ({
                   textColor="var(--primary-blue)"
                   borderColor="var(--primary-blue)"
                   onClick={() => {
-                    toast("Login to view more.")
+                    toast("Login to view more.");
                   }}
                 >
                   open
