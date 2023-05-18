@@ -9,7 +9,6 @@ import { UserContext } from "../../contexts/UserContext/UserContext";
 export const SearchBar = () => {
   const {
     posts,
-    userPosts,
     setSearchedPosts,
     setValue,
     searchFunction,
@@ -17,11 +16,12 @@ export const SearchBar = () => {
     setSearchOpen,
     resetSearch,
   } = useContext(PostContext);
-  const { userState } = useContext(UserContext);
+  const { userState, user } = useContext(UserContext);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    const userPosts = posts.filter((posts) => posts.userId === user!.id)
+    
     if (userState === "userLoggedInPerfil") {
       const filteredPosts = userPosts.filter((post) => searchFunction(post));
       setSearchedPosts(filteredPosts);

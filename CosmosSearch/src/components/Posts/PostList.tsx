@@ -23,7 +23,6 @@ export const Posts = () => {
   useEffect(() => {
     setIsSearch(false);
     getAllPosts();
-    console.log("ok");
   }, []);
 
   return (

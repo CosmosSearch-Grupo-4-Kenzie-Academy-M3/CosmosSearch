@@ -76,7 +76,7 @@ export interface IUserContext {
   setUserState: React.Dispatch<
     React.SetStateAction<"userLoggedInPerfil" | "userLogged" | "userDeslogged">
   >;
-  user: IUser | string | null;
+  user: IUser | null;
   setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
   patchProfile: (data: IPatchProfile) => Promise<void>;
   userInfos: IUserInfos | null;
