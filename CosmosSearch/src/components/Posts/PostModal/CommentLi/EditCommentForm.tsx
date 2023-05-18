@@ -27,7 +27,7 @@ export const EditCommentForm = ({id, setEditInputOpen, setMenuEditCommentOpen}: 
 
   const submit: SubmitHandler<INewComment> = (data) => {
     editComment(id, data);
-    console.log(commentWasEdited)
+
     if (commentWasEdited) {
       setCommentWasEdited(false);
       setEditInputOpen(false);

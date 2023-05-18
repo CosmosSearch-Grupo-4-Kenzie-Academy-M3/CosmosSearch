@@ -49,7 +49,6 @@ export const CommentsProvider = ({ children }: iChildren) => {
       });
       setAllComments([...allComments, response.data]);
       toast.success("Comment created sucessifully!");
-      console.log(newData);
       setOpenCommentInput(false);
       setCommentButtonIsRotate(false);
     } catch (error) {

@@ -25,8 +25,6 @@ export const CommentLi = ({ name, text, postId, id, userId }: IAllComments) => {
     localStorage.getItem("@CosmosSearch:USERINFOS") as string
   ) as IUserInfos;
   const loggedUserId = userInfos.id;
-  console.log(userId)
-  console.log(loggedUserId)
 
   return (
     <CommentDiv>
