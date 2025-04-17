@@ -7,10 +7,20 @@ import {
 } from "react-hook-form";
 
 export interface IFormUserRegister {
-  name: string;
   email: string;
+  username: string;
+  firstName:string;
+  lastName:string;
   password: string;
-  confirmPassword: string;
+  confirmpassword: string;
+}
+
+export interface IFormUserRegisterValidator {
+  email: string;
+  username: string;
+  firstname: string;
+  lastname: string;
+  password: string;
 }
 
 export interface IFormUserUpdate {

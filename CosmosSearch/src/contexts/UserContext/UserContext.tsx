@@ -20,6 +20,7 @@ import {
   IPatchProfile,
   IUserInfos,
   IUserFromApi,
+  IFormUserRegisterValidator,
 } from "./@types_User";
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -67,9 +68,11 @@ export const UserProvider = ({ children }: iChildren) => {
   };
 
   const userRegister = async (data: IFormUserRegister) => {
-    const fullDataToRegister = { ...data, postLikeds: [] };
-    try {
-      const response = await api.post("/users", fullDataToRegister);
+
+      const { confirmpassword, ...filteredData } = data;
+
+   
+      const response = await api.post("/users", filteredData);
       const newUserRegistered = response.data.user;
       const token = response.data.accessToken;
       const userInfosData = {
@@ -86,18 +89,13 @@ export const UserProvider = ({ children }: iChildren) => {
       setUserInfos(userInfosData);
       toast.success("User registered successfully!");
       navigate("/dashboard");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response?.status === 400) {
-          toast.error("Email already in use.");
-        }
-      }
-    }
+
+    
   };
 
   const userLogin = async (data: IFormUserLogin) => {
     try {
-      const response = await api.post("/login", data);
+      const response = await api.post("/users/login", data);
       const userLogged = response.data.user;
       const token = response.data.accessToken;
       const userInfosData = {

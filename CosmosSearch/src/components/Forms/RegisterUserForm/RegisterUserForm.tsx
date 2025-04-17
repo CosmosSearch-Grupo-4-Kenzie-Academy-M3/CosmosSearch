@@ -24,39 +24,61 @@ export const RegisterUserForm = () => {
   });
 
   const userRegisterSubmit: SubmitHandler<IFormUserRegister> = (data) => {
+
     userRegister(data);
   };
 
   return (
     <RegisterUserFormStyled onSubmit={handleSubmit(userRegisterSubmit)}>
-      <Input
-        placeholder="Type your name"
-        error={errors.name?.message}
-        register={register("name")}
-        type="text"
-        labelName="Name"
-      />
-      <Input
+     
+     <Input
         placeholder="Type your email"
         error={errors.email?.message}
         register={register("email")}
-        type="email"
+        type="text"
         labelName="Email"
       />
+     
       <Input
-        placeholder="Type your password"
+        placeholder="Type your name"
+        error={errors.username?.message}
+        register={register("username")}
+        type="text"
+        labelName="Name"
+      />
+     
+      <Input
+        placeholder="Confirm your firstName"
+        error={errors.firstName?.message}
+        register={register("firstName")}
+        type="text"
+        labelName="firstName"
+      />
+        <Input
+        placeholder="Confirm your lastName"
+        error={errors.lastName?.message}
+        register={register("lastName")}
+        type="text"
+        labelName="lastName"
+      />
+
+      <Input
+        placeholder="password"
         error={errors.password?.message}
         register={register("password")}
         type="password"
-        labelName="Password"
+        labelName="password"
       />
+
       <Input
         placeholder="Confirm your password"
-        error={errors.confirmPassword?.message}
-        register={register("confirmPassword")}
+        error={errors.confirmpassword?.message}
+        register={register("confirmpassword")}
         type="password"
-        labelName="Confirm password"
+        labelName="Confirm your password"
       />
+
+
       <ButtonStyled
         type="submit"
         borderColor={"var(--primary-blue)"}
@@ -64,6 +86,7 @@ export const RegisterUserForm = () => {
       >
         Register
       </ButtonStyled>
+
     </RegisterUserFormStyled>
   );
 };
